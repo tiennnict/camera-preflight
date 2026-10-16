@@ -86,7 +86,8 @@ Detailed personas and journeys: [UX.md](UX.md).
 | CON-01 | Python 3.12 or newer; PySide6 GUI | D-09 |
 | CON-02 | Apache-2.0 for project code; LGPL libraries kept replaceable (onedir distribution) | H§10 |
 | CON-03 | No vendor SDK binaries, headers or SDK-derived bindings in the repository or releases until V-01 is resolved | H§10, R-11 |
-| CON-04 | Project code, docs and issues in English | D-07 |
+| CON-04 | Everything published on GitHub (code, comments, docs, commits, issues, pull requests, release notes) in English | D-07, D-14 |
+| CON-07 | Internationalised from the start; English and Vietnamese UI and report text complete in every release | D-15 |
 | CON-05 | No reading, storing or transmitting of previous-owner personal data from the camera | H§10 |
 | CON-06 | No brand names in the product name | H§10 |
 
@@ -253,7 +254,7 @@ Test-to-release mapping:
 
 | ID | Requirement | Pri | Release | Source |
 | --- | --- | --- | --- | --- |
-| FR-SET-01 | The user shall be able to choose UI language (English, Vietnamese). | S | v0.1 | N-08 |
+| FR-SET-01 | The user shall be able to choose UI language (English, Vietnamese); the default follows the OS language, falling back to English. | M | v0.1 | D-15 |
 | FR-SET-02 | The user shall be able to set the sessions folder, ExifTool path (if not bundled), and vendor SDK adapter paths. | M | v0.1 | H§13 |
 | FR-SET-03 | The user shall be able to choose light or dark theme, defaulting to the OS setting. | C | v0.1 | UX |
 
@@ -305,7 +306,7 @@ Specified in [UX.md](UX.md). Key requirements: wizard navigation with a persiste
 | NFR-11 | Maintainability | Analysis and verdict modules shall have at least 90% line coverage `[Guess]`. | S | CI coverage |
 | NFR-12 | Maintainability | Layer dependency rules ([ARCHITECTURE.md](ARCHITECTURE.md) section 6) shall be enforced in CI. | M | CI |
 | NFR-13 | Licensing | Releases shall ship LICENSE, NOTICE and third-party licence texts; no vendor SDK files. | M | Release checklist |
-| NFR-14 | Localisation | All user-visible strings shall be translatable; English and Vietnamese shipped. | S | Translation coverage check |
+| NFR-14 | Localisation | All user-visible strings (GUI, messages, report, field kit, remote pack) shall be translatable; English and Vietnamese catalogues shall be 100% complete in every release. | M | Translation coverage check in CI |
 | NFR-15 | Accessibility | Result levels shall never be conveyed by colour alone; text contrast should meet WCAG 2.1 AA. | M | Review |
 | NFR-16 | Security | The app shall not execute code from session files or KB files; YAML shall be loaded in safe mode. | M | Inspection, test |
 | NFR-17 | Size | Windows release archive should stay under 250 MB `[Guess]`. | C | CI artefact check |

@@ -283,7 +283,7 @@ Language; theme; sessions folder; ExifTool path (if not bundled); SDK adapters (
 - Keyboard: full wizard operable without a mouse; visible focus.
 - Contrast: WCAG 2.1 AA target for text; icons accompany colour.
 - Text scaling: layout holds at 150% system scaling `[Guess]` target.
-- Localisation: all strings via gettext; no text in images; dates and numbers formatted per locale; reports in the UI language with language-neutral IDs.
+- Localisation (D-15): English and Vietnamese complete in every release; all strings via gettext; no text in images; dates and numbers formatted per locale; reports, field kit and remote pack in the chosen language with language-neutral IDs. Layouts must allow for Vietnamese text, which is often longer than English `[Inference]`.
 
 ## 9. Visual style (initial tokens)
 

@@ -28,6 +28,7 @@ Status: draft for maintainer review. Scope references point to [SRS.md](SRS.md) 
 Scope:
 
 - Repo setup: `pyproject.toml`, uv lock, ruff, pyright, pytest, import-linter, pre-commit.
+- i18n foundation (D-15): gettext catalogues for `en` and `vi`, string extraction, CI check for untranslated strings.
 - CI: lint, type, test on Windows and Linux; release workflow building a PyInstaller onedir zip with a `--self-test` smoke run.
 - `domain` models; report, session and KB schemas (pydantic) with JSON Schema export.
 - `synth` generator v1: CFA frames with noise, vignetting, and injected pixel defects and dust, with ground truth.
@@ -61,7 +62,7 @@ Scope: FR-GUI-01, 02, 04, 05, FR-PLN-01 to 03, 05, FR-SES-02, 05, FR-TST-07, FR-
 
 - `wizard` state machine with persistence and resume.
 - `gui` shell, step runner, import and classify, manual check items, results, detail views, report export.
-- Reduced F checklist; demo session (N-09); English and Vietnamese catalogues (N-08).
+- Reduced F checklist; demo session (N-09); English and Vietnamese catalogues complete (D-15).
 - Usability test round 1 (UX section 10).
 
 Exit criteria:
@@ -162,7 +163,7 @@ A work item is done when:
 
 1. Code passes ruff, pyright and import-linter.
 2. Unit tests cover the change; analysis changes include synthetic-suite cases.
-3. User-visible strings are translatable and present in both catalogues (English may be the fallback text in Vietnamese until reviewed).
+3. User-visible strings are translatable and translated in both catalogues, English and Vietnamese, in the same change (D-15); CI fails on a missing translation.
 4. Any threshold added is a named parameter with an evidence label and appears in the report's Method data.
 5. Docs updated: SRS traceability if a requirement changed; TEST-CATALOGUE if a test changed.
 6. CI build succeeds and `--self-test` passes on the Windows artefact.

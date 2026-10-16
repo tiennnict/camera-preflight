@@ -21,6 +21,9 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-11 | Open verification tasks are kept in docs, not opened as GitHub issues for now | 2026-10-16 | Session |
 | D-12 | First work cycle produces documents only: SRS, technical solution, project structure, UI/UX design, development plan | 2026-10-16 | Session |
 | D-13 | The assistant proposes optimisations, including features not in the handoff, for maintainer approval | 2026-10-16 | Session |
+| D-14 | Everything published on GitHub is in English: code, comments, docs, commit messages, issues, pull requests, review replies, release notes. Clarifies D-07 | 2026-10-16 | Session |
+| D-15 | The software is internationalised from the start; English and Vietnamese are built and kept complete in parallel. Confirms N-08 | 2026-10-16 | Session |
+| D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
 
 ## 2. Proposed (awaiting approval)
 
@@ -50,7 +53,7 @@ Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVI
 | N-05 | Microphone-assisted burst rhythm | DESIGN-REVIEW §4 | Proposed |
 | N-06 | Baseline and compare | DESIGN-REVIEW §4 | Proposed |
 | N-07 | Field kit export | DESIGN-REVIEW §4 | Proposed |
-| N-08 | Bilingual UI (English, Vietnamese) | DESIGN-REVIEW §4 | Proposed |
+| N-08 | Bilingual UI (English, Vietnamese) | DESIGN-REVIEW §4 | Confirmed as D-15 (2026-10-16) |
 | N-09 | Demo mode with synthetic session | DESIGN-REVIEW §4 | Proposed |
 | N-10 | Shareable single-file report with integrity hash | DESIGN-REVIEW §4 | Proposed |
 | P-01 | Qt Widgets rather than Qt Quick (QML) | ARCHITECTURE §2.1 | Proposed |

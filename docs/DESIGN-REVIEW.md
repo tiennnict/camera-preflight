@@ -42,7 +42,7 @@ A change is proposed only when it fixes a logic flaw, removes cost without losin
 | N-05 | Shutter | Microphone-assisted burst rhythm (C1) and sound capture (C6) | Sub-second EXIF timestamps are often absent `[Unverified]`; audio gives intervals | Could |
 | N-06 | Follow-up | Baseline and compare: re-run within a return window and diff against the first report | Detects defects that appear after purchase (for example new hot pixels) | Could |
 | N-07 | Field use | Field kit export: printable shooting script, group F checklist and AF chart | On-site use without a laptop (R-02) | Should |
-| N-08 | UI | Bilingual UI (English and Vietnamese) from the first GUI release | Maintainer and a likely early user base are Vietnamese-speaking `[Inference]` | Should |
+| N-08 | UI | Bilingual UI (English and Vietnamese) from the first GUI release | Confirmed by the maintainer (D-15) | Must |
 | N-09 | Onboarding | Demo mode with a synthetic sample session | Lets users rehearse before meeting a seller; doubles as test data | Could |
 | N-10 | Report | Shareable single-file HTML report with integrity hash | Buyer can send the report to a seller or repair shop; tampering is detectable | Must (with R-09) |
 
@@ -188,7 +188,7 @@ A saved session can be re-run later with the same plan. The comparison shows new
 
 One printable HTML page per plan: shooting script with camera settings per step, group F checklist with tick boxes, and the AF chart (generated per model when layout data exists, generic otherwise).
 
-### N-08 Bilingual UI
+### N-08 Bilingual UI (confirmed, D-15)
 
 Qt translation files (`.ts`) for English and Vietnamese from the first GUI release. Reports use the UI language, with test IDs and verdict codes language-neutral.
 
