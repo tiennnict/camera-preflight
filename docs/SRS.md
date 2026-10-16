@@ -242,6 +242,7 @@ Test-to-release mapping:
 | FR-GUI-03 | The system shall export solid-colour images (red, green, blue, white, black) for LCD and EVF checks. | S | v0.2 | H§6 F |
 | FR-GUI-04 | The system shall display the preparation equipment list relevant to the plan. | M | v0.1 | H§6 |
 | FR-GUI-05 | The system shall provide a demo session generated from synthetic frames. | C | v0.1 | N-09 |
+| FR-GUI-06 | Every step that requires a physical action (cable, power, lens, cap, card, button press or hold, dial or ring, joystick, tripod and chart, tilting or looking at a part) shall show a looping 2D animation of that action. Animations contain no text (labels come from translatable strings), can be paused and replayed, and fall back to a static key frame when the OS requests reduced motion. | M | v0.1 | D-18 |
 
 ### 3.12 Field kit and remote pack (KIT)
 
