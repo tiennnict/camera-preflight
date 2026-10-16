@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# camera-preflight
+vendor-sdk/
+sessions/
+reports/
+tests/data/
+*.CR2
+*.CR3
+*.NEF
+*.NRW
+*.ARW
+*.DNG
+*.cr2
+*.cr3
+*.nef
+*.nrw
+*.arw
+*.dng
