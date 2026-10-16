@@ -329,7 +329,7 @@ Dependency rules (enforced by import-linter):
 | Persistence | Atomic writes (write to temp, rename) of session JSON after every step |
 | Logging | stdlib `logging`; per-session log file inside the session; no personal data |
 | Errors | Typed errors from `io` and backends; wizard converts them into Not tested reasons or fallbacks (FR-CON-07) |
-| Privacy | No network code in the app; previous-owner frames excluded by capture time (FR-ACQ-02) |
+| Privacy | No network code in the app; only files inside the session's import window or explicitly selected are imported (FR-ACQ-02); metadata stored through an allowlist (FR-META-02) |
 | Plugins | SDK adapters discovered from a user-configured folder and Python entry points, loaded only in the backend host |
 | Versioning | SemVer for app, report schema and KB schema; KB data versioned by date (`2026.1`) |
 

@@ -44,7 +44,7 @@ A change is proposed only when it fixes a logic flaw, removes cost without losin
 | N-07 | Field use | Field kit export: printable shooting script, group F checklist and AF chart | On-site use without a laptop (R-02) | Should |
 | N-08 | UI | Bilingual UI (English and Vietnamese) from the first GUI release | Confirmed by the maintainer (D-15) | Must |
 | N-09 | Onboarding | Demo mode with a synthetic sample session | Lets users rehearse before meeting a seller; doubles as test data | Could |
-| N-10 | Report | Shareable single-file HTML report with integrity hash | Buyer can send the report to a seller or repair shop; tampering is detectable | Must (with R-09) |
+| N-10 | Report | Shareable single-file HTML report with hash manifest and re-verification | Buyer can send the report to a seller or repair shop; anyone with the original files can re-run the analysis and compare | Must (with R-09) |
 
 Priority uses MoSCoW: Must, Should, Could. "Won't (this cycle)" items are listed in section 5.
 
@@ -196,9 +196,9 @@ Qt translation files (`.ts`) for English and Vietnamese from the first GUI relea
 
 A bundled synthetic session (generated CFA frames with known injected defects) that users can run end to end. The same generator produces the test fixtures, so the demo is always consistent with the test suite.
 
-### N-10 Shareable report with integrity hash
+### N-10 Shareable report with hash manifest
 
-Covered with R-09. The HTML embeds evidence images and the manifest hash; the JSON plus original files allow anyone to recompute the hash.
+Covered with R-09. The HTML embeds evidence images and the manifest hash. A hash stored inside the same file does not prove the report was not edited: anyone can change the content and recompute it. What the manifest does provide is a link to the original files: a recipient with those files can recompute the hashes and re-run the analysis with the stated app version and parameter set (FR-REP-08). Results are trustworthy because they can be reproduced, not because of the hash. Digital signatures are not proposed: a self-generated key on a personal PC proves no identity `[Inference]`.
 
 ## 5. Considered and not proposed this cycle
 

@@ -55,7 +55,7 @@ Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVI
 | N-07 | Field kit export | DESIGN-REVIEW §4 | Proposed |
 | N-08 | Bilingual UI (English, Vietnamese) | DESIGN-REVIEW §4 | Confirmed as D-15 (2026-10-16) |
 | N-09 | Demo mode with synthetic session | DESIGN-REVIEW §4 | Proposed |
-| N-10 | Shareable single-file report with integrity hash | DESIGN-REVIEW §4 | Proposed |
+| N-10 | Shareable single-file report with hash manifest and re-verification | DESIGN-REVIEW §4 | Proposed |
 | P-01 | Qt Widgets rather than Qt Quick (QML) | ARCHITECTURE §2.1 | Proposed |
 | P-02 | All device backends run in a separate host process with a JSON protocol | ARCHITECTURE §2.3 | Proposed |
 | P-03 | Tooling: uv, ruff, pyright, pytest, pytest-qt, hypothesis, import-linter | ARCHITECTURE §2.4 | Proposed |

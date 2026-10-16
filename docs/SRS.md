@@ -58,7 +58,7 @@ Standalone, offline desktop application. It talks to cameras over USB through in
 4. Acquire frames by tethered capture or import; classify, validate and check provenance.
 5. Analyse frames per test (groups A to F, [TEST-CATALOGUE.md](TEST-CATALOGUE.md)).
 6. Assign result level, confidence and severity; never report Pass for a test that did not run.
-7. Produce a JSON record and a self-contained HTML report with evidence and integrity hash.
+7. Produce a JSON record and a self-contained HTML report with evidence and a hash manifest that ties the report to its original files.
 8. Export field kit and remote pack; compare a session with a baseline.
 
 ### 2.3 User classes
@@ -115,6 +115,7 @@ Buy or price advice; absolute shutter speed measurement (C5); internal camera se
 | FR-SES-03 | The system shall record the user-entered body serial (optional) and the serial read from the camera or metadata. | M | v0.1 | H§6 A1 |
 | FR-SES-04 | The system shall store frames as copies; it shall never modify or delete files on the camera or the source card. | M | v0.1 | H§5 |
 | FR-SES-05 | The system should allow opening a completed session read-only and re-rendering its report. | S | v0.1 | H§5 p6 |
+| FR-SES-07 | Session export shall let the user leave out original frame files (keeping evidence images, metadata and results), and shall warn that original files may contain personal fields written by the camera. | M | v0.1 | NFR-07 |
 | FR-SES-06 | The system may compare a session with an earlier session of the same body and report differences (new or removed defective pixels, dust changes, shutter count delta). | C | v0.5 | N-06 |
 
 ### 3.2 Camera identification and connection (CON)
@@ -134,7 +135,7 @@ Buy or price advice; absolute shutter speed measurement (C5); internal camera se
 | ID | Requirement | Pri | Release | Source |
 | --- | --- | --- | --- | --- |
 | FR-ACQ-01 | The system shall import frames from a folder or a mounted card, copying them into the session. | M | v0.1 | H§5 |
-| FR-ACQ-02 | The system shall ignore files whose capture time precedes the session start, unless the user explicitly includes them (protects previous-owner images). | M | v0.1 | CON-05 |
+| FR-ACQ-02 | Every session shall have an import window that determines which files are pre-selected for import: (a) tethered or on-site sessions: from session creation or field kit export, whichever is earlier; (b) remote sessions: the window declared in the remote pack; (c) existing-files sessions: no file is pre-selected; the user selects files or a capture date range explicitly. Files outside the window are listed, grouped by capture date, and can be added by explicit selection. The CLI treats the folder given on the command line as the explicit selection and accepts an optional capture date range. (Protects previous-owner images.) | M | v0.1 | CON-05 |
 | FR-ACQ-03 | The system shall classify imported frames as dark, flat, chart, burst or other, and let the user confirm or correct the classification. | M | v0.1 | N-04 |
 | FR-ACQ-04 | The system shall map classified frames to plan steps by capture settings and order. | M | v0.1 | N-04 |
 | FR-ACQ-05 | In tethered mode the system shall apply the capture settings required by each step, capture, and download the RAW file. | M | v0.3 | H§6 |
@@ -150,7 +151,7 @@ Buy or price advice; absolute shutter speed measurement (C5); internal camera se
 | FR-GATE-02 | The system shall keep rejected frames as evidence with the rejection reason and shall exclude them from analysis. | M | v0.1 | R-14 |
 | FR-GATE-03 | The system shall prompt for a re-shoot when a step has fewer accepted frames than required, within the step's shot limit. | M | v0.1 | H§6 |
 | FR-GATE-04 | The system shall check that all frames of a session come from the same body (serial in maker notes) and match the user-entered serial when provided. | M | v0.1 | N-02 |
-| FR-GATE-05 | The system shall check capture times against the session or remote-pack window and against file-number order. | M | v0.1 | N-02 |
+| FR-GATE-05 | The system shall check capture times against the session's import window (FR-ACQ-02) and against file-number order; for existing-files sessions, the check is consistency within the selection only. | M | v0.1 | N-02 |
 | FR-GATE-06 | The system shall flag frames whose metadata indicates editing software or missing maker notes. | S | v0.1 | N-02 |
 | FR-GATE-07 | When provenance cannot be determined, the system shall lower the confidence of dependent results and state why. | M | v0.1 | N-02 |
 
@@ -159,7 +160,7 @@ Buy or price advice; absolute shutter speed measurement (C5); internal camera se
 | ID | Requirement | Pri | Release | Source |
 | --- | --- | --- | --- | --- |
 | FR-META-01 | The system shall decode RAW frames to CFA arrays with black level, white level and CFA pattern. | M | v0.1 | R-08 |
-| FR-META-02 | The system shall read metadata including maker notes and preserve the full metadata dump per frame in the session. | M | v0.1 | H§5 |
+| FR-META-02 | The system shall read metadata, including maker notes, through an allowlist of fields needed for analysis, provenance and identification, and store only those fields per frame. Personal fields (for example artist, copyright, owner name, GPS, user comments, network settings) shall not be stored, logged or reported. The allowlist is versioned and stated in the report. | M | v0.1 | H§5, NFR-07 |
 | FR-META-03 | When a RAW format cannot be decoded, the system shall explain the DNG conversion option and accept DNG input. | S | v0.1 | R-08, V-14 |
 | FR-META-04 | The system shall accept JPEG input only for tests that declare JPEG support, with confidence capped at Low. | S | v0.1 | R-08 |
 | FR-META-05 | The system shall record sensor or camera temperature when the metadata exposes it. | S | v0.2 | R-15 |
@@ -205,7 +206,8 @@ Test-to-release mapping:
 | FR-REP-01 | The system shall write `report.json` conforming to a versioned schema as the canonical record. | M | v0.1 | R-09 |
 | FR-REP-02 | The system shall render a single self-contained `report.html` from `report.json`, viewable offline and printable. | M | v0.1 | R-09, N-10 |
 | FR-REP-03 | The report shall contain: summary counts per result level; Blockers first; camera info (brand, model, serial, firmware, shutter count before and after, lens); results per group with confidence and path; evidence images; Not tested list with reasons; suggested actions. | M | v0.1 | H§9 |
-| FR-REP-04 | The report shall include an evidence manifest with SHA-256 of every source frame and evidence image, and show the manifest hash in the header. | M | v0.1 | R-09 |
+| FR-REP-04 | The report shall include an evidence manifest with SHA-256 of every source frame and evidence image, and show the manifest hash in the header. The manifest lets a recipient who has the original files confirm that the report refers to them; it is not proof that the report itself was not edited, and the report shall not claim tamper evidence. | M | v0.1 | R-09 |
+| FR-REP-08 | The system shall re-verify a report: given `report.json` and the original frames, recompute hashes and re-run the analysis with the stated app version and parameter set, and show any difference. | S | v0.2 | R-09 |
 | FR-REP-05 | The report shall not contain buy advice, price advice or an overall pass or fail of the camera. | M | v0.1 | H§9 |
 | FR-REP-06 | The report shall state the app version, KB version, analysis parameter set and evidence labels of any threshold used. | M | v0.1 | H§0 |
 | FR-REP-07 | The report shall show shutter count plausibility checks with their basis. | S | v0.2 | N-03 |
@@ -299,7 +301,7 @@ Specified in [UX.md](UX.md). Key requirements: wizard navigation with a persiste
 | NFR-04 | Responsiveness | The GUI shall remain responsive during analysis and transfer (work runs off the UI thread) and show progress. | M | Manual and pytest-qt |
 | NFR-05 | Reliability | Unplugging the camera or closing the app shall not lose completed steps (FR-SES-02). | M | Test |
 | NFR-06 | Privacy | The app shall make no network requests by default. Any future update check shall be opt-in. | M | Inspection, network-off test |
-| NFR-07 | Privacy | The app shall not read owner name, copyright, Wi-Fi or other personal settings from the camera; previous-owner images shall be excluded by default (FR-ACQ-02). | M | Inspection |
+| NFR-07 | Privacy | The app shall not read owner name, copyright, Wi-Fi or other personal settings from the camera, and shall not store personal metadata fields from frames (FR-META-02); files outside the import window are not imported unless explicitly selected (FR-ACQ-02). | M | Inspection, test with frames carrying personal tags |
 | NFR-08 | Transparency | Every threshold, parameter set and KB entry used shall be traceable from the report. | M | Inspection |
 | NFR-09 | Portability | Windows build shall run from an unpacked folder without administrator rights. | M | Release test |
 | NFR-10 | Portability | Platform-specific code shall be confined to backends and packaging. | M | Import contract in CI |
@@ -321,7 +323,7 @@ Specified in [UX.md](UX.md). Key requirements: wizard navigation with a persiste
   plan.json           selected tests, budgets, ordering
   frames/             copied originals, never modified
   frames.json         per-frame metadata summary, classification, gate result, SHA-256
-  metadata/           full metadata dump per frame
+  metadata/           allowlisted metadata per frame (FR-META-02)
   evidence/           generated maps and charts (PNG)
   results.json        per-test results
   report.json         canonical report (schema-versioned)

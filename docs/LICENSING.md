@@ -51,7 +51,9 @@ Rules (R-11, CON-03):
 ## 5. Personal data
 
 - The app does not read owner name, copyright, Wi-Fi or similar settings from the camera (CON-05).
-- Previous-owner images are excluded from import by capture time unless the user explicitly includes them (FR-ACQ-02).
+- Only files inside the session's import window, or files the user explicitly selects, are imported (FR-ACQ-02).
+- Stored metadata passes an allowlist; personal fields (artist, copyright, owner name, GPS, user comments, network settings) are dropped (FR-META-02).
+- Original frame files are kept unmodified for re-verification and may still contain such fields as written by the camera; session export lets the user leave original frames out (FR-SES-07).
 - Sessions are stored locally; nothing is transmitted (NFR-06).
 - Reports include the camera serial; the UI notes this before sharing a report.
 

@@ -183,10 +183,12 @@ Behaviour:
 
 ### S5b Import and classify
 
+Pre-selection follows the session's import window (FR-ACQ-02). In an "I already have the files" session nothing is pre-selected; the screen opens on a list grouped by capture date where the user ticks dates or files.
+
 ```
 +------------------------------------------------------------------+
 | Import 31 files from E:\DCIM\100CANON                            |
-| Excluded: 214 files taken before this session (previous owner)   |
+| Not selected: 214 files taken before this session [Show / add]   |
 |                                                                  |
 | Dark (6)   [thumb][thumb][thumb][thumb][thumb][thumb] -> B1      |
 | Flat (6)   [thumb][thumb][thumb] -> B2  [thumb][thumb][thumb]->B4|
@@ -232,7 +234,7 @@ AF point map: points drawn on the frame outline, each with icon and colour by le
 
 ### S9 Report and export
 
-Options: Save HTML report; Save JSON; Export session as zip; Save as baseline; Field kit; Remote pack. Shows manifest hash with a "What is this?" explanation.
+Options: Save HTML report; Save JSON; Export session as zip; Save as baseline; Field kit; Remote pack. Shows the manifest hash with a "What is this?" explanation: it links the report to the original files, so someone with those files can re-check the results; it does not prove the report was not edited. "Export session as zip" offers to leave out original frames (FR-SES-07).
 
 ### S10 Settings
 
