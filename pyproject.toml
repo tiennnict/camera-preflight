@@ -49,7 +49,7 @@ src = ["src", "tests", "tools"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
-ignore = ["RUF001", "RUF002", "RUF003"]
+ignore = ["RUF001", "RUF002", "RUF003", "RUF005", "RUF046"]
 
 [tool.pyright]
 include = ["src", "tools"]
@@ -61,6 +61,7 @@ strict = [
   "src/camera_preflight/checks",
 ]
 reportMissingTypeStubs = false
+reportPrivateImportUsage = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
