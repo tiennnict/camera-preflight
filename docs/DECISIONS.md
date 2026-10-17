@@ -24,6 +24,10 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-14 | Everything published on GitHub is in English: code, comments, docs, commit messages, issues, pull requests, review replies, release notes. Clarifies D-07 | 2026-10-16 | Session |
 | D-15 | The software is internationalised from the start; English and Vietnamese are built and kept complete in parallel. Confirms N-08 | 2026-10-16 | Session |
 | D-17 | Approvals and decisions are requested from the maintainer in the chat, in Vietnamese, with enough context to decide; the English documents record the outcome | 2026-10-16 | Session |
+| D-19 | Animations are layered vector SVG scenes driven by keyframe timelines, played in Qt Widgets through QGraphicsView; the same assets drive the HTML mockup and the printable field kit (static key frame) | 2026-10-16 | Session |
+| D-20 | Animations use two generic body types (DSLR and mirrorless) without brand shapes or logos; the control involved is highlighted and named by a translatable label | 2026-10-16 | Session |
+| D-21 | Camera menu settings (RAW, noise reduction off, lens corrections off) are given as text only, without animation, because menus differ per brand and generation | 2026-10-16 | Session |
+| D-22 | The UI mockup covers every wizard step of all three profiles, one framed screen per step on a single page | 2026-10-16 | Session |
 | D-18 | The wizard shows 2D animations that illustrate the physical actions the user must perform (for example plugging a cable, powering on, mounting a lens, fitting a body cap, pressing or holding a button, tilting the camera to inspect a part) | 2026-10-16 | Session |
 | D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
 

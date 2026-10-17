@@ -45,6 +45,7 @@ Within PySide6:
 | HTML report | Jinja2; string templates | **Jinja2** | Autoescaping; single self-contained output |
 | Internationalisation | gettext + Babel; Qt Linguist | **gettext + Babel** for all app strings; Qt's own translations loaded for standard dialogs `[Unverified]` that Qt ships Vietnamese for them | One catalogue for GUI, core messages and report |
 | Audio (later) | sounddevice (PortAudio) | sounddevice | N-05 only |
+| Physical-action animations | Layered SVG + keyframe timeline (QGraphicsView, QPropertyAnimation); Lottie (needs Qt Quick); pre-rendered video or GIF | **Layered SVG + timeline** (D-19) | Text-free, themeable, small, diffable in git; one asset set serves the app, the mockup and the field kit. Assets in `src/camera_preflight/gui/animations/` (one SVG with named layers plus one timeline file per action) |
 
 Licence status of each dependency is tracked in [LICENSING.md](LICENSING.md); all are `[Unverified]` until V-11.
 

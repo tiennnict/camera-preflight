@@ -240,6 +240,16 @@ Options: Save HTML report; Save JSON; Export session as zip; Save as baseline; F
 
 Language; theme; sessions folder; ExifTool path (if not bundled); SDK adapters (path, status, licence reminder); advanced: parameter set (read only in v0.1).
 
+## 5a. Physical-action animations (D-18 to D-21)
+
+- Every step with a physical action shows a looping 2D animation above the instructions (FR-GUI-06).
+- Two generic body types, DSLR and mirrorless, chosen from the detected or selected model; no brand shapes or logos (D-20).
+- The control involved is highlighted; its name comes from a translatable label, never from text inside the drawing.
+- Controls: pause, replay; static key frame when the OS requests reduced motion.
+- Menu settings are text only (D-21).
+
+Animation catalogue (reused across steps): plug USB cable; power on; remove and mount lens; fit body cap; cover viewfinder; switch AF/MF; turn focus ring; turn command dial; half-press shutter; press and hold shutter; move AF joystick; turn camera to read serial; tilt camera to inspect mount; open card door and remove card; insert card into reader; set up tripod and chart; aim at a flat bright surface; look through viewfinder and turn diopter; check lens mount play; raise pop-up flash.
+
 ## 6. Interaction rules
 
 | Rule | Detail |
