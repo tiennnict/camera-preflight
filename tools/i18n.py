@@ -127,7 +127,9 @@ def check() -> int:
                 compiled = {str(m.id): m.string for m in mofile.read_mo(fh) if m.id}
             wanted = {str(m.id): m.string for m in cat if m.id and m.string}
             if compiled != wanted:
-                problems.append(f"{lang}: compiled catalogue differs from the .po file; run compile")
+                problems.append(
+                    f"{lang}: compiled catalogue differs from the .po file; run compile"
+                )
     for line in problems:
         print(line)
     return 1 if problems else 0
