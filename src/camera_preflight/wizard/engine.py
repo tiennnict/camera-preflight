@@ -388,6 +388,11 @@ class Wizard:
 
     def _update_shutter_counts(self) -> None:
         """Shutter count before and after the session, from the earliest and latest frames (D-37)."""
+        temps = [f.meta.temperature_c for f in self._accepted() if f.meta.temperature_c is not None]
+        if temps:
+            self.camera.temperature_c = temps[
+                -1
+            ]  # recorded when the metadata exposes it (FR-META-05)
         counted = [(f.meta.capture_seconds(), f.meta.shutter_count) for f in self._accepted()]
         counted = [(t, n) for t, n in counted if t is not None and n is not None]
         if counted:

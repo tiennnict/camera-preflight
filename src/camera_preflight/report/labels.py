@@ -16,6 +16,7 @@ LABELS: dict[str, str] = {
     "lens": N_("Lens"),
     "count_before": N_("Shutter count before"),
     "count_after": N_("Shutter count after"),
+    "temperature": N_("Sensor temperature"),
     "unknown": N_("Unknown"),
     "summary": N_("Summary"),
     "blockers": N_("Blockers"),

@@ -30,3 +30,10 @@ Status values: Open, In progress, Closed (with result and date), Dropped (with r
 | V-22 | Which live-view and property signals are readable per backend for helpers H1 to H7 (dark sensor, flat field, chart in view, steady camera, lens ID, focus mode, card)? | FR-ACQ-10, 11 | Spike on real bodies, recorded live view | M3 | Open |
 | V-23 | Can the test environment obtain the Canon, Nikon and Sony SDKs automatically (registration, licence acceptance), or only on a local machine? | D-31, SDK adapter tests | Read download terms; try | M3 | Open |
 | V-24 | Licence and attribution of each reference photo candidate in REFERENCE-IMAGES.md (blocked: Commons not reachable from this environment) | D-38, NFR-13 | Open file pages; record attribution | M2 | Open |
+
+## Findings from the implementation pass
+
+- V-07: simulation showed that requiring a hot pixel in 2 of 3 frames lets random single-electron events through at high ISO; the parameter `b1.repeat_min` is now 3 `[Inference]`. Real-camera calibration is still open.
+- V-16: the release build stops until `packaging/exiftool/VERSION.json` holds a pinned version, URL and SHA-256; ExifTool terms for bundling are still to be read.
+- V-24: photo hosts were not reachable from the build environment; no reference photo is included.
+- V-23: SDK adapters load the library only; bindings wait for the SDK in the test environment.

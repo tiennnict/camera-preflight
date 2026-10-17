@@ -1,6 +1,6 @@
 # Guide for coding agents
 
-camera-preflight is a Windows desktop diagnostics wizard, written in Python with PySide6, that checks a used camera before purchase. The project is in the design phase: no code exists yet. This file tells an agent (Claude Code or any other) how to work on it.
+camera-preflight is a Windows desktop diagnostics wizard, written in Python with PySide6, that checks a used camera before purchase. The upload-mode wizard and the connected-mode flow are implemented and tested without hardware; see [docs/WORK-PACKAGES.md](docs/WORK-PACKAGES.md) section 10 for what is done, partial or blocked. This file tells an agent (Claude Code or any other) how to work on it.
 
 ## 1. Read first, in this order
 

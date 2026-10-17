@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:57+0000\n"
+"POT-Creation-Date: 2026-10-17 11:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: vi\n"
@@ -74,7 +74,7 @@ msgstr "Chĩa máy vào mặt phẳng trắng"
 msgid "Aim at the focus chart"
 msgstr "Chĩa máy vào bảng lấy nét"
 
-#: src/camera_preflight/report/labels.py:24
+#: src/camera_preflight/report/labels.py:25
 msgid "All results"
 msgstr "Tất cả kết quả"
 
@@ -118,7 +118,7 @@ msgstr "Khẩu độ {aperture}"
 msgid "Aperture {found}; needs {needed}"
 msgstr "Khẩu độ {found}; cần {needed}"
 
-#: src/camera_preflight/report/labels.py:29
+#: src/camera_preflight/report/labels.py:30
 msgid "App version"
 msgstr "Phiên bản ứng dụng"
 
@@ -142,7 +142,7 @@ msgstr "Hỏi về lỗi đo sáng gặp khi sử dụng ({checks})"
 msgid "Ask about the shutter count and any past repairs ({checks})"
 msgstr "Hỏi về số lần chụp và các lần sửa chữa trước đây ({checks})"
 
-#: src/camera_preflight/report/labels.py:27
+#: src/camera_preflight/report/labels.py:28
 msgid "Ask the seller"
 msgstr "Hỏi người bán"
 
@@ -190,7 +190,7 @@ msgstr "Pin {percent}%"
 msgid "Blocker"
 msgstr "Nghiêm trọng, nên dừng"
 
-#: src/camera_preflight/gui/views/results.py:206 src/camera_preflight/report/labels.py:21
+#: src/camera_preflight/gui/views/results.py:206 src/camera_preflight/report/labels.py:22
 msgid "Blockers"
 msgstr "Lỗi nghiêm trọng"
 
@@ -380,7 +380,7 @@ msgstr "Các bước bù trừ không đều ({ev} EV)"
 msgid "Compensation {ev} EV"
 msgstr "Bù sáng {ev} EV"
 
-#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:46
+#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:47
 msgid "Confidence"
 msgstr "Độ tin cậy"
 
@@ -457,7 +457,7 @@ msgid "Defocus the lens. Keep the light even."
 msgstr "Để ống kính mất nét. Giữ ánh sáng đều."
 
 #: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:239
-#: src/camera_preflight/report/labels.py:49
+#: src/camera_preflight/report/labels.py:50
 msgid "Details"
 msgstr "Chi tiết"
 
@@ -539,11 +539,11 @@ msgstr "Cảnh đều, phơi sáng tự động"
 msgid "Even, defocused"
 msgstr "Đều, mất nét"
 
-#: src/camera_preflight/report/labels.py:37
+#: src/camera_preflight/report/labels.py:38
 msgid "Evidence images"
 msgstr "Ảnh bằng chứng"
 
-#: src/camera_preflight/report/labels.py:35
+#: src/camera_preflight/report/labels.py:36
 msgid "Evidence label"
 msgstr "Nhãn bằng chứng"
 
@@ -625,7 +625,7 @@ msgstr "Lỗi chỉ ở màn trập cơ"
 msgid "Fault with both lenses: {points}"
 msgstr "Lỗi với cả hai ống kính: {points}"
 
-#: src/camera_preflight/report/labels.py:38
+#: src/camera_preflight/report/labels.py:39
 msgid "File"
 msgstr "Tệp"
 
@@ -803,11 +803,11 @@ msgstr "Từ ảnh tải lên"
 msgid "Gradient at {speed}: {amp}"
 msgstr "Chênh sáng ở {speed}: {amp}"
 
-#: src/camera_preflight/report/labels.py:53
+#: src/camera_preflight/report/labels.py:54
 msgid "Guess"
 msgstr "Phỏng đoán"
 
-#: src/camera_preflight/report/labels.py:41
+#: src/camera_preflight/report/labels.py:42
 msgid "Hashes show file integrity only. They do not prove the files were not altered."
 msgstr "Mã băm chỉ cho biết tính toàn vẹn của tệp, không chứng minh tệp chưa bị chỉnh sửa."
 
@@ -886,7 +886,7 @@ msgstr "ISO {iso}: nhiễu {sigma} DN"
 msgid "Images"
 msgstr "Hình ảnh"
 
-#: src/camera_preflight/report/labels.py:52
+#: src/camera_preflight/report/labels.py:53
 msgid "Inference"
 msgstr "Suy luận"
 
@@ -910,7 +910,7 @@ msgstr "Bạn đánh giá: Đạt"
 msgid "Judged Suspect by you"
 msgstr "Bạn đánh giá: Nghi vấn"
 
-#: src/camera_preflight/report/labels.py:30
+#: src/camera_preflight/report/labels.py:31
 msgid "Knowledge base version"
 msgstr "Phiên bản cơ sở tri thức"
 
@@ -1044,7 +1044,7 @@ msgstr "Ảnh đo sáng"
 msgid "Metering: {mode}"
 msgstr "Đo sáng: {mode}"
 
-#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:28
+#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:29
 msgid "Method"
 msgstr "Phương pháp"
 
@@ -1167,7 +1167,7 @@ msgid "Not sure"
 msgstr "Không chắc"
 
 #: src/camera_preflight/gui/views/results.py:212 src/camera_preflight/messages.py:27
-#: src/camera_preflight/report/labels.py:25
+#: src/camera_preflight/report/labels.py:26
 msgid "Not tested"
 msgstr "Chưa kiểm tra"
 
@@ -1180,7 +1180,7 @@ msgstr "Ghi chú"
 msgid "Note: {text}"
 msgstr "Ghi chú: {text}"
 
-#: src/camera_preflight/report/labels.py:23
+#: src/camera_preflight/report/labels.py:24
 msgid "Nothing suspect or failed."
 msgstr "Không có mục nghi vấn hay không đạt."
 
@@ -1209,11 +1209,11 @@ msgstr "Mức sáng đầu ra"
 msgid "Output {percent}, {offset} EV from mid-grey"
 msgstr "Mức sáng {percent}, lệch {offset} EV so với xám trung bình"
 
-#: src/camera_preflight/report/labels.py:33
+#: src/camera_preflight/report/labels.py:34
 msgid "Parameter"
 msgstr "Tham số"
 
-#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:31
+#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:32
 msgid "Parameter set"
 msgstr "Bộ tham số"
 
@@ -1225,7 +1225,7 @@ msgstr "Đạt"
 msgid "Passed"
 msgstr "Đạt"
 
-#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:47
+#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:48
 msgid "Path"
 msgstr "Cách thực hiện"
 
@@ -1233,7 +1233,7 @@ msgstr "Cách thực hiện"
 msgid "Pause"
 msgstr "Tạm dừng"
 
-#: src/camera_preflight/report/labels.py:55
+#: src/camera_preflight/report/labels.py:56
 msgid "Photo checks"
 msgstr "Kiểm tra ảnh"
 
@@ -1321,7 +1321,7 @@ msgstr "Xem kết quả. Lưu báo cáo."
 msgid "Reading camera data"
 msgstr "Đọc dữ liệu máy"
 
-#: src/camera_preflight/report/labels.py:26
+#: src/camera_preflight/report/labels.py:27
 msgid "Reason"
 msgstr "Lý do"
 
@@ -1365,7 +1365,7 @@ msgstr "Phải"
 msgid "SDK not configured"
 msgstr "Chưa cấu hình SDK"
 
-#: src/camera_preflight/report/labels.py:39
+#: src/camera_preflight/report/labels.py:40
 msgid "SHA-256"
 msgstr "SHA-256"
 
@@ -1393,6 +1393,10 @@ msgstr "Bán tự động"
 #: src/camera_preflight/gui/labels.py:88
 msgid "Sensor"
 msgstr "Cảm biến"
+
+#: src/camera_preflight/report/labels.py:19
+msgid "Sensor temperature"
+msgstr "Nhiệt độ cảm biến"
 
 #: src/camera_preflight/report/labels.py:14
 msgid "Serial (last 4)"
@@ -1441,7 +1445,7 @@ msgstr "Cài đặt"
 msgid "Severe problem"
 msgstr "Lỗi nghiêm trọng"
 
-#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:48
+#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:49
 msgid "Severity"
 msgstr "Mức nghiêm trọng"
 
@@ -1523,11 +1527,11 @@ msgstr "Một số ảnh thiếu ghi chú của máy"
 msgid "Something went wrong"
 msgstr "Đã xảy ra lỗi"
 
-#: src/camera_preflight/report/labels.py:36
+#: src/camera_preflight/report/labels.py:37
 msgid "Source files"
 msgstr "Tệp nguồn"
 
-#: src/camera_preflight/report/labels.py:51
+#: src/camera_preflight/report/labels.py:52
 msgid "Sourced"
 msgstr "Có nguồn"
 
@@ -1585,7 +1589,7 @@ msgstr "Điểm kẹt và điểm chết"
 msgid "Stuck pixel at row {row}, column {col} ({channel})"
 msgstr "Điểm kẹt sáng tại hàng {row}, cột {col} ({channel})"
 
-#: src/camera_preflight/report/labels.py:20
+#: src/camera_preflight/report/labels.py:21
 msgid "Summary"
 msgstr "Tóm tắt"
 
@@ -1593,7 +1597,7 @@ msgstr "Tóm tắt"
 msgid "Suspect"
 msgstr "Nghi vấn"
 
-#: src/camera_preflight/gui/views/results.py:209 src/camera_preflight/report/labels.py:22
+#: src/camera_preflight/gui/views/results.py:209 src/camera_preflight/report/labels.py:23
 msgid "Suspect and fail results"
 msgstr "Kết quả nghi vấn và không đạt"
 
@@ -1625,11 +1629,11 @@ msgstr "Giao diện"
 msgid "This file format cannot be read; convert to DNG"
 msgstr "Không đọc được định dạng này; hãy chuyển sang DNG"
 
-#: src/camera_preflight/report/labels.py:44
+#: src/camera_preflight/report/labels.py:45
 msgid "This report lists measurements and suspected issues. It gives no buying or price advice."
 msgstr "Báo cáo này liệt kê số đo và nghi vấn. Báo cáo không khuyên mua hay định giá."
 
-#: src/camera_preflight/report/labels.py:32
+#: src/camera_preflight/report/labels.py:33
 msgid "Thresholds used"
 msgstr "Ngưỡng đã dùng"
 
@@ -1654,7 +1658,7 @@ msgstr "Cổng USB"
 msgid "Uneven rhythm (variation {cv})"
 msgstr "Nhịp không đều (dao động {cv})"
 
-#: src/camera_preflight/report/labels.py:19
+#: src/camera_preflight/report/labels.py:20
 msgid "Unknown"
 msgstr "Không rõ"
 
@@ -1663,7 +1667,7 @@ msgstr "Không rõ"
 msgid "Unstable focus at: {points}"
 msgstr "Lấy nét không ổn định tại: {points}"
 
-#: src/camera_preflight/report/labels.py:54
+#: src/camera_preflight/report/labels.py:55
 msgid "Unverified"
 msgstr "Chưa xác minh"
 
@@ -1691,7 +1695,7 @@ msgstr "Tệp đã tải lên"
 msgid "Use photo upload"
 msgstr "Chuyển sang tải ảnh"
 
-#: src/camera_preflight/report/labels.py:34
+#: src/camera_preflight/report/labels.py:35
 msgid "Value"
 msgstr "Giá trị"
 
@@ -1752,7 +1756,7 @@ msgstr "Đang xử lý"
 msgid "Yes"
 msgstr "Có"
 
-#: src/camera_preflight/report/labels.py:50
+#: src/camera_preflight/report/labels.py:51
 msgid "more not shown"
 msgstr "mục khác không hiển thị"
 

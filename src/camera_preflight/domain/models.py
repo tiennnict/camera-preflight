@@ -182,6 +182,7 @@ class Camera(BaseModel):
     lens: str | None = None
     shutter_count_before: int | None = None
     shutter_count_after: int | None = None
+    temperature_c: float | None = None
 
 
 class Session(BaseModel):

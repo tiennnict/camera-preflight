@@ -1,7 +1,19 @@
 # camera-preflight
 Open-source wizard that checks a used digital camera before you buy: sensor pixels, dust, shutter, autofocus and metering, with guided manual fallback.
 
-**Status:** design phase. No code has been released yet, and nothing in the design has been tested on a real camera.
+**Status:** pre-release. The upload-mode wizard and the connected-mode flow are implemented and tested on synthetic frames and a simulated camera. Nothing has been tested on a real camera yet, and every threshold is a `[Guess]` to be calibrated. Details: [docs/WORK-PACKAGES.md](docs/WORK-PACKAGES.md) section 10.
+
+## Run from source
+
+```
+uv sync
+uv run camera-preflight            # graphical wizard
+uv run camera-preflight demo       # whole wizard on a synthetic camera, writes an HTML report
+uv run camera-preflight analyse --check B2,B5 photo1.dng photo2.dng photo3.dng
+uv run camera-preflight --self-test
+```
+
+Development checks: `uv run ruff check .`, `uv run pyright`, `uv run lint-imports`, `uv run python tools/i18n.py check`, `QT_QPA_PLATFORM=offscreen uv run pytest`. ExifTool must be installed for the tests that read real metadata; release builds bundle it.
 
 ## Requirements
 

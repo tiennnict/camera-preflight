@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:57+0000\n"
+"POT-Creation-Date: 2026-10-17 11:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -74,7 +74,7 @@ msgstr "Aim at a white surface"
 msgid "Aim at the focus chart"
 msgstr "Aim at the focus chart"
 
-#: src/camera_preflight/report/labels.py:24
+#: src/camera_preflight/report/labels.py:25
 msgid "All results"
 msgstr "All results"
 
@@ -118,7 +118,7 @@ msgstr "Aperture {aperture}"
 msgid "Aperture {found}; needs {needed}"
 msgstr "Aperture {found}; needs {needed}"
 
-#: src/camera_preflight/report/labels.py:29
+#: src/camera_preflight/report/labels.py:30
 msgid "App version"
 msgstr "App version"
 
@@ -142,7 +142,7 @@ msgstr "Ask about metering problems seen in use ({checks})"
 msgid "Ask about the shutter count and any past repairs ({checks})"
 msgstr "Ask about the shutter count and any past repairs ({checks})"
 
-#: src/camera_preflight/report/labels.py:27
+#: src/camera_preflight/report/labels.py:28
 msgid "Ask the seller"
 msgstr "Ask the seller"
 
@@ -190,7 +190,7 @@ msgstr "Battery {percent}%"
 msgid "Blocker"
 msgstr "Blocker"
 
-#: src/camera_preflight/gui/views/results.py:206 src/camera_preflight/report/labels.py:21
+#: src/camera_preflight/gui/views/results.py:206 src/camera_preflight/report/labels.py:22
 msgid "Blockers"
 msgstr "Blockers"
 
@@ -380,7 +380,7 @@ msgstr "Compensation steps uneven ({ev} EV)"
 msgid "Compensation {ev} EV"
 msgstr "Compensation {ev} EV"
 
-#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:46
+#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:47
 msgid "Confidence"
 msgstr "Confidence"
 
@@ -457,7 +457,7 @@ msgid "Defocus the lens. Keep the light even."
 msgstr "Defocus the lens. Keep the light even."
 
 #: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:239
-#: src/camera_preflight/report/labels.py:49
+#: src/camera_preflight/report/labels.py:50
 msgid "Details"
 msgstr "Details"
 
@@ -539,11 +539,11 @@ msgstr "Even scene, auto exposure"
 msgid "Even, defocused"
 msgstr "Even, defocused"
 
-#: src/camera_preflight/report/labels.py:37
+#: src/camera_preflight/report/labels.py:38
 msgid "Evidence images"
 msgstr "Evidence images"
 
-#: src/camera_preflight/report/labels.py:35
+#: src/camera_preflight/report/labels.py:36
 msgid "Evidence label"
 msgstr "Evidence label"
 
@@ -625,7 +625,7 @@ msgstr "Fault only with the mechanical shutter"
 msgid "Fault with both lenses: {points}"
 msgstr "Fault with both lenses: {points}"
 
-#: src/camera_preflight/report/labels.py:38
+#: src/camera_preflight/report/labels.py:39
 msgid "File"
 msgstr "File"
 
@@ -803,11 +803,11 @@ msgstr "From uploaded files"
 msgid "Gradient at {speed}: {amp}"
 msgstr "Gradient at {speed}: {amp}"
 
-#: src/camera_preflight/report/labels.py:53
+#: src/camera_preflight/report/labels.py:54
 msgid "Guess"
 msgstr "Guess"
 
-#: src/camera_preflight/report/labels.py:41
+#: src/camera_preflight/report/labels.py:42
 msgid "Hashes show file integrity only. They do not prove the files were not altered."
 msgstr "Hashes show file integrity only. They do not prove the files were not altered."
 
@@ -886,7 +886,7 @@ msgstr "ISO {iso}: noise {sigma} DN"
 msgid "Images"
 msgstr "Images"
 
-#: src/camera_preflight/report/labels.py:52
+#: src/camera_preflight/report/labels.py:53
 msgid "Inference"
 msgstr "Inference"
 
@@ -910,7 +910,7 @@ msgstr "Judged Pass by you"
 msgid "Judged Suspect by you"
 msgstr "Judged Suspect by you"
 
-#: src/camera_preflight/report/labels.py:30
+#: src/camera_preflight/report/labels.py:31
 msgid "Knowledge base version"
 msgstr "Knowledge base version"
 
@@ -1044,7 +1044,7 @@ msgstr "Metering photos"
 msgid "Metering: {mode}"
 msgstr "Metering: {mode}"
 
-#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:28
+#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:29
 msgid "Method"
 msgstr "Method"
 
@@ -1167,7 +1167,7 @@ msgid "Not sure"
 msgstr "Not sure"
 
 #: src/camera_preflight/gui/views/results.py:212 src/camera_preflight/messages.py:27
-#: src/camera_preflight/report/labels.py:25
+#: src/camera_preflight/report/labels.py:26
 msgid "Not tested"
 msgstr "Not tested"
 
@@ -1180,7 +1180,7 @@ msgstr "Note"
 msgid "Note: {text}"
 msgstr "Note: {text}"
 
-#: src/camera_preflight/report/labels.py:23
+#: src/camera_preflight/report/labels.py:24
 msgid "Nothing suspect or failed."
 msgstr "Nothing suspect or failed."
 
@@ -1209,11 +1209,11 @@ msgstr "Output level"
 msgid "Output {percent}, {offset} EV from mid-grey"
 msgstr "Output {percent}, {offset} EV from mid-grey"
 
-#: src/camera_preflight/report/labels.py:33
+#: src/camera_preflight/report/labels.py:34
 msgid "Parameter"
 msgstr "Parameter"
 
-#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:31
+#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:32
 msgid "Parameter set"
 msgstr "Parameter set"
 
@@ -1225,7 +1225,7 @@ msgstr "Pass"
 msgid "Passed"
 msgstr "Passed"
 
-#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:47
+#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:48
 msgid "Path"
 msgstr "Path"
 
@@ -1233,7 +1233,7 @@ msgstr "Path"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/camera_preflight/report/labels.py:55
+#: src/camera_preflight/report/labels.py:56
 msgid "Photo checks"
 msgstr "Photo checks"
 
@@ -1321,7 +1321,7 @@ msgstr "Read the results. Save the report."
 msgid "Reading camera data"
 msgstr "Reading camera data"
 
-#: src/camera_preflight/report/labels.py:26
+#: src/camera_preflight/report/labels.py:27
 msgid "Reason"
 msgstr "Reason"
 
@@ -1365,7 +1365,7 @@ msgstr "Right"
 msgid "SDK not configured"
 msgstr "SDK not configured"
 
-#: src/camera_preflight/report/labels.py:39
+#: src/camera_preflight/report/labels.py:40
 msgid "SHA-256"
 msgstr "SHA-256"
 
@@ -1393,6 +1393,10 @@ msgstr "Semi-automatic"
 #: src/camera_preflight/gui/labels.py:88
 msgid "Sensor"
 msgstr "Sensor"
+
+#: src/camera_preflight/report/labels.py:19
+msgid "Sensor temperature"
+msgstr "Sensor temperature"
 
 #: src/camera_preflight/report/labels.py:14
 msgid "Serial (last 4)"
@@ -1441,7 +1445,7 @@ msgstr "Settings"
 msgid "Severe problem"
 msgstr "Severe problem"
 
-#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:48
+#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:49
 msgid "Severity"
 msgstr "Severity"
 
@@ -1523,11 +1527,11 @@ msgstr "Some photos lack camera notes"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/camera_preflight/report/labels.py:36
+#: src/camera_preflight/report/labels.py:37
 msgid "Source files"
 msgstr "Source files"
 
-#: src/camera_preflight/report/labels.py:51
+#: src/camera_preflight/report/labels.py:52
 msgid "Sourced"
 msgstr "Sourced"
 
@@ -1585,7 +1589,7 @@ msgstr "Stuck and dead pixels"
 msgid "Stuck pixel at row {row}, column {col} ({channel})"
 msgstr "Stuck pixel at row {row}, column {col} ({channel})"
 
-#: src/camera_preflight/report/labels.py:20
+#: src/camera_preflight/report/labels.py:21
 msgid "Summary"
 msgstr "Summary"
 
@@ -1593,7 +1597,7 @@ msgstr "Summary"
 msgid "Suspect"
 msgstr "Suspect"
 
-#: src/camera_preflight/gui/views/results.py:209 src/camera_preflight/report/labels.py:22
+#: src/camera_preflight/gui/views/results.py:209 src/camera_preflight/report/labels.py:23
 msgid "Suspect and fail results"
 msgstr "Suspect and fail results"
 
@@ -1625,11 +1629,11 @@ msgstr "Theme"
 msgid "This file format cannot be read; convert to DNG"
 msgstr "This file format cannot be read; convert to DNG"
 
-#: src/camera_preflight/report/labels.py:44
+#: src/camera_preflight/report/labels.py:45
 msgid "This report lists measurements and suspected issues. It gives no buying or price advice."
 msgstr "This report lists measurements and suspected issues. It gives no buying or price advice."
 
-#: src/camera_preflight/report/labels.py:32
+#: src/camera_preflight/report/labels.py:33
 msgid "Thresholds used"
 msgstr "Thresholds used"
 
@@ -1654,7 +1658,7 @@ msgstr "USB port"
 msgid "Uneven rhythm (variation {cv})"
 msgstr "Uneven rhythm (variation {cv})"
 
-#: src/camera_preflight/report/labels.py:19
+#: src/camera_preflight/report/labels.py:20
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -1663,7 +1667,7 @@ msgstr "Unknown"
 msgid "Unstable focus at: {points}"
 msgstr "Unstable focus at: {points}"
 
-#: src/camera_preflight/report/labels.py:54
+#: src/camera_preflight/report/labels.py:55
 msgid "Unverified"
 msgstr "Unverified"
 
@@ -1691,7 +1695,7 @@ msgstr "Uploaded files"
 msgid "Use photo upload"
 msgstr "Use photo upload"
 
-#: src/camera_preflight/report/labels.py:34
+#: src/camera_preflight/report/labels.py:35
 msgid "Value"
 msgstr "Value"
 
@@ -1752,7 +1756,7 @@ msgstr "Working"
 msgid "Yes"
 msgstr "Yes"
 
-#: src/camera_preflight/report/labels.py:50
+#: src/camera_preflight/report/labels.py:51
 msgid "more not shown"
 msgstr "more not shown"
 

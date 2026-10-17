@@ -88,6 +88,8 @@ def _render(data: ReportData, lang: str) -> str:
         (L["count_before"], val(cam.shutter_count_before)),
         (L["count_after"], val(cam.shutter_count_after)),
     ]
+    if cam.temperature_c is not None:
+        rows.append((L["temperature"], f"{cam.temperature_c:.0f} \u00b0C"))
     levels = [
         {"key": lv.value, "glyph": _GLYPH[lv], "name": _level_name(lv), "count": summary.counts[lv]}
         for lv in (Level.PASS, Level.SUSPECT, Level.FAIL, Level.NOT_TESTED)

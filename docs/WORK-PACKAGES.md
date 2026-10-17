@@ -126,3 +126,29 @@ Approving an item unblocks the packages listed. Items with no package affect sco
 | Requirement | Reason |
 | --- | --- |
 | FR-ACQ-08 | Audio burst rhythm (N-05), release "later" |
+
+## 10. Status after the first implementation pass
+
+Status of each package on branch `feat/implementation`. "Done" means built, tested without a camera and merged into that branch. Nothing here has run on a real camera.
+
+| Package | Status | Note |
+| --- | --- | --- |
+| WP-00 to WP-05 | Done | Skeleton, CI, i18n check, domain, synthetic generator and DNG writer |
+| WP-10 to WP-12 | Done | RAW via rawpy, ExifTool and in-house readers, session folder, per-step upload |
+| WP-13 to WP-19 | Done | Gate, analysis, checks A to F, verdict rules, derived knowledge tier. Thresholds are `[Guess]` until V-07 |
+| WP-20, WP-21 | Done | HTML report with hashes (N-10), command line |
+| WP-30 to WP-33, WP-35, WP-37, WP-38 | Done | Wizard engine, Qt shell, upload, manual, results, 24 scenes, demo session |
+| WP-34 | Partial | Mechanism, credits and About screen done. No photo is included: the photo hosts were not reachable (V-24) |
+| WP-36 | Done | AF from uploads; tier 1 reported by the user |
+| WP-39 | Partial | NOTICE, licence collection and SmartScreen steps done; pinned ExifTool and photo credits still open (V-16, V-24) |
+| WP-3A | Open | Needs five people (UX section 11) |
+| WP-40 | Blocked | Needs hardware: Canon and Sony bodies on Windows |
+| WP-41, WP-42, WP-45, WP-48 | Done | Host process, JSON protocol, PTP core, SDK loader and first-run setup, detection, lost-connection screen |
+| WP-43, WP-44, WP-60 | Partial | Standard PTP operations only. Brand extras (Canon shutter count property, live view, remote AF point) are `[Unverified]` and stay off until hardware logs exist |
+| WP-46, WP-47, WP-61 | Partial | Loader and feature declaration only. Bindings need the real SDK in the test environment (V-23) and are never written from memory |
+| WP-49, WP-4A, WP-50 | Done | Automatic run, helpers H1 to H5 and H7 with button fallback; H6 always uses the button (V-22) |
+| WP-4B | Partial | Plausibility notes and temperature done; relies on shutter count being readable |
+| WP-4C | Open | Protocol in [hardware-log/README.md](hardware-log/README.md); needs bodies |
+| WP-51, WP-52, WP-62 | Partial | Connected AF runs by point when the backend can select a point, otherwise falls back by hand. D6 to D8 analysis exists; their data comes from SDK bindings that are not bound yet |
+| WP-53 | Done | Schema, loader, validator, template |
+| WP-54 | Blocked | Curated data for every model needs sourced manufacturer data; the sources were not reachable. No value is written without a source |
