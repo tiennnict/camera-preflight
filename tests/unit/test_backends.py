@@ -3,7 +3,7 @@ import sys
 import pytest
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
-from fake_ptp import FakePtpCamera  # noqa: E402
+from fake_ptp import FakePtpCamera
 
 from camera_preflight.backends.client import BackendClient
 from camera_preflight.backends.protocol import CaptureSettings, Disconnected, NotSupported

@@ -12,6 +12,8 @@ from datetime import datetime
 from pathlib import Path
 
 from .. import __version__
+from ..acquisition import ConnectedRunner
+from ..backends.protocol import BackendError, CameraBackend
 from ..checks import BY_ID, AfAttempt, CheckContext, ManualAnswer, checks_for, not_tested
 from ..checks.base import REQUIRES_INSTRUMENT, SKIPPED
 from ..checks.group_d import faulty_points, points_for
@@ -75,6 +77,8 @@ class Wizard:
         self.entry: ModelEntry | None = None
         self.camera = Camera()
         self._listeners: list[Listener] = []
+        self.backend: CameraBackend
+        self.runner: ConnectedRunner
         self._counter = 0
 
     # ---- observers -------------------------------------------------------------------
@@ -243,6 +247,90 @@ class Wizard:
         self._persist()
         return outcomes
 
+    # ---- connected mode ---------------------------------------------------------------------
+    def use_backend(self, backend: CameraBackend, workdir: Path | None = None) -> None:
+        """Attach an opened backend; the plan becomes the connected plan (FR-CON-01)."""
+        self.backend = backend
+        self.runner = ConnectedRunner(backend, self, ingest_file, workdir=workdir)
+        info = backend.device_info()
+        self.device = info
+        self.camera = Camera(
+            brand=info.brand,
+            model=info.model,
+            serial_read=info.serial,
+            serial_entered=self.entered_serial,
+            firmware=info.firmware,
+            lens=info.lens,
+            shutter_count_before=info.shutter_count,
+        )
+        if self.kb:
+            self.entry = self.kb.find(info.brand, info.model)
+        self.session.identify(info.model, info.serial)
+        if self.mode is not Mode.CONNECTED:
+            self.mode = Mode.CONNECTED
+            self.plan = build_plan(self.mode, sdk_available=self.sdk_available)
+            self.states = {s.id: StepState(s) for s in self.plan}
+            self.index = 0
+            self._emit(ev.ModeChanged(self.mode.value))
+        self._emit(ev.DeviceIdentified(info.model or ""))
+
+    def next_frame_id(self) -> str:
+        self._counter += 1
+        return f"{self._counter:04d}"
+
+    def register(self, outcome: IngestOutcome) -> None:  # type: ignore[override]
+        self._register(outcome)
+        self._emit(ev.FrameIngested(outcome))
+
+    def record_attempt(self, point: str, focused: bool, lens: int) -> None:
+        store = self.af_attempts if lens == 1 else self.af_attempts2
+        store.setdefault(point, []).append(AfAttempt(focused, "tethered"))
+
+    def run_connected_step(
+        self,
+        step_id: str,
+        *,
+        manual_done: frozenset[str] = frozenset(),
+        on_progress: Callable[[str, int, int], None] | None = None,
+    ) -> list[CheckResult]:
+        """Run one connected step: shoot what it needs, then its checks (D-25, D-34).
+
+        Raises ``ManualFallback`` when a command fails twice; the caller shows the guided
+        manual step and calls again with ``manual_done`` holding that requirement key.
+        """
+        step = self.states[step_id].step
+        runner = self.runner
+        if on_progress:
+            runner.progress = on_progress
+        if step_id == "auto":
+            self._run_automatic(runner, manual_done)
+        else:
+            for req in step.requirements:
+                have = sum(1 for f in self.frames.get(req.key, []) if f.accepted)
+                if have >= req.count:
+                    continue
+                runner.run_requirement(req, manual_done=req.key in manual_done)
+        results = self.run_checks(step.checks)
+        self.states[step_id].done = True
+        self._persist()
+        return results
+
+    def _run_automatic(self, runner: ConnectedRunner, manual_done: frozenset[str]) -> None:
+        for req in step_requirements(self, "auto"):
+            if req.key in manual_done:
+                continue
+            runner.run_requirement(req)
+        self.device = self.backend.device_info()
+
+    def finish_connected(self) -> bool:
+        """Restore every camera setting the app changed and read the final shutter count."""
+        ok = self.runner.restore()
+        try:
+            self.camera.shutter_count_after = self.backend.device_info().shutter_count
+        except BackendError:
+            pass
+        return ok
+
     def add_frame(self, outcome: IngestOutcome) -> None:
         """Register a frame obtained by the connected backend (same path as an upload)."""
         self._register(outcome)
@@ -304,7 +392,8 @@ class Wizard:
         counted = [(t, n) for t, n in counted if t is not None and n is not None]
         if counted:
             counted.sort()
-            self.camera.shutter_count_before = counted[0][1]
+            if self.camera.shutter_count_before is None:
+                self.camera.shutter_count_before = counted[0][1]
             self.camera.shutter_count_after = counted[-1][1]
 
     def report_no_focus(self, point: str, lens: int = 1) -> None:
@@ -427,3 +516,7 @@ class Wizard:
 
 
 __all__ = ["FrameRequirement", "Level", "StepState", "Wizard", "points_for"]
+
+
+def step_requirements(wizard: Wizard, step_id: str) -> tuple[FrameRequirement, ...]:
+    return wizard.states[step_id].step.requirements

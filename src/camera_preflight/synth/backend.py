@@ -115,7 +115,9 @@ class SimBackend:
             firmware=self.cam.firmware,
             lens=self.cam.lens,
             battery_percent=self.cam.battery_percent,
-            shutter_count=self.cam.shutter_count,
+            shutter_count=None
+            if self.cam.shutter_count is None
+            else self.cam.shutter_count + self._shots,
             storage=("slot1",),
             af_fine_tune=0,
             usb_mode="PTP",
@@ -152,6 +154,8 @@ class SimBackend:
         if self.scene == "chart":
             tex = np.kron(np.random.default_rng(3).random((15, 20)) > 0.5, np.ones((4, 4)))
             frame = 40 + 170 * tex
+        elif self.scene == "normal":
+            frame = np.random.default_rng(11).normal(luma, 45, (h, w))  # an ordinary scene
         else:
             frame = np.full((h, w), float(luma))
         return np.clip(frame + rng.normal(0, 1.5, (h, w)), 0, 255).astype(np.uint8)
@@ -188,6 +192,8 @@ class SimBackend:
                 exposure_s=t, exposure_comp_ev=comp, metering_mode=s.metering or "Multi-segment"
             )
             level = float(np.clip(0.18 * 2**comp, 0.02, 0.88))
+            if tag == "e3-bright" and cam.spot_follows:
+                meta["exposure_s"] = t / 2**2.5  # spot on a bright area: the camera exposes less
             d = Defects()
         elif tag.startswith(("c2", "c4")):
             fast = t <= 1 / 1000
