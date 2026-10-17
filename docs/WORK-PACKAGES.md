@@ -1,6 +1,6 @@
 # Work Packages
 
-Status: draft, 2026-10-17. Derived from the design baseline ([SRS.md](SRS.md), [TEST-CATALOGUE.md](TEST-CATALOGUE.md), [ARCHITECTURE.md](ARCHITECTURE.md), [UX.md](UX.md), [ROADMAP.md](ROADMAP.md)). The milestone order follows the release map, which is itself Proposed (P-07). Read [AGENTS.md](../AGENTS.md) before taking a package.
+Status: draft, 2026-10-17. All Proposed blockers were resolved by D-46. Derived from the design baseline ([SRS.md](SRS.md), [TEST-CATALOGUE.md](TEST-CATALOGUE.md), [ARCHITECTURE.md](ARCHITECTURE.md), [UX.md](UX.md), [ROADMAP.md](ROADMAP.md)). The milestone order follows the release map, which is itself Proposed (P-07). Read [AGENTS.md](../AGENTS.md) before taking a package.
 
 ## 1. How to use this list
 
@@ -110,7 +110,7 @@ Approving an item unblocks the packages listed. Items with no package affect sco
 | N-02 | WP-13 |
 | N-03 | WP-4B |
 | N-05 | none |
-| N-06 | none |
+| N-06 | none (rejected by D-46) |
 | N-09 | WP-38, WP-3A |
 | N-10 | WP-20 |
 | P-01 | WP-31, WP-32 |

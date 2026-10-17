@@ -53,45 +53,46 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-43 | Minimum Windows version: Windows 10 22H2 and Windows 11, x64 only. Answers O-05 | 2026-10-17 | Session |
 | D-44 | UI text is short and complete in meaning. Screens carry no long notes, footnotes or explanations; detail is available on demand (check detail, method section of the report). Applies to English and Vietnamese ([UX.md](UX.md) section 9) | 2026-10-17 | Session |
 | D-45 | The mockup is not revised further. It is a layout and flow reference only; where it differs from the documents, the documents prevail. Its on-screen text is longer than D-44 allows and must not be copied as is | 2026-10-17 | Session |
+| D-46 | The maintainer approved all Proposed items (R-01, R-03, R-05 to R-08, R-12 to R-15, N-02, N-03, N-05, N-09, N-10, P-01 to P-07) and rejected N-06 (baseline and compare conflicts with D-36). The maintainer ordered autonomous implementation of all work packages with a commit per stage | 2026-10-17 | Session |
 
-## 2. Proposed (awaiting approval)
+## 2. Formerly proposed (resolved by D-46)
 
 Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVIEW.md).
 
 | ID | Decision | Detail | Status |
 | --- | --- | --- | --- |
-| R-01 | AF tier 1 = focus not acquired or shutter not released within a timeout | DESIGN-REVIEW §3 | Proposed |
+| R-01 | AF tier 1 = focus not acquired or shutter not released within a timeout | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
 | R-02 | Quick profile runs entirely by file import; v0.1 has no USB dependency | DESIGN-REVIEW §3 | Superseded by D-23, D-28 (2026-10-17) |
-| R-03 | Windows USB spike evaluates WPD first, then libusb, then .NET helper | DESIGN-REVIEW §3 | Proposed |
+| R-03 | Windows USB spike evaluates WPD first, then libusb, then .NET helper | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
 | R-04 | Standard profile: E1, E5, D5 by default; rest of E and full AF map in Full | DESIGN-REVIEW §3 | Superseded by D-28 (2026-10-17) |
-| R-05 | C3 at maximum aperture; C2 relative to a slow reference speed | DESIGN-REVIEW §3 | Proposed |
-| R-06 | B4 without lens rotation; sensor dust identified by f/22 versus f/8 | DESIGN-REVIEW §3 | Proposed |
-| R-07 | Two-tier knowledge base (derived and curated); missing data never blocks a test | DESIGN-REVIEW §3 | Proposed |
-| R-08 | Analysis on CFA arrays; RAW decoding isolated; DNG fallback | DESIGN-REVIEW §3 | Proposed |
+| R-05 | C3 at maximum aperture; C2 relative to a slow reference speed | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
+| R-06 | B4 without lens rotation; sensor dust identified by f/22 versus f/8 | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
+| R-07 | Two-tier knowledge base (derived and curated); missing data never blocks a test | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
+| R-08 | Analysis on CFA arrays; RAW decoding isolated; DNG fallback | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
 | R-09 | JSON canonical report; self-contained HTML; SHA-256 evidence manifest | DESIGN-REVIEW §3 | Modified by D-27: HTML is the user deliverable; JSON stays internal to the session (2026-10-17) |
 | R-10 | Shot and time budget planner over the three presets | DESIGN-REVIEW §3 | Superseded by D-28 (2026-10-17) |
 | R-11 | Vendor SDK adapters outside the core repo until SDK terms are read | DESIGN-REVIEW §3 | Superseded by D-31 (2026-10-17) |
-| R-12 | Package layout `src/camera_preflight/`; enforced layer dependencies | ARCHITECTURE §6 | Proposed |
-| R-13 | No OpenCV in early milestones | ARCHITECTURE §2.2 | Proposed |
-| R-14 | Single frame acceptance gate | TEST-CATALOGUE §1 | Proposed |
-| R-15 | Record sensor temperature; robust per-ISO statistics | DESIGN-REVIEW §3 | Proposed |
+| R-12 | Package layout `src/camera_preflight/`; enforced layer dependencies | ARCHITECTURE §6 | Confirmed by D-46 (2026-10-17) |
+| R-13 | No OpenCV in early milestones | ARCHITECTURE §2.2 | Confirmed by D-46 (2026-10-17) |
+| R-14 | Single frame acceptance gate | TEST-CATALOGUE §1 | Confirmed by D-46 (2026-10-17) |
+| R-15 | Record sensor temperature; robust per-ISO statistics | DESIGN-REVIEW §3 | Confirmed by D-46 (2026-10-17) |
 | N-01 | Remote pre-check pack | DESIGN-REVIEW §4 | Rejected by D-30 (2026-10-17) |
-| N-02 | Provenance and consistency checks | DESIGN-REVIEW §4 | Proposed |
-| N-03 | Shutter count plausibility cross-check | DESIGN-REVIEW §4 | Proposed |
+| N-02 | Provenance and consistency checks | DESIGN-REVIEW §4 | Confirmed by D-46 (2026-10-17) |
+| N-03 | Shutter count plausibility cross-check | DESIGN-REVIEW §4 | Confirmed by D-46 (2026-10-17) |
 | N-04 | Automatic frame classification on import | DESIGN-REVIEW §4 | Superseded by D-29 (2026-10-17) |
-| N-05 | Microphone-assisted burst rhythm | DESIGN-REVIEW §4 | Proposed |
-| N-06 | Baseline and compare | DESIGN-REVIEW §4 | Proposed |
+| N-05 | Microphone-assisted burst rhythm | DESIGN-REVIEW §4 | Confirmed by D-46 (2026-10-17) |
+| N-06 | Baseline and compare | DESIGN-REVIEW §4 | Rejected by D-46 (2026-10-17) |
 | N-07 | Field kit export | DESIGN-REVIEW §4 | Rejected by D-30 (2026-10-17) |
 | N-08 | Bilingual UI (English, Vietnamese) | DESIGN-REVIEW §4 | Confirmed as D-15 (2026-10-16) |
-| N-09 | Demo mode with synthetic session | DESIGN-REVIEW §4 | Proposed |
-| N-10 | Shareable single-file report with hash manifest and re-verification | DESIGN-REVIEW §4 | Proposed |
-| P-01 | Qt Widgets rather than Qt Quick (QML) | ARCHITECTURE §2.1 | Proposed |
-| P-02 | All device backends run in a separate host process with a JSON protocol | ARCHITECTURE §2.3 | Proposed |
-| P-03 | Tooling: uv, ruff, pyright, pytest, pytest-qt, hypothesis, import-linter | ARCHITECTURE §2.4 | Proposed |
-| P-04 | gettext + Babel as the single translation catalogue | ARCHITECTURE §2.2 | Proposed |
-| P-05 | Core libraries: rawpy, ExifTool, NumPy, SciPy, Pillow, pydantic, PyYAML, Jinja2 | ARCHITECTURE §2.2 | Proposed |
-| P-06 | Release format: PyInstaller onedir zip (portable) with SHA256SUMS; installer later | ARCHITECTURE §2.4 | Proposed |
-| P-07 | Release map v0.1 to v0.4 and milestones M0 to M5 (Sony moved into v0.2 by D-39) | ROADMAP §2, §3 | Proposed |
+| N-09 | Demo mode with synthetic session | DESIGN-REVIEW §4 | Confirmed by D-46 (2026-10-17) |
+| N-10 | Shareable single-file report with hash manifest and re-verification | DESIGN-REVIEW §4 | Confirmed by D-46 (2026-10-17) |
+| P-01 | Qt Widgets rather than Qt Quick (QML) | ARCHITECTURE §2.1 | Confirmed by D-46 (2026-10-17) |
+| P-02 | All device backends run in a separate host process with a JSON protocol | ARCHITECTURE §2.3 | Confirmed by D-46 (2026-10-17) |
+| P-03 | Tooling: uv, ruff, pyright, pytest, pytest-qt, hypothesis, import-linter | ARCHITECTURE §2.4 | Confirmed by D-46 (2026-10-17) |
+| P-04 | gettext + Babel as the single translation catalogue | ARCHITECTURE §2.2 | Confirmed by D-46 (2026-10-17) |
+| P-05 | Core libraries: rawpy, ExifTool, NumPy, SciPy, Pillow, pydantic, PyYAML, Jinja2 | ARCHITECTURE §2.2 | Confirmed by D-46 (2026-10-17) |
+| P-06 | Release format: PyInstaller onedir zip (portable) with SHA256SUMS; installer later | ARCHITECTURE §2.4 | Confirmed by D-46 (2026-10-17) |
+| P-07 | Release map v0.1 to v0.4 and milestones M0 to M5 (Sony moved into v0.2 by D-39) | ROADMAP §2, §3 | Confirmed by D-46 (2026-10-17) |
 
 ## 3. Open (maintainer input needed)
 
