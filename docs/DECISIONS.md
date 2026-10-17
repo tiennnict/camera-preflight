@@ -28,6 +28,11 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-20 | Animations use two generic body types (DSLR and mirrorless) without brand shapes or logos; the control involved is highlighted and named by a translatable label | 2026-10-16 | Session |
 | D-21 | Camera menu settings (RAW, noise reduction off, lens corrections off) are given as text only, without animation, because menus differ per brand and generation | 2026-10-16 | Session |
 | D-22 | The UI mockup covers every wizard step of all three profiles, one framed screen per step on a single page | 2026-10-16 | Session |
+| D-23 | Two operating modes only: camera connected (tethered) or not connected (upload images). The app detects the driver and a plugged-in camera automatically. Supersedes the four entry choices in UX S1 | 2026-10-17 | Session |
+| D-24 | Vendor SDK support is part of the design. A first-run setup step lets the user point to each SDK and explains the benefit of using it. Without an SDK, checks that need it are skipped automatically and reported as Not tested with the reason | 2026-10-17 | Session |
+| D-25 | Tethered mode automates as much as possible: set camera settings and exposure parameters, release the shutter, download the files and analyse them. When an automatic command fails, the step falls back to guided manual instructions | 2026-10-17 | Session |
+| D-26 | The wizard always contains every step. In upload mode, the capture control of each shooting step is replaced by an upload button | 2026-10-17 | Session |
+| D-27 | The report delivered to the user is an HTML file | 2026-10-17 | Session |
 | D-18 | The wizard shows 2D animations that illustrate the physical actions the user must perform (for example plugging a cable, powering on, mounting a lens, fitting a body cap, pressing or holding a button, tilting the camera to inspect a part) | 2026-10-16 | Session |
 | D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
 
