@@ -232,6 +232,21 @@ class FrameRequirement:
         return "/".join(parts)
 
 
+class DeviceInfo(BaseModel):
+    """What a backend or the first uploaded frame says about the body (group A)."""
+
+    brand: str | None = None
+    model: str | None = None
+    serial: str | None = None
+    firmware: str | None = None
+    lens: str | None = None
+    battery_percent: int | None = None
+    shutter_count: int | None = None
+    storage: tuple[str, ...] = ()
+    af_fine_tune: int | None = None
+    usb_mode: str | None = None
+
+
 @dataclass(frozen=True)
 class CheckSpec:
     """Declaration of a check (FR-TST-01)."""
