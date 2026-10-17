@@ -29,7 +29,8 @@ from ..protocol import (
 
 LIBRARY_NAMES: dict[str, tuple[str, ...]] = {
     "canon": ("EDSDK.dll", "libEDSDK.so", "EDSDK.framework"),
-    "nikon": ("NkdPTDR.dll", "Nikon.dll", "libNikon.so"),
+    # [Sourced] Remote SDK v2.1.0 ships Module/Win/BinaryFile/ControlServiceLayer.dll
+    "nikon": ("ControlServiceLayer.dll",),
     "sony": ("Cr_Core.dll", "libCr_Core.so", "CrAdapter"),
 }
 
@@ -134,5 +135,9 @@ def open_sdk_backend(brand: str, folder: Path | None) -> SdkAdapter:
 
 
 def _adapter(brand: str, location: SdkLocation) -> SdkAdapter:
+    if brand == "nikon":
+        from .nikon import NikonAdapter
+
+        return NikonAdapter(location)
     cls = type(f"{brand.capitalize()}Adapter", (SdkAdapter,), {"brand": brand})
     return cls(location)
