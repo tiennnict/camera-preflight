@@ -122,8 +122,12 @@ def check() -> int:
         mo = mo_path(lang)
         if not mo.exists():
             problems.append(f"{lang}: compiled catalogue missing")
-        elif mo.stat().st_mtime + 1 < path.stat().st_mtime:
-            problems.append(f"{lang}: compiled catalogue is older than the .po file")
+        else:
+            with mo.open("rb") as fh:
+                compiled = {str(m.id): m.string for m in mofile.read_mo(fh) if m.id}
+            wanted = {str(m.id): m.string for m in cat if m.id and m.string}
+            if compiled != wanted:
+                problems.append(f"{lang}: compiled catalogue differs from the .po file; run compile")
     for line in problems:
         print(line)
     return 1 if problems else 0

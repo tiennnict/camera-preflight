@@ -1,0 +1,30 @@
+# Copy to canon/, nikon/ or sony/ and fill in. Remove fields you cannot source.
+schema_version: 1
+brand: Canon                 # Canon, Nikon or Sony
+model: EOS Example           # name as written by the manufacturer
+aliases: [Example]           # names as they appear in photo metadata
+release_year: 2020
+release_year_source: https://example.invalid/source
+shutter:
+  type: mechanical           # mechanical, electronic, both or efcs
+  rated_life:
+    value: 150000
+    source: https://example.invalid/spec
+    confidence: medium       # high, medium or low
+  max_burst_fps:
+    value: 7
+    source: https://example.invalid/spec
+    confidence: high
+af:
+  point_count: 45
+  layout_ref: example-45     # file in layouts/
+  metadata_decoder: unverified   # verified only after a hardware test
+firmware_latest:
+  version: "1.2.0"
+  date: "2024-01-01"
+  source: https://example.invalid/firmware
+backend_hints:
+  no_sdk: canon_ptp
+  usb_mode_note: Set the USB mode to PTP.
+known_issues: []
+controls: []

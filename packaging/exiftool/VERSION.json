@@ -1,0 +1,6 @@
+{
+  "version": "UNSET",
+  "url": "UNSET",
+  "sha256": "UNSET",
+  "note": "Pin a released Windows 64-bit ExifTool build and its published SHA-256 before the first release (V-16). fetch.py refuses to run while a field is UNSET."
+}

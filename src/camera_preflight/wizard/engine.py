@@ -474,6 +474,7 @@ class Wizard:
     def report_data(self) -> ReportData:
         ctx = self.context()
         issues = [(m.code, {k: str(v) for k, v in m.params.items()}) for m in ctx.provenance.issues]
+        issues += self.known_issue_notes()
         return ReportData(
             camera=self.camera,
             results=self.ordered_results(),
@@ -485,6 +486,15 @@ class Wizard:
             evidence_dir=self.session.evidence_dir,
             session_issues=issues,
         )
+
+    def known_issue_notes(self) -> list[tuple[str, dict[str, str]]]:
+        """Known issues of the curated entry: a warning only, never a verdict (FR-VER-04)."""
+        if self.entry is None:
+            return []
+        return [
+            ("kb.known_issue", {"description": i.description, "check": i.confirming_test})
+            for i in self.entry.known_issues
+        ]
 
     def render_report(self, language: str | None = None) -> str:
         return render_report(self.report_data(), language or self.language)

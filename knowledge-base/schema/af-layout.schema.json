@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "AfPointSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "x": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Y",
+          "type": "number"
+        },
+        "kind": {
+          "default": "cross",
+          "enum": [
+            "cross",
+            "line",
+            "area"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "x",
+        "y"
+      ],
+      "title": "AfPointSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "points": {
+      "items": {
+        "$ref": "#/$defs/AfPointSpec"
+      },
+      "title": "Points",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "points"
+  ],
+  "title": "AfLayout",
+  "type": "object"
+}

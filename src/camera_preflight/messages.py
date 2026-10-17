@@ -284,3 +284,9 @@ register(
         "step.results.instruction": N_("Read the results. Save the report."),
     }
 )
+
+register(
+    {
+        "kb.known_issue": N_("Known issue: {description} (confirm with {check})"),
+    }
+)

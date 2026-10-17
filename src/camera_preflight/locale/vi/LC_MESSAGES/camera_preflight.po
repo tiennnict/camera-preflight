@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:54+0000\n"
+"POT-Creation-Date: 2026-10-17 10:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: vi\n"
@@ -913,6 +913,11 @@ msgstr "Bạn đánh giá: Nghi vấn"
 #: src/camera_preflight/report/labels.py:30
 msgid "Knowledge base version"
 msgstr "Phiên bản cơ sở tri thức"
+
+#: src/camera_preflight/messages.py:290
+#, python-brace-format
+msgid "Known issue: {description} (confirm with {check})"
+msgstr "Lỗi đã biết: {description} (kiểm tra bằng {check})"
 
 #: src/camera_preflight/gui/shell.py:92 src/camera_preflight/gui/views/settings_dialogs.py:103
 msgid "Language"

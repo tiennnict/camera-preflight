@@ -1,0 +1,367 @@
+{
+  "$defs": {
+    "AfInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "point_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Point Count"
+        },
+        "layout_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layout Ref"
+        },
+        "metadata_decoder": {
+          "default": "unverified",
+          "enum": [
+            "verified",
+            "unverified"
+          ],
+          "title": "Metadata Decoder",
+          "type": "string"
+        },
+        "max_response_s": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourcedValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "AfInfo",
+      "type": "object"
+    },
+    "BackendHints": {
+      "additionalProperties": false,
+      "properties": {
+        "no_sdk": {
+          "default": "none",
+          "enum": [
+            "canon_ptp",
+            "nikon_ext",
+            "sony_remote",
+            "libgphoto2",
+            "none"
+          ],
+          "title": "No Sdk",
+          "type": "string"
+        },
+        "usb_mode_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usb Mode Note"
+        }
+      },
+      "title": "BackendHints",
+      "type": "object"
+    },
+    "Confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "FirmwareInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "source": {
+          "minLength": 3,
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "source"
+      ],
+      "title": "FirmwareInfo",
+      "type": "object"
+    },
+    "KnownIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scope"
+        },
+        "confirming_test": {
+          "title": "Confirming Test",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "source": {
+          "minLength": 3,
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "confirming_test",
+        "confidence",
+        "source"
+      ],
+      "title": "KnownIssue",
+      "type": "object"
+    },
+    "ShutterInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "anyOf": [
+            {
+              "enum": [
+                "mechanical",
+                "electronic",
+                "both",
+                "efcs"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type"
+        },
+        "rated_life": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourcedValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "max_burst_fps": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourcedValue"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ShutterInfo",
+      "type": "object"
+    },
+    "SourcedValue": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        },
+        "source": {
+          "minLength": 3,
+          "title": "Source",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        }
+      },
+      "required": [
+        "value",
+        "source",
+        "confidence"
+      ],
+      "title": "SourcedValue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "brand": {
+      "enum": [
+        "Canon",
+        "Nikon",
+        "Sony"
+      ],
+      "title": "Brand",
+      "type": "string"
+    },
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "aliases": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Aliases",
+      "type": "array"
+    },
+    "release_year": {
+      "anyOf": [
+        {
+          "maximum": 2100,
+          "minimum": 1990,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Release Year"
+    },
+    "release_year_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Release Year Source"
+    },
+    "shutter": {
+      "$ref": "#/$defs/ShutterInfo",
+      "default": {
+        "type": null,
+        "rated_life": null,
+        "max_burst_fps": null
+      }
+    },
+    "af": {
+      "$ref": "#/$defs/AfInfo",
+      "default": {
+        "point_count": null,
+        "layout_ref": null,
+        "metadata_decoder": "unverified",
+        "max_response_s": null
+      }
+    },
+    "firmware_latest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FirmwareInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "backend_hints": {
+      "$ref": "#/$defs/BackendHints",
+      "default": {
+        "no_sdk": "none",
+        "usb_mode_note": null
+      }
+    },
+    "known_issues": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/KnownIssue"
+      },
+      "title": "Known Issues",
+      "type": "array"
+    },
+    "controls": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Controls",
+      "type": "array"
+    }
+  },
+  "required": [
+    "brand",
+    "model"
+  ],
+  "title": "ModelEntry",
+  "type": "object"
+}

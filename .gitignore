@@ -236,3 +236,6 @@ tests/data/
 *.nrw
 *.arw
 *.dng
+
+# compiled translation catalogues are part of the source tree
+!src/camera_preflight/locale/**/*.mo
