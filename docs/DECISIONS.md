@@ -40,6 +40,10 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-32 | No time estimates, no shot-count estimates and no session history in the app | 2026-10-17 | Session |
 | D-33 | Visual (manual) physical checks show real-world reference photos of each defect so the user can recognise it | 2026-10-17 | Session |
 | D-34 | The wizard behaves like a diagnostics tool, ordered by automation level: (1) fully automatic checks first: run, mark the result and advance on their own; (2) semi-automatic checks next, either with a helper that detects the user's action and starts the check automatically, or, where detection is not possible, with a button the user presses; (3) fully manual checks last. Every action the PC can perform on the camera over USB is done by the app, never by the user | 2026-10-17 | Session |
+| D-35 | A short visual blocker check (about 30 seconds, yes/no questions on severe defects only) runs at the very start, before any automatic check. All other manual checks stay last | 2026-10-17 | Session |
+| D-36 | No session resume: every app launch starts a new session; an interrupted session is not continued | 2026-10-17 | Session |
+| D-37 | The report keeps the camera's actual shutter count read before and after the session; the wizard shows no shot estimate or counter | 2026-10-17 | Session |
+| D-38 | Reference photos come only from openly licensed sources, with author, licence and source recorded and shown in the app; target 4 photos per defect. The maintainer adds or replaces photos with their own where needed | 2026-10-17 | Session |
 | D-18 | The wizard shows 2D animations that illustrate the physical actions the user must perform (for example plugging a cable, powering on, mounting a lens, fitting a body cap, pressing or holding a button, tilting the camera to inspect a part) | 2026-10-16 | Session |
 | D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
 
