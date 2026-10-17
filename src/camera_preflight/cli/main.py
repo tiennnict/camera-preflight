@@ -109,9 +109,11 @@ def cmd_self_test(_args: argparse.Namespace) -> int:
 
 
 def cmd_gui(args: argparse.Namespace) -> int:
-    from ..gui.app import run
+    # Loaded by name so the command-line layer has no static dependency on the GUI layer.
+    import importlib
 
-    return run(args.lang if hasattr(args, "lang") else None)
+    gui = importlib.import_module("camera_preflight.gui.app")
+    return int(gui.run(args.lang if hasattr(args, "lang") else None))
 
 
 def build_parser() -> argparse.ArgumentParser:

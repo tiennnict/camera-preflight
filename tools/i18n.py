@@ -16,8 +16,22 @@ PKG = ROOT / "src" / "camera_preflight"
 LOCALE = PKG / "locale"
 DOMAIN = "camera_preflight"
 LANGS = ("en", "vi")
-KEYWORDS = {"_": None, "N_": None, "ngettext": (1, 2)}
+KEYWORDS = {"_": None, "N_": None, "tr": None, "ngettext": (1, 2)}
 POT = LOCALE / f"{DOMAIN}.pot"
+
+# Source texts that are legitimately identical in Vietnamese (terms and codes).
+IDENTICAL_OK = frozenset(
+    {
+        "Firmware",
+        "Model",
+        "SHA-256",
+        "ISO",
+        "RAW",
+        "Firmware {version}",
+        "{mode}: {ev} EV",
+        "ISO {iso}",
+    }
+)
 
 
 def po_path(lang: str) -> Path:
@@ -60,10 +74,15 @@ def update() -> None:
                 existing = pofile.read_po(fh, locale=lang)
         else:
             existing = Catalog(locale=lang, project="camera-preflight", charset="utf-8")
+        known = {str(m.id) for m in existing if m.id}
         existing.update(template, no_fuzzy_matching=True)
         for msg in existing:
-            if msg.id and lang == "en" and not msg.string:
+            if not msg.id:
+                continue
+            if lang == "en" and not msg.string:
                 msg.string = msg.id
+            elif lang != "en" and str(msg.id) not in known:
+                msg.string = ""  # new text: must be translated, never left as English
         with path.open("wb") as fh:
             pofile.write_po(fh, existing, width=100, sort_output=True)
 
@@ -98,6 +117,8 @@ def check() -> int:
             strings = msg.string if isinstance(msg.string, tuple) else (msg.string,)
             if not all(strings):
                 problems.append(f"{lang}: untranslated {msg.id!r}")
+            elif lang != "en" and msg.string == msg.id and str(msg.id) not in IDENTICAL_OK:
+                problems.append(f"{lang}: still English {msg.id!r}")
         mo = mo_path(lang)
         if not mo.exists():
             problems.append(f"{lang}: compiled catalogue missing")

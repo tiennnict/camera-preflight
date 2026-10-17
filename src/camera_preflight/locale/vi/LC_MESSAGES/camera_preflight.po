@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:29+0000\n"
+"POT-Creation-Date: 2026-10-17 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: vi\n"
@@ -19,10 +19,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: src/camera_preflight/gui/shell.py:312
+msgid "A severe problem was found."
+msgstr "Phát hiện lỗi nghiêm trọng."
+
+#: src/camera_preflight/gui/animations/library.py:210
+msgid "AF joystick"
+msgstr "Cần gạt lấy nét"
+
 #: src/camera_preflight/messages.py:219
 #, python-brace-format
 msgid "AF point {found}; needs {needed}"
 msgstr "Điểm lấy nét {found}; cần {needed}"
+
+#: src/camera_preflight/gui/animations/library.py:133
+msgid "AF/MF switch"
+msgstr "Công tắc AF/MF"
+
+#: src/camera_preflight/gui/shell.py:94 src/camera_preflight/gui/shell.py:142
+#: src/camera_preflight/gui/views/about.py:15
+msgid "About"
+msgstr "Giới thiệu"
 
 #: src/camera_preflight/messages.py:230
 #, python-brace-format
@@ -32,6 +49,22 @@ msgstr "Khoảng {per_year} lần chụp mỗi năm trong {years} năm"
 #: src/camera_preflight/messages.py:64
 msgid "Absolute shutter speed"
 msgstr "Tốc độ màn trập tuyệt đối"
+
+#: src/camera_preflight/gui/views/upload.py:137
+msgid "Accepted"
+msgstr "Hợp lệ"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:28
+msgid "Adds AF point selection and focus check."
+msgstr "Thêm chọn điểm lấy nét và kiểm tra lấy nét."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:27
+msgid "Adds focus control and newer bodies."
+msgstr "Thêm điều khiển lấy nét và hỗ trợ máy mới."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:29
+msgid "Adds remote AF area and focus check."
+msgstr "Thêm chọn vùng lấy nét từ xa và kiểm tra lấy nét."
 
 #: src/camera_preflight/messages.py:265
 msgid "Aim at a white surface"
@@ -50,6 +83,14 @@ msgstr "Tất cả kết quả"
 msgid "All {count} points focus"
 msgstr "Cả {count} điểm đều lấy nét"
 
+#: src/camera_preflight/gui/views/results.py:119
+msgid "Analysing"
+msgstr "Đang phân tích"
+
+#: src/camera_preflight/gui/labels.py:80
+msgid "Aperture"
+msgstr "Khẩu độ"
+
 #: src/camera_preflight/messages.py:274
 msgid "Aperture photos"
 msgstr "Ảnh theo khẩu độ"
@@ -66,6 +107,11 @@ msgstr "Các bước khẩu độ"
 #: src/camera_preflight/messages.py:206
 msgid "Aperture steps are even"
 msgstr "Các bước khẩu độ đều"
+
+#: src/camera_preflight/gui/labels.py:68
+#, python-brace-format
+msgid "Aperture {aperture}"
+msgstr "Khẩu độ {aperture}"
 
 #: src/camera_preflight/messages.py:211
 #, python-brace-format
@@ -110,6 +156,10 @@ msgstr "Hỏi cảm biến đã được vệ sinh hoặc thay chưa ({checks})"
 msgid "Ask whether the shutter was serviced or replaced ({checks})"
 msgstr "Hỏi màn trập đã được bảo dưỡng hoặc thay chưa ({checks})"
 
+#: src/camera_preflight/gui/views/manual.py:84 src/camera_preflight/gui/views/manual.py:103
+msgid "Attach photo"
+msgstr "Đính kèm ảnh"
+
 #: src/camera_preflight/messages.py:66
 msgid "Autofocus points"
 msgstr "Điểm lấy nét"
@@ -117,6 +167,10 @@ msgstr "Điểm lấy nét"
 #: src/camera_preflight/messages.py:35
 msgid "Automatic"
 msgstr "Tự động"
+
+#: src/camera_preflight/gui/shell.py:120 src/camera_preflight/gui/shell.py:143
+msgid "Back"
+msgstr "Quay lại"
 
 #: src/camera_preflight/messages.py:146
 #, python-brace-format
@@ -136,13 +190,17 @@ msgstr "Pin {percent}%"
 msgid "Blocker"
 msgstr "Nghiêm trọng, nên dừng"
 
-#: src/camera_preflight/report/labels.py:21
+#: src/camera_preflight/gui/views/results.py:184 src/camera_preflight/report/labels.py:21
 msgid "Blockers"
 msgstr "Lỗi nghiêm trọng"
 
 #: src/camera_preflight/messages.py:87
 msgid "Body and structure"
 msgstr "Thân máy và kết cấu"
+
+#: src/camera_preflight/gui/animations/library.py:108
+msgid "Body cap"
+msgstr "Nắp thân máy"
 
 #: src/camera_preflight/messages.py:75
 msgid "Body or lens"
@@ -151,6 +209,10 @@ msgstr "Thân máy hay ống kính"
 #: src/camera_preflight/messages.py:163
 msgid "Both shutter modes are even"
 msgstr "Cả hai kiểu màn trập đều ổn"
+
+#: src/camera_preflight/gui/labels.py:15
+msgid "Bottom"
+msgstr "Dưới"
 
 #: src/camera_preflight/report/labels.py:12
 msgid "Brand"
@@ -177,6 +239,11 @@ msgstr "Độ sáng {found}%; cần {needed}%"
 msgid "Bundled lens"
 msgstr "Ống kính kèm theo"
 
+#: src/camera_preflight/gui/labels.py:40
+#, python-brace-format
+msgid "Burst of {count}"
+msgstr "Chuỗi {count} ảnh"
+
 #: src/camera_preflight/messages.py:60
 msgid "Burst rhythm"
 msgstr "Nhịp chụp liên tiếp"
@@ -186,9 +253,29 @@ msgstr "Nhịp chụp liên tiếp"
 msgid "Burst stalled (x{ratio} longest gap)"
 msgstr "Chụp liên tiếp bị khựng (gấp {ratio} lần)"
 
+#: src/camera_preflight/gui/animations/library.py:367
+msgid "Buttons"
+msgstr "Các nút"
+
 #: src/camera_preflight/report/labels.py:11
 msgid "Camera"
 msgstr "Máy ảnh"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:140
+msgid "Camera SDK"
+msgstr "SDK máy ảnh"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:108
+msgid "Camera SDK folders"
+msgstr "Thư mục SDK máy ảnh"
+
+#: src/camera_preflight/gui/animations/library.py:394
+msgid "Camera body"
+msgstr "Thân máy"
+
+#: src/camera_preflight/gui/shell.py:140
+msgid "Camera check"
+msgstr "Kiểm tra máy ảnh"
 
 #: src/camera_preflight/report/labels.py:8
 msgid "Camera check report"
@@ -197,6 +284,26 @@ msgstr "Báo cáo kiểm tra máy ảnh"
 #: src/camera_preflight/messages.py:47
 msgid "Camera identity"
 msgstr "Nhận dạng máy"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:118
+msgid "Cancel"
+msgstr "Hủy"
+
+#: src/camera_preflight/gui/animations/library.py:226
+msgid "Card door"
+msgstr "Nắp thẻ nhớ"
+
+#: src/camera_preflight/gui/animations/library.py:241
+msgid "Card reader"
+msgstr "Đầu đọc thẻ"
+
+#: src/camera_preflight/gui/labels.py:11
+msgid "Centre"
+msgstr "Giữa"
+
+#: src/camera_preflight/gui/labels.py:19
+msgid "Centre-weighted"
+msgstr "Trung tâm"
 
 #: src/camera_preflight/messages.py:279
 msgid "Change the lens"
@@ -207,19 +314,40 @@ msgstr "Đổi ống kính"
 msgid "Channel {channel}: {count}"
 msgstr "Kênh {channel}: {count}"
 
+#: src/camera_preflight/gui/views/start.py:23
+msgid "Check a used camera"
+msgstr "Kiểm tra máy ảnh cũ"
+
 #: src/camera_preflight/messages.py:255
 msgid "Check for severe damage"
 msgstr "Kiểm tra hư hỏng nặng"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:42
+#: src/camera_preflight/gui/views/settings_dialogs.py:51
+msgid "Choose folder"
+msgstr "Chọn thư mục"
 
 #: src/camera_preflight/messages.py:217
 #, python-brace-format
 msgid "Clipped pixels {found}%; needs under {needed}%"
 msgstr "Điểm cháy sáng {found}%; cần dưới {needed}%"
 
+#: src/camera_preflight/gui/views/about.py:41 src/camera_preflight/gui/views/results.py:103
+msgid "Close"
+msgstr "Đóng"
+
 #: src/camera_preflight/messages.py:142
 #, python-brace-format
 msgid "Colour cast across the frame ({amp})"
 msgstr "Lệch màu trên khung hình ({amp})"
+
+#: src/camera_preflight/gui/animations/library.py:157
+msgid "Command dial"
+msgstr "Vòng chỉnh lệnh"
+
+#: src/camera_preflight/gui/labels.py:82
+msgid "Compensation"
+msgstr "Bù sáng"
 
 #: src/camera_preflight/messages.py:200
 #, python-brace-format
@@ -235,13 +363,26 @@ msgstr "Ảnh bù trừ sáng"
 msgid "Compensation steps uneven ({ev} EV)"
 msgstr "Các bước bù trừ không đều ({ev} EV)"
 
-#: src/camera_preflight/report/labels.py:46
+#: src/camera_preflight/gui/labels.py:64
+#, python-brace-format
+msgid "Compensation {ev} EV"
+msgstr "Bù sáng {ev} EV"
+
+#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:46
 msgid "Confidence"
 msgstr "Độ tin cậy"
 
 #: src/camera_preflight/messages.py:39
 msgid "Connected"
 msgstr "Cắm máy"
+
+#: src/camera_preflight/gui/shell.py:314
+msgid "Continue"
+msgstr "Tiếp tục"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:155
+msgid "Continue without SDK"
+msgstr "Tiếp tục không dùng SDK"
 
 #: src/camera_preflight/messages.py:88
 msgid "Controls"
@@ -265,6 +406,10 @@ msgstr "Đã chụp {count}; chưa rõ tuổi thọ danh định"
 msgid "Cover the sensor. Keep it covered."
 msgstr "Che kín cảm biến. Giữ nguyên."
 
+#: src/camera_preflight/gui/labels.py:88
+msgid "Covered"
+msgstr "Đã che kín"
+
 #: src/camera_preflight/report/labels.py:9
 msgid "Created"
 msgstr "Ngày tạo"
@@ -277,6 +422,15 @@ msgstr "Màn trập đều ở mọi tốc độ"
 msgid "Curtain evenness"
 msgstr "Độ đều của màn trập"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:98
+msgid "Dark"
+msgstr "Tối"
+
+#: src/camera_preflight/gui/labels.py:31
+#, python-brace-format
+msgid "Dark, ISO {iso}, {exposure}"
+msgstr "Ảnh tối, ISO {iso}, {exposure}"
+
 #: src/camera_preflight/messages.py:125
 #, python-brace-format
 msgid "Dead pixel at row {row}, column {col} ({channel})"
@@ -286,6 +440,7 @@ msgstr "Điểm chết tại hàng {row}, cột {col} ({channel})"
 msgid "Defocus the lens. Keep the light even."
 msgstr "Để ống kính mất nét. Giữ ánh sáng đều."
 
+#: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:217
 #: src/camera_preflight/report/labels.py:49
 msgid "Details"
 msgstr "Chi tiết"
@@ -295,6 +450,26 @@ msgstr "Chi tiết"
 msgid "Deviation {dev} EV"
 msgstr "Lệch {dev} EV"
 
+#: src/camera_preflight/gui/views/upload.py:60
+msgid "Did not focus"
+msgstr "Không lấy nét"
+
+#: src/camera_preflight/gui/animations/library.py:286
+msgid "Diopter dial"
+msgstr "Vòng chỉnh diop"
+
+#: src/camera_preflight/gui/views/manual.py:33
+msgid "Does it power on normally?"
+msgstr "Máy bật nguồn bình thường không?"
+
+#: src/camera_preflight/gui/views/manual.py:36
+msgid "Does the mirror move freely?"
+msgstr "Gương lật có chuyển động tự do không?"
+
+#: src/camera_preflight/gui/labels.py:94
+msgid "Drive"
+msgstr "Chế độ chụp"
+
 #: src/camera_preflight/messages.py:149
 msgid "Dust and mark map"
 msgstr "Bản đồ bụi và vết"
@@ -303,7 +478,11 @@ msgstr "Bản đồ bụi và vết"
 msgid "Dust and marks"
 msgstr "Bụi và vết trên cảm biến"
 
-#: src/camera_preflight/messages.py:254
+#: src/camera_preflight/gui/labels.py:86
+msgid "Electronic"
+msgstr "Điện tử"
+
+#: src/camera_preflight/gui/views/start.py:24 src/camera_preflight/messages.py:254
 msgid "Enter the serial if you wish."
 msgstr "Nhập số seri nếu muốn."
 
@@ -311,10 +490,26 @@ msgstr "Nhập số seri nếu muốn."
 msgid "Entered serial differs from the photos"
 msgstr "Seri đã nhập khác với ảnh"
 
+#: src/camera_preflight/gui/labels.py:18
+msgid "Evaluative"
+msgstr "Đa vùng"
+
+#: src/camera_preflight/gui/animations/library.py:269
+msgid "Even bright surface"
+msgstr "Mặt phẳng sáng đều"
+
 #: src/camera_preflight/messages.py:152
 #, python-brace-format
 msgid "Even rhythm, {fps} shots/s"
 msgstr "Nhịp đều, {fps} ảnh/giây"
+
+#: src/camera_preflight/gui/labels.py:54
+msgid "Even scene, auto exposure"
+msgstr "Cảnh đều, phơi sáng tự động"
+
+#: src/camera_preflight/gui/labels.py:90
+msgid "Even, defocused"
+msgstr "Đều, mất nét"
 
 #: src/camera_preflight/report/labels.py:37
 msgid "Evidence images"
@@ -380,6 +575,10 @@ msgstr "Không đạt"
 msgid "Fast shutter photos"
 msgstr "Ảnh tốc độ nhanh"
 
+#: src/camera_preflight/gui/labels.py:94
+msgid "Fastest burst"
+msgstr "Chụp liên tiếp nhanh nhất"
+
 #: src/camera_preflight/messages.py:162
 msgid "Fault in both shutter modes"
 msgstr "Lỗi ở cả hai kiểu màn trập"
@@ -410,6 +609,10 @@ msgstr "Lỗi tệp"
 msgid "File numbers and capture times disagree"
 msgstr "Số tệp và thời gian chụp không khớp"
 
+#: src/camera_preflight/gui/labels.py:73
+msgid "File type"
+msgstr "Loại tệp"
+
 #: src/camera_preflight/messages.py:208
 #, python-brace-format
 msgid "File type {found}; needs RAW"
@@ -437,7 +640,7 @@ msgstr "Lắp nắp thân máy"
 msgid "Fix the camera on a tripod. Fill the frame with the chart."
 msgstr "Đặt máy lên chân máy. Cho bảng chiếm đầy khung hình."
 
-#: src/camera_preflight/messages.py:92
+#: src/camera_preflight/gui/animations/library.py:308 src/camera_preflight/messages.py:92
 msgid "Flash"
 msgstr "Đèn flash"
 
@@ -449,9 +652,37 @@ msgstr "Ảnh phẳng ở f/22"
 msgid "Flat photos at f/8"
 msgstr "Ảnh phẳng ở f/8"
 
+#: src/camera_preflight/gui/labels.py:42 src/camera_preflight/gui/labels.py:44
+#, python-brace-format
+msgid "Flat, {aperture}"
+msgstr "Ảnh phẳng, {aperture}"
+
+#: src/camera_preflight/gui/labels.py:52
+#, python-brace-format
+msgid "Flat, {count} identical photos"
+msgstr "Ảnh phẳng, {count} ảnh giống nhau"
+
+#: src/camera_preflight/gui/labels.py:46
+#, python-brace-format
+msgid "Flat, {exposure}"
+msgstr "Ảnh phẳng, {exposure}"
+
+#: src/camera_preflight/gui/labels.py:48
+#, python-brace-format
+msgid "Flat, {exposure}, electronic shutter"
+msgstr "Ảnh phẳng, {exposure}, màn trập điện tử"
+
+#: src/camera_preflight/gui/labels.py:92
+msgid "Focus"
+msgstr "Lấy nét"
+
 #: src/camera_preflight/messages.py:67
 msgid "Focus acquired"
 msgstr "Lấy nét được"
+
+#: src/camera_preflight/gui/animations/library.py:254
+msgid "Focus chart"
+msgstr "Bảng lấy nét"
 
 #: src/camera_preflight/messages.py:275
 msgid "Focus chart photos"
@@ -469,6 +700,11 @@ msgstr "Tinh chỉnh lấy nét đang tắt"
 #, python-brace-format
 msgid "Focus fine-tune is {value}"
 msgstr "Tinh chỉnh lấy nét là {value}"
+
+#: src/camera_preflight/gui/labels.py:36
+#, python-brace-format
+msgid "Focus point: {point}"
+msgstr "Điểm lấy nét: {point}"
 
 #: src/camera_preflight/messages.py:73
 msgid "Focus position"
@@ -490,6 +726,10 @@ msgstr "Lấy nét lặp lại tốt"
 msgid "Focus response time"
 msgstr "Thời gian lấy nét"
 
+#: src/camera_preflight/gui/animations/library.py:145
+msgid "Focus ring"
+msgstr "Vòng lấy nét"
+
 #: src/camera_preflight/messages.py:68
 msgid "Focus sharpness"
 msgstr "Độ nét khi lấy nét"
@@ -503,6 +743,19 @@ msgstr "Thời gian lấy nét {median} giây"
 #, python-brace-format
 msgid "Focus time {median} s; reference {ref} s"
 msgstr "Lấy nét {median} giây; tham chiếu {ref} giây"
+
+#: src/camera_preflight/gui/views/upload.py:59
+msgid "Focused"
+msgstr "Đã lấy nét"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:91
+#: src/camera_preflight/gui/views/settings_dialogs.py:96
+msgid "Follow system"
+msgstr "Theo hệ thống"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:59
+msgid "Found"
+msgstr "Đã thấy"
 
 #: src/camera_preflight/messages.py:220
 #, python-brace-format
@@ -556,6 +809,10 @@ msgstr "Bản đồ điểm nóng"
 msgid "Hot pixels (dark frames)"
 msgstr "Điểm nóng (ảnh tối)"
 
+#: src/camera_preflight/gui/labels.py:76
+msgid "ISO"
+msgstr "ISO"
+
 #: src/camera_preflight/messages.py:273
 msgid "ISO photos"
 msgstr "Ảnh theo ISO"
@@ -579,14 +836,31 @@ msgstr "Các bước ISO đều (độ dốc {slope})"
 msgid "ISO {found}; needs {needed}"
 msgstr "ISO {found}; cần {needed}"
 
+#: src/camera_preflight/gui/labels.py:66
+#, python-brace-format
+msgid "ISO {iso}"
+msgstr "ISO {iso}"
+
 #: src/camera_preflight/messages.py:145
 #, python-brace-format
 msgid "ISO {iso}: noise {sigma} DN"
 msgstr "ISO {iso}: nhiễu {sigma} DN"
 
+#: src/camera_preflight/gui/views/manual.py:103
+msgid "Images"
+msgstr "Hình ảnh"
+
 #: src/camera_preflight/report/labels.py:52
 msgid "Inference"
 msgstr "Suy luận"
+
+#: src/camera_preflight/gui/views/manual.py:34
+msgid "Is it free of cracks and large dents?"
+msgstr "Thân máy không nứt, không móp nặng?"
+
+#: src/camera_preflight/gui/views/manual.py:35
+msgid "Is the lens mount undamaged?"
+msgstr "Ngàm ống kính còn nguyên vẹn?"
 
 #: src/camera_preflight/messages.py:107
 msgid "Judged Fail by you"
@@ -604,6 +878,14 @@ msgstr "Bạn đánh giá: Nghi vấn"
 msgid "Knowledge base version"
 msgstr "Phiên bản cơ sở tri thức"
 
+#: src/camera_preflight/gui/shell.py:91 src/camera_preflight/gui/views/settings_dialogs.py:103
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: src/camera_preflight/gui/labels.py:12
+msgid "Left"
+msgstr "Trái"
+
 #: src/camera_preflight/messages.py:143
 #, python-brace-format
 msgid "Left and right differ ({amp})"
@@ -613,10 +895,22 @@ msgstr "Trái và phải khác nhau ({amp})"
 msgid "Lens"
 msgstr "Ống kính"
 
+#: src/camera_preflight/gui/animations/library.py:85 src/camera_preflight/gui/animations/library.py:297
+msgid "Lens mount"
+msgstr "Ngàm ống kính"
+
+#: src/camera_preflight/gui/animations/library.py:96
+msgid "Lens release"
+msgstr "Nút nhả ống kính"
+
 #: src/camera_preflight/messages.py:122
 #, python-brace-format
 msgid "Lens: {lens}"
 msgstr "Ống kính: {lens}"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:97
+msgid "Light"
+msgstr "Sáng"
 
 #: src/camera_preflight/messages.py:218
 #, python-brace-format
@@ -688,6 +982,10 @@ msgstr "Thẻ nhớ"
 msgid "Metadata reader is missing"
 msgstr "Thiếu bộ đọc thông tin ảnh"
 
+#: src/camera_preflight/gui/labels.py:84
+msgid "Metering"
+msgstr "Đo sáng"
+
 #: src/camera_preflight/messages.py:76
 msgid "Metering consistency"
 msgstr "Độ ổn định đo sáng"
@@ -700,7 +998,12 @@ msgstr "Các chế độ đo sáng"
 msgid "Metering photos"
 msgstr "Ảnh đo sáng"
 
-#: src/camera_preflight/report/labels.py:28
+#: src/camera_preflight/gui/labels.py:56
+#, python-brace-format
+msgid "Metering: {mode}"
+msgstr "Đo sáng: {mode}"
+
+#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:28
 msgid "Method"
 msgstr "Phương pháp"
 
@@ -742,6 +1045,14 @@ msgstr "Ống kính đang gắn"
 msgid "Needs a reference instrument"
 msgstr "Cần thiết bị đo chuẩn"
 
+#: src/camera_preflight/gui/shell.py:122 src/camera_preflight/gui/shell.py:145
+msgid "Next"
+msgstr "Tiếp"
+
+#: src/camera_preflight/gui/views/manual.py:40
+msgid "No"
+msgstr "Không"
+
 #: src/camera_preflight/messages.py:102
 msgid "No answer given"
 msgstr "Chưa trả lời"
@@ -766,13 +1077,29 @@ msgstr "Không lỗi với cả hai ống kính"
 msgid "No hot pixels found"
 msgstr "Không thấy điểm nóng"
 
+#: src/camera_preflight/gui/views/about.py:22
+msgid "No network access. No data leaves this computer."
+msgstr "Không dùng mạng. Dữ liệu không rời khỏi máy tính này."
+
 #: src/camera_preflight/messages.py:97
 msgid "No reference data"
 msgstr "Chưa có dữ liệu tham chiếu"
 
+#: src/camera_preflight/gui/widgets/common.py:65
+msgid "No reference photo yet"
+msgstr "Chưa có ảnh tham khảo"
+
+#: src/camera_preflight/gui/views/about.py:30
+msgid "No reference photos yet"
+msgstr "Chưa có ảnh tham khảo"
+
 #: src/camera_preflight/messages.py:59
 msgid "Noise and banding"
 msgstr "Nhiễu và sọc"
+
+#: src/camera_preflight/gui/labels.py:74
+msgid "Noise reduction"
+msgstr "Khử nhiễu"
 
 #: src/camera_preflight/messages.py:212
 msgid "Noise reduction is on; needs off"
@@ -786,13 +1113,26 @@ msgstr "Không áp dụng"
 msgid "Not enough accepted photos"
 msgstr "Chưa đủ ảnh hợp lệ"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:59
+msgid "Not found"
+msgstr "Không thấy"
+
 #: src/camera_preflight/messages.py:104
 msgid "Not supported over this connection"
 msgstr "Kết nối này không hỗ trợ"
 
-#: src/camera_preflight/messages.py:27 src/camera_preflight/report/labels.py:25
+#: src/camera_preflight/gui/views/manual.py:41
+msgid "Not sure"
+msgstr "Không chắc"
+
+#: src/camera_preflight/gui/views/results.py:190 src/camera_preflight/messages.py:27
+#: src/camera_preflight/report/labels.py:25
 msgid "Not tested"
 msgstr "Chưa kiểm tra"
+
+#: src/camera_preflight/gui/views/manual.py:82
+msgid "Note"
+msgstr "Ghi chú"
 
 #: src/camera_preflight/messages.py:108
 #, python-brace-format
@@ -802,6 +1142,22 @@ msgstr "Ghi chú: {text}"
 #: src/camera_preflight/report/labels.py:23
 msgid "Nothing suspect or failed."
 msgstr "Không có mục nghi vấn hay không đạt."
+
+#: src/camera_preflight/gui/labels.py:74
+msgid "Off"
+msgstr "Tắt"
+
+#: src/camera_preflight/gui/labels.py:92
+msgid "One point, AF-S"
+msgstr "Một điểm, AF-S"
+
+#: src/camera_preflight/gui/views/results.py:134
+msgid "Open report"
+msgstr "Mở báo cáo"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:146
+msgid "Optional. Without an SDK some checks are skipped."
+msgstr "Không bắt buộc. Thiếu SDK sẽ bỏ qua một số bài kiểm tra."
 
 #: src/camera_preflight/messages.py:79
 msgid "Output level"
@@ -816,7 +1172,7 @@ msgstr "Mức sáng {percent}, lệch {offset} EV so với xám trung bình"
 msgid "Parameter"
 msgstr "Tham số"
 
-#: src/camera_preflight/report/labels.py:31
+#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:31
 msgid "Parameter set"
 msgstr "Bộ tham số"
 
@@ -824,17 +1180,33 @@ msgstr "Bộ tham số"
 msgid "Pass"
 msgstr "Đạt"
 
-#: src/camera_preflight/report/labels.py:47
+#: src/camera_preflight/gui/views/results.py:192
+msgid "Passed"
+msgstr "Đạt"
+
+#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:47
 msgid "Path"
 msgstr "Cách thực hiện"
+
+#: src/camera_preflight/gui/animations/engine.py:171
+msgid "Pause"
+msgstr "Tạm dừng"
 
 #: src/camera_preflight/report/labels.py:55
 msgid "Photo checks"
 msgstr "Kiểm tra ảnh"
 
+#: src/camera_preflight/gui/views/about.py:23
+msgid "Photo credits"
+msgstr "Nguồn ảnh tham khảo"
+
 #: src/camera_preflight/messages.py:235
 msgid "Photo details cannot be read"
 msgstr "Không đọc được thông tin ảnh"
+
+#: src/camera_preflight/gui/labels.py:69 src/camera_preflight/gui/labels.py:95
+msgid "Photos"
+msgstr "Ảnh"
 
 #: src/camera_preflight/messages.py:223
 #, python-brace-format
@@ -844,6 +1216,10 @@ msgstr "Ảnh từ {count} thân máy khác nhau"
 #: src/camera_preflight/messages.py:56
 msgid "Pixel classification"
 msgstr "Phân loại điểm ảnh lỗi"
+
+#: src/camera_preflight/gui/animations/engine.py:171
+msgid "Play"
+msgstr "Phát"
 
 #: src/camera_preflight/messages.py:164
 msgid "Point layout unknown; using 5 points"
@@ -868,6 +1244,10 @@ msgstr "Điểm {point}: dao động {cv}"
 msgid "Ports, battery and video"
 msgstr "Cổng, pin và video"
 
+#: src/camera_preflight/gui/animations/library.py:57
+msgid "Power switch"
+msgstr "Công tắc nguồn"
+
 #: src/camera_preflight/messages.py:83
 msgid "Powers on"
 msgstr "Bật nguồn bình thường"
@@ -876,9 +1256,17 @@ msgstr "Bật nguồn bình thường"
 msgid "Previous owner traces"
 msgstr "Dấu vết chủ cũ"
 
+#: src/camera_preflight/gui/views/start.py:28
+msgid "Printed on the camera"
+msgstr "In trên thân máy"
+
 #: src/camera_preflight/messages.py:70
 msgid "Priority focus points"
 msgstr "Điểm lấy nét ưu tiên"
+
+#: src/camera_preflight/gui/labels.py:73
+msgid "RAW"
+msgstr "RAW"
 
 #: src/camera_preflight/messages.py:214
 msgid "RAW data cannot be read"
@@ -896,6 +1284,10 @@ msgstr "Đọc dữ liệu máy"
 msgid "Reason"
 msgstr "Lý do"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:100
+msgid "Reduce motion"
+msgstr "Giảm chuyển động"
+
 #: src/camera_preflight/messages.py:179
 msgid "Regions are evenly sharp"
 msgstr "Các vùng nét đều"
@@ -904,13 +1296,21 @@ msgstr "Các vùng nét đều"
 msgid "Repeat photos"
 msgstr "Ảnh lặp lại"
 
-#: src/camera_preflight/report/labels.py:10
+#: src/camera_preflight/gui/animations/engine.py:172
+msgid "Replay"
+msgstr "Phát lại"
+
+#: src/camera_preflight/gui/views/results.py:138 src/camera_preflight/report/labels.py:10
 msgid "Report language"
 msgstr "Ngôn ngữ báo cáo"
 
-#: src/camera_preflight/messages.py:283
+#: src/camera_preflight/gui/views/upload.py:107 src/camera_preflight/messages.py:283
 msgid "Results"
 msgstr "Kết quả"
+
+#: src/camera_preflight/gui/labels.py:13
+msgid "Right"
+msgstr "Phải"
 
 #: src/camera_preflight/messages.py:96
 msgid "SDK not configured"
@@ -920,6 +1320,19 @@ msgstr "Chưa cấu hình SDK"
 msgid "SHA-256"
 msgstr "SHA-256"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:117
+#: src/camera_preflight/gui/views/settings_dialogs.py:157
+msgid "Save"
+msgstr "Lưu"
+
+#: src/camera_preflight/gui/views/results.py:132 src/camera_preflight/gui/views/results.py:237
+msgid "Save report"
+msgstr "Lưu báo cáo"
+
+#: src/camera_preflight/gui/animations/library.py:348
+msgid "Screen"
+msgstr "Màn hình"
+
 #: src/camera_preflight/messages.py:89
 msgid "Screens and viewfinder"
 msgstr "Màn hình và kính ngắm"
@@ -928,9 +1341,17 @@ msgstr "Màn hình và kính ngắm"
 msgid "Semi-automatic"
 msgstr "Bán tự động"
 
+#: src/camera_preflight/gui/labels.py:88
+msgid "Sensor"
+msgstr "Cảm biến"
+
 #: src/camera_preflight/report/labels.py:14
 msgid "Serial (last 4)"
 msgstr "Số seri (4 số cuối)"
+
+#: src/camera_preflight/gui/views/start.py:25 src/camera_preflight/gui/views/start.py:30
+msgid "Serial (optional)"
+msgstr "Số seri (không bắt buộc)"
 
 #: src/camera_preflight/messages.py:222
 msgid "Serial not found in the photos"
@@ -939,6 +1360,10 @@ msgstr "Không thấy số seri trong ảnh"
 #: src/camera_preflight/messages.py:111
 msgid "Serial not readable"
 msgstr "Không đọc được số seri"
+
+#: src/camera_preflight/gui/animations/library.py:77
+msgid "Serial plate"
+msgstr "Nhãn số seri"
 
 #: src/camera_preflight/messages.py:213
 #, python-brace-format
@@ -950,7 +1375,24 @@ msgstr "Seri {found}; phiên là {needed}"
 msgid "Serial {read} differs from entered {entered}"
 msgstr "Seri đọc {read} khác seri nhập {entered}"
 
-#: src/camera_preflight/report/labels.py:48
+#: src/camera_preflight/gui/views/settings_dialogs.py:106
+msgid "Sessions folder"
+msgstr "Thư mục phiên"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:144
+msgid "Set up camera SDKs"
+msgstr "Thiết lập SDK máy ảnh"
+
+#: src/camera_preflight/gui/shell.py:92 src/camera_preflight/gui/shell.py:141
+#: src/camera_preflight/gui/views/settings_dialogs.py:85 src/camera_preflight/gui/views/start.py:34
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: src/camera_preflight/gui/shell.py:311
+msgid "Severe problem"
+msgstr "Lỗi nghiêm trọng"
+
+#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:48
 msgid "Severity"
 msgstr "Mức nghiêm trọng"
 
@@ -962,9 +1404,18 @@ msgstr "Độ nét theo vùng"
 msgid "Shoot with the settings shown. Upload the photos."
 msgstr "Chụp theo thông số bên dưới. Tải ảnh lên."
 
+#: src/camera_preflight/gui/labels.py:78
+msgid "Shutter"
+msgstr "Tốc độ chụp"
+
 #: src/camera_preflight/messages.py:65
 msgid "Shutter and mirror sound"
 msgstr "Tiếng màn trập và gương"
+
+#: src/camera_preflight/gui/animations/library.py:173
+#: src/camera_preflight/gui/animations/library.py:193
+msgid "Shutter button"
+msgstr "Nút chụp"
 
 #: src/camera_preflight/messages.py:49
 msgid "Shutter count"
@@ -982,6 +1433,14 @@ msgstr "Số lần chụp trước kiểm tra"
 #, python-brace-format
 msgid "Shutter count {count}"
 msgstr "Số lần chụp {count}"
+
+#: src/camera_preflight/gui/labels.py:86
+msgid "Shutter type"
+msgstr "Kiểu màn trập"
+
+#: src/camera_preflight/gui/shell.py:121 src/camera_preflight/gui/shell.py:144
+msgid "Skip"
+msgstr "Bỏ qua"
 
 #: src/camera_preflight/messages.py:95
 msgid "Skipped by user"
@@ -1011,6 +1470,10 @@ msgstr "Ảnh mềm tại: {points}"
 msgid "Some photos lack camera notes"
 msgstr "Một số ảnh thiếu ghi chú của máy"
 
+#: src/camera_preflight/gui/shell.py:333
+msgid "Something went wrong"
+msgstr "Đã xảy ra lỗi"
+
 #: src/camera_preflight/report/labels.py:36
 msgid "Source files"
 msgstr "Tệp nguồn"
@@ -1018,6 +1481,14 @@ msgstr "Tệp nguồn"
 #: src/camera_preflight/report/labels.py:51
 msgid "Sourced"
 msgstr "Có nguồn"
+
+#: src/camera_preflight/gui/labels.py:20
+msgid "Spot"
+msgstr "Điểm"
+
+#: src/camera_preflight/gui/animations/library.py:383
+msgid "Spot metering area"
+msgstr "Vùng đo sáng điểm"
 
 #: src/camera_preflight/messages.py:276
 msgid "Spot metering photos"
@@ -1027,9 +1498,25 @@ msgstr "Ảnh đo sáng điểm"
 msgid "Spot metering position"
 msgstr "Vị trí đo sáng điểm"
 
-#: src/camera_preflight/messages.py:253
+#: src/camera_preflight/gui/labels.py:60
+msgid "Spot on a bright area"
+msgstr "Đo điểm vào vùng sáng"
+
+#: src/camera_preflight/gui/labels.py:62
+msgid "Spot on a dark area"
+msgstr "Đo điểm vào vùng tối"
+
+#: src/camera_preflight/gui/views/start.py:31 src/camera_preflight/messages.py:253
 msgid "Start"
 msgstr "Bắt đầu"
+
+#: src/camera_preflight/gui/shell.py:108
+msgid "Steps"
+msgstr "Các bước"
+
+#: src/camera_preflight/gui/shell.py:313
+msgid "Stop and save report"
+msgstr "Dừng và lưu báo cáo"
 
 #: src/camera_preflight/messages.py:141
 #, python-brace-format
@@ -1057,13 +1544,21 @@ msgstr "Tóm tắt"
 msgid "Suspect"
 msgstr "Nghi vấn"
 
-#: src/camera_preflight/report/labels.py:22
+#: src/camera_preflight/gui/views/results.py:187 src/camera_preflight/report/labels.py:22
 msgid "Suspect and fail results"
 msgstr "Kết quả nghi vấn và không đạt"
 
 #: src/camera_preflight/messages.py:260
 msgid "Take one RAW photo. Upload it."
 msgstr "Chụp một ảnh RAW. Tải lên."
+
+#: src/camera_preflight/gui/labels.py:90
+msgid "Target"
+msgstr "Đối tượng"
+
+#: src/camera_preflight/gui/labels.py:38
+msgid "Test photo"
+msgstr "Ảnh thử"
 
 #: src/camera_preflight/messages.py:234
 msgid "The RAW file is damaged or unreadable"
@@ -1072,6 +1567,10 @@ msgstr "Tệp RAW hỏng hoặc không đọc được"
 #: src/camera_preflight/messages.py:258
 msgid "The app works alone. Please wait."
 msgstr "Ứng dụng tự chạy. Vui lòng chờ."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:104
+msgid "Theme"
+msgstr "Giao diện"
 
 #: src/camera_preflight/messages.py:233
 msgid "This file format cannot be read; convert to DNG"
@@ -1088,6 +1587,14 @@ msgstr "Ngưỡng đã dùng"
 #: src/camera_preflight/messages.py:103
 msgid "Timestamps lack fractions of a second"
 msgstr "Thời gian chụp thiếu phần giây"
+
+#: src/camera_preflight/gui/labels.py:14
+msgid "Top"
+msgstr "Trên"
+
+#: src/camera_preflight/gui/animations/library.py:41
+msgid "USB port"
+msgstr "Cổng USB"
 
 #: src/camera_preflight/messages.py:154
 #, python-brace-format
@@ -1119,6 +1626,14 @@ msgstr "Tải chuỗi ảnh liên tiếp"
 msgid "Upload a test photo"
 msgstr "Tải ảnh thử lên"
 
+#: src/camera_preflight/gui/views/upload.py:45 src/camera_preflight/gui/views/upload.py:73
+msgid "Upload photos"
+msgstr "Tải ảnh lên"
+
+#: src/camera_preflight/gui/views/upload.py:102
+msgid "Uploaded files"
+msgstr "Tệp đã tải lên"
+
 #: src/camera_preflight/report/labels.py:34
 msgid "Value"
 msgstr "Giá trị"
@@ -1132,9 +1647,21 @@ msgstr "Không đọc được giá trị"
 msgid "Very few shots in {years} years"
 msgstr "Rất ít lần chụp sau {years} năm"
 
+#: src/camera_preflight/gui/animations/library.py:116
+msgid "Viewfinder"
+msgstr "Kính ngắm"
+
 #: src/camera_preflight/messages.py:90
 msgid "Viewfinder view"
 msgstr "Hình qua kính ngắm"
+
+#: src/camera_preflight/gui/shell.py:135
+msgid "Working"
+msgstr "Đang xử lý"
+
+#: src/camera_preflight/gui/views/manual.py:39
+msgid "Yes"
+msgstr "Có"
 
 #: src/camera_preflight/report/labels.py:50
 msgid "more not shown"

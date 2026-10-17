@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:29+0000\n"
+"POT-Creation-Date: 2026-10-17 10:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,10 +19,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: src/camera_preflight/gui/shell.py:312
+msgid "A severe problem was found."
+msgstr "A severe problem was found."
+
+#: src/camera_preflight/gui/animations/library.py:210
+msgid "AF joystick"
+msgstr "AF joystick"
+
 #: src/camera_preflight/messages.py:219
 #, python-brace-format
 msgid "AF point {found}; needs {needed}"
 msgstr "AF point {found}; needs {needed}"
+
+#: src/camera_preflight/gui/animations/library.py:133
+msgid "AF/MF switch"
+msgstr "AF/MF switch"
+
+#: src/camera_preflight/gui/shell.py:94 src/camera_preflight/gui/shell.py:142
+#: src/camera_preflight/gui/views/about.py:15
+msgid "About"
+msgstr "About"
 
 #: src/camera_preflight/messages.py:230
 #, python-brace-format
@@ -32,6 +49,22 @@ msgstr "About {per_year} shots a year over {years} years"
 #: src/camera_preflight/messages.py:64
 msgid "Absolute shutter speed"
 msgstr "Absolute shutter speed"
+
+#: src/camera_preflight/gui/views/upload.py:137
+msgid "Accepted"
+msgstr "Accepted"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:28
+msgid "Adds AF point selection and focus check."
+msgstr "Adds AF point selection and focus check."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:27
+msgid "Adds focus control and newer bodies."
+msgstr "Adds focus control and newer bodies."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:29
+msgid "Adds remote AF area and focus check."
+msgstr "Adds remote AF area and focus check."
 
 #: src/camera_preflight/messages.py:265
 msgid "Aim at a white surface"
@@ -50,6 +83,14 @@ msgstr "All results"
 msgid "All {count} points focus"
 msgstr "All {count} points focus"
 
+#: src/camera_preflight/gui/views/results.py:119
+msgid "Analysing"
+msgstr "Analysing"
+
+#: src/camera_preflight/gui/labels.py:80
+msgid "Aperture"
+msgstr "Aperture"
+
 #: src/camera_preflight/messages.py:274
 msgid "Aperture photos"
 msgstr "Aperture photos"
@@ -66,6 +107,11 @@ msgstr "Aperture steps"
 #: src/camera_preflight/messages.py:206
 msgid "Aperture steps are even"
 msgstr "Aperture steps are even"
+
+#: src/camera_preflight/gui/labels.py:68
+#, python-brace-format
+msgid "Aperture {aperture}"
+msgstr "Aperture {aperture}"
 
 #: src/camera_preflight/messages.py:211
 #, python-brace-format
@@ -110,6 +156,10 @@ msgstr "Ask whether the sensor was cleaned or replaced ({checks})"
 msgid "Ask whether the shutter was serviced or replaced ({checks})"
 msgstr "Ask whether the shutter was serviced or replaced ({checks})"
 
+#: src/camera_preflight/gui/views/manual.py:84 src/camera_preflight/gui/views/manual.py:103
+msgid "Attach photo"
+msgstr "Attach photo"
+
 #: src/camera_preflight/messages.py:66
 msgid "Autofocus points"
 msgstr "Autofocus points"
@@ -117,6 +167,10 @@ msgstr "Autofocus points"
 #: src/camera_preflight/messages.py:35
 msgid "Automatic"
 msgstr "Automatic"
+
+#: src/camera_preflight/gui/shell.py:120 src/camera_preflight/gui/shell.py:143
+msgid "Back"
+msgstr "Back"
 
 #: src/camera_preflight/messages.py:146
 #, python-brace-format
@@ -136,13 +190,17 @@ msgstr "Battery {percent}%"
 msgid "Blocker"
 msgstr "Blocker"
 
-#: src/camera_preflight/report/labels.py:21
+#: src/camera_preflight/gui/views/results.py:184 src/camera_preflight/report/labels.py:21
 msgid "Blockers"
 msgstr "Blockers"
 
 #: src/camera_preflight/messages.py:87
 msgid "Body and structure"
 msgstr "Body and structure"
+
+#: src/camera_preflight/gui/animations/library.py:108
+msgid "Body cap"
+msgstr "Body cap"
 
 #: src/camera_preflight/messages.py:75
 msgid "Body or lens"
@@ -151,6 +209,10 @@ msgstr "Body or lens"
 #: src/camera_preflight/messages.py:163
 msgid "Both shutter modes are even"
 msgstr "Both shutter modes are even"
+
+#: src/camera_preflight/gui/labels.py:15
+msgid "Bottom"
+msgstr "Bottom"
 
 #: src/camera_preflight/report/labels.py:12
 msgid "Brand"
@@ -177,6 +239,11 @@ msgstr "Brightness {found}%; needs {needed}%"
 msgid "Bundled lens"
 msgstr "Bundled lens"
 
+#: src/camera_preflight/gui/labels.py:40
+#, python-brace-format
+msgid "Burst of {count}"
+msgstr "Burst of {count}"
+
 #: src/camera_preflight/messages.py:60
 msgid "Burst rhythm"
 msgstr "Burst rhythm"
@@ -186,9 +253,29 @@ msgstr "Burst rhythm"
 msgid "Burst stalled (x{ratio} longest gap)"
 msgstr "Burst stalled (x{ratio} longest gap)"
 
+#: src/camera_preflight/gui/animations/library.py:367
+msgid "Buttons"
+msgstr "Buttons"
+
 #: src/camera_preflight/report/labels.py:11
 msgid "Camera"
 msgstr "Camera"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:140
+msgid "Camera SDK"
+msgstr "Camera SDK"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:108
+msgid "Camera SDK folders"
+msgstr "Camera SDK folders"
+
+#: src/camera_preflight/gui/animations/library.py:394
+msgid "Camera body"
+msgstr "Camera body"
+
+#: src/camera_preflight/gui/shell.py:140
+msgid "Camera check"
+msgstr "Camera check"
 
 #: src/camera_preflight/report/labels.py:8
 msgid "Camera check report"
@@ -197,6 +284,26 @@ msgstr "Camera check report"
 #: src/camera_preflight/messages.py:47
 msgid "Camera identity"
 msgstr "Camera identity"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:118
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/camera_preflight/gui/animations/library.py:226
+msgid "Card door"
+msgstr "Card door"
+
+#: src/camera_preflight/gui/animations/library.py:241
+msgid "Card reader"
+msgstr "Card reader"
+
+#: src/camera_preflight/gui/labels.py:11
+msgid "Centre"
+msgstr "Centre"
+
+#: src/camera_preflight/gui/labels.py:19
+msgid "Centre-weighted"
+msgstr "Centre-weighted"
 
 #: src/camera_preflight/messages.py:279
 msgid "Change the lens"
@@ -207,19 +314,40 @@ msgstr "Change the lens"
 msgid "Channel {channel}: {count}"
 msgstr "Channel {channel}: {count}"
 
+#: src/camera_preflight/gui/views/start.py:23
+msgid "Check a used camera"
+msgstr "Check a used camera"
+
 #: src/camera_preflight/messages.py:255
 msgid "Check for severe damage"
 msgstr "Check for severe damage"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:42
+#: src/camera_preflight/gui/views/settings_dialogs.py:51
+msgid "Choose folder"
+msgstr "Choose folder"
 
 #: src/camera_preflight/messages.py:217
 #, python-brace-format
 msgid "Clipped pixels {found}%; needs under {needed}%"
 msgstr "Clipped pixels {found}%; needs under {needed}%"
 
+#: src/camera_preflight/gui/views/about.py:41 src/camera_preflight/gui/views/results.py:103
+msgid "Close"
+msgstr "Close"
+
 #: src/camera_preflight/messages.py:142
 #, python-brace-format
 msgid "Colour cast across the frame ({amp})"
 msgstr "Colour cast across the frame ({amp})"
+
+#: src/camera_preflight/gui/animations/library.py:157
+msgid "Command dial"
+msgstr "Command dial"
+
+#: src/camera_preflight/gui/labels.py:82
+msgid "Compensation"
+msgstr "Compensation"
 
 #: src/camera_preflight/messages.py:200
 #, python-brace-format
@@ -235,13 +363,26 @@ msgstr "Compensation photos"
 msgid "Compensation steps uneven ({ev} EV)"
 msgstr "Compensation steps uneven ({ev} EV)"
 
-#: src/camera_preflight/report/labels.py:46
+#: src/camera_preflight/gui/labels.py:64
+#, python-brace-format
+msgid "Compensation {ev} EV"
+msgstr "Compensation {ev} EV"
+
+#: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:46
 msgid "Confidence"
 msgstr "Confidence"
 
 #: src/camera_preflight/messages.py:39
 msgid "Connected"
 msgstr "Connected"
+
+#: src/camera_preflight/gui/shell.py:314
+msgid "Continue"
+msgstr "Continue"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:155
+msgid "Continue without SDK"
+msgstr "Continue without SDK"
 
 #: src/camera_preflight/messages.py:88
 msgid "Controls"
@@ -265,6 +406,10 @@ msgstr "Count {count}; rated life unknown"
 msgid "Cover the sensor. Keep it covered."
 msgstr "Cover the sensor. Keep it covered."
 
+#: src/camera_preflight/gui/labels.py:88
+msgid "Covered"
+msgstr "Covered"
+
 #: src/camera_preflight/report/labels.py:9
 msgid "Created"
 msgstr "Created"
@@ -277,6 +422,15 @@ msgstr "Curtain even at all speeds"
 msgid "Curtain evenness"
 msgstr "Curtain evenness"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:98
+msgid "Dark"
+msgstr "Dark"
+
+#: src/camera_preflight/gui/labels.py:31
+#, python-brace-format
+msgid "Dark, ISO {iso}, {exposure}"
+msgstr "Dark, ISO {iso}, {exposure}"
+
 #: src/camera_preflight/messages.py:125
 #, python-brace-format
 msgid "Dead pixel at row {row}, column {col} ({channel})"
@@ -286,6 +440,7 @@ msgstr "Dead pixel at row {row}, column {col} ({channel})"
 msgid "Defocus the lens. Keep the light even."
 msgstr "Defocus the lens. Keep the light even."
 
+#: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:217
 #: src/camera_preflight/report/labels.py:49
 msgid "Details"
 msgstr "Details"
@@ -295,6 +450,26 @@ msgstr "Details"
 msgid "Deviation {dev} EV"
 msgstr "Deviation {dev} EV"
 
+#: src/camera_preflight/gui/views/upload.py:60
+msgid "Did not focus"
+msgstr "Did not focus"
+
+#: src/camera_preflight/gui/animations/library.py:286
+msgid "Diopter dial"
+msgstr "Diopter dial"
+
+#: src/camera_preflight/gui/views/manual.py:33
+msgid "Does it power on normally?"
+msgstr "Does it power on normally?"
+
+#: src/camera_preflight/gui/views/manual.py:36
+msgid "Does the mirror move freely?"
+msgstr "Does the mirror move freely?"
+
+#: src/camera_preflight/gui/labels.py:94
+msgid "Drive"
+msgstr "Drive"
+
 #: src/camera_preflight/messages.py:149
 msgid "Dust and mark map"
 msgstr "Dust and mark map"
@@ -303,7 +478,11 @@ msgstr "Dust and mark map"
 msgid "Dust and marks"
 msgstr "Dust and marks"
 
-#: src/camera_preflight/messages.py:254
+#: src/camera_preflight/gui/labels.py:86
+msgid "Electronic"
+msgstr "Electronic"
+
+#: src/camera_preflight/gui/views/start.py:24 src/camera_preflight/messages.py:254
 msgid "Enter the serial if you wish."
 msgstr "Enter the serial if you wish."
 
@@ -311,10 +490,26 @@ msgstr "Enter the serial if you wish."
 msgid "Entered serial differs from the photos"
 msgstr "Entered serial differs from the photos"
 
+#: src/camera_preflight/gui/labels.py:18
+msgid "Evaluative"
+msgstr "Evaluative"
+
+#: src/camera_preflight/gui/animations/library.py:269
+msgid "Even bright surface"
+msgstr "Even bright surface"
+
 #: src/camera_preflight/messages.py:152
 #, python-brace-format
 msgid "Even rhythm, {fps} shots/s"
 msgstr "Even rhythm, {fps} shots/s"
+
+#: src/camera_preflight/gui/labels.py:54
+msgid "Even scene, auto exposure"
+msgstr "Even scene, auto exposure"
+
+#: src/camera_preflight/gui/labels.py:90
+msgid "Even, defocused"
+msgstr "Even, defocused"
 
 #: src/camera_preflight/report/labels.py:37
 msgid "Evidence images"
@@ -380,6 +575,10 @@ msgstr "Fail"
 msgid "Fast shutter photos"
 msgstr "Fast shutter photos"
 
+#: src/camera_preflight/gui/labels.py:94
+msgid "Fastest burst"
+msgstr "Fastest burst"
+
 #: src/camera_preflight/messages.py:162
 msgid "Fault in both shutter modes"
 msgstr "Fault in both shutter modes"
@@ -410,6 +609,10 @@ msgstr "File error"
 msgid "File numbers and capture times disagree"
 msgstr "File numbers and capture times disagree"
 
+#: src/camera_preflight/gui/labels.py:73
+msgid "File type"
+msgstr "File type"
+
 #: src/camera_preflight/messages.py:208
 #, python-brace-format
 msgid "File type {found}; needs RAW"
@@ -437,7 +640,7 @@ msgstr "Fit the body cap"
 msgid "Fix the camera on a tripod. Fill the frame with the chart."
 msgstr "Fix the camera on a tripod. Fill the frame with the chart."
 
-#: src/camera_preflight/messages.py:92
+#: src/camera_preflight/gui/animations/library.py:308 src/camera_preflight/messages.py:92
 msgid "Flash"
 msgstr "Flash"
 
@@ -449,9 +652,37 @@ msgstr "Flat photos at f/22"
 msgid "Flat photos at f/8"
 msgstr "Flat photos at f/8"
 
+#: src/camera_preflight/gui/labels.py:42 src/camera_preflight/gui/labels.py:44
+#, python-brace-format
+msgid "Flat, {aperture}"
+msgstr "Flat, {aperture}"
+
+#: src/camera_preflight/gui/labels.py:52
+#, python-brace-format
+msgid "Flat, {count} identical photos"
+msgstr "Flat, {count} identical photos"
+
+#: src/camera_preflight/gui/labels.py:46
+#, python-brace-format
+msgid "Flat, {exposure}"
+msgstr "Flat, {exposure}"
+
+#: src/camera_preflight/gui/labels.py:48
+#, python-brace-format
+msgid "Flat, {exposure}, electronic shutter"
+msgstr "Flat, {exposure}, electronic shutter"
+
+#: src/camera_preflight/gui/labels.py:92
+msgid "Focus"
+msgstr "Focus"
+
 #: src/camera_preflight/messages.py:67
 msgid "Focus acquired"
 msgstr "Focus acquired"
+
+#: src/camera_preflight/gui/animations/library.py:254
+msgid "Focus chart"
+msgstr "Focus chart"
 
 #: src/camera_preflight/messages.py:275
 msgid "Focus chart photos"
@@ -469,6 +700,11 @@ msgstr "Focus fine-tune is off"
 #, python-brace-format
 msgid "Focus fine-tune is {value}"
 msgstr "Focus fine-tune is {value}"
+
+#: src/camera_preflight/gui/labels.py:36
+#, python-brace-format
+msgid "Focus point: {point}"
+msgstr "Focus point: {point}"
 
 #: src/camera_preflight/messages.py:73
 msgid "Focus position"
@@ -490,6 +726,10 @@ msgstr "Focus repeats well"
 msgid "Focus response time"
 msgstr "Focus response time"
 
+#: src/camera_preflight/gui/animations/library.py:145
+msgid "Focus ring"
+msgstr "Focus ring"
+
 #: src/camera_preflight/messages.py:68
 msgid "Focus sharpness"
 msgstr "Focus sharpness"
@@ -503,6 +743,19 @@ msgstr "Focus time {median} s"
 #, python-brace-format
 msgid "Focus time {median} s; reference {ref} s"
 msgstr "Focus time {median} s; reference {ref} s"
+
+#: src/camera_preflight/gui/views/upload.py:59
+msgid "Focused"
+msgstr "Focused"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:91
+#: src/camera_preflight/gui/views/settings_dialogs.py:96
+msgid "Follow system"
+msgstr "Follow system"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:59
+msgid "Found"
+msgstr "Found"
 
 #: src/camera_preflight/messages.py:220
 #, python-brace-format
@@ -556,6 +809,10 @@ msgstr "Hot pixel map"
 msgid "Hot pixels (dark frames)"
 msgstr "Hot pixels (dark frames)"
 
+#: src/camera_preflight/gui/labels.py:76
+msgid "ISO"
+msgstr "ISO"
+
 #: src/camera_preflight/messages.py:273
 msgid "ISO photos"
 msgstr "ISO photos"
@@ -579,14 +836,31 @@ msgstr "ISO steps are even (slope {slope})"
 msgid "ISO {found}; needs {needed}"
 msgstr "ISO {found}; needs {needed}"
 
+#: src/camera_preflight/gui/labels.py:66
+#, python-brace-format
+msgid "ISO {iso}"
+msgstr "ISO {iso}"
+
 #: src/camera_preflight/messages.py:145
 #, python-brace-format
 msgid "ISO {iso}: noise {sigma} DN"
 msgstr "ISO {iso}: noise {sigma} DN"
 
+#: src/camera_preflight/gui/views/manual.py:103
+msgid "Images"
+msgstr "Images"
+
 #: src/camera_preflight/report/labels.py:52
 msgid "Inference"
 msgstr "Inference"
+
+#: src/camera_preflight/gui/views/manual.py:34
+msgid "Is it free of cracks and large dents?"
+msgstr "Is it free of cracks and large dents?"
+
+#: src/camera_preflight/gui/views/manual.py:35
+msgid "Is the lens mount undamaged?"
+msgstr "Is the lens mount undamaged?"
 
 #: src/camera_preflight/messages.py:107
 msgid "Judged Fail by you"
@@ -604,6 +878,14 @@ msgstr "Judged Suspect by you"
 msgid "Knowledge base version"
 msgstr "Knowledge base version"
 
+#: src/camera_preflight/gui/shell.py:91 src/camera_preflight/gui/views/settings_dialogs.py:103
+msgid "Language"
+msgstr "Language"
+
+#: src/camera_preflight/gui/labels.py:12
+msgid "Left"
+msgstr "Left"
+
 #: src/camera_preflight/messages.py:143
 #, python-brace-format
 msgid "Left and right differ ({amp})"
@@ -613,10 +895,22 @@ msgstr "Left and right differ ({amp})"
 msgid "Lens"
 msgstr "Lens"
 
+#: src/camera_preflight/gui/animations/library.py:85 src/camera_preflight/gui/animations/library.py:297
+msgid "Lens mount"
+msgstr "Lens mount"
+
+#: src/camera_preflight/gui/animations/library.py:96
+msgid "Lens release"
+msgstr "Lens release"
+
 #: src/camera_preflight/messages.py:122
 #, python-brace-format
 msgid "Lens: {lens}"
 msgstr "Lens: {lens}"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:97
+msgid "Light"
+msgstr "Light"
 
 #: src/camera_preflight/messages.py:218
 #, python-brace-format
@@ -688,6 +982,10 @@ msgstr "Memory cards"
 msgid "Metadata reader is missing"
 msgstr "Metadata reader is missing"
 
+#: src/camera_preflight/gui/labels.py:84
+msgid "Metering"
+msgstr "Metering"
+
 #: src/camera_preflight/messages.py:76
 msgid "Metering consistency"
 msgstr "Metering consistency"
@@ -700,7 +998,12 @@ msgstr "Metering modes"
 msgid "Metering photos"
 msgstr "Metering photos"
 
-#: src/camera_preflight/report/labels.py:28
+#: src/camera_preflight/gui/labels.py:56
+#, python-brace-format
+msgid "Metering: {mode}"
+msgstr "Metering: {mode}"
+
+#: src/camera_preflight/gui/views/results.py:89 src/camera_preflight/report/labels.py:28
 msgid "Method"
 msgstr "Method"
 
@@ -742,6 +1045,14 @@ msgstr "Mounted lens"
 msgid "Needs a reference instrument"
 msgstr "Needs a reference instrument"
 
+#: src/camera_preflight/gui/shell.py:122 src/camera_preflight/gui/shell.py:145
+msgid "Next"
+msgstr "Next"
+
+#: src/camera_preflight/gui/views/manual.py:40
+msgid "No"
+msgstr "No"
+
 #: src/camera_preflight/messages.py:102
 msgid "No answer given"
 msgstr "No answer given"
@@ -766,13 +1077,29 @@ msgstr "No fault with either lens"
 msgid "No hot pixels found"
 msgstr "No hot pixels found"
 
+#: src/camera_preflight/gui/views/about.py:22
+msgid "No network access. No data leaves this computer."
+msgstr "No network access. No data leaves this computer."
+
 #: src/camera_preflight/messages.py:97
 msgid "No reference data"
 msgstr "No reference data"
 
+#: src/camera_preflight/gui/widgets/common.py:65
+msgid "No reference photo yet"
+msgstr "No reference photo yet"
+
+#: src/camera_preflight/gui/views/about.py:30
+msgid "No reference photos yet"
+msgstr "No reference photos yet"
+
 #: src/camera_preflight/messages.py:59
 msgid "Noise and banding"
 msgstr "Noise and banding"
+
+#: src/camera_preflight/gui/labels.py:74
+msgid "Noise reduction"
+msgstr "Noise reduction"
 
 #: src/camera_preflight/messages.py:212
 msgid "Noise reduction is on; needs off"
@@ -786,13 +1113,26 @@ msgstr "Not applicable"
 msgid "Not enough accepted photos"
 msgstr "Not enough accepted photos"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:59
+msgid "Not found"
+msgstr "Not found"
+
 #: src/camera_preflight/messages.py:104
 msgid "Not supported over this connection"
 msgstr "Not supported over this connection"
 
-#: src/camera_preflight/messages.py:27 src/camera_preflight/report/labels.py:25
+#: src/camera_preflight/gui/views/manual.py:41
+msgid "Not sure"
+msgstr "Not sure"
+
+#: src/camera_preflight/gui/views/results.py:190 src/camera_preflight/messages.py:27
+#: src/camera_preflight/report/labels.py:25
 msgid "Not tested"
 msgstr "Not tested"
+
+#: src/camera_preflight/gui/views/manual.py:82
+msgid "Note"
+msgstr "Note"
 
 #: src/camera_preflight/messages.py:108
 #, python-brace-format
@@ -802,6 +1142,22 @@ msgstr "Note: {text}"
 #: src/camera_preflight/report/labels.py:23
 msgid "Nothing suspect or failed."
 msgstr "Nothing suspect or failed."
+
+#: src/camera_preflight/gui/labels.py:74
+msgid "Off"
+msgstr "Off"
+
+#: src/camera_preflight/gui/labels.py:92
+msgid "One point, AF-S"
+msgstr "One point, AF-S"
+
+#: src/camera_preflight/gui/views/results.py:134
+msgid "Open report"
+msgstr "Open report"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:146
+msgid "Optional. Without an SDK some checks are skipped."
+msgstr "Optional. Without an SDK some checks are skipped."
 
 #: src/camera_preflight/messages.py:79
 msgid "Output level"
@@ -816,7 +1172,7 @@ msgstr "Output {percent}, {offset} EV from mid-grey"
 msgid "Parameter"
 msgstr "Parameter"
 
-#: src/camera_preflight/report/labels.py:31
+#: src/camera_preflight/gui/views/results.py:92 src/camera_preflight/report/labels.py:31
 msgid "Parameter set"
 msgstr "Parameter set"
 
@@ -824,17 +1180,33 @@ msgstr "Parameter set"
 msgid "Pass"
 msgstr "Pass"
 
-#: src/camera_preflight/report/labels.py:47
+#: src/camera_preflight/gui/views/results.py:192
+msgid "Passed"
+msgstr "Passed"
+
+#: src/camera_preflight/gui/views/results.py:64 src/camera_preflight/report/labels.py:47
 msgid "Path"
 msgstr "Path"
+
+#: src/camera_preflight/gui/animations/engine.py:171
+msgid "Pause"
+msgstr "Pause"
 
 #: src/camera_preflight/report/labels.py:55
 msgid "Photo checks"
 msgstr "Photo checks"
 
+#: src/camera_preflight/gui/views/about.py:23
+msgid "Photo credits"
+msgstr "Photo credits"
+
 #: src/camera_preflight/messages.py:235
 msgid "Photo details cannot be read"
 msgstr "Photo details cannot be read"
+
+#: src/camera_preflight/gui/labels.py:69 src/camera_preflight/gui/labels.py:95
+msgid "Photos"
+msgstr "Photos"
 
 #: src/camera_preflight/messages.py:223
 #, python-brace-format
@@ -844,6 +1216,10 @@ msgstr "Photos from {count} different bodies"
 #: src/camera_preflight/messages.py:56
 msgid "Pixel classification"
 msgstr "Pixel classification"
+
+#: src/camera_preflight/gui/animations/engine.py:171
+msgid "Play"
+msgstr "Play"
 
 #: src/camera_preflight/messages.py:164
 msgid "Point layout unknown; using 5 points"
@@ -868,6 +1244,10 @@ msgstr "Point {point}: variation {cv}"
 msgid "Ports, battery and video"
 msgstr "Ports, battery and video"
 
+#: src/camera_preflight/gui/animations/library.py:57
+msgid "Power switch"
+msgstr "Power switch"
+
 #: src/camera_preflight/messages.py:83
 msgid "Powers on"
 msgstr "Powers on"
@@ -876,9 +1256,17 @@ msgstr "Powers on"
 msgid "Previous owner traces"
 msgstr "Previous owner traces"
 
+#: src/camera_preflight/gui/views/start.py:28
+msgid "Printed on the camera"
+msgstr "Printed on the camera"
+
 #: src/camera_preflight/messages.py:70
 msgid "Priority focus points"
 msgstr "Priority focus points"
+
+#: src/camera_preflight/gui/labels.py:73
+msgid "RAW"
+msgstr "RAW"
 
 #: src/camera_preflight/messages.py:214
 msgid "RAW data cannot be read"
@@ -896,6 +1284,10 @@ msgstr "Reading camera data"
 msgid "Reason"
 msgstr "Reason"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:100
+msgid "Reduce motion"
+msgstr "Reduce motion"
+
 #: src/camera_preflight/messages.py:179
 msgid "Regions are evenly sharp"
 msgstr "Regions are evenly sharp"
@@ -904,13 +1296,21 @@ msgstr "Regions are evenly sharp"
 msgid "Repeat photos"
 msgstr "Repeat photos"
 
-#: src/camera_preflight/report/labels.py:10
+#: src/camera_preflight/gui/animations/engine.py:172
+msgid "Replay"
+msgstr "Replay"
+
+#: src/camera_preflight/gui/views/results.py:138 src/camera_preflight/report/labels.py:10
 msgid "Report language"
 msgstr "Report language"
 
-#: src/camera_preflight/messages.py:283
+#: src/camera_preflight/gui/views/upload.py:107 src/camera_preflight/messages.py:283
 msgid "Results"
 msgstr "Results"
+
+#: src/camera_preflight/gui/labels.py:13
+msgid "Right"
+msgstr "Right"
 
 #: src/camera_preflight/messages.py:96
 msgid "SDK not configured"
@@ -920,6 +1320,19 @@ msgstr "SDK not configured"
 msgid "SHA-256"
 msgstr "SHA-256"
 
+#: src/camera_preflight/gui/views/settings_dialogs.py:117
+#: src/camera_preflight/gui/views/settings_dialogs.py:157
+msgid "Save"
+msgstr "Save"
+
+#: src/camera_preflight/gui/views/results.py:132 src/camera_preflight/gui/views/results.py:237
+msgid "Save report"
+msgstr "Save report"
+
+#: src/camera_preflight/gui/animations/library.py:348
+msgid "Screen"
+msgstr "Screen"
+
 #: src/camera_preflight/messages.py:89
 msgid "Screens and viewfinder"
 msgstr "Screens and viewfinder"
@@ -928,9 +1341,17 @@ msgstr "Screens and viewfinder"
 msgid "Semi-automatic"
 msgstr "Semi-automatic"
 
+#: src/camera_preflight/gui/labels.py:88
+msgid "Sensor"
+msgstr "Sensor"
+
 #: src/camera_preflight/report/labels.py:14
 msgid "Serial (last 4)"
 msgstr "Serial (last 4)"
+
+#: src/camera_preflight/gui/views/start.py:25 src/camera_preflight/gui/views/start.py:30
+msgid "Serial (optional)"
+msgstr "Serial (optional)"
 
 #: src/camera_preflight/messages.py:222
 msgid "Serial not found in the photos"
@@ -939,6 +1360,10 @@ msgstr "Serial not found in the photos"
 #: src/camera_preflight/messages.py:111
 msgid "Serial not readable"
 msgstr "Serial not readable"
+
+#: src/camera_preflight/gui/animations/library.py:77
+msgid "Serial plate"
+msgstr "Serial plate"
 
 #: src/camera_preflight/messages.py:213
 #, python-brace-format
@@ -950,7 +1375,24 @@ msgstr "Serial {found}; session has {needed}"
 msgid "Serial {read} differs from entered {entered}"
 msgstr "Serial {read} differs from entered {entered}"
 
-#: src/camera_preflight/report/labels.py:48
+#: src/camera_preflight/gui/views/settings_dialogs.py:106
+msgid "Sessions folder"
+msgstr "Sessions folder"
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:144
+msgid "Set up camera SDKs"
+msgstr "Set up camera SDKs"
+
+#: src/camera_preflight/gui/shell.py:92 src/camera_preflight/gui/shell.py:141
+#: src/camera_preflight/gui/views/settings_dialogs.py:85 src/camera_preflight/gui/views/start.py:34
+msgid "Settings"
+msgstr "Settings"
+
+#: src/camera_preflight/gui/shell.py:311
+msgid "Severe problem"
+msgstr "Severe problem"
+
+#: src/camera_preflight/gui/views/results.py:63 src/camera_preflight/report/labels.py:48
 msgid "Severity"
 msgstr "Severity"
 
@@ -962,9 +1404,18 @@ msgstr "Sharpness by region"
 msgid "Shoot with the settings shown. Upload the photos."
 msgstr "Shoot with the settings shown. Upload the photos."
 
+#: src/camera_preflight/gui/labels.py:78
+msgid "Shutter"
+msgstr "Shutter"
+
 #: src/camera_preflight/messages.py:65
 msgid "Shutter and mirror sound"
 msgstr "Shutter and mirror sound"
+
+#: src/camera_preflight/gui/animations/library.py:173
+#: src/camera_preflight/gui/animations/library.py:193
+msgid "Shutter button"
+msgstr "Shutter button"
 
 #: src/camera_preflight/messages.py:49
 msgid "Shutter count"
@@ -982,6 +1433,14 @@ msgstr "Shutter count before"
 #, python-brace-format
 msgid "Shutter count {count}"
 msgstr "Shutter count {count}"
+
+#: src/camera_preflight/gui/labels.py:86
+msgid "Shutter type"
+msgstr "Shutter type"
+
+#: src/camera_preflight/gui/shell.py:121 src/camera_preflight/gui/shell.py:144
+msgid "Skip"
+msgstr "Skip"
 
 #: src/camera_preflight/messages.py:95
 msgid "Skipped by user"
@@ -1011,6 +1470,10 @@ msgstr "Soft at: {points}"
 msgid "Some photos lack camera notes"
 msgstr "Some photos lack camera notes"
 
+#: src/camera_preflight/gui/shell.py:333
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
 #: src/camera_preflight/report/labels.py:36
 msgid "Source files"
 msgstr "Source files"
@@ -1018,6 +1481,14 @@ msgstr "Source files"
 #: src/camera_preflight/report/labels.py:51
 msgid "Sourced"
 msgstr "Sourced"
+
+#: src/camera_preflight/gui/labels.py:20
+msgid "Spot"
+msgstr "Spot"
+
+#: src/camera_preflight/gui/animations/library.py:383
+msgid "Spot metering area"
+msgstr "Spot metering area"
 
 #: src/camera_preflight/messages.py:276
 msgid "Spot metering photos"
@@ -1027,9 +1498,25 @@ msgstr "Spot metering photos"
 msgid "Spot metering position"
 msgstr "Spot metering position"
 
-#: src/camera_preflight/messages.py:253
+#: src/camera_preflight/gui/labels.py:60
+msgid "Spot on a bright area"
+msgstr "Spot on a bright area"
+
+#: src/camera_preflight/gui/labels.py:62
+msgid "Spot on a dark area"
+msgstr "Spot on a dark area"
+
+#: src/camera_preflight/gui/views/start.py:31 src/camera_preflight/messages.py:253
 msgid "Start"
 msgstr "Start"
+
+#: src/camera_preflight/gui/shell.py:108
+msgid "Steps"
+msgstr "Steps"
+
+#: src/camera_preflight/gui/shell.py:313
+msgid "Stop and save report"
+msgstr "Stop and save report"
 
 #: src/camera_preflight/messages.py:141
 #, python-brace-format
@@ -1057,13 +1544,21 @@ msgstr "Summary"
 msgid "Suspect"
 msgstr "Suspect"
 
-#: src/camera_preflight/report/labels.py:22
+#: src/camera_preflight/gui/views/results.py:187 src/camera_preflight/report/labels.py:22
 msgid "Suspect and fail results"
 msgstr "Suspect and fail results"
 
 #: src/camera_preflight/messages.py:260
 msgid "Take one RAW photo. Upload it."
 msgstr "Take one RAW photo. Upload it."
+
+#: src/camera_preflight/gui/labels.py:90
+msgid "Target"
+msgstr "Target"
+
+#: src/camera_preflight/gui/labels.py:38
+msgid "Test photo"
+msgstr "Test photo"
 
 #: src/camera_preflight/messages.py:234
 msgid "The RAW file is damaged or unreadable"
@@ -1072,6 +1567,10 @@ msgstr "The RAW file is damaged or unreadable"
 #: src/camera_preflight/messages.py:258
 msgid "The app works alone. Please wait."
 msgstr "The app works alone. Please wait."
+
+#: src/camera_preflight/gui/views/settings_dialogs.py:104
+msgid "Theme"
+msgstr "Theme"
 
 #: src/camera_preflight/messages.py:233
 msgid "This file format cannot be read; convert to DNG"
@@ -1088,6 +1587,14 @@ msgstr "Thresholds used"
 #: src/camera_preflight/messages.py:103
 msgid "Timestamps lack fractions of a second"
 msgstr "Timestamps lack fractions of a second"
+
+#: src/camera_preflight/gui/labels.py:14
+msgid "Top"
+msgstr "Top"
+
+#: src/camera_preflight/gui/animations/library.py:41
+msgid "USB port"
+msgstr "USB port"
 
 #: src/camera_preflight/messages.py:154
 #, python-brace-format
@@ -1119,6 +1626,14 @@ msgstr "Upload a burst"
 msgid "Upload a test photo"
 msgstr "Upload a test photo"
 
+#: src/camera_preflight/gui/views/upload.py:45 src/camera_preflight/gui/views/upload.py:73
+msgid "Upload photos"
+msgstr "Upload photos"
+
+#: src/camera_preflight/gui/views/upload.py:102
+msgid "Uploaded files"
+msgstr "Uploaded files"
+
 #: src/camera_preflight/report/labels.py:34
 msgid "Value"
 msgstr "Value"
@@ -1132,9 +1647,21 @@ msgstr "Value not readable"
 msgid "Very few shots in {years} years"
 msgstr "Very few shots in {years} years"
 
+#: src/camera_preflight/gui/animations/library.py:116
+msgid "Viewfinder"
+msgstr "Viewfinder"
+
 #: src/camera_preflight/messages.py:90
 msgid "Viewfinder view"
 msgstr "Viewfinder view"
+
+#: src/camera_preflight/gui/shell.py:135
+msgid "Working"
+msgstr "Working"
+
+#: src/camera_preflight/gui/views/manual.py:39
+msgid "Yes"
+msgstr "Yes"
 
 #: src/camera_preflight/report/labels.py:50
 msgid "more not shown"
