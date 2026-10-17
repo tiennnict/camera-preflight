@@ -92,6 +92,14 @@ class BackendClient:
             self._proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
             self._proc.kill()
+        # A host that already ended leaves unflushed text in the stdin wrapper; closing it here
+        # keeps the error out of the garbage collector.
+        for pipe in (self._proc.stdin, self._proc.stdout):
+            if pipe is not None:
+                try:
+                    pipe.close()
+                except OSError:
+                    pass
 
     def capabilities(self) -> Capabilities:
         data = self.call("capabilities")

@@ -23,7 +23,8 @@ def main() -> int:
         return 2
     target = HERE / "bundle"
     archive = HERE / "exiftool.zip"
-    with urllib.request.urlopen(pin["url"], timeout=120) as resp:
+    request = urllib.request.Request(pin["url"], headers={"User-Agent": "camera-preflight-build"})
+    with urllib.request.urlopen(request, timeout=120) as resp:
         archive.write_bytes(resp.read())
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
     if digest.lower() != str(pin["sha256"]).lower():

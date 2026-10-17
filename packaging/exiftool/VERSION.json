@@ -1,6 +1,6 @@
 {
-  "version": "UNSET",
-  "url": "UNSET",
-  "sha256": "UNSET",
-  "note": "Pin a released Windows 64-bit ExifTool build and its published SHA-256 before the first release (V-16). fetch.py refuses to run while a field is UNSET."
+  "version": "13.59",
+  "url": "https://sourceforge.net/projects/exiftool/files/exiftool-13.59_64.zip/download",
+  "sha256": "44b512b25af500724ba579d0a53c8fc5851628b692dd5e5d94ae4a15c2cba9ec",
+  "note": "[Sourced] version and SHA-256 from exiftool.org/ver.txt and exiftool.org/checksums.txt, read 2026-10-17. [Unverified] the SourceForge download was not reachable from the maintainer machine on that date, so the archive was not hashed here; fetch.py checks the hash at build time and stops on a mismatch (V-16)."
 }
