@@ -21,6 +21,9 @@ from ..domain import (
 from ..io.raw import is_raw
 from .format import fmt_aperture, fmt_exposure, fmt_iso, fmt_percent
 
+# Flat sets whose brightness must sit in the histogram range (B2, B4, C3).
+LEVEL_CHECKED_TAGS = frozenset({"b2", "b4", "c3"})
+
 KNOWN_EDITORS = (
     "photoshop",
     "lightroom",
@@ -62,10 +65,9 @@ class GateProfile:
             iso=req.iso,
             exposure_s=req.exposure_s,
             aperture=req.aperture,
-            check_histogram=flat and req.exposure_s is not None,
-            check_clipping=req.kind in (FrameKind.FLAT, FrameKind.CHART)
-            and req.exposure_s is not None,
-            check_flicker=flat and req.exposure_s is not None,
+            check_histogram=flat and req.tag in LEVEL_CHECKED_TAGS,
+            check_clipping=req.kind in (FrameKind.FLAT, FrameKind.CHART),
+            check_flicker=flat,
             check_dark=req.kind is FrameKind.DARK,
         )
 
@@ -180,9 +182,11 @@ def evaluate(
             )
 
     # G4 Flicker
-    if profile.check_flicker and (
-        profile.exposure_s is None
-        or profile.exposure_s <= params.get("gate.flicker_max_exposure_s")
+    shutter = profile.exposure_s if profile.exposure_s is not None else meta.exposure_s
+    if (
+        profile.check_flicker
+        and shutter is not None
+        and shutter <= params.get("gate.flicker_max_exposure_s")
     ):
         sig = binned_signal(cfa.array, cfa.pattern, cfa.black_level).astype(np.float64)
         rows = sig.mean(axis=1) / max(float(sig.mean()), 1e-6)

@@ -23,7 +23,7 @@ class LinearFit:
 
 def linear_fit(x: list[float], y: list[float]) -> LinearFit:
     xa, ya = np.asarray(x, dtype=np.float64), np.asarray(y, dtype=np.float64)
-    if xa.size < 2:
+    if xa.size < 2 or float(np.ptp(xa)) == 0.0:
         return LinearFit(0.0, float(ya[0]) if ya.size else 0.0, 0.0, ())
     slope, intercept = np.polyfit(xa, ya, 1)
     resid = ya - (slope * xa + intercept)

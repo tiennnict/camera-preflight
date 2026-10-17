@@ -20,6 +20,7 @@ from .base import (
     INSUFFICIENT,
     NO_REFERENCE,
     UNREADABLE,
+    AfAttempt,
     Check,
     CheckContext,
     FrameSet,
@@ -47,12 +48,16 @@ GENERIC_POINTS: tuple[AfPoint, ...] = (
 SDK_ANY = frozenset({"canon", "sony", "nikon"})
 
 
-def af_key(point: str) -> str:
-    return FrameRequirement(FrameKind.CHART, 1, tag=f"af:{point}").key
+def af_key(point: str, prefix: str = "af") -> str:
+    return FrameRequirement(FrameKind.CHART, 1, tag=f"{prefix}:{point}").key
 
 
-def af_requirements(points: tuple[AfPoint, ...], attempts: int) -> tuple[FrameRequirement, ...]:
-    return tuple(FrameRequirement(FrameKind.CHART, attempts, tag=f"af:{p.name}") for p in points)
+def af_requirements(
+    points: tuple[AfPoint, ...], attempts: int, prefix: str = "af"
+) -> tuple[FrameRequirement, ...]:
+    return tuple(
+        FrameRequirement(FrameKind.CHART, attempts, tag=f"{prefix}:{p.name}") for p in points
+    )
 
 
 def priority_points(points: tuple[AfPoint, ...]) -> tuple[AfPoint, ...]:
@@ -88,11 +93,13 @@ def _centre_name(points: tuple[AfPoint, ...]) -> str:
     return next((p.name for p in points if p.is_centre), points[0].name)
 
 
-def _sharp_by_point(frames: FrameSet, points: tuple[AfPoint, ...]) -> dict[str, list[float]]:
+def _sharp_by_point(
+    frames: FrameSet, points: tuple[AfPoint, ...], prefix: str = "af"
+) -> dict[str, list[float]]:
     out: dict[str, list[float]] = {}
     for p in points:
         vals: list[float] = []
-        for f in frames_of(frames, af_key(p.name)):
+        for f in frames_of(frames, af_key(p.name, prefix)):
             assert f.cfa is not None
             vals.append(region_sharpness(f.cfa.array, f.cfa.pattern, f.cfa.black_level, p))
         if vals:
@@ -120,9 +127,9 @@ def d1(spec: CheckSpec, frames: FrameSet, ctx: CheckContext) -> CheckResult:
         spec,
         ctx,
         Level.PASS,
-        msg("d1.points", count=res.value, tier=res.tier),
+        msg(f"d1.points_{res.tier}", count=res.value),
         confidence=conf,
-        findings=[finding("points", "d1.points", count=res.value, tier=res.tier)],
+        findings=[finding("points", f"d1.points_{res.tier}", count=res.value)],
     )
 
 
@@ -391,6 +398,26 @@ def d9(spec: CheckSpec, frames: FrameSet, ctx: CheckContext) -> CheckResult:
             findings=[finding("fine_tune", "d9.set", value=value)],
         )
     return make_result(spec, ctx, Level.PASS, msg("d9.zero"), confidence=Confidence.HIGH)
+
+
+def faulty_points(
+    frames: FrameSet,
+    ctx: CheckContext,
+    attempts: dict[str, list[AfAttempt]],
+    prefix: str = "af",
+) -> set[str]:
+    """Points with a tier 1 or tier 2 fault for one lens (input of D10)."""
+    points = points_for(ctx)
+    bad: set[str] = set()
+    need = int(ctx.params.get("af.fail_attempts"))
+    for p in points:
+        if sum(1 for a in attempts.get(p.name, []) if not a.focused) >= need:
+            bad.add(p.name)
+    sharp = _sharp_by_point(frames, points, prefix)
+    if len(sharp) >= 2:
+        soft, _ref, _means = _soft_points(sharp, points, ctx.params.get("af.soft_ratio"))
+        bad.update(soft)
+    return bad
 
 
 def d10(spec: CheckSpec, frames: FrameSet, ctx: CheckContext) -> CheckResult:

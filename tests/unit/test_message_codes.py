@@ -50,3 +50,17 @@ def test_all_used_codes_are_registered():
         c for c in used_codes() | {f"reason.{r}" for r in REASONS} if c not in MESSAGES
     )
     assert not missing, missing
+
+
+def test_step_and_check_codes_registered():
+    from camera_preflight.checks import ALL_CHECKS
+    from camera_preflight.domain import Mode
+    from camera_preflight.wizard import build_plan
+
+    codes = {c.spec.title for c in ALL_CHECKS}
+    for mode in Mode:
+        for step in build_plan(mode, sdk_available=frozenset({"sony"})):
+            codes |= {step.title_code, step.instruction_code}
+    codes |= {"b.hot", "b.stuck_bright", "b.dead", "manual.pass", "manual.suspect", "manual.fail"}
+    missing = sorted(c for c in codes if c not in MESSAGES)
+    assert not missing, missing
