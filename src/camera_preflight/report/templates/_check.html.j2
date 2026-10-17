@@ -1,0 +1,11 @@
+<div class="check">
+<h3><span>{{ r.id }} &middot; {{ r.title }}</span>
+<span class="badge {{ r.key }}"><i>{{ r.glyph|safe }}</i>{{ r.level }}</span></h3>
+<div class="tags">
+{% if r.confidence %}{{ L.confidence }}: {{ r.confidence }}{% endif %}
+{% if r.severity %} &middot; {{ L.severity }}: {{ r.severity }}{% endif %}
+&middot; {{ L.path }}: {{ r.path }}</div>
+<p>{{ r.explanation }}</p>
+{% if r.findings %}<ul class="find">{% for f in r.findings %}<li>{{ f }}</li>{% endfor %}{% if r.more %}<li>+{{ r.more }} {{ L.more_findings }}</li>{% endif %}</ul>{% endif %}
+{% for e in r.evidence %}<figure><img alt="{{ e.caption }}" src="{{ e.src }}"><figcaption>{{ e.caption }}</figcaption></figure>{% endfor %}
+</div>

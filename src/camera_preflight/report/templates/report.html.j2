@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ L.title }}</title>
+<style>
+:root { --bg:#fff; --fg:#1d1d21; --muted:#5b5b66; --line:#d9d9e0; --card:#f6f6f9;
+  --pass:#1a7f37; --suspect:#9a6700; --fail:#c62828; --nt:#5b5b66; }
+@media (prefers-color-scheme: dark) { :root { --bg:#17171b; --fg:#ececf1; --muted:#a2a2ae; --line:#34343c; --card:#202026;
+  --pass:#56d364; --suspect:#e3b341; --fail:#ff7b72; --nt:#a2a2ae; } }
+body { background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, "Segoe UI", sans-serif; margin:0 auto; max-width:60rem; padding:1rem 1rem 3rem; }
+h1 { font-size:1.6rem; margin:.5rem 0 0 } h2 { font-size:1.2rem; margin:2rem 0 .5rem; border-bottom:1px solid var(--line); padding-bottom:.25rem }
+.meta { color:var(--muted); font-size:.9rem }
+table { border-collapse:collapse; width:100% } th,td { text-align:left; padding:.3rem .5rem; border-bottom:1px solid var(--line); vertical-align:top }
+th { color:var(--muted); font-weight:600; width:14rem } .tbl th { width:auto }
+.counts { display:flex; flex-wrap:wrap; gap:.75rem; margin:.5rem 0 }
+.count { background:var(--card); border:1px solid var(--line); border-radius:.5rem; padding:.5rem 1rem; min-width:8rem }
+.count b { font-size:1.5rem; display:block }
+.badge { display:inline-flex; align-items:center; gap:.35rem; font-weight:600 }
+.badge i { display:inline-block; width:1.3rem; height:1.3rem; line-height:1.3rem; text-align:center; font-style:normal; border:2px solid currentColor; font-size:.8rem }
+.pass { color:var(--pass) } .pass i { border-radius:50% } .suspect { color:var(--suspect) } .suspect i { border-radius:0; transform:rotate(45deg) scale(.85) } .suspect i span { display:inline-block; transform:rotate(-45deg) }
+.fail { color:var(--fail) } .fail i { border-radius:.2rem } .not_tested { color:var(--nt) } .not_tested i { border-radius:50%; border-style:dashed }
+.check { background:var(--card); border:1px solid var(--line); border-radius:.5rem; padding:.6rem .9rem; margin:.6rem 0; break-inside:avoid }
+.check h3 { font-size:1rem; margin:0 0 .2rem; display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:baseline }
+.tags { color:var(--muted); font-size:.85rem } ul.find { margin:.3rem 0; padding-left:1.2rem; color:var(--muted); font-size:.9rem }
+figure { margin:.5rem 0 } figure img { max-width:100%; border:1px solid var(--line); border-radius:.3rem } figcaption { color:var(--muted); font-size:.85rem }
+code { font-family:ui-monospace, Consolas, monospace; font-size:.8rem; word-break:break-all }
+.disclaimer { margin-top:2rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:.5rem; color:var(--muted) }
+@media print { body { max-width:none } .check { page-break-inside:avoid } }
+</style>
+</head>
+<body>
+<h1>{{ L.title }}</h1>
+<p class="meta">{{ L.created }}: {{ created }} &middot; {{ L.language }}: {{ lang }}</p>
+
+<h2>{{ L.camera }}</h2>
+<table>
+{% for k, v in camera_rows %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>
+{% endfor %}</table>
+
+<h2>{{ L.summary }}</h2>
+<div class="counts">
+{% for lv in levels %}<div class="count"><span class="badge {{ lv.key }}"><i>{{ lv.glyph|safe }}</i>{{ lv.name }}</span><b>{{ lv.count }}</b></div>
+{% endfor %}</div>
+
+{% if blockers %}<h2>{{ L.blockers }}</h2>
+{% for r in blockers %}{% include "_check.html.j2" %}{% endfor %}{% endif %}
+
+<h2>{{ L.flagged }}</h2>
+{% if flagged %}{% for r in flagged %}{% include "_check.html.j2" %}{% endfor %}{% else %}<p>{{ L.none_flagged }}</p>{% endif %}
+
+{% if session_issues %}<h2>{{ L.session_issues }}</h2>
+<ul class="find">{% for t in session_issues %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+
+{% if questions %}<h2>{{ L.ask }}</h2>
+<ul>{% for q in questions %}<li>{{ q }}</li>{% endfor %}</ul>{% endif %}
+
+<h2>{{ L.all_results }}</h2>
+{% for r in passed %}{% include "_check.html.j2" %}{% endfor %}
+
+{% if not_tested %}<h2>{{ L.not_tested }}</h2>
+<table class="tbl"><tr><th>ID</th><th></th><th>{{ L.reason }}</th></tr>
+{% for r in not_tested %}<tr><td>{{ r.id }}</td><td>{{ r.title }}</td><td>{{ r.reason }}</td></tr>
+{% endfor %}</table>{% endif %}
+
+<h2>{{ L.method }}</h2>
+<table>
+<tr><th>{{ L.app_version }}</th><td>{{ app_version }}</td></tr>
+{% if kb_version %}<tr><th>{{ L.kb_version }}</th><td>{{ kb_version }}</td></tr>{% endif %}
+<tr><th>{{ L.parameter_set }}</th><td>{{ parameter_set }}</td></tr>
+</table>
+<h3>{{ L.thresholds }}</h3>
+<table class="tbl"><tr><th>{{ L.parameter }}</th><th>{{ L.value }}</th><th>{{ L.evidence_label }}</th></tr>
+{% for p in params %}<tr><td><code>{{ p.name }}</code></td><td>{{ p.value }}</td><td>{{ p.label }}</td></tr>
+{% endfor %}</table>
+
+{% if sources %}<h3>{{ L.frames }}</h3>
+<table class="tbl"><tr><th>{{ L.file }}</th><th>{{ L.sha256 }}</th></tr>
+{% for s in sources %}<tr><td>{{ s.name }}</td><td><code>{{ s.sha256 }}</code></td></tr>
+{% endfor %}</table>{% endif %}
+{% if evidence_hashes %}<h3>{{ L.evidence_files }}</h3>
+<table class="tbl"><tr><th>{{ L.file }}</th><th>{{ L.sha256 }}</th></tr>
+{% for s in evidence_hashes %}<tr><td>{{ s.name }}</td><td><code>{{ s.sha256 }}</code></td></tr>
+{% endfor %}</table>{% endif %}
+{% if sources or evidence_hashes %}<p class="meta">{{ L.hash_note }}</p>{% endif %}
+
+<p class="disclaimer">{{ L.disclaimer }}</p>
+</body>
+</html>

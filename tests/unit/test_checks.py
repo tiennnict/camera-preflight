@@ -14,7 +14,6 @@ from camera_preflight.i18n import render
 from camera_preflight.knowledge import ModelEntry
 from camera_preflight.synth import Defects, SynthCamera, af_attempts, build_frames
 
-
 _CACHE: dict[str, object] = {}
 
 

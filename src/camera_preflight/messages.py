@@ -235,3 +235,14 @@ register(
         "io.exiftool_missing": N_("Metadata reader is missing"),
     }
 )
+
+register(
+    {
+        "ask.A": N_("Ask about the shutter count and any past repairs ({checks})"),
+        "ask.B": N_("Ask whether the sensor was cleaned or replaced ({checks})"),
+        "ask.C": N_("Ask whether the shutter was serviced or replaced ({checks})"),
+        "ask.D": N_("Ask about autofocus repairs or calibration ({checks})"),
+        "ask.E": N_("Ask about metering problems seen in use ({checks})"),
+        "ask.F": N_("Ask about drops, water or repairs ({checks})"),
+    }
+)
