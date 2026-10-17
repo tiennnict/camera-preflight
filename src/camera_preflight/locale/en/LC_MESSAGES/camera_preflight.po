@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 09:53+0000\n"
+"POT-Creation-Date: 2026-10-17 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,25 +19,367 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+#: src/camera_preflight/messages.py:218
+#, python-brace-format
+msgid "AF point {found}; needs {needed}"
+msgstr "AF point {found}; needs {needed}"
+
+#: src/camera_preflight/messages.py:229
+#, python-brace-format
+msgid "About {per_year} shots a year over {years} years"
+msgstr "About {per_year} shots a year over {years} years"
+
+#: src/camera_preflight/messages.py:64
+msgid "Absolute shutter speed"
+msgstr "Absolute shutter speed"
+
+#: src/camera_preflight/messages.py:168
+#, python-brace-format
+msgid "All {count} points focus"
+msgstr "All {count} points focus"
+
+#: src/camera_preflight/messages.py:206
+#, python-brace-format
+msgid "Aperture step off by {ev} EV"
+msgstr "Aperture step off by {ev} EV"
+
+#: src/camera_preflight/messages.py:82
+msgid "Aperture steps"
+msgstr "Aperture steps"
+
+#: src/camera_preflight/messages.py:205
+msgid "Aperture steps are even"
+msgstr "Aperture steps are even"
+
+#: src/camera_preflight/messages.py:210
+#, python-brace-format
+msgid "Aperture {found}; needs {needed}"
+msgstr "Aperture {found}; needs {needed}"
+
+#: src/camera_preflight/messages.py:66
+msgid "Autofocus points"
+msgstr "Autofocus points"
+
 #: src/camera_preflight/messages.py:35
 msgid "Automatic"
 msgstr "Automatic"
+
+#: src/camera_preflight/messages.py:146
+#, python-brace-format
+msgid "Banding in {axis} at ISO {iso} ({amp} DN)"
+msgstr "Banding in {axis} at ISO {iso} ({amp} DN)"
+
+#: src/camera_preflight/messages.py:48
+msgid "Battery"
+msgstr "Battery"
+
+#: src/camera_preflight/messages.py:112
+#, python-brace-format
+msgid "Battery {percent}%"
+msgstr "Battery {percent}%"
 
 #: src/camera_preflight/messages.py:31
 msgid "Blocker"
 msgstr "Blocker"
 
+#: src/camera_preflight/messages.py:87
+msgid "Body and structure"
+msgstr "Body and structure"
+
+#: src/camera_preflight/messages.py:75
+msgid "Body or lens"
+msgstr "Body or lens"
+
+#: src/camera_preflight/messages.py:163
+msgid "Both shutter modes are even"
+msgstr "Both shutter modes are even"
+
+#: src/camera_preflight/messages.py:140
+msgid "Brightness is even"
+msgstr "Brightness is even"
+
+#: src/camera_preflight/messages.py:150
+msgid "Brightness map"
+msgstr "Brightness map"
+
+#: src/camera_preflight/messages.py:58
+msgid "Brightness uniformity"
+msgstr "Brightness uniformity"
+
+#: src/camera_preflight/messages.py:214 src/camera_preflight/messages.py:215
+#, python-brace-format
+msgid "Brightness {found}%; needs {needed}%"
+msgstr "Brightness {found}%; needs {needed}%"
+
+#: src/camera_preflight/messages.py:94
+msgid "Bundled lens"
+msgstr "Bundled lens"
+
+#: src/camera_preflight/messages.py:60
+msgid "Burst rhythm"
+msgstr "Burst rhythm"
+
+#: src/camera_preflight/messages.py:153
+#, python-brace-format
+msgid "Burst stalled (x{ratio} longest gap)"
+msgstr "Burst stalled (x{ratio} longest gap)"
+
+#: src/camera_preflight/messages.py:47
+msgid "Camera identity"
+msgstr "Camera identity"
+
+#: src/camera_preflight/messages.py:135
+#, python-brace-format
+msgid "Channel {channel}: {count}"
+msgstr "Channel {channel}: {count}"
+
+#: src/camera_preflight/messages.py:216
+#, python-brace-format
+msgid "Clipped pixels {found}%; needs under {needed}%"
+msgstr "Clipped pixels {found}%; needs under {needed}%"
+
+#: src/camera_preflight/messages.py:142
+#, python-brace-format
+msgid "Colour cast across the frame ({amp})"
+msgstr "Colour cast across the frame ({amp})"
+
+#: src/camera_preflight/messages.py:199
+#, python-brace-format
+msgid "Compensation is linear (slope {slope})"
+msgstr "Compensation is linear (slope {slope})"
+
+#: src/camera_preflight/messages.py:200
+#, python-brace-format
+msgid "Compensation steps uneven ({ev} EV)"
+msgstr "Compensation steps uneven ({ev} EV)"
+
 #: src/camera_preflight/messages.py:39
 msgid "Connected"
 msgstr "Connected"
+
+#: src/camera_preflight/messages.py:88
+msgid "Controls"
+msgstr "Controls"
+
+#: src/camera_preflight/messages.py:228
+msgid "Count is 0 but photos exist"
+msgstr "Count is 0 but photos exist"
+
+#: src/camera_preflight/messages.py:227
+#, python-brace-format
+msgid "Count {count} is below file number {file_number}"
+msgstr "Count {count} is below file number {file_number}"
+
+#: src/camera_preflight/messages.py:114
+#, python-brace-format
+msgid "Count {count}; rated life unknown"
+msgstr "Count {count}; rated life unknown"
+
+#: src/camera_preflight/messages.py:157
+msgid "Curtain even at all speeds"
+msgstr "Curtain even at all speeds"
+
+#: src/camera_preflight/messages.py:61
+msgid "Curtain evenness"
+msgstr "Curtain evenness"
+
+#: src/camera_preflight/messages.py:125
+#, python-brace-format
+msgid "Dead pixel at row {row}, column {col} ({channel})"
+msgstr "Dead pixel at row {row}, column {col} ({channel})"
+
+#: src/camera_preflight/messages.py:204
+#, python-brace-format
+msgid "Deviation {dev} EV"
+msgstr "Deviation {dev} EV"
+
+#: src/camera_preflight/messages.py:149
+msgid "Dust and mark map"
+msgstr "Dust and mark map"
+
+#: src/camera_preflight/messages.py:57
+msgid "Dust and marks"
+msgstr "Dust and marks"
+
+#: src/camera_preflight/messages.py:223
+msgid "Entered serial differs from the photos"
+msgstr "Entered serial differs from the photos"
+
+#: src/camera_preflight/messages.py:152
+#, python-brace-format
+msgid "Even rhythm, {fps} shots/s"
+msgstr "Even rhythm, {fps} shots/s"
+
+#: src/camera_preflight/messages.py:194
+#, python-brace-format
+msgid "Exposure change {ev} EV"
+msgstr "Exposure change {ev} EV"
+
+#: src/camera_preflight/messages.py:80
+msgid "Exposure compensation"
+msgstr "Exposure compensation"
+
+#: src/camera_preflight/messages.py:195
+#, python-brace-format
+msgid "Exposure follows the spot ({ev} EV)"
+msgstr "Exposure follows the spot ({ev} EV)"
+
+#: src/camera_preflight/messages.py:196
+#, python-brace-format
+msgid "Exposure ignores the spot ({ev} EV)"
+msgstr "Exposure ignores the spot ({ev} EV)"
+
+#: src/camera_preflight/messages.py:62
+msgid "Exposure repeatability"
+msgstr "Exposure repeatability"
+
+#: src/camera_preflight/messages.py:159
+#, python-brace-format
+msgid "Exposure repeats ({ev} EV)"
+msgstr "Exposure repeats ({ev} EV)"
+
+#: src/camera_preflight/messages.py:189
+#, python-brace-format
+msgid "Exposure spread {ev} EV"
+msgstr "Exposure spread {ev} EV"
+
+#: src/camera_preflight/messages.py:158
+#, python-brace-format
+msgid "Exposure varies {ev} EV"
+msgstr "Exposure varies {ev} EV"
+
+#: src/camera_preflight/messages.py:190
+#, python-brace-format
+msgid "Exposure varies {ev} EV on the same scene"
+msgstr "Exposure varies {ev} EV on the same scene"
+
+#: src/camera_preflight/messages.py:209
+#, python-brace-format
+msgid "Exposure {found}; needs {needed}"
+msgstr "Exposure {found}; needs {needed}"
 
 #: src/camera_preflight/messages.py:26
 msgid "Fail"
 msgstr "Fail"
 
+#: src/camera_preflight/messages.py:162
+msgid "Fault in both shutter modes"
+msgstr "Fault in both shutter modes"
+
+#: src/camera_preflight/messages.py:186
+#, python-brace-format
+msgid "Fault only with one lens: {points}"
+msgstr "Fault only with one lens: {points}"
+
+#: src/camera_preflight/messages.py:161
+msgid "Fault only with the mechanical shutter"
+msgstr "Fault only with the mechanical shutter"
+
+#: src/camera_preflight/messages.py:187
+#, python-brace-format
+msgid "Fault with both lenses: {points}"
+msgstr "Fault with both lenses: {points}"
+
+#: src/camera_preflight/messages.py:231
+msgid "File error"
+msgstr "File error"
+
+#: src/camera_preflight/messages.py:226
+msgid "File numbers and capture times disagree"
+msgstr "File numbers and capture times disagree"
+
+#: src/camera_preflight/messages.py:207
+#, python-brace-format
+msgid "File type {found}; needs RAW"
+msgstr "File type {found}; needs RAW"
+
+#: src/camera_preflight/messages.py:50
+msgid "Firmware"
+msgstr "Firmware"
+
+#: src/camera_preflight/messages.py:119
+#, python-brace-format
+msgid "Firmware {found}; latest {latest}"
+msgstr "Firmware {found}; latest {latest}"
+
+#: src/camera_preflight/messages.py:118
+#, python-brace-format
+msgid "Firmware {version}"
+msgstr "Firmware {version}"
+
+#: src/camera_preflight/messages.py:92
+msgid "Flash"
+msgstr "Flash"
+
+#: src/camera_preflight/messages.py:67
+msgid "Focus acquired"
+msgstr "Focus acquired"
+
+#: src/camera_preflight/messages.py:74
+msgid "Focus fine-tune"
+msgstr "Focus fine-tune"
+
+#: src/camera_preflight/messages.py:185
+msgid "Focus fine-tune is off"
+msgstr "Focus fine-tune is off"
+
+#: src/camera_preflight/messages.py:184
+#, python-brace-format
+msgid "Focus fine-tune is {value}"
+msgstr "Focus fine-tune is {value}"
+
+#: src/camera_preflight/messages.py:73
+msgid "Focus position"
+msgstr "Focus position"
+
+#: src/camera_preflight/messages.py:183
+msgid "Focus positions reached"
+msgstr "Focus positions reached"
+
+#: src/camera_preflight/messages.py:69
+msgid "Focus repeatability"
+msgstr "Focus repeatability"
+
+#: src/camera_preflight/messages.py:174
+msgid "Focus repeats well"
+msgstr "Focus repeats well"
+
+#: src/camera_preflight/messages.py:72
+msgid "Focus response time"
+msgstr "Focus response time"
+
+#: src/camera_preflight/messages.py:68
+msgid "Focus sharpness"
+msgstr "Focus sharpness"
+
+#: src/camera_preflight/messages.py:181
+#, python-brace-format
+msgid "Focus time {median} s"
+msgstr "Focus time {median} s"
+
+#: src/camera_preflight/messages.py:180
+#, python-brace-format
+msgid "Focus time {median} s; reference {ref} s"
+msgstr "Focus time {median} s; reference {ref} s"
+
+#: src/camera_preflight/messages.py:219
+#, python-brace-format
+msgid "Frame not dark: {found}%; needs under {needed}%"
+msgstr "Frame not dark: {found}%; needs under {needed}%"
+
 #: src/camera_preflight/messages.py:37
 msgid "From uploaded files"
 msgstr "From uploaded files"
+
+#: src/camera_preflight/messages.py:156
+#, python-brace-format
+msgid "Gradient at {speed}: {amp}"
+msgstr "Gradient at {speed}: {amp}"
+
+#: src/camera_preflight/messages.py:138
+#, python-brace-format
+msgid "Heavy dust: {count} marks"
+msgstr "Heavy dust: {count} marks"
 
 #: src/camera_preflight/messages.py:32
 msgid "High"
@@ -46,6 +388,80 @@ msgstr "High"
 #: src/camera_preflight/messages.py:28
 msgid "High confidence"
 msgstr "High confidence"
+
+#: src/camera_preflight/messages.py:123
+#, python-brace-format
+msgid "Hot pixel at row {row}, column {col} ({channel})"
+msgstr "Hot pixel at row {row}, column {col} ({channel})"
+
+#: src/camera_preflight/messages.py:147
+msgid "Hot pixel map"
+msgstr "Hot pixel map"
+
+#: src/camera_preflight/messages.py:54
+msgid "Hot pixels (dark frames)"
+msgstr "Hot pixels (dark frames)"
+
+#: src/camera_preflight/messages.py:203
+#, python-brace-format
+msgid "ISO step jumps by {ev} EV"
+msgstr "ISO step jumps by {ev} EV"
+
+#: src/camera_preflight/messages.py:81
+msgid "ISO steps"
+msgstr "ISO steps"
+
+#: src/camera_preflight/messages.py:202
+#, python-brace-format
+msgid "ISO steps are even (slope {slope})"
+msgstr "ISO steps are even (slope {slope})"
+
+#: src/camera_preflight/messages.py:208
+#, python-brace-format
+msgid "ISO {found}; needs {needed}"
+msgstr "ISO {found}; needs {needed}"
+
+#: src/camera_preflight/messages.py:145
+#, python-brace-format
+msgid "ISO {iso}: noise {sigma} DN"
+msgstr "ISO {iso}: noise {sigma} DN"
+
+#: src/camera_preflight/messages.py:107
+msgid "Judged Fail by you"
+msgstr "Judged Fail by you"
+
+#: src/camera_preflight/messages.py:105
+msgid "Judged Pass by you"
+msgstr "Judged Pass by you"
+
+#: src/camera_preflight/messages.py:106
+msgid "Judged Suspect by you"
+msgstr "Judged Suspect by you"
+
+#: src/camera_preflight/messages.py:143
+#, python-brace-format
+msgid "Left and right differ ({amp})"
+msgstr "Left and right differ ({amp})"
+
+#: src/camera_preflight/messages.py:122
+#, python-brace-format
+msgid "Lens: {lens}"
+msgstr "Lens: {lens}"
+
+#: src/camera_preflight/messages.py:217
+#, python-brace-format
+msgid "Light flicker {found}%; needs under {needed}%"
+msgstr "Light flicker {found}%; needs under {needed}%"
+
+#: src/camera_preflight/messages.py:220
+#, python-brace-format
+msgid "Light leak: {found}%; needs under {needed}%"
+msgstr "Light leak: {found}%; needs under {needed}%"
+
+#: src/camera_preflight/messages.py:139
+#, python-brace-format
+msgid "Linear mark found ({count})"
+msgstr "Linear mark found ({count})"
 
 #: src/camera_preflight/messages.py:34
 msgid "Low"
@@ -59,6 +475,25 @@ msgstr "Low confidence"
 msgid "Manual"
 msgstr "Manual"
 
+#: src/camera_preflight/messages.py:136
+#, python-brace-format
+msgid "Mark at row {row}, column {col}, depth {depth}"
+msgstr "Mark at row {row}, column {col}, depth {depth}"
+
+#: src/camera_preflight/messages.py:63
+msgid "Mechanical and electronic shutter"
+msgstr "Mechanical and electronic shutter"
+
+#: src/camera_preflight/messages.py:160
+#, python-brace-format
+msgid "Mechanical fault: {mechanical}; electronic fault: {electronic}"
+msgstr "Mechanical fault: {mechanical}; electronic fault: {electronic}"
+
+#: src/camera_preflight/messages.py:179
+#, python-brace-format
+msgid "Median focus time {median} s"
+msgstr "Median focus time {median} s"
+
 #: src/camera_preflight/messages.py:33
 msgid "Medium"
 msgstr "Medium"
@@ -67,23 +502,430 @@ msgstr "Medium"
 msgid "Medium confidence"
 msgstr "Medium confidence"
 
+#: src/camera_preflight/messages.py:51
+msgid "Memory cards"
+msgstr "Memory cards"
+
+#: src/camera_preflight/messages.py:235
+msgid "Metadata reader is missing"
+msgstr "Metadata reader is missing"
+
+#: src/camera_preflight/messages.py:76
+msgid "Metering consistency"
+msgstr "Metering consistency"
+
+#: src/camera_preflight/messages.py:77
+msgid "Metering modes"
+msgstr "Metering modes"
+
+#: src/camera_preflight/messages.py:86
+msgid "Mirror position"
+msgstr "Mirror position"
+
+#: src/camera_preflight/messages.py:192
+#, python-brace-format
+msgid "Modes agree ({ev} EV)"
+msgstr "Modes agree ({ev} EV)"
+
+#: src/camera_preflight/messages.py:193
+#, python-brace-format
+msgid "Modes differ by {ev} EV"
+msgstr "Modes differ by {ev} EV"
+
+#: src/camera_preflight/messages.py:91
+msgid "Mount play"
+msgstr "Mount play"
+
+#: src/camera_preflight/messages.py:85
+msgid "Mount shape"
+msgstr "Mount shape"
+
+#: src/camera_preflight/messages.py:52
+msgid "Mounted lens"
+msgstr "Mounted lens"
+
+#: src/camera_preflight/messages.py:100
+msgid "Needs a reference instrument"
+msgstr "Needs a reference instrument"
+
+#: src/camera_preflight/messages.py:102
+msgid "No answer given"
+msgstr "No answer given"
+
+#: src/camera_preflight/messages.py:144
+msgid "No banding"
+msgstr "No banding"
+
+#: src/camera_preflight/messages.py:84
+msgid "No crack or dent"
+msgstr "No crack or dent"
+
+#: src/camera_preflight/messages.py:132
+msgid "No defective pixels"
+msgstr "No defective pixels"
+
+#: src/camera_preflight/messages.py:188
+msgid "No fault with either lens"
+msgstr "No fault with either lens"
+
+#: src/camera_preflight/messages.py:126
+msgid "No hot pixels found"
+msgstr "No hot pixels found"
+
+#: src/camera_preflight/messages.py:97
+msgid "No reference data"
+msgstr "No reference data"
+
+#: src/camera_preflight/messages.py:59
+msgid "Noise and banding"
+msgstr "Noise and banding"
+
+#: src/camera_preflight/messages.py:211
+msgid "Noise reduction is on; needs off"
+msgstr "Noise reduction is on; needs off"
+
+#: src/camera_preflight/messages.py:101
+msgid "Not applicable"
+msgstr "Not applicable"
+
+#: src/camera_preflight/messages.py:98
+msgid "Not enough accepted photos"
+msgstr "Not enough accepted photos"
+
+#: src/camera_preflight/messages.py:104
+msgid "Not supported over this connection"
+msgstr "Not supported over this connection"
+
 #: src/camera_preflight/messages.py:27
 msgid "Not tested"
 msgstr "Not tested"
+
+#: src/camera_preflight/messages.py:108
+#, python-brace-format
+msgid "Note: {text}"
+msgstr "Note: {text}"
+
+#: src/camera_preflight/messages.py:79
+msgid "Output level"
+msgstr "Output level"
+
+#: src/camera_preflight/messages.py:197
+#, python-brace-format
+msgid "Output {percent}, {offset} EV from mid-grey"
+msgstr "Output {percent}, {offset} EV from mid-grey"
 
 #: src/camera_preflight/messages.py:24
 msgid "Pass"
 msgstr "Pass"
 
+#: src/camera_preflight/messages.py:234
+msgid "Photo details cannot be read"
+msgstr "Photo details cannot be read"
+
+#: src/camera_preflight/messages.py:222
+#, python-brace-format
+msgid "Photos from {count} different bodies"
+msgstr "Photos from {count} different bodies"
+
+#: src/camera_preflight/messages.py:56
+msgid "Pixel classification"
+msgstr "Pixel classification"
+
+#: src/camera_preflight/messages.py:164
+msgid "Point layout unknown; using 5 points"
+msgstr "Point layout unknown; using 5 points"
+
+#: src/camera_preflight/messages.py:166
+#, python-brace-format
+msgid "Point {point} did not focus"
+msgstr "Point {point} did not focus"
+
+#: src/camera_preflight/messages.py:169
+#, python-brace-format
+msgid "Point {point}: sharpness {value}"
+msgstr "Point {point}: sharpness {value}"
+
+#: src/camera_preflight/messages.py:172
+#, python-brace-format
+msgid "Point {point}: variation {cv}"
+msgstr "Point {point}: variation {cv}"
+
+#: src/camera_preflight/messages.py:93
+msgid "Ports, battery and video"
+msgstr "Ports, battery and video"
+
+#: src/camera_preflight/messages.py:83
+msgid "Powers on"
+msgstr "Powers on"
+
+#: src/camera_preflight/messages.py:53
+msgid "Previous owner traces"
+msgstr "Previous owner traces"
+
+#: src/camera_preflight/messages.py:70
+msgid "Priority focus points"
+msgstr "Priority focus points"
+
+#: src/camera_preflight/messages.py:213
+msgid "RAW data cannot be read"
+msgstr "RAW data cannot be read"
+
+#: src/camera_preflight/messages.py:178
+msgid "Regions are evenly sharp"
+msgstr "Regions are evenly sharp"
+
+#: src/camera_preflight/messages.py:96
+msgid "SDK not configured"
+msgstr "SDK not configured"
+
+#: src/camera_preflight/messages.py:89
+msgid "Screens and viewfinder"
+msgstr "Screens and viewfinder"
+
 #: src/camera_preflight/messages.py:36
 msgid "Semi-automatic"
 msgstr "Semi-automatic"
+
+#: src/camera_preflight/messages.py:221
+msgid "Serial not found in the photos"
+msgstr "Serial not found in the photos"
+
+#: src/camera_preflight/messages.py:111
+msgid "Serial not readable"
+msgstr "Serial not readable"
+
+#: src/camera_preflight/messages.py:212
+#, python-brace-format
+msgid "Serial {found}; session has {needed}"
+msgstr "Serial {found}; session has {needed}"
+
+#: src/camera_preflight/messages.py:110
+#, python-brace-format
+msgid "Serial {read} differs from entered {entered}"
+msgstr "Serial {read} differs from entered {entered}"
+
+#: src/camera_preflight/messages.py:71
+msgid "Sharpness by region"
+msgstr "Sharpness by region"
+
+#: src/camera_preflight/messages.py:65
+msgid "Shutter and mirror sound"
+msgstr "Shutter and mirror sound"
+
+#: src/camera_preflight/messages.py:49
+msgid "Shutter count"
+msgstr "Shutter count"
+
+#: src/camera_preflight/messages.py:113
+#, python-brace-format
+msgid "Shutter count {count}"
+msgstr "Shutter count {count}"
+
+#: src/camera_preflight/messages.py:95
+msgid "Skipped by user"
+msgstr "Skipped by user"
+
+#: src/camera_preflight/messages.py:201
+#, python-brace-format
+msgid "Slope {slope}, deviation {dev} EV"
+msgstr "Slope {slope}, deviation {dev} EV"
+
+#: src/camera_preflight/messages.py:198
+#, python-brace-format
+msgid "Slope {slope}, deviation {resid} EV"
+msgstr "Slope {slope}, deviation {resid} EV"
+
+#: src/camera_preflight/messages.py:121
+#, python-brace-format
+msgid "Slot {slot} has a fault"
+msgstr "Slot {slot} has a fault"
+
+#: src/camera_preflight/messages.py:170
+#, python-brace-format
+msgid "Soft at: {points}"
+msgstr "Soft at: {points}"
+
+#: src/camera_preflight/messages.py:225
+msgid "Some photos lack camera notes"
+msgstr "Some photos lack camera notes"
+
+#: src/camera_preflight/messages.py:78
+msgid "Spot metering position"
+msgstr "Spot metering position"
+
+#: src/camera_preflight/messages.py:141
+#, python-brace-format
+msgid "Stripes in brightness ({amp})"
+msgstr "Stripes in brightness ({amp})"
+
+#: src/camera_preflight/messages.py:148
+msgid "Stuck and dead pixel map"
+msgstr "Stuck and dead pixel map"
+
+#: src/camera_preflight/messages.py:55
+msgid "Stuck and dead pixels"
+msgstr "Stuck and dead pixels"
+
+#: src/camera_preflight/messages.py:124
+#, python-brace-format
+msgid "Stuck pixel at row {row}, column {col} ({channel})"
+msgstr "Stuck pixel at row {row}, column {col} ({channel})"
 
 #: src/camera_preflight/messages.py:25
 msgid "Suspect"
 msgstr "Suspect"
 
+#: src/camera_preflight/messages.py:233
+msgid "The RAW file is damaged or unreadable"
+msgstr "The RAW file is damaged or unreadable"
+
+#: src/camera_preflight/messages.py:232
+msgid "This file format cannot be read; convert to DNG"
+msgstr "This file format cannot be read; convert to DNG"
+
+#: src/camera_preflight/messages.py:103
+msgid "Timestamps lack fractions of a second"
+msgstr "Timestamps lack fractions of a second"
+
+#: src/camera_preflight/messages.py:154
+#, python-brace-format
+msgid "Uneven rhythm (variation {cv})"
+msgstr "Uneven rhythm (variation {cv})"
+
+#: src/camera_preflight/messages.py:173
+#, python-brace-format
+msgid "Unstable focus at: {points}"
+msgstr "Unstable focus at: {points}"
+
 #: src/camera_preflight/messages.py:40
 msgid "Upload"
 msgstr "Upload"
+
+#: src/camera_preflight/messages.py:99
+msgid "Value not readable"
+msgstr "Value not readable"
+
+#: src/camera_preflight/messages.py:230
+#, python-brace-format
+msgid "Very few shots in {years} years"
+msgstr "Very few shots in {years} years"
+
+#: src/camera_preflight/messages.py:90
+msgid "Viewfinder view"
+msgstr "Viewfinder view"
+
+#: src/camera_preflight/messages.py:165
+#, python-brace-format
+msgid "{count} AF points ({tier})"
+msgstr "{count} AF points ({tier})"
+
+#: src/camera_preflight/messages.py:120
+#, python-brace-format
+msgid "{count} card slot(s) work"
+msgstr "{count} card slot(s) work"
+
+#: src/camera_preflight/messages.py:133
+#, python-brace-format
+msgid "{count} defective pixels, within allowance"
+msgstr "{count} defective pixels, within allowance"
+
+#: src/camera_preflight/messages.py:182
+#, python-brace-format
+msgid "{count} focus position(s) not reached"
+msgstr "{count} focus position(s) not reached"
+
+#: src/camera_preflight/messages.py:129
+#, python-brace-format
+msgid "{count} hot pixels, above allowance"
+msgstr "{count} hot pixels, above allowance"
+
+#: src/camera_preflight/messages.py:127
+#, python-brace-format
+msgid "{count} hot pixels, within allowance"
+msgstr "{count} hot pixels, within allowance"
+
+#: src/camera_preflight/messages.py:128
+#, python-brace-format
+msgid "{count} hot pixels, {clusters} cluster(s)"
+msgstr "{count} hot pixels, {clusters} cluster(s)"
+
+#: src/camera_preflight/messages.py:137
+#, python-brace-format
+msgid "{count} marks on the sensor"
+msgstr "{count} marks on the sensor"
+
+#: src/camera_preflight/messages.py:224
+#, python-brace-format
+msgid "{count} photo(s) saved by editing software"
+msgstr "{count} photo(s) saved by editing software"
+
+#: src/camera_preflight/messages.py:167
+#, python-brace-format
+msgid "{count} point(s) fail to focus, first: {point}"
+msgstr "{count} point(s) fail to focus, first: {point}"
+
+#: src/camera_preflight/messages.py:171
+#, python-brace-format
+msgid "{count} points are sharp"
+msgstr "{count} points are sharp"
+
+#: src/camera_preflight/messages.py:175
+#, python-brace-format
+msgid "{count} priority points are fine"
+msgstr "{count} priority points are fine"
+
+#: src/camera_preflight/messages.py:116
+#, python-brace-format
+msgid "{count} shots, above rated life ({share})"
+msgstr "{count} shots, above rated life ({share})"
+
+#: src/camera_preflight/messages.py:115 src/camera_preflight/messages.py:117
+#, python-brace-format
+msgid "{count} shots, {share} of rated life"
+msgstr "{count} shots, {share} of rated life"
+
+#: src/camera_preflight/messages.py:177
+#, python-brace-format
+msgid "{count} soft region(s)"
+msgstr "{count} soft region(s)"
+
+#: src/camera_preflight/messages.py:130
+#, python-brace-format
+msgid "{count} stuck or dead pixels, within allowance"
+msgstr "{count} stuck or dead pixels, within allowance"
+
+#: src/camera_preflight/messages.py:151
+#, python-brace-format
+msgid "{fps} shots/s, variation {cv}"
+msgstr "{fps} shots/s, variation {cv}"
+
+#: src/camera_preflight/messages.py:155
+#, python-brace-format
+msgid "{fps} shots/s; rated {rated}"
+msgstr "{fps} shots/s; rated {rated}"
+
+#: src/camera_preflight/messages.py:134
+#, python-brace-format
+msgid "{hot} hot, {stuck} stuck, {dead} dead"
+msgstr "{hot} hot, {stuck} stuck, {dead} dead"
+
+#: src/camera_preflight/messages.py:109
+#, python-brace-format
+msgid "{model}, serial ending {serial}"
+msgstr "{model}, serial ending {serial}"
+
+#: src/camera_preflight/messages.py:191
+#, python-brace-format
+msgid "{mode}: {ev} EV"
+msgstr "{mode}: {ev} EV"
+
+#: src/camera_preflight/messages.py:131
+#, python-brace-format
+msgid "{stuck} stuck, {dead} dead pixels"
+msgstr "{stuck} stuck, {dead} dead pixels"
+
+#: src/camera_preflight/messages.py:176
+#, python-brace-format
+msgid "{weak} of {regions} regions are soft"
+msgstr "{weak} of {regions} regions are soft"
 

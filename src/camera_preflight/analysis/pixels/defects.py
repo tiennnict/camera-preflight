@@ -11,7 +11,13 @@ import numpy as np
 from numpy.typing import NDArray
 from scipy import ndimage
 
-from ..common import label_components, local_residual, mad_sigma, plane_to_mosaic, split_planes
+from ..common import (
+    label_components,
+    local_residual,
+    plane_to_mosaic,
+    robust_sigma,
+    split_planes,
+)
 
 Coord = tuple[int, int]
 
@@ -41,7 +47,7 @@ def bright_outliers(
     found: dict[Coord, tuple[str, float]] = {}
     for name, plane in split_planes(array, pattern).items():
         residual = local_residual(plane)
-        sigma = max(mad_sigma(residual), 1e-3)
+        sigma = max(robust_sigma(residual), 1e-3)
         mask = (residual > k_sigma * sigma) & (residual > min_excess_dn)
         for r, c in np.argwhere(mask):
             mr, mc = plane_to_mosaic(name, pattern, int(r), int(c))

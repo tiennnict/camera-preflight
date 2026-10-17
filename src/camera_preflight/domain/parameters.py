@@ -41,7 +41,12 @@ DEFAULT_1 = ParameterSet(
         # B1 to B3 pixel defects
         _p("b1.k_sigma", 6.0, _G, "outlier threshold in robust sigmas"),
         _p("b1.min_excess_dn", 8.0, _G, "minimum excess over neighbours, DN"),
-        _p("b1.repeat_min", 2, _G, "hot pixel must repeat in this many frames of a set"),
+        _p(
+            "b1.repeat_min",
+            3,
+            _I,
+            "hot pixel must repeat in this many frames of a set (simulation: 2 of 3 let random single-electron events through)",
+        ),
         _p("b1.allowance_per_mp", 5.0, _G, "isolated hot pixels tolerated per megapixel"),
         _p("b1.cluster_distance_px", 2, _I, "defects closer than this are one cluster"),
         _p("b2.rel_dev", 0.25, _G, "flat frame deviation from neighbours, relative"),
@@ -65,7 +70,6 @@ DEFAULT_1 = ParameterSet(
         _p("c1.cv_max", 0.25, _G, "variation of burst intervals"),
         _p("c1.min_frames", 6, _G, "frames needed for burst rhythm"),
         _p("c1.fps_ratio_min", 0.8, _G, "measured over rated burst speed"),
-        _p("c1.min_resolution_s", 0.01, _I, "timestamp resolution needed"),
         _p("c2.gradient_max", 0.02, _G, "curtain gradient along the travel axis, relative"),
         _p("c3.spread_ev_max", 0.1, _G, "spread of mean level over identical frames"),
         # D autofocus
@@ -74,6 +78,7 @@ DEFAULT_1 = ParameterSet(
         _p("af.fail_attempts", 2, _G, "failed attempts that make a point suspect"),
         _p("af.soft_ratio", 0.5, _G, "sharpness over reference sharpness"),
         _p("af.repeat_cv", 0.3, _I, "spread of sharpness across repeats"),
+        _p("d7.slow_ratio", 2.0, _I, "AF response over the model reference"),
         # E metering
         _p("e1.spread_ev", 1 / 3, _G, "exposure spread across identical scenes"),
         _p("e2.mode_dev_ev", 0.5, _I, "difference between metering modes"),

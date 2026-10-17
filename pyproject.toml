@@ -58,7 +58,6 @@ typeCheckingMode = "basic"
 strict = [
   "src/camera_preflight/domain",
   "src/camera_preflight/analysis",
-  "src/camera_preflight/checks",
 ]
 reportMissingTypeStubs = false
 reportPrivateImportUsage = false

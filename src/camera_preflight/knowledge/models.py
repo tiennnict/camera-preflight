@@ -35,6 +35,7 @@ class AfInfo(_Strict):
     point_count: int | None = Field(default=None, ge=0)
     layout_ref: str | None = None
     metadata_decoder: Literal["verified", "unverified"] = "unverified"
+    max_response_s: SourcedValue | None = None
 
 
 class FirmwareInfo(_Strict):

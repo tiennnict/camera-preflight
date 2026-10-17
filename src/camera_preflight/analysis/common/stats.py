@@ -21,6 +21,20 @@ def mad_sigma(values: NDArray[np.floating]) -> float:
     return float(np.median(np.abs(arr - med)) * _MAD_TO_SIGMA)
 
 
+def robust_sigma(values: NDArray[np.floating]) -> float:
+    """Spread estimate that stays sensible when most values are identical.
+
+    The median absolute deviation collapses to zero when more than half of the values sit at
+    the same level (a dark frame with rare single-electron events). Half the 16th to 84th
+    percentile range is used as a floor, so the threshold never falls below the event size.
+    """
+    arr = np.asarray(values, dtype=np.float64).ravel()
+    if arr.size == 0:
+        return 0.0
+    p16, p84 = np.percentile(arr, [16, 84])
+    return max(mad_sigma(arr), 0.5 * float(p84 - p16))
+
+
 def local_residual(plane: NDArray[np.float32], size: int = 5) -> NDArray[np.float32]:
     """Plane minus its local median (same-colour neighbours)."""
     med = np.asarray(ndimage.median_filter(plane, size=size, mode="reflect"))
