@@ -33,6 +33,10 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-25 | Tethered mode automates as much as possible: set camera settings and exposure parameters, release the shutter, download the files and analyse them. When an automatic command fails, the step falls back to guided manual instructions | 2026-10-17 | Session |
 | D-26 | The wizard always contains every step. In upload mode, the capture control of each shooting step is replaced by an upload button | 2026-10-17 | Session |
 | D-27 | The report delivered to the user is an HTML file | 2026-10-17 | Session |
+| D-28 | No Quick, Standard or Full profiles. The wizard always shows every step that applies to the camera; the user may skip any step, which is then reported as Not tested (skipped by user). The planned number of shots is shown at the start | 2026-10-17 | Session |
+| D-29 | Upload mode accepts images per step only; there is no bulk upload with automatic assignment to steps | 2026-10-17 | Session |
+| D-30 | No remote pre-check pack and no printable field kit. Each shooting step shows the required shooting parameters, whoever takes the shots. On upload, the app checks that the parameters (aperture, exposure time, ISO, file type and so on) are sufficient for the test, and rejects frames that are not, with the reason (for example exposure too short) | 2026-10-17 | Session |
+| D-31 | Vendor SDK integration is fully designed and implemented. The test environment downloads the SDKs to test against them. Release builds contain no SDK; the user is told where to download it and either places it in the default folder or points the app to another folder | 2026-10-17 | Session |
 | D-18 | The wizard shows 2D animations that illustrate the physical actions the user must perform (for example plugging a cable, powering on, mounting a lens, fitting a body cap, pressing or holding a button, tilting the camera to inspect a part) | 2026-10-16 | Session |
 | D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
 
@@ -43,27 +47,27 @@ Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVI
 | ID | Decision | Detail | Status |
 | --- | --- | --- | --- |
 | R-01 | AF tier 1 = focus not acquired or shutter not released within a timeout | DESIGN-REVIEW §3 | Proposed |
-| R-02 | Quick profile runs entirely by file import; v0.1 has no USB dependency | DESIGN-REVIEW §3 | Proposed |
+| R-02 | Quick profile runs entirely by file import; v0.1 has no USB dependency | DESIGN-REVIEW §3 | Superseded by D-23, D-28 (2026-10-17) |
 | R-03 | Windows USB spike evaluates WPD first, then libusb, then .NET helper | DESIGN-REVIEW §3 | Proposed |
-| R-04 | Standard profile: E1, E5, D5 by default; rest of E and full AF map in Full | DESIGN-REVIEW §3 | Proposed |
+| R-04 | Standard profile: E1, E5, D5 by default; rest of E and full AF map in Full | DESIGN-REVIEW §3 | Superseded by D-28 (2026-10-17) |
 | R-05 | C3 at maximum aperture; C2 relative to a slow reference speed | DESIGN-REVIEW §3 | Proposed |
 | R-06 | B4 without lens rotation; sensor dust identified by f/22 versus f/8 | DESIGN-REVIEW §3 | Proposed |
 | R-07 | Two-tier knowledge base (derived and curated); missing data never blocks a test | DESIGN-REVIEW §3 | Proposed |
 | R-08 | Analysis on CFA arrays; RAW decoding isolated; DNG fallback | DESIGN-REVIEW §3 | Proposed |
-| R-09 | JSON canonical report; self-contained HTML; SHA-256 evidence manifest | DESIGN-REVIEW §3 | Proposed |
-| R-10 | Shot and time budget planner over the three presets | DESIGN-REVIEW §3 | Proposed |
-| R-11 | Vendor SDK adapters outside the core repo until SDK terms are read | DESIGN-REVIEW §3 | Proposed |
+| R-09 | JSON canonical report; self-contained HTML; SHA-256 evidence manifest | DESIGN-REVIEW §3 | Modified by D-27: HTML is the user deliverable; JSON stays internal to the session (2026-10-17) |
+| R-10 | Shot and time budget planner over the three presets | DESIGN-REVIEW §3 | Superseded by D-28 (2026-10-17) |
+| R-11 | Vendor SDK adapters outside the core repo until SDK terms are read | DESIGN-REVIEW §3 | Superseded by D-31 (2026-10-17) |
 | R-12 | Package layout `src/camera_preflight/`; enforced layer dependencies | ARCHITECTURE §6 | Proposed |
 | R-13 | No OpenCV in early milestones | ARCHITECTURE §2.2 | Proposed |
 | R-14 | Single frame acceptance gate | TEST-CATALOGUE §1 | Proposed |
 | R-15 | Record sensor temperature; robust per-ISO statistics | DESIGN-REVIEW §3 | Proposed |
-| N-01 | Remote pre-check pack | DESIGN-REVIEW §4 | Proposed |
+| N-01 | Remote pre-check pack | DESIGN-REVIEW §4 | Rejected by D-30 (2026-10-17) |
 | N-02 | Provenance and consistency checks | DESIGN-REVIEW §4 | Proposed |
 | N-03 | Shutter count plausibility cross-check | DESIGN-REVIEW §4 | Proposed |
-| N-04 | Automatic frame classification on import | DESIGN-REVIEW §4 | Proposed |
+| N-04 | Automatic frame classification on import | DESIGN-REVIEW §4 | Superseded by D-29 (2026-10-17) |
 | N-05 | Microphone-assisted burst rhythm | DESIGN-REVIEW §4 | Proposed |
 | N-06 | Baseline and compare | DESIGN-REVIEW §4 | Proposed |
-| N-07 | Field kit export | DESIGN-REVIEW §4 | Proposed |
+| N-07 | Field kit export | DESIGN-REVIEW §4 | Rejected by D-30 (2026-10-17) |
 | N-08 | Bilingual UI (English, Vietnamese) | DESIGN-REVIEW §4 | Confirmed as D-15 (2026-10-16) |
 | N-09 | Demo mode with synthetic session | DESIGN-REVIEW §4 | Proposed |
 | N-10 | Shareable single-file report with hash manifest and re-verification | DESIGN-REVIEW §4 | Proposed |
