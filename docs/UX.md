@@ -1,281 +1,156 @@
 # UI/UX Design
 
-Status: draft for maintainer review. Requirements referenced as `FR-xx`/`NFR-xx` are in [SRS.md](SRS.md). Wireframes are low fidelity; layout and wording will change after usability testing (section 10).
+Status: revised 2026-10-17 after maintainer decisions D-23 to D-38 ([DECISIONS.md](DECISIONS.md)). Requirements referenced as `FR-xx`/`NFR-xx` are in [SRS.md](SRS.md). The visual mockup is a separate Design artifact; this document is the reference for behaviour.
 
 ## 1. Design goals
 
-1. **Honest first**: the user must never read a result as stronger than the evidence. Level, confidence and path are always visible together.
-2. **One action per screen**: each wizard step asks the user to do one thing and tells them what they should see.
-3. **Cost visible before it is spent**: shots, minutes and shutter actuations are shown before shooting and counted during it.
-4. **Recoverable**: any step can be re-run; leaving the app never loses completed steps.
-5. **Works under pressure**: the Quick flow must be completable on site in 20 to 30 minutes `[Guess]`, with or without a laptop present.
+1. **Diagnostics tool, not a questionnaire** (D-34): the app does everything it can by itself, in this order: automatic checks, then semi-automatic checks, then manual checks.
+2. **Honest results**: level, confidence and execution path are always shown together. No Pass for a check that did not run.
+3. **The PC does every camera action it can over USB** (D-25, D-34): settings, exposure parameters, shutter release, file download. The user only does what a cable cannot: fit a cap, aim the camera, swap a lens, look and judge.
+4. **One action per screen** when the user has to act, with an animation (D-18) and, for visual checks, real reference photos (D-33).
+5. **No estimates, no counters, no history** (D-32, D-36, D-37): the app shows no time estimate, no shot estimate, no list of past sessions, and does not resume interrupted sessions.
 
-## 2. Personas and context of use
+## 2. Modes and users
 
-| Persona | Context | Goal | Constraints | Primary flow |
-| --- | --- | --- | --- | --- |
-| P1 On-site buyer (U1) | Meets a seller in a cafe or shop | Spot serious faults fast | Little time; maybe no laptop on site; social pressure | Field kit, then Quick by file import |
-| P2 Remote buyer (U2) | Buys from an online listing | Get evidence before paying or travelling | Depends on seller's cooperation; cannot see the body | Remote pack, then import |
-| P3 Home tester (U3) | Has the camera at home, return window open | Thorough check | Has time, tripod, second lens | Standard or Full, tethered |
-| P4 Contributor (U4) | Enthusiast or developer | Add model data | Needs schema and validation | CLI and docs (no GUI flow) |
+Two modes only (D-23):
 
-## 3. Key journeys
+| Mode | When | What the app does |
+| --- | --- | --- |
+| **Connected** | A camera is detected on USB | Controls the camera, shoots, downloads, analyses; falls back to guided manual steps when a command fails (D-25) |
+| **Upload** | No camera detected, or the user chooses it | Every shooting step shows the exact parameters to use and an upload button; uploaded files are validated against the step's requirements and analysed (D-26, D-29, D-30) |
 
-### J1 On-site Quick (P1)
+The mode is picked automatically: the app watches for a camera and its driver (FR-CON-01). The user can switch to upload mode at any time.
 
-1. At home: open app, New session, choose **On site**, pick the model if known, choose Quick, export the field kit (print or save to phone).
-2. On site: follow the printed script on the camera (about 23 shots), tick the reduced F checklist.
-3. Import the card (on site with a laptop, or later at home). The app classifies frames; user confirms.
-4. Results screen: Blockers first, then Suspect items with confidence.
-5. Export report; optionally show it to the seller.
+Users: an individual checking a used camera, at a seller's place or at home. Remote checks are possible in upload mode (the seller shoots with the shown parameters and sends the files), without a dedicated remote feature (D-30).
 
-### J2 Remote pre-check (P2)
+## 3. Wizard model
 
-1. New session, choose **Remote**, choose the model, the app proposes a reduced plan suitable for a seller (no tripod, no AF chart).
-2. Export remote pack (printable page and short text for messaging).
-3. Receive files; import. Provenance checks run first; failed frames are excluded with reasons.
-4. Results are capped at Medium confidence and labelled "seller-supplied".
+The wizard always contains every check that applies to the detected body (D-26, D-28). There are no profiles. Any check can be skipped by the user; it is then reported as Not tested, reason "skipped by user".
 
-### J3 Home Standard or Full (P3)
+### 3.1 Phases
 
-1. Connect camera; the app identifies it and shows the required USB mode.
-2. Plan: choose Standard, adjust budget, review actuations share.
-3. Preparation checklist; each step runs tethered where possible, otherwise guided.
-4. Results, detail views, report. Optional: save as baseline for a later compare.
+| Phase | Content | User involvement | Advance |
+| --- | --- | --- | --- |
+| 0 Start | First-run SDK setup (once), camera detection, optional printed serial | Minimal | Manual |
+| 1 Blocker check (D-35) | About 30 seconds of yes/no questions on severe visible defects, with reference photos | Look and answer | Manual; a Blocker offers to stop |
+| 2 Automatic | Checks the app can run alone | None | Runs, marks each result and advances by itself |
+| 3 Semi-automatic | Checks that need the user to change something physical | One physical action per check group | **Detected**: a helper watches for the action and starts the check by itself. **Button**: where the action cannot be detected, the user presses "Done" |
+| 4 Manual | Visual and tactile checks the app cannot measure | Look, listen, answer, with reference photos | Manual |
+| 5 Results | Summary, details, HTML report | Read, save | Manual |
 
-### J4 Re-check (P3, later)
+### 3.2 Behaviour of automatic checks
 
-Open a past session, choose **Re-run and compare**; the same plan runs; the report shows differences.
+- A list of checks with live status: waiting, running, Pass, Suspect, Fail, Not tested.
+- Each check runs, gets its result, and the next starts without user input.
+- When a command fails (for example a setting cannot be written over USB), the app tries once more, then turns that single item into a guided manual step (animation and instruction), and continues automatically after the user confirms.
+- The user can pause the run or skip a check at any time.
+
+### 3.3 Helpers for semi-automatic checks
+
+A helper watches live view, camera properties or test frames and starts the check when the condition is met. If the condition is not met within a time limit, the screen offers the button fallback.
+
+| Helper | Detects | Signal | Used by |
+| --- | --- | --- | --- |
+| H1 Dark sensor | Body cap fitted, viewfinder covered | Live view or test frame mean near black level | B1 |
+| H2 Flat field | Camera aimed at an even bright surface, image defocused | Live view low spatial variance, histogram in range | B2, B4, B5, C2, C3, C4, E1, E2, E4 to E7 |
+| H3 Chart in view | AF chart visible, square to the camera | Chart pattern found in live view | D, E3 |
+| H4 Steady camera | Camera on a tripod | Live view frame-to-frame motion below a limit | D, E3 |
+| H5 Lens changed | A different lens is mounted | Lens ID or name property changes | D10, E7 |
+| H6 Focus mode | AF/MF switch position | Focus mode property, where readable `[Unverified]` | B2, D |
+| H7 Card present | Card inserted in a slot | Storage info changes | A5 |
+
+`[Unverified]` Live view and property access differ per brand and backend (V-04, V-13); a helper that cannot run on a body falls back to the button.
+
+Grouping: all checks that share a set-up run in one go after the helper fires. Example: once H2 detects a flat field, the app runs B2, B4, C2, C3, C4, E1, E2, E5, E6 and E7 in sequence, changing settings itself between them.
+
+### 3.4 Upload mode
+
+- Every shooting step shows the parameters to use (mode, aperture, shutter speed, ISO, file type, noise reduction, focus) and an upload button (D-26, D-29).
+- On upload, the app checks the files against the step's requirements and gives a clear reason for any rejection, for example "exposure 1/60 s is too short for this check; use 30 s" (D-30).
+- Accepted frames are analysed immediately and the step is marked.
+- Steps with no shooting (blocker check, manual checks) are identical in both modes.
 
 ## 4. Information architecture
 
 ```mermaid
 flowchart LR
-  Home --> NewSession
-  Home --> OpenSession
-  Home --> Demo
-  Home --> Settings
-  NewSession --> Identity
-  Identity --> Plan
-  Plan --> Prep[Preparation]
-  Plan --> Kit[Field kit / Remote pack export]
-  Prep --> Steps[Step runner]
-  Steps --> Import[Import and classify]
-  Import --> Steps
-  Steps --> Manual[Manual check item]
-  Manual --> Steps
-  Steps --> Results
+  First[First-run SDK setup] --> Home
+  Home --> Detect[Detect camera]
+  Detect -->|camera found| Blocker[Blocker check]
+  Detect -->|no camera| Blocker
+  Blocker --> Auto[Automatic checks]
+  Auto --> Semi[Semi-automatic checks]
+  Semi --> Manual[Manual checks]
+  Manual --> Results
   Results --> Detail[Check detail]
-  Results --> Report[Report and export]
-  OpenSession --> Results
+  Results --> Report[HTML report]
+  Home --> Settings
 ```
 
-Persistent shell: left sidebar with the step list (status icon per step), main area, bottom bar with Back, Next, and the shot counter.
+Persistent shell: top bar (app, camera, mode, language, settings), left list of phases and checks with live status, main area, bottom bar (Back, Skip, Next or auto-advance notice). No shot counter, no time estimate.
 
-## 5. Screen specifications
+## 5. Screens
 
-### S0 Home
-
-```
-+------------------------------------------------------------------+
-| camera-preflight                                   [Settings]    |
-|                                                                  |
-|  [ New check ]      [ Open previous ]      [ Try demo ]          |
-|                                                                  |
-|  Recent sessions                                                 |
-|  - 2026-10-12  <model>  ...4821   Quick     2 Suspect   [Open]   |
-|  - 2026-10-03  <model>  ...0193   Standard  0 Suspect   [Open]   |
-|                                                                  |
-|  This app suggests what to check further. It does not tell you   |
-|  whether to buy.                                                 |
-+------------------------------------------------------------------+
-```
-
-### S1 New check: where are you?
-
-Four cards, one choice:
-
-| Card | Description shown | Leads to |
+| ID | Screen | Content |
 | --- | --- | --- |
-| On site, short time | Shoot from a printed script, import later | Quick, file import, field kit offered |
-| At home, camera connected | The app controls the camera over USB where possible | Detection, Standard default |
-| Remote, seller sends files | Send a shooting script to the seller | Remote pack |
-| I already have the files | Analyse a folder | Import directly |
+| S0 | First-run SDK setup | Per brand: what the SDK adds (for example remote AF point selection, focus confirmation, newer bodies), where to download it, default folder, "Choose folder", status. "Continue without SDK" lists which checks will be skipped (D-24) |
+| S1 | Home | Start check; Settings. No history (D-32) |
+| S2 | Detect camera | Live detection status: driver, USB mode hint, camera identified, backend chosen (SDK or standard protocol). Optional printed serial. Switch to upload mode |
+| S3 | Blocker check | 3 to 4 yes/no questions, each with an animation and reference photos (D-35) |
+| S4 | Automatic run | Check list with live status, current check detail, auto-advance; fallback item when a command fails |
+| S5 | Semi-automatic: waiting for action | Animation of the action, live helper indicator ("Waiting: body cap not detected yet"), button fallback after a time limit |
+| S6 | Semi-automatic: running | Group of checks running after the helper fired, with live status |
+| S7 | Semi-automatic: button variant | Instruction, animation, "Done" button (for actions that cannot be detected) |
+| S8 | Upload step | Required parameters, upload button, validation results with reasons |
+| S9 | Manual check | Instruction, animation, 4 reference photos with credit, Pass/Suspect/Fail/Not tested, notes, photo attachment |
+| S10 | Results | Counts per level, Blockers first, Suspect list with confidence and severity, Not tested with reasons |
+| S11 | Check detail | Explanation, evidence (pixel map, dust map, AF map, charts), frames used, method and thresholds |
+| S12 | Report | Save the HTML report (D-27); restore camera settings changed by the app |
+| S13 | Settings | Language, theme, reduced motion, SDK folders (same content as S0), sessions folder |
+| S14 | Connection lost | What happened, nothing lost in the running session, reconnect or switch to upload mode |
 
-### S2 Camera identity
+## 6. Animations (D-18 to D-21)
 
-```
-+---------------------------+--------------------------------------+
-| Steps                     | Camera                               |
-| > Camera                  | Detected:  <brand> <model>  (USB)    |
-|   Plan                    | Firmware:  1.2.0                     |
-|   Preparation             | Serial (read):  ****4821             |
-|   ...                     | Serial printed on body: [__________] |
-|                           |   (optional; checks frames are from  |
-|                           |    this body)                        |
-|                           | USB mode: set "Remote Shooting"      |
-|                           |   [How to]                           |
-|                           | Knowledge base: curated entry found  |
-+---------------------------+--------------------------------------+
-| [Back]                                      Shots 0      [Next]  |
-+------------------------------------------------------------------+
-```
+- Every step with a physical action shows a looping 2D animation (FR-GUI-06).
+- Two generic body types, DSLR and mirrorless; no brand shapes or logos (D-20).
+- The control involved is highlighted; its name comes from a translatable label, never from text in the drawing.
+- Pause and replay; a static key frame when the OS requests reduced motion.
+- Camera menu settings are text only (D-21). In connected mode the app sets them itself; text appears only in the fallback.
 
-When no camera is connected, the model is selected from a searchable list or read from the first imported file.
+Catalogue: plug USB cable; power on; turn camera to read serial; tilt camera to inspect mount; remove and mount lens; fit body cap; cover viewfinder; switch AF/MF; turn focus ring; turn command dial; half-press shutter; press and hold shutter; move AF joystick; open card door and remove card; insert card into reader; set up tripod and chart; aim at a flat bright surface; look through viewfinder and turn diopter; check lens mount play; raise pop-up flash; show solid-colour images; press each button; move frame across spot meter; mirrorless body sample.
 
-### S3 Plan
+## 7. Reference photos (D-33, D-38)
 
-```
-+---------------------------+--------------------------------------+
-| Steps                     | Plan   ( Quick ) ( Standard ) ( Full )|
-|                           | Budget: shots [ 30 ]  minutes [ 25 ] |
-|                           |                                      |
-|                           | [x] A1 Identification     0 sh  1 min|
-|                           | [x] A3 Shutter count      1 sh  1 min|
-|                           | [x] F  Physical (short)   0 sh  5 min|
-|                           | [x] B1 Dark frames        6 sh  4 min|
-|                           | [x] B2 Flat frames        3 sh  3 min|
-|                           | [x] B4 Dust               3 sh  2 min|
-|                           | [x] C1 Burst              10 sh 1 min|
-|                           | [ ] D5 AF (needs tripod) 15 sh 10 min|
-|                           |                                      |
-|                           | Total 23 shots, about 17 min         |
-|                           | = 0.01% of rated shutter life        |
-|                           | Dropped for budget: none             |
-|                           | [Export field kit]                   |
-+---------------------------+--------------------------------------+
-```
+- Manual and blocker checks show up to 4 real photos of the defect, beside the animation.
+- Each photo shows its credit (author, licence, source) on hover or under the photo, and the full list is in the About screen.
+- Sources: openly licensed only; candidates and status in [REFERENCE-IMAGES.md](REFERENCE-IMAGES.md). Missing photos are filled by the maintainer.
 
-Rules: deselected tests show "will be reported as Not tested (skipped by you)". Planner suggestions show why a test was dropped (FR-PLN-04).
-
-### S4 Preparation
-
-Checklist of equipment and camera settings for the selected plan (FR-GUI-04). Items can be ticked; unticked items do not block, but steps that need them warn at start.
-
-### S5 Step runner
-
-```
-+---------------------------+--------------------------------------+
-| Steps                     | B1 Dark frames  (2 of 6 configs)     |
-| v Camera                  |                                      |
-| v Plan                    | 1. Put the body cap on.              |
-| v Preparation             | 2. Set ISO 1600, 1 second, RAW.      |
-| > B1 Dark frames   2/6    | 3. Turn long-exposure NR off.        |
-|   B2 Flat frames          |   [illustration]                     |
-|   B4 Dust                 |                                      |
-|   C1 Burst                | [ Capture 3 frames ]  or [ Import ]  |
-|   F  Physical             |                                      |
-|   Results                 | Frames                               |
-|                           |  #1 accepted                         |
-|                           |  #2 accepted                         |
-|                           |  #3 rejected: NR is on (G1) [Retake] |
-+---------------------------+--------------------------------------+
-| [Back]   [Skip test]                  Shots 8 / 23      [Next]   |
-+------------------------------------------------------------------+
-```
-
-Behaviour:
-
-- Tethered: "Capture" applies settings and shoots; settings that cannot be set remotely are shown as instructions.
-- File import: "Import" opens the import screen filtered to this step.
-- Rejected frames show the gate rule in plain words and a Retake action; retakes count towards shots.
-- Analysis runs in the background; the user can continue to the next step.
-
-### S5b Import and classify
-
-Pre-selection follows the session's import window (FR-ACQ-02). In an "I already have the files" session nothing is pre-selected; the screen opens on a list grouped by capture date where the user ticks dates or files.
-
-```
-+------------------------------------------------------------------+
-| Import 31 files from E:\DCIM\100CANON                            |
-| Not selected: 214 files taken before this session [Show / add]   |
-|                                                                  |
-| Dark (6)   [thumb][thumb][thumb][thumb][thumb][thumb] -> B1      |
-| Flat (6)   [thumb][thumb][thumb] -> B2  [thumb][thumb][thumb]->B4|
-| Burst (10) [thumb]...                                -> C1        |
-| Other (9)  [thumb]...                                -> not used |
-|                                                                  |
-| Provenance: all frames from serial ****4821                [ok]  |
-| [Change assignment]                         [Cancel] [Confirm]   |
-+------------------------------------------------------------------+
-```
-
-### S6 Manual check item (group F)
-
-One item per screen: instruction, optional reference image, four buttons (Pass, Suspect, Fail, Not tested), notes field, "Attach photo". Keyboard shortcuts 1 to 4.
-
-### S7 Results overview
-
-```
-+------------------------------------------------------------------+
-| <model>  ****4821   Quick   2026-10-16                           |
-| Pass 6   Suspect 2   Fail 0   Not tested 3                       |
-|                                                                  |
-| Blockers: none                                                   |
-|                                                                  |
-| Suspect                                                          |
-|  [!] B1 Hot pixels: 3 isolated, 1 cluster   High conf.  Medium   |
-|  [!] C1 Burst: 1 stall at frame 7           Low conf.   Low      |
-|                                                                  |
-| Pass        A1, A3, B2, B4, F (7 items)                          |
-| Not tested  D5 (skipped by you), C5 (needs instrument), A5 (USB) |
-|                                                                  |
-| [Report and export]                                              |
-+------------------------------------------------------------------+
-```
-
-Each row opens S8. Wording for Suspect: "worth checking further; not proven".
-
-### S8 Check detail
-
-Tabs: **Finding** (plain explanation, level, confidence, severity, path), **Evidence** (zoomable pixel map, dust map, AF point map, charts), **Frames** (accepted and rejected with reasons), **Method** (parameters, thresholds with evidence label, e.g. "estimated threshold, not yet calibrated").
-
-AF point map: points drawn on the frame outline, each with icon and colour by level; hovering shows per-attempt data.
-
-### S9 Report and export
-
-Options: Save HTML report; Save JSON; Export session as zip; Save as baseline; Field kit; Remote pack. Shows the manifest hash with a "What is this?" explanation: it links the report to the original files, so someone with those files can re-check the results; it does not prove the report was not edited. "Export session as zip" offers to leave out original frames (FR-SES-07).
-
-### S10 Settings
-
-Language; theme; sessions folder; ExifTool path (if not bundled); SDK adapters (path, status, licence reminder); advanced: parameter set (read only in v0.1).
-
-## 5a. Physical-action animations (D-18 to D-21)
-
-- Every step with a physical action shows a looping 2D animation above the instructions (FR-GUI-06).
-- Two generic body types, DSLR and mirrorless, chosen from the detected or selected model; no brand shapes or logos (D-20).
-- The control involved is highlighted; its name comes from a translatable label, never from text inside the drawing.
-- Controls: pause, replay; static key frame when the OS requests reduced motion.
-- Menu settings are text only (D-21).
-
-Animation catalogue (reused across steps): plug USB cable; power on; remove and mount lens; fit body cap; cover viewfinder; switch AF/MF; turn focus ring; turn command dial; half-press shutter; press and hold shutter; move AF joystick; turn camera to read serial; tilt camera to inspect mount; open card door and remove card; insert card into reader; set up tripod and chart; aim at a flat bright surface; look through viewfinder and turn diopter; check lens mount play; raise pop-up flash.
-
-## 6. Interaction rules
+## 8. Interaction rules
 
 | Rule | Detail |
 | --- | --- |
 | Result vocabulary | Pass, Suspect, Fail, Not tested; never "OK", "Bad", "Good to buy" |
-| Never colour alone | Each level has an icon and text: Pass (check), Suspect (triangle), Fail (cross), Not tested (dash) (NFR-15) |
-| Confidence | Text "High / Medium / Low confidence" with a three-segment bar |
-| Path | Badge: Automatic, Semi-automatic, From files, Manual |
-| Shot counter | Always in the bottom bar: used / planned; turns amber above plan |
-| Blocker | Modal after the phase that found it: "We recommend stopping here" with Stop and report / Continue |
-| Skip | Any test can be skipped; it becomes Not tested with reason |
-| Background work | Progress per step in the sidebar; cancel available; app never freezes (NFR-04) |
-| Restore settings | At session end, offer to restore all camera settings changed by the app (FR-ACQ-06) |
-| Errors | Say what happened, what it means for results, and the next action; never a raw stack trace |
+| Automatic marking | Automatic and semi-automatic checks set their own result; AF and metering use Suspect with confidence, never Fail from one lens or one repetition (D-03) |
+| Never colour alone | Each level has an icon and text (NFR-15) |
+| Confidence | Text "High / Medium / Low confidence" |
+| Path | Badge: Automatic, Semi-automatic, From uploaded files, Manual |
+| Auto-advance | After an automatic result the next check starts; a short notice shows what just finished; the user can pause |
+| Helper timeout | After a time limit without detection, the button fallback appears; the helper keeps watching |
+| Blocker | After the blocker check, a Blocker offers "Stop and save report" or "Continue" |
+| Skip | Any check can be skipped; it becomes Not tested, reason "skipped by user" |
+| Restore settings | At the end of a connected session, offer to restore every camera setting the app changed |
+| Errors | Say what happened, what it means for results, and the next action |
 
-## 7. Content guidelines
+## 9. Content guidelines
 
 - Plain, neutral sentences. State what was measured and what it may mean.
 - No advice to buy, not buy, or negotiate a price.
-- Unverified thresholds are labelled in the Method tab and in the report.
-- Remote results always carry "seller-supplied frames".
+- Unverified thresholds are labelled in the method section and in the report.
 - Explain jargon on first use with a tooltip (CFA, hot pixel, EFCS).
 
-### 7.1 Core vocabulary (English and Vietnamese)
+### 9.1 Core vocabulary (English and Vietnamese)
 
-| Key | English | Vietnamese (proposed) |
+| Key | English | Vietnamese |
 | --- | --- | --- |
 | level.pass | Pass | Đạt |
 | level.suspect | Suspect | Nghi vấn |
@@ -286,35 +161,23 @@ Animation catalogue (reused across steps): plug USB cable; power on; remove and 
 | severity.high / medium / low | High / Medium / Low | Cao / Trung bình / Thấp |
 | path.automatic | Automatic | Tự động |
 | path.semi_automatic | Semi-automatic | Bán tự động |
-| path.file_import | From files | Từ tệp ảnh |
+| path.uploaded | From uploaded files | Từ ảnh tải lên |
 | path.manual | Manual | Thủ công |
-| shots | Shots | Số lần chụp |
+| mode.connected | Connected | Cắm máy |
+| mode.upload | Upload | Tải ảnh lên |
 
-## 8. Accessibility and localisation
+## 10. Accessibility and localisation
 
 - Keyboard: full wizard operable without a mouse; visible focus.
 - Contrast: WCAG 2.1 AA target for text; icons accompany colour.
-- Text scaling: layout holds at 150% system scaling `[Guess]` target.
-- Localisation (D-15): English and Vietnamese complete in every release; all strings via gettext; no text in images; dates and numbers formatted per locale; reports, field kit and remote pack in the chosen language with language-neutral IDs. Layouts must allow for Vietnamese text, which is often longer than English `[Inference]`.
+- Text scaling: layout holds at 150% system scaling `[Guess]`.
+- Localisation (D-15): English and Vietnamese complete in every release; all strings via gettext; no text in images; reports in the chosen language with language-neutral IDs. Layouts allow for longer Vietnamese text `[Inference]`.
 
-## 9. Visual style (initial tokens)
-
-| Token | Use | Note |
-| --- | --- | --- |
-| `level-pass` | Pass | Green family |
-| `level-suspect` | Suspect | Amber family |
-| `level-fail` | Fail | Red family |
-| `level-not-tested` | Not tested | Neutral grey |
-| `surface`, `surface-alt`, `text`, `text-muted`, `accent` | Shell | Light and dark variants follow OS theme |
-
-Exact colour values are chosen and contrast-checked during M2 for both themes.
-
-## 10. Usability validation
+## 11. Usability validation
 
 | When | Method | Participants | Tasks | Success measure |
 | --- | --- | --- | --- | --- |
-| M2, before v0.1 | Moderated test on the demo session | 5 people `[Guess]`, at least 2 non-technical | J1 from import to report; explain one Suspect result in their own words | All complete J1 unaided; at least 4 of 5 explain Suspect as "not proven" |
-| M3, before v0.2 | Remote pack dry run | 2 buyer and seller pairs | J2 end to end | Seller completes the script without contacting the buyer |
-| M4, before v0.3 | Tethered session on a real body | 2 people | J3 Standard | No lost steps; restore settings used |
+| Before the first release | Moderated test on the demo session | 5 people `[Guess]`, at least 2 non-technical | Upload mode end to end; explain one Suspect result | All complete unaided; at least 4 of 5 explain Suspect as "not proven" |
+| Before connected mode ships | Session on a real body | 2 people | Connected mode end to end | No step where the user had to do something the app could have done over USB |
 
-Findings are logged in `docs/ux-findings/` and fed back into this document.
+Findings go to `docs/ux-findings/`.
