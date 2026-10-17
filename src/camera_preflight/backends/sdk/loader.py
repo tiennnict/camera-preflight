@@ -31,7 +31,8 @@ LIBRARY_NAMES: dict[str, tuple[str, ...]] = {
     "canon": ("EDSDK.dll", "libEDSDK.so", "EDSDK.framework"),
     # [Sourced] Remote SDK v2.1.0 ships Module/Win/BinaryFile/ControlServiceLayer.dll
     "nikon": ("ControlServiceLayer.dll",),
-    "sony": ("Cr_Core.dll", "libCr_Core.so", "CrAdapter"),
+    # [Sourced] Camera Remote SDK v2.02.00 ships external/crsdk/Cr_Core.dll (adapters in CrAdapter/)
+    "sony": ("Cr_Core.dll", "libCr_Core.so"),
 }
 
 SDK_FEATURES: dict[str, tuple[str, ...]] = {
@@ -139,5 +140,9 @@ def _adapter(brand: str, location: SdkLocation) -> SdkAdapter:
         from .nikon import NikonAdapter
 
         return NikonAdapter(location)
+    if brand == "sony":
+        from .sony import SonyAdapter
+
+        return SonyAdapter(location)
     cls = type(f"{brand.capitalize()}Adapter", (SdkAdapter,), {"brand": brand})
     return cls(location)

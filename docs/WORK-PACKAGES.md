@@ -145,7 +145,8 @@ Status of each package on branch `feat/implementation`. "Done" means built, test
 | WP-40 | Blocked | Needs hardware: Canon and Sony bodies on Windows |
 | WP-41, WP-42, WP-45, WP-48 | Done | Host process, JSON protocol, PTP core, SDK loader and first-run setup, detection, lost-connection screen |
 | WP-43, WP-44, WP-60 | Partial | Standard PTP operations only. Brand extras (Canon shutter count property, live view, remote AF point) are `[Unverified]` and stay off until hardware logs exist |
-| WP-46, WP-47, WP-61 | Partial | Loader and feature declaration only. Bindings need the real SDK in the test environment (V-23) and are never written from memory |
+| WP-47, WP-61 | Bound, not run on a camera | `backends/sdk/sony.py` (Camera Remote SDK v2.02.00) and `backends/sdk/nikon.py` (Remote SDK v2.1.0, Control Service Layer) are written from the vendor headers and samples and tested against fake layers. Layouts worked out by hand are `[Inference]`; camera behaviour is `[Unverified]` until a hardware log exists (V-23). Not bound: AF point selection, focus drive, Sony burst |
+| WP-46 | Partial | Canon loader and feature declaration only; the Canon SDK has not been provided yet |
 | WP-49, WP-4A, WP-50 | Done | Automatic run, helpers H1 to H5 and H7 with button fallback; H6 always uses the button (V-22) |
 | WP-4B | Partial | Plausibility notes and temperature done; relies on shutter count being readable |
 | WP-4C | Open | Protocol in [hardware-log/README.md](hardware-log/README.md); needs bodies |

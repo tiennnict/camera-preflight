@@ -1,5 +1,9 @@
 *
-!.gitignore
-!README.md
-!*/
-!*/.gitkeep
+!/.gitignore
+!/README.md
+!/canon/
+!/sony/
+!/nikon/
+!/canon/.gitkeep
+!/sony/.gitkeep
+!/nikon/.gitkeep
