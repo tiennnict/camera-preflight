@@ -36,4 +36,4 @@ Status values: Open, In progress, Closed (with result and date), Dropped (with r
 - V-07: simulation showed that requiring a hot pixel in 2 of 3 frames lets random single-electron events through at high ISO; the parameter `b1.repeat_min` is now 3 `[Inference]`. Real-camera calibration is still open.
 - V-16: the release build stops until `packaging/exiftool/VERSION.json` holds a pinned version, URL and SHA-256; ExifTool terms for bundling are still to be read.
 - V-24: photo hosts were not reachable from the build environment; no reference photo is included.
-- V-23: SDK adapters load the library only; bindings wait for the SDK in the test environment.
+- V-23: the Canon adapter is bound (WP-46) against EDSDK 2.13 kept in the maintainer's local `sdk/canon`; Sony and Nikon are bound against their SDKs. No adapter has run on a camera. The test environment still cannot fetch any SDK, so the tests that read the local copy skip there.

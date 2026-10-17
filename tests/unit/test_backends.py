@@ -8,7 +8,13 @@ from fake_ptp import FakePtpCamera
 from camera_preflight.backends.client import BackendClient
 from camera_preflight.backends.protocol import CaptureSettings, Disconnected, NotSupported
 from camera_preflight.backends.ptp import PtpBackend, codec
-from camera_preflight.backends.sdk.loader import find_sdk, open_sdk_backend, sdk_present
+from camera_preflight.backends.sdk.canon import CanonAdapter
+from camera_preflight.backends.sdk.loader import (
+    SdkUnavailable,
+    find_sdk,
+    open_sdk_backend,
+    sdk_present,
+)
 
 
 def test_container_and_string_roundtrip():
@@ -84,9 +90,11 @@ def test_sdk_discovery_and_missing(tmp_path):
     loc = find_sdk("canon", tmp_path)
     assert loc and loc.library.name == "EDSDK.dll"
     adapter = open_sdk_backend("canon", tmp_path)
-    assert adapter.capabilities().sdk_features
-    with pytest.raises(NotSupported):
-        adapter.capture(CaptureSettings(), 1.0)
+    assert isinstance(adapter, CanonAdapter)
+    with pytest.raises(SdkUnavailable):  # the file is not a library
+        adapter.open()
+    with pytest.raises(SdkUnavailable):
+        open_sdk_backend("canon", tmp_path / "nowhere")
 
 
 def test_host_process_roundtrip_and_isolation(tmp_path):

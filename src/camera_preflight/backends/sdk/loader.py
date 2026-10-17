@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import ctypes
 import os
+import struct
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -62,23 +63,48 @@ class SdkLocation:
     library: Path
 
 
+def _built_for_this_cpu(path: Path) -> bool:
+    """False only for a PE file built for the other of x86 and x64 than this process.
+
+    A folder with both builds (Canon ships ``EDSDK`` and ``EDSDK_64``) must not hand a 32-bit
+    library to a 64-bit process. Anything that is not a PE file counts as a match.
+    """
+    try:
+        with path.open("rb") as f:
+            head = f.read(64)
+            if head[:2] != b"MZ" or len(head) < 64:
+                return True
+            f.seek(struct.unpack_from("<I", head, 0x3C)[0])
+            sig = f.read(6)
+    except OSError:
+        return True
+    if len(sig) < 6 or sig[:4] != b"PE\0\0":
+        return True
+    machine = struct.unpack_from("<H", sig, 4)[0]
+    want = 0x8664 if struct.calcsize("P") == 8 else 0x14C
+    return machine == want or machine not in (0x8664, 0x14C)
+
+
 def find_sdk(brand: str, folder: Path | None) -> SdkLocation | None:
-    """Locate the SDK library inside ``folder`` (searched recursively, bounded depth)."""
+    """Locate the SDK library inside ``folder`` (searched recursively, bounded depth).
+
+    The first library built for this process's CPU wins; failing that, the first one found.
+    """
     if folder is None or not folder.is_dir():
         return None
     names = {n.lower() for n in LIBRARY_NAMES.get(brand, ())}
+    found: list[Path] = []
     for root, dirs, files in os.walk(folder):
         depth = Path(root).relative_to(folder).parts
         if len(depth) > 4:
             dirs[:] = []
             continue
-        for f in files:
-            if f.lower() in names:
-                return SdkLocation(brand, folder, Path(root) / f)
-        for d in dirs:
-            if d.lower() in names:
-                return SdkLocation(brand, folder, Path(root) / d)
-    return None
+        found += [Path(root) / f for f in files if f.lower() in names]
+        found += [Path(root) / d for d in dirs if d.lower() in names]
+    for path in found:
+        if _built_for_this_cpu(path):
+            return SdkLocation(brand, folder, path)
+    return SdkLocation(brand, folder, found[0]) if found else None
 
 
 def sdk_present(brand: str, folder: Path | None) -> bool:
@@ -153,5 +179,9 @@ def _adapter(brand: str, location: SdkLocation) -> SdkAdapter:
         from .sony import SonyAdapter
 
         return SonyAdapter(location)
+    if brand == "canon":
+        from .canon import CanonAdapter
+
+        return CanonAdapter(location)
     cls = type(f"{brand.capitalize()}Adapter", (SdkAdapter,), {"brand": brand})
     return cls(location)
