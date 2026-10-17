@@ -71,8 +71,12 @@ class SidecarReader:
     name = "sidecar"
 
     def __init__(self, directory: Path) -> None:
+        self._dir = directory
         self._by_hash: dict[str, FrameMeta] = {}
-        for side in directory.glob("*.meta.json"):
+        self._scan()
+
+    def _scan(self) -> None:
+        for side in self._dir.glob("*.meta.json"):
             data = side.with_name(side.name.removesuffix(".meta.json"))
             if data.exists():
                 self._by_hash[sha256_of(data)] = FrameMeta.model_validate(
@@ -80,7 +84,10 @@ class SidecarReader:
                 )
 
     def read(self, path: Path) -> FrameMeta:
-        meta = self._by_hash.get(sha256_of(path))
+        digest = sha256_of(path)
+        if digest not in self._by_hash:
+            self._scan()
+        meta = self._by_hash.get(digest)
         if meta is None:
             raise MetadataError(f"no sidecar for {path.name}")
         return meta
