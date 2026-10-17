@@ -46,6 +46,15 @@ class SdkUnavailable(BackendError):
     code = "backend.sdk_unavailable"
 
 
+def add_dll_directories(*folders: Path) -> list[Any]:
+    """Let Windows find the DLLs next to an SDK library. Returns handles to close later; empty
+    elsewhere (``os.add_dll_directory`` exists on Windows only)."""
+    add: Any = getattr(os, "add_dll_directory", None)
+    if add is None:
+        return []
+    return [add(str(f)) for f in folders if f.is_dir()]
+
+
 @dataclass(frozen=True)
 class SdkLocation:
     brand: str

@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import contextlib
 import ctypes
-import os
 import shutil
 import tempfile
 import threading
@@ -37,7 +36,7 @@ from ..protocol import (
     NotSupported,
     RemoteFile,
 )
-from .loader import SdkAdapter, SdkLocation, SdkUnavailable
+from .loader import SdkAdapter, SdkLocation, SdkUnavailable, add_dll_directories
 
 # ---- property codes (CrDevicePropertyCode) [Sourced] ----------------------------------------------
 P_S1 = 0x1
@@ -240,11 +239,7 @@ class CrLayer:
         self.on_disconnected: Callable[[int], None] | None = None
         self.on_error: Callable[[int], None] | None = None
         self._path = library
-        self._dll_dirs: list[Any] = []
-        if hasattr(os, "add_dll_directory"):
-            for d in (library.parent, library.parent / "CrAdapter"):
-                if d.is_dir():
-                    self._dll_dirs.append(os.add_dll_directory(str(d)))
+        self._dll_dirs = add_dll_directories(library.parent, library.parent / "CrAdapter")
         try:
             self._dll = ctypes.CDLL(str(library))
         except OSError as exc:

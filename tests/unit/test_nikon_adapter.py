@@ -136,7 +136,8 @@ def test_struct_sizes_follow_two_byte_packing():
     assert ctypes.sizeof(nikon._Enum) == 26
     assert ctypes.sizeof(nikon._Range) == 44
     assert ctypes.sizeof(nikon._DeviceInfo) == 138
-    assert ctypes.sizeof(nikon._Shooting) == 2078
+    # 22 bytes before the path, 1024 wide characters, then the 8 byte reference pointer
+    assert ctypes.sizeof(nikon._Shooting) == 22 + 1024 * ctypes.sizeof(ctypes.c_wchar) + 8
     assert ctypes.sizeof(nikon._LiveView) == 900
 
 

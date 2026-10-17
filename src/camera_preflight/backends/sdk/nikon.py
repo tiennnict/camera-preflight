@@ -33,7 +33,7 @@ from ..protocol import (
     NotSupported,
     RemoteFile,
 )
-from .loader import SdkAdapter, SdkLocation, SdkUnavailable
+from .loader import SdkAdapter, SdkLocation, SdkUnavailable, add_dll_directories
 
 # ---- constants from Maid3.h and Maid3d1.h [Sourced] --------------------------------------------
 _VENDOR = 0x8000
@@ -300,9 +300,7 @@ class CsLayer:
         self.on_saved: Callable[[str], None] | None = None
         self.on_live_frame: Callable[[bytes], None] | None = None
         self._path = library
-        self._dll_dir: Any = None
-        if hasattr(os, "add_dll_directory"):
-            self._dll_dir = os.add_dll_directory(str(library.parent))
+        self._dll_dirs = add_dll_directories(library.parent)
         try:
             self._dll = (
                 ctypes.WinDLL(str(library)) if os.name == "nt" else ctypes.CDLL(str(library))
@@ -408,10 +406,10 @@ class CsLayer:
             with contextlib.suppress(Exception):
                 self._free_sdk()
             self._initialised = False
-        if self._dll_dir is not None:
+        for d in self._dll_dirs:
             with contextlib.suppress(Exception):
-                self._dll_dir.close()
-            self._dll_dir = None
+                d.close()
+        self._dll_dirs = []
 
     def devices(self) -> list[DeviceEntry]:
         self._release_device_list()
