@@ -144,6 +144,7 @@ class ResultsView(StepView):
         self._set_buttons(False)
         controller.finished.connect(self.populate)
         self._started = False
+        self.restored: bool | None = None
 
     def _set_buttons(self, enabled: bool) -> None:
         self.save_btn.setEnabled(enabled)
@@ -154,13 +155,34 @@ class ResultsView(StepView):
         if self._started:
             return
         self._started = True
-        self.controller.finalize()
+        w = self.controller.wizard
+        assert w is not None
+        if w.mode.value == "connected":
+            self.controller.run_async(self._finish_connected)
+        else:
+            self.controller.finalize()
+
+    def _finish_connected(self) -> bool:
+        """Restore the camera settings the app changed, then run the final analysis (FR-ACQ-06)."""
+        w = self.controller.wizard
+        assert w is not None
+        restored = w.finish_connected()
+        w.finalize()
+        self.restored = restored
+        return restored
 
     def populate(self) -> None:
         w = self.controller.wizard
         if w is None:
             return
-        self.status.setText("")
+        if self.restored is None:
+            self.status.setText("")
+        else:
+            self.status.setText(
+                tr("Camera settings restored")
+                if self.restored
+                else tr("Camera settings not restored")
+            )
         while self.body.count():
             item = self.body.takeAt(0)
             widget = item.widget() if item else None

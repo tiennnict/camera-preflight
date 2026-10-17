@@ -50,6 +50,7 @@ class Controller(QObject):
         self._pool = QThreadPool(self)
         self._pool.setMaxThreadCount(1)  # the engine is not thread safe: one job at a time
         self._busy = 0
+        self.last_error: Exception | None = None
 
     # ---- session -------------------------------------------------------------------------
     def begin(
@@ -77,6 +78,43 @@ class Controller(QObject):
         )
         self.wizard.subscribe(self._on_event)
         return self.wizard
+
+    def begin_connected(
+        self,
+        spec: str,
+        sessions_dir: Path,
+        *,
+        language: str,
+        entered_serial: str | None,
+        workdir: Path,
+        kb: KnowledgeBase | None = None,
+        sdk_available: frozenset[str] = frozenset(),
+        sdk_dir: Path | None = None,
+    ) -> Wizard:
+        """Start a connected session; the backend runs in its own process (P-02)."""
+        from ..backends.client import BackendClient
+        from ..synth import SidecarReader
+
+        if self.wizard:
+            self.wizard.close()
+        sessions_dir.mkdir(parents=True, exist_ok=True)
+        workdir.mkdir(parents=True, exist_ok=True)
+        client = BackendClient(spec, sdk_dir=sdk_dir, workdir=workdir)
+        client.open()
+        reader = SidecarReader(workdir) if spec.startswith("sim") else None
+        w = Wizard(
+            Mode.UPLOAD,
+            sessions_dir,
+            kb=kb,
+            reader=reader,
+            entered_serial=entered_serial or None,
+            language=language,
+            sdk_available=sdk_available,
+        )
+        w.use_backend(client, workdir / "downloads")
+        w.subscribe(self._on_event)
+        self.wizard = w
+        return w
 
     def _on_event(self, event: ev.Event) -> None:
         if isinstance(event, ev.StepChanged):
@@ -109,7 +147,8 @@ class Controller(QObject):
             self.busyChanged.emit(False)
         self.jobDone.emit(result)
 
-    def _job_failed(self, text: str) -> None:
+    def _job_failed(self, text: str, exc: Exception | None = None) -> None:
+        self.last_error = exc
         self._busy -= 1
         if self._busy == 0:
             self.busyChanged.emit(False)

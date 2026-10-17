@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 10:39+0000\n"
+"POT-Creation-Date: 2026-10-17 10:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/camera_preflight/gui/shell.py:312
+#: src/camera_preflight/gui/shell.py:370
 msgid "A severe problem was found."
 msgstr "A severe problem was found."
 
@@ -36,7 +36,7 @@ msgstr "AF point {found}; needs {needed}"
 msgid "AF/MF switch"
 msgstr "AF/MF switch"
 
-#: src/camera_preflight/gui/shell.py:94 src/camera_preflight/gui/shell.py:142
+#: src/camera_preflight/gui/shell.py:95 src/camera_preflight/gui/shell.py:143
 #: src/camera_preflight/gui/views/about.py:15
 msgid "About"
 msgstr "About"
@@ -168,7 +168,7 @@ msgstr "Autofocus points"
 msgid "Automatic"
 msgstr "Automatic"
 
-#: src/camera_preflight/gui/shell.py:120 src/camera_preflight/gui/shell.py:143
+#: src/camera_preflight/gui/shell.py:121 src/camera_preflight/gui/shell.py:144
 msgid "Back"
 msgstr "Back"
 
@@ -190,7 +190,7 @@ msgstr "Battery {percent}%"
 msgid "Blocker"
 msgstr "Blocker"
 
-#: src/camera_preflight/gui/views/results.py:184 src/camera_preflight/report/labels.py:21
+#: src/camera_preflight/gui/views/results.py:206 src/camera_preflight/report/labels.py:21
 msgid "Blockers"
 msgstr "Blockers"
 
@@ -273,7 +273,7 @@ msgstr "Camera SDK folders"
 msgid "Camera body"
 msgstr "Camera body"
 
-#: src/camera_preflight/gui/shell.py:140
+#: src/camera_preflight/gui/shell.py:141
 msgid "Camera check"
 msgstr "Camera check"
 
@@ -281,9 +281,21 @@ msgstr "Camera check"
 msgid "Camera check report"
 msgstr "Camera check report"
 
+#: src/camera_preflight/gui/views/connected.py:55
+msgid "Camera disconnected"
+msgstr "Camera disconnected"
+
 #: src/camera_preflight/messages.py:47
 msgid "Camera identity"
 msgstr "Camera identity"
+
+#: src/camera_preflight/gui/views/results.py:184
+msgid "Camera settings not restored"
+msgstr "Camera settings not restored"
+
+#: src/camera_preflight/gui/views/results.py:182
+msgid "Camera settings restored"
+msgstr "Camera settings restored"
 
 #: src/camera_preflight/gui/views/settings_dialogs.py:118
 msgid "Cancel"
@@ -314,7 +326,7 @@ msgstr "Change the lens"
 msgid "Channel {channel}: {count}"
 msgstr "Channel {channel}: {count}"
 
-#: src/camera_preflight/gui/views/start.py:23
+#: src/camera_preflight/gui/views/start.py:24
 msgid "Check a used camera"
 msgstr "Check a used camera"
 
@@ -376,7 +388,11 @@ msgstr "Confidence"
 msgid "Connected"
 msgstr "Connected"
 
-#: src/camera_preflight/gui/shell.py:314
+#: src/camera_preflight/gui/views/connected.py:53
+msgid "Connection lost"
+msgstr "Connection lost"
+
+#: src/camera_preflight/gui/shell.py:372
 msgid "Continue"
 msgstr "Continue"
 
@@ -440,10 +456,14 @@ msgstr "Dead pixel at row {row}, column {col} ({channel})"
 msgid "Defocus the lens. Keep the light even."
 msgstr "Defocus the lens. Keep the light even."
 
-#: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:217
+#: src/camera_preflight/gui/views/results.py:72 src/camera_preflight/gui/views/results.py:239
 #: src/camera_preflight/report/labels.py:49
 msgid "Details"
 msgstr "Details"
+
+#: src/camera_preflight/gui/views/connected.py:169
+msgid "Detected. Running."
+msgstr "Detected. Running."
 
 #: src/camera_preflight/messages.py:205
 #, python-brace-format
@@ -458,6 +478,10 @@ msgstr "Did not focus"
 msgid "Diopter dial"
 msgstr "Diopter dial"
 
+#: src/camera_preflight/gui/views/connected.py:216
+msgid "Do this by hand, then press Done."
+msgstr "Do this by hand, then press Done."
+
 #: src/camera_preflight/gui/views/manual.py:33
 msgid "Does it power on normally?"
 msgstr "Does it power on normally?"
@@ -465,6 +489,10 @@ msgstr "Does it power on normally?"
 #: src/camera_preflight/gui/views/manual.py:36
 msgid "Does the mirror move freely?"
 msgstr "Does the mirror move freely?"
+
+#: src/camera_preflight/gui/views/connected.py:93
+msgid "Done"
+msgstr "Done"
 
 #: src/camera_preflight/gui/labels.py:94
 msgid "Drive"
@@ -482,7 +510,7 @@ msgstr "Dust and marks"
 msgid "Electronic"
 msgstr "Electronic"
 
-#: src/camera_preflight/gui/views/start.py:24 src/camera_preflight/messages.py:254
+#: src/camera_preflight/gui/views/start.py:25 src/camera_preflight/messages.py:254
 msgid "Enter the serial if you wish."
 msgstr "Enter the serial if you wish."
 
@@ -617,6 +645,10 @@ msgstr "File type"
 #, python-brace-format
 msgid "File type {found}; needs RAW"
 msgstr "File type {found}; needs RAW"
+
+#: src/camera_preflight/gui/views/connected.py:205
+msgid "Finished. Next step starts."
+msgstr "Finished. Next step starts."
 
 #: src/camera_preflight/messages.py:50 src/camera_preflight/report/labels.py:15
 msgid "Firmware"
@@ -784,6 +816,10 @@ msgstr "Hashes show file integrity only. They do not prove the files were not al
 msgid "Heavy dust: {count} marks"
 msgstr "Heavy dust: {count} marks"
 
+#: src/camera_preflight/gui/views/connected.py:164
+msgid "Helper not available. Press Done."
+msgstr "Helper not available. Press Done."
+
 #: src/camera_preflight/messages.py:32
 msgid "High"
 msgstr "High"
@@ -878,7 +914,7 @@ msgstr "Judged Suspect by you"
 msgid "Knowledge base version"
 msgstr "Knowledge base version"
 
-#: src/camera_preflight/gui/shell.py:91 src/camera_preflight/gui/views/settings_dialogs.py:103
+#: src/camera_preflight/gui/shell.py:92 src/camera_preflight/gui/views/settings_dialogs.py:103
 msgid "Language"
 msgstr "Language"
 
@@ -1045,7 +1081,7 @@ msgstr "Mounted lens"
 msgid "Needs a reference instrument"
 msgstr "Needs a reference instrument"
 
-#: src/camera_preflight/gui/shell.py:122 src/camera_preflight/gui/shell.py:145
+#: src/camera_preflight/gui/shell.py:123 src/camera_preflight/gui/shell.py:146
 msgid "Next"
 msgstr "Next"
 
@@ -1125,7 +1161,7 @@ msgstr "Not supported over this connection"
 msgid "Not sure"
 msgstr "Not sure"
 
-#: src/camera_preflight/gui/views/results.py:190 src/camera_preflight/messages.py:27
+#: src/camera_preflight/gui/views/results.py:212 src/camera_preflight/messages.py:27
 #: src/camera_preflight/report/labels.py:25
 msgid "Not tested"
 msgstr "Not tested"
@@ -1180,7 +1216,7 @@ msgstr "Parameter set"
 msgid "Pass"
 msgstr "Pass"
 
-#: src/camera_preflight/gui/views/results.py:192
+#: src/camera_preflight/gui/views/results.py:214
 msgid "Passed"
 msgstr "Passed"
 
@@ -1256,7 +1292,7 @@ msgstr "Powers on"
 msgid "Previous owner traces"
 msgstr "Previous owner traces"
 
-#: src/camera_preflight/gui/views/start.py:28
+#: src/camera_preflight/gui/views/start.py:29
 msgid "Printed on the camera"
 msgstr "Printed on the camera"
 
@@ -1284,6 +1320,10 @@ msgstr "Reading camera data"
 msgid "Reason"
 msgstr "Reason"
 
+#: src/camera_preflight/gui/views/connected.py:60
+msgid "Reconnect"
+msgstr "Reconnect"
+
 #: src/camera_preflight/gui/views/settings_dialogs.py:100
 msgid "Reduce motion"
 msgstr "Reduce motion"
@@ -1308,6 +1348,10 @@ msgstr "Report language"
 msgid "Results"
 msgstr "Results"
 
+#: src/camera_preflight/gui/views/connected.py:58
+msgid "Results so far are kept."
+msgstr "Results so far are kept."
+
 #: src/camera_preflight/gui/labels.py:13
 msgid "Right"
 msgstr "Right"
@@ -1325,7 +1369,7 @@ msgstr "SHA-256"
 msgid "Save"
 msgstr "Save"
 
-#: src/camera_preflight/gui/views/results.py:132 src/camera_preflight/gui/views/results.py:237
+#: src/camera_preflight/gui/views/results.py:132 src/camera_preflight/gui/views/results.py:259
 msgid "Save report"
 msgstr "Save report"
 
@@ -1349,7 +1393,7 @@ msgstr "Sensor"
 msgid "Serial (last 4)"
 msgstr "Serial (last 4)"
 
-#: src/camera_preflight/gui/views/start.py:25 src/camera_preflight/gui/views/start.py:30
+#: src/camera_preflight/gui/views/start.py:26 src/camera_preflight/gui/views/start.py:31
 msgid "Serial (optional)"
 msgstr "Serial (optional)"
 
@@ -1383,12 +1427,12 @@ msgstr "Sessions folder"
 msgid "Set up camera SDKs"
 msgstr "Set up camera SDKs"
 
-#: src/camera_preflight/gui/shell.py:92 src/camera_preflight/gui/shell.py:141
-#: src/camera_preflight/gui/views/settings_dialogs.py:85 src/camera_preflight/gui/views/start.py:34
+#: src/camera_preflight/gui/shell.py:93 src/camera_preflight/gui/shell.py:142
+#: src/camera_preflight/gui/views/settings_dialogs.py:85 src/camera_preflight/gui/views/start.py:37
 msgid "Settings"
 msgstr "Settings"
 
-#: src/camera_preflight/gui/shell.py:311
+#: src/camera_preflight/gui/shell.py:369
 msgid "Severe problem"
 msgstr "Severe problem"
 
@@ -1438,7 +1482,7 @@ msgstr "Shutter count {count}"
 msgid "Shutter type"
 msgstr "Shutter type"
 
-#: src/camera_preflight/gui/shell.py:121 src/camera_preflight/gui/shell.py:144
+#: src/camera_preflight/gui/shell.py:122 src/camera_preflight/gui/shell.py:145
 msgid "Skip"
 msgstr "Skip"
 
@@ -1470,7 +1514,7 @@ msgstr "Soft at: {points}"
 msgid "Some photos lack camera notes"
 msgstr "Some photos lack camera notes"
 
-#: src/camera_preflight/gui/shell.py:333
+#: src/camera_preflight/gui/shell.py:391
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
@@ -1506,15 +1550,15 @@ msgstr "Spot on a bright area"
 msgid "Spot on a dark area"
 msgstr "Spot on a dark area"
 
-#: src/camera_preflight/gui/views/start.py:31 src/camera_preflight/messages.py:253
+#: src/camera_preflight/gui/views/start.py:32 src/camera_preflight/messages.py:253
 msgid "Start"
 msgstr "Start"
 
-#: src/camera_preflight/gui/shell.py:108
+#: src/camera_preflight/gui/shell.py:109
 msgid "Steps"
 msgstr "Steps"
 
-#: src/camera_preflight/gui/shell.py:313
+#: src/camera_preflight/gui/shell.py:371
 msgid "Stop and save report"
 msgstr "Stop and save report"
 
@@ -1544,7 +1588,7 @@ msgstr "Summary"
 msgid "Suspect"
 msgstr "Suspect"
 
-#: src/camera_preflight/gui/views/results.py:187 src/camera_preflight/report/labels.py:22
+#: src/camera_preflight/gui/views/results.py:209 src/camera_preflight/report/labels.py:22
 msgid "Suspect and fail results"
 msgstr "Suspect and fail results"
 
@@ -1592,6 +1636,10 @@ msgstr "Timestamps lack fractions of a second"
 msgid "Top"
 msgstr "Top"
 
+#: src/camera_preflight/gui/views/start.py:35
+msgid "Try demo"
+msgstr "Try demo"
+
 #: src/camera_preflight/gui/animations/library.py:41
 msgid "USB port"
 msgstr "USB port"
@@ -1634,6 +1682,10 @@ msgstr "Upload photos"
 msgid "Uploaded files"
 msgstr "Uploaded files"
 
+#: src/camera_preflight/gui/views/connected.py:62
+msgid "Use photo upload"
+msgstr "Use photo upload"
+
 #: src/camera_preflight/report/labels.py:34
 msgid "Value"
 msgstr "Value"
@@ -1655,7 +1707,39 @@ msgstr "Viewfinder"
 msgid "Viewfinder view"
 msgstr "Viewfinder view"
 
-#: src/camera_preflight/gui/shell.py:135
+#: src/camera_preflight/gui/views/connected.py:111
+msgid "Waiting"
+msgstr "Waiting"
+
+#: src/camera_preflight/gui/views/connected.py:43
+msgid "Waiting for a card"
+msgstr "Waiting for a card"
+
+#: src/camera_preflight/gui/views/connected.py:41
+msgid "Waiting for a lens change"
+msgstr "Waiting for a lens change"
+
+#: src/camera_preflight/gui/views/connected.py:40
+msgid "Waiting for a steady camera"
+msgstr "Waiting for a steady camera"
+
+#: src/camera_preflight/gui/views/connected.py:38
+msgid "Waiting for an even bright surface"
+msgstr "Waiting for an even bright surface"
+
+#: src/camera_preflight/gui/views/connected.py:37
+msgid "Waiting for the body cap"
+msgstr "Waiting for the body cap"
+
+#: src/camera_preflight/gui/views/connected.py:39
+msgid "Waiting for the focus chart"
+msgstr "Waiting for the focus chart"
+
+#: src/camera_preflight/gui/views/connected.py:42
+msgid "Waiting for the focus mode"
+msgstr "Waiting for the focus mode"
+
+#: src/camera_preflight/gui/shell.py:136
 msgid "Working"
 msgstr "Working"
 

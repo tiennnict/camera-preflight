@@ -15,6 +15,7 @@ from .base import StepView
 class StartView(StepView):
     startRequested = Signal(str)  # entered serial, may be empty
     settingsRequested = Signal()
+    demoRequested = Signal(str)
 
     def __init__(
         self, controller: Controller, colors: Colors, step: StepDef, parent: QWidget | None = None
@@ -31,10 +32,13 @@ class StartView(StepView):
         self.start_btn = QPushButton(tr("Start"))
         self.start_btn.setObjectName("primary")
         self.start_btn.clicked.connect(lambda: self.startRequested.emit(self.serial.text().strip()))
+        self.demo_btn = QPushButton(tr("Try demo"))
+        self.demo_btn.clicked.connect(lambda: self.demoRequested.emit(self.serial.text().strip()))
         self.settings_btn = QPushButton(tr("Settings"))
         self.settings_btn.clicked.connect(self.settingsRequested)
         row = QHBoxLayout()
         row.addWidget(self.start_btn)
+        row.addWidget(self.demo_btn)
         row.addWidget(self.settings_btn)
         row.addStretch(1)
         self.root.addWidget(label)

@@ -149,3 +149,29 @@ def test_about_lists_credits_or_none(qtbot):
     dlg = AboutDialog()
     qtbot.addWidget(dlg)
     assert dlg.windowTitle()
+
+
+def test_demo_connected_flow(qtbot, user_settings, settings_store, monkeypatch):
+    from camera_preflight.domain import Mode
+
+    ctrl = Controller()
+    win = MainWindow(user_settings, ctrl, settings_store)
+    qtbot.addWidget(win)
+    win.show()
+    monkeypatch.setattr(win, "_auto_advance", lambda: None)
+    win.start_session("", demo=True)
+    w = ctrl.wizard
+    assert w is not None and w.mode is Mode.CONNECTED
+    assert win.camera_label.text() == "SC-1"
+    win.show_step("auto")
+    from camera_preflight.gui.views.connected import ConnectedStepView
+
+    assert isinstance(win.view, ConnectedStepView)
+    qtbot.waitUntil(lambda: "A1" in w.results and not win.view.running, timeout=60000)
+    # helper step: the simulated user fits the cap, the helper detects it, the app shoots
+    win.show_step("dark")
+    w.backend.call("sim", name="user_action", args={"scene": "dark", "after_polls": 2})
+    qtbot.waitUntil(lambda: "B1" in w.results, timeout=120000)
+    assert w.results["B1"].path.value == "semi_automatic"
+    win.close()
+    w.backend.close()

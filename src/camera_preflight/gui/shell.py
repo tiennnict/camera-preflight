@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (
 )
 
 from .. import i18n
-from ..domain import CheckResult, Level, Message, Mode, Phase
+from ..domain import AutomationLevel, CheckResult, Level, Message, Mode, Phase
 from ..wizard import StepDef
 from . import settings as store
 from .controller import Controller
@@ -29,6 +29,7 @@ from .settings import UserSettings
 from .theme import GLYPH, Colors, apply_theme, level_color
 from .views.about import AboutDialog
 from .views.base import StepView, tr_code
+from .views.connected import ConnectedStepView, LostDialog
 from .views.manual import ManualView
 from .views.results import ResultsView
 from .views.settings_dialogs import SettingsDialog
@@ -162,25 +163,48 @@ class MainWindow(QMainWindow):
         home = build_plan(Mode.UPLOAD)[0]
         view = StartView(self.controller, self.colors, home)
         view.startRequested.connect(self.start_session)
+        view.demoRequested.connect(lambda serial: self.start_session(serial, demo=True))
         view.settingsRequested.connect(self.open_settings)
         self._set_view(view)
         for b in (self.back_btn, self.skip_btn, self.next_btn):
             b.setEnabled(False)
         self.mode_label.setText("")
 
-    def start_session(self, serial: str) -> None:
-        sdk = frozenset(
+    def _sdk_available(self) -> frozenset[str]:
+        return frozenset(
             b.lower()
             for b, p in ((b, self.settings.sdk_path(b)) for b in store.BRANDS)
             if p.is_dir() and any(p.iterdir())
         )
-        self.controller.begin(
-            Mode.UPLOAD,
-            self.settings.sessions_path(),
-            language=i18n.current_language(),
-            entered_serial=serial,
-            sdk_available=sdk,
-        )
+
+    def start_session(self, serial: str, demo: bool = False) -> None:
+        """Detect a camera: connected mode when found, upload mode otherwise (D-23)."""
+        import tempfile
+        from pathlib import Path
+
+        from ..backends.discovery import detect
+
+        work = Path(tempfile.mkdtemp(prefix="cp-cam-"))
+        found = detect(prefer="sim" if demo else None, workdir=work)
+        sdk = self._sdk_available()
+        if found.found and found.spec:
+            self.controller.begin_connected(
+                found.spec,
+                self.settings.sessions_path(),
+                language=i18n.current_language(),
+                entered_serial=serial,
+                workdir=work,
+                sdk_available=sdk,
+            )
+            self.camera_label.setText(found.camera)
+        else:
+            self.controller.begin(
+                Mode.UPLOAD,
+                self.settings.sessions_path(),
+                language=i18n.current_language(),
+                entered_serial=serial,
+                sdk_available=sdk,
+            )
         self._rebuild_tree()
         self._apply_text()
         self.show_step("blocker")
@@ -259,6 +283,13 @@ class MainWindow(QMainWindow):
             view = ManualView(self.controller, self.colors, step)
             if step.phase is Phase.BLOCKER:
                 view.blockerFound.connect(self._blocker_found)  # type: ignore[attr-defined]
+        elif w.mode is Mode.CONNECTED and step.automation in (
+            AutomationLevel.AUTOMATIC,
+            AutomationLevel.HELPER,
+        ):
+            view = ConnectedStepView(self.controller, self.colors, step)
+            view.connectionLost.connect(self._connection_lost)  # type: ignore[attr-defined]
+            view.finished.connect(self._auto_advance)  # type: ignore[attr-defined]
         elif step.is_shooting:
             view = UploadView(self.controller, self.colors, step)
         else:
@@ -305,6 +336,33 @@ class MainWindow(QMainWindow):
             return
         w.skip_step(w.step.id)
         self.go_next()
+
+    def _auto_advance(self) -> None:
+        """After an automatic or helper-started run the next step begins by itself (S4)."""
+        w = self.controller.wizard
+        if w is None:
+            return
+        current = w.step.id
+        QTimer.singleShot(1200, lambda: self._advance_if_still(current))
+
+    def _advance_if_still(self, step_id: str) -> None:
+        w = self.controller.wizard
+        if w is not None and w.step.id == step_id:
+            self.go_next()
+
+    def _connection_lost(self) -> None:
+        dlg = LostDialog(self)
+        if dlg.exec():
+            w = self.controller.wizard
+            if w is not None:
+                self.show_step(w.step.id)  # try the same step again
+        else:
+            w = self.controller.wizard
+            if w is not None:
+                w.switch_to_upload()
+                self._rebuild_tree()
+                self._apply_text()
+                self.show_step(w.step.id)
 
     def _blocker_found(self) -> None:
         box = QMessageBox(self)
