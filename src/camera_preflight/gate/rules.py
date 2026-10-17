@@ -24,6 +24,12 @@ from .format import fmt_aperture, fmt_exposure, fmt_iso, fmt_percent
 # Flat sets whose brightness must sit in the histogram range (B2, B4, C3).
 LEVEL_CHECKED_TAGS = frozenset({"b2", "b4", "c3"})
 
+METERING_NAMES = {
+    "evaluative": "Multi-segment",
+    "centre_weighted": "Center-weighted",
+    "spot": "Spot",
+}
+
 KNOWN_EDITORS = (
     "photoshop",
     "lightroom",
@@ -56,6 +62,9 @@ class GateProfile:
     check_dark: bool = False
     af_point: str | None = None
     af_decoder_verified: bool = False
+    shutter_mode: str | None = None
+    metering: str | None = None
+    exposure_comp_ev: float | None = None
 
     @classmethod
     def for_requirement(cls, req: FrameRequirement) -> GateProfile:
@@ -69,6 +78,9 @@ class GateProfile:
             check_clipping=req.kind in (FrameKind.FLAT, FrameKind.CHART),
             check_flicker=flat,
             check_dark=req.kind is FrameKind.DARK,
+            shutter_mode=req.shutter_mode,
+            metering=req.metering,
+            exposure_comp_ev=req.exposure_comp_ev,
         )
 
 
@@ -141,6 +153,25 @@ def evaluate(
                 found=fmt_aperture(got_f),
                 needed=fmt_aperture(profile.aperture),
             )
+    if profile.shutter_mode is not None:
+        got_mode = (meta.shutter_type or "").lower()
+        if got_mode != profile.shutter_mode:
+            return _reject(
+                "G1", "gate.shutter_mode", found=got_mode or "unknown", needed=profile.shutter_mode
+            )
+    if profile.metering is not None:
+        wanted = METERING_NAMES.get(profile.metering, profile.metering)
+        if meta.metering_mode != wanted:
+            return _reject(
+                "G1", "gate.metering", found=meta.metering_mode or "unknown", needed=wanted
+            )
+    if profile.exposure_comp_ev is not None and (
+        meta.exposure_comp_ev is None or abs(meta.exposure_comp_ev - profile.exposure_comp_ev) > 0.2
+    ):
+        found_ev = "unknown" if meta.exposure_comp_ev is None else f"{meta.exposure_comp_ev:+g}"
+        return _reject(
+            "G1", "gate.compensation", found=found_ev, needed=f"{profile.exposure_comp_ev:+g}"
+        )
     if profile.require_nr_off and (meta.long_exposure_nr or meta.high_iso_nr):
         return _reject("G1", "gate.nr_on")
 

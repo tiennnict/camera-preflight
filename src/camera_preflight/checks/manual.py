@@ -2,7 +2,20 @@
 
 from __future__ import annotations
 
-from ..domain import CheckResult, CheckSpec, Confidence, Finding, Level, Message, Severity
+import hashlib
+import shutil
+from pathlib import Path
+
+from ..domain import (
+    CheckResult,
+    CheckSpec,
+    Confidence,
+    EvidenceRef,
+    Finding,
+    Level,
+    Message,
+    Severity,
+)
 from .base import NOT_ANSWERED, CheckContext, make_result, not_tested
 
 BLOCKER_IDS = frozenset({"F1", "F2", "F3", "F4"})
@@ -25,6 +38,19 @@ def from_answer(spec: CheckSpec, ctx: CheckContext) -> CheckResult:
         findings.append(
             Finding(kind="note", message=Message(code="manual.note", params={"text": answer.notes}))
         )
+    evidence: list[EvidenceRef] = []
+    if answer.photo and ctx.evidence_dir is not None:
+        src = Path(answer.photo)
+        if src.is_file():
+            ctx.evidence_dir.mkdir(parents=True, exist_ok=True)
+            dest = ctx.evidence_dir / f"{spec.id}-photo{src.suffix.lower()}"
+            shutil.copyfile(src, dest)
+            digest = hashlib.sha256(dest.read_bytes()).hexdigest()
+            evidence.append(
+                EvidenceRef(
+                    path=dest.name, caption=Message(code="evidence.manual_photo"), sha256=digest
+                )
+            )
     return make_result(
         spec,
         ctx,
@@ -33,5 +59,6 @@ def from_answer(spec: CheckSpec, ctx: CheckContext) -> CheckResult:
         confidence=Confidence.MEDIUM,
         severity=severity,
         findings=findings,
+        evidence=evidence,
         cap_confidence=False,
     )

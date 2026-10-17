@@ -23,6 +23,7 @@ from ..backends.protocol import (
     RemoteFile,
 )
 from ..domain import DeviceInfo, FrameMeta
+from ..gate.rules import METERING_NAMES
 from .dng import write_dng
 from .files import _dng_meta
 from .sensor import Defects, synth_chart, synth_dark, synth_flat
@@ -189,7 +190,9 @@ class SimBackend:
             comp = s.exposure_comp_ev or 0.0
             t = float(ap**2 / 2 ** (scene_ev - comp + np.log2(iso / 100)))
             meta.update(
-                exposure_s=t, exposure_comp_ev=comp, metering_mode=s.metering or "Multi-segment"
+                exposure_s=t,
+                exposure_comp_ev=comp,
+                metering_mode=METERING_NAMES.get(s.metering or "", "Multi-segment"),
             )
             level = float(np.clip(0.18 * 2**comp, 0.02, 0.88))
             if tag == "e3-bright" and cam.spot_follows:

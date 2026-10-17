@@ -95,6 +95,12 @@ class FunctionCheck:
         missing_sdk = self.spec.needs_sdk - ctx.sdk_available
         if self.spec.needs_sdk and missing_sdk == self.spec.needs_sdk:
             return not_tested(self.spec, ctx, SDK_NOT_CONFIGURED)
+        for req in self.spec.requirements:
+            have = sum(1 for f in frames.get(req.key, ()) if f.accepted)
+            if have < req.count:
+                return not_tested(
+                    self.spec, ctx, INSUFFICIENT
+                )  # never Pass on a partial set (NFR-01)
         return self.fn(self.spec, frames, ctx)
 
 

@@ -290,3 +290,12 @@ register(
         "kb.known_issue": N_("Known issue: {description} (confirm with {check})"),
     }
 )
+
+register(
+    {
+        "gate.shutter_mode": N_("Shutter {found}; needs {needed}"),
+        "gate.metering": N_("Metering {found}; needs {needed}"),
+        "gate.compensation": N_("Compensation {found} EV; needs {needed} EV"),
+        "evidence.manual_photo": N_("Photo attached by you"),
+    }
+)

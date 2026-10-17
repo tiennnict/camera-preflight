@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: camera-preflight VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-17 11:01+0000\n"
+"POT-Creation-Date: 2026-10-17 11:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: vi\n"
@@ -379,6 +379,11 @@ msgstr "Các bước bù trừ không đều ({ev} EV)"
 #, python-brace-format
 msgid "Compensation {ev} EV"
 msgstr "Bù sáng {ev} EV"
+
+#: src/camera_preflight/messages.py:298
+#, python-brace-format
+msgid "Compensation {found} EV; needs {needed} EV"
+msgstr "Bù sáng {found} EV; cần {needed} EV"
 
 #: src/camera_preflight/gui/views/results.py:61 src/camera_preflight/report/labels.py:47
 msgid "Confidence"
@@ -1039,6 +1044,11 @@ msgstr "Các chế độ đo sáng"
 msgid "Metering photos"
 msgstr "Ảnh đo sáng"
 
+#: src/camera_preflight/messages.py:297
+#, python-brace-format
+msgid "Metering {found}; needs {needed}"
+msgstr "Đo sáng {found}; cần {needed}"
+
 #: src/camera_preflight/gui/labels.py:56
 #, python-brace-format
 msgid "Metering: {mode}"
@@ -1232,6 +1242,10 @@ msgstr "Cách thực hiện"
 #: src/camera_preflight/gui/animations/engine.py:171
 msgid "Pause"
 msgstr "Tạm dừng"
+
+#: src/camera_preflight/messages.py:299
+msgid "Photo attached by you"
+msgstr "Ảnh do bạn đính kèm"
 
 #: src/camera_preflight/report/labels.py:56
 msgid "Photo checks"
@@ -1490,6 +1504,11 @@ msgstr "Số lần chụp {count}"
 #: src/camera_preflight/gui/labels.py:86
 msgid "Shutter type"
 msgstr "Kiểu màn trập"
+
+#: src/camera_preflight/messages.py:296
+#, python-brace-format
+msgid "Shutter {found}; needs {needed}"
+msgstr "Màn trập {found}; cần {needed}"
 
 #: src/camera_preflight/gui/shell.py:122 src/camera_preflight/gui/shell.py:145
 msgid "Skip"

@@ -234,3 +234,82 @@ def test_checks_for_orders_by_automation():
     assert order.index("A1") < order.index("B1") < order.index("F5")
     assert "A2" not in [c.spec.id for c in checks_for(Mode.UPLOAD)]
     assert DeviceInfo().model is None
+
+
+def test_partial_frame_sets_are_not_tested():
+    """A declared requirement that is not complete never gives a verdict (NFR-01)."""
+    cam = SynthCamera()
+    frames = dict(build_frames(cam))
+    key = "flat/b4/f22"
+    frames[key] = frames[key][:1]
+    ctx = CheckContext(params=DEFAULT_1, mode=Mode.UPLOAD)
+    r = BY_ID["B4"].analyse(frames, ctx)
+    assert r.level is Level.NOT_TESTED and r.not_tested_reason == "insufficient_frames"
+
+
+def test_tier1_needs_the_declared_attempts():
+    from camera_preflight.checks import AfAttempt
+
+    ctx = CheckContext(
+        params=DEFAULT_1, mode=Mode.UPLOAD, af_attempts={"centre": [AfAttempt(True, "user")]}
+    )
+    assert BY_ID["D2"].analyse({}, ctx).level is Level.NOT_TESTED
+    full = {"centre": [AfAttempt(True, "user")] * 3}
+    ctx2 = CheckContext(params=DEFAULT_1, mode=Mode.UPLOAD, af_attempts=full)
+    # frames are also required, so use the shared helper directly for the tier 1 rule
+    from camera_preflight.checks.group_d import _tier1, points_for
+
+    assert _tier1(ctx2, points_for(ctx2))[1] == 1
+
+
+def test_gate_checks_shutter_mode_metering_and_compensation():
+    from pathlib import Path
+
+    from camera_preflight.domain import CfaData, Frame, FrameKind, FrameMeta, FrameRequirement
+    from camera_preflight.gate import GateProfile, evaluate
+    from camera_preflight.synth import SensorSpec
+
+    spec = SensorSpec()
+    arr = np_zeros(spec)
+    cfa = CfaData(arr, spec.pattern, spec.black_level, spec.white_level)
+    frame = Frame(
+        "f",
+        "0" * 64,
+        Path("a.dng"),
+        FrameMeta(shutter_type="mechanical", metering_mode="Spot", exposure_comp_ev=0.0),
+        cfa=cfa,
+    )
+    elec = FrameRequirement(FrameKind.OTHER, 1, shutter_mode="electronic", tag="c4")
+    assert (
+        evaluate(frame, GateProfile.for_requirement(elec), DEFAULT_1).message.code
+        == "gate.shutter_mode"
+    )
+    comp = FrameRequirement(FrameKind.OTHER, 1, exposure_comp_ev=1.0, tag="e5")
+    assert (
+        evaluate(frame, GateProfile.for_requirement(comp), DEFAULT_1).message.code
+        == "gate.compensation"
+    )
+    meter = FrameRequirement(FrameKind.OTHER, 1, metering="evaluative", tag="e2")
+    assert (
+        evaluate(frame, GateProfile.for_requirement(meter), DEFAULT_1).message.code
+        == "gate.metering"
+    )
+
+
+def np_zeros(spec):
+    import numpy as np
+
+    return np.full((spec.height, spec.width), spec.black_level, dtype=np.float32)
+
+
+def test_manual_photo_is_kept_as_evidence(tmp_path):
+    photo = tmp_path / "p.png"
+    photo.write_bytes(b"\x89PNG fake")
+    ctx = CheckContext(
+        params=DEFAULT_1,
+        mode=Mode.UPLOAD,
+        evidence_dir=tmp_path / "ev",
+        manual={"F5": ManualAnswer(Level.SUSPECT, "scratch", str(photo))},
+    )
+    r = BY_ID["F5"].analyse({}, ctx)
+    assert r.evidence and (tmp_path / "ev" / r.evidence[0].path).exists() and r.evidence[0].sha256

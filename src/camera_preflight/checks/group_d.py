@@ -148,6 +148,11 @@ def _tier1(ctx: CheckContext, points: tuple[AfPoint, ...]):
         attempts = ctx.af_attempts.get(p.name, [])
         if not attempts:
             continue
+        if (
+            len(attempts) < int(ctx.params.get("af.attempts"))
+            and sum(1 for a in attempts if not a.focused) < need
+        ):
+            continue  # too few reports to call this point; it stays untested
         seen += 1
         fails = [a for a in attempts if not a.focused]
         if len(fails) >= need:
