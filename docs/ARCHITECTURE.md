@@ -1,13 +1,13 @@
 # Architecture and Technical Solution
 
-Status: draft for maintainer review. Decisions referenced as `D-xx` (confirmed) or `P-xx` (proposed) are tracked in [DECISIONS.md](DECISIONS.md). Evidence labels keep the handoff meaning.
+Status: draft, revised 2026-10-17 after D-39 to D-45. Decisions referenced as `D-xx` (confirmed) or `P-xx`/`R-xx` (proposed, not yet binding) are tracked in [DECISIONS.md](DECISIONS.md). Evidence labels keep the handoff meaning.
 
 ## 1. Drivers
 
 Quality attributes in priority order, derived from the SRS:
 
 1. **Correctness and honesty of results**: no false Pass, every threshold traceable (NFR-01, NFR-08).
-2. **Works without a camera connection**: file import is the guaranteed path (R-02).
+2. **Works without a camera connection**: upload mode is the guaranteed path and ships first (D-23, D-26).
 3. **Testability without hardware**: analysis verifiable with synthetic data (R-08).
 4. **Replaceable connection layer**: backends can change per brand and OS without touching analysis (H§5).
 5. **Legal safety**: no vendor SDK files in the repo or releases; SDKs are downloaded by the user or the test environment (D-31); LGPL libraries replaceable (H§10).
@@ -38,7 +38,7 @@ Within PySide6:
 | Concern | Options | Proposed | Reason |
 | --- | --- | --- | --- |
 | RAW decoding | rawpy (LibRaw); direct LibRaw via ctypes; Adobe DNG SDK | **rawpy** | `[Sourced]` MIT wrapper over LibRaw (LGPL-2.1); exposes the raw CFA, black and white levels, CFA pattern. Format coverage per model is V-14 |
-| Metadata and maker notes | ExifTool (subprocess); exiv2 bindings; rawpy only | **ExifTool** via a thin in-house wrapper using `-stay_open` batch mode | Broadest maker-note decoding including AF info `[Sourced]`; exiv2 is GPL `[Unverified]` and would affect distribution; rawpy exposes too little. Bundling terms: V-16 |
+| Metadata and maker notes | ExifTool (subprocess); exiv2 bindings; rawpy only; in-house reader | **ExifTool, bundled** (D-42), behind a `MetadataReader` interface, run through a thin wrapper using `-stay_open` batch mode | Broadest maker-note decoding including AF info `[Sourced]`; exiv2 is GPL `[Unverified]` and would affect distribution; rawpy exposes too little. If V-16 rules out bundling, an in-house reader implements the same interface for the allowlisted fields (D-42) |
 | Numerics and image analysis | NumPy + SciPy; OpenCV; scikit-image | **NumPy + SciPy** (R-13) | `scipy.ndimage` covers filtering, labelling and region statistics `[Inference]`; OpenCV only if D6 chart registration needs it |
 | Evidence images | Pillow; matplotlib | **Pillow** for maps; hand-built SVG for charts | Small, prints well, no plotting runtime |
 | Data models and schemas | pydantic v2; dataclasses + jsonschema | **pydantic v2** | Validation and JSON Schema export for report, session and KB |
@@ -46,7 +46,7 @@ Within PySide6:
 | HTML report | Jinja2; string templates | **Jinja2** | Autoescaping; single self-contained output |
 | Internationalisation | gettext + Babel; Qt Linguist | **gettext + Babel** for all app strings; Qt's own translations loaded for standard dialogs `[Unverified]` that Qt ships Vietnamese for them | One catalogue for GUI, core messages and report |
 | Audio (later) | sounddevice (PortAudio) | sounddevice | N-05 only |
-| Physical-action animations | Layered SVG + keyframe timeline (QGraphicsView, QPropertyAnimation); Lottie (needs Qt Quick); pre-rendered video or GIF | **Layered SVG + timeline** (D-19) | Text-free, themeable, small, diffable in git; one asset set serves the app, the mockup and the field kit. Assets in `src/camera_preflight/gui/animations/` (one SVG with named layers plus one timeline file per action) |
+| Physical-action animations | Layered SVG + keyframe timeline (QGraphicsView, QPropertyAnimation); Lottie (needs Qt Quick); pre-rendered video or GIF | **Layered SVG + timeline** (D-19) | Text-free, themeable, small, diffable in git; one asset set serves the app and the mockup. Assets in `src/camera_preflight/gui/animations/` (one SVG with named layers plus one timeline file per action) |
 
 Licence status of each dependency is tracked in [LICENSING.md](LICENSING.md); all are `[Unverified]` until V-11.
 
@@ -78,7 +78,8 @@ The connection choice depends on spikes (V-10, V-13). Candidates, in evaluation 
 | Layer rules | import-linter | NFR-12 |
 | Packaging | PyInstaller onedir, zipped; Nuitka standalone as fallback if antivirus false positives appear | H§13 `[Sourced]` onefile flagged more often |
 | Installer | None for v0.1 (portable zip); Inno Setup optional later | NFR-09 |
-| Code signing | Open decision O-03 | SmartScreen prompt on unsigned builds `[Sourced]` |
+| Code signing | None (D-41) | SmartScreen prompt on unsigned builds `[Sourced]`; steps documented in README and release notes |
+| Target OS | Windows 10 22H2 and Windows 11, x64 (D-43) | CI tests on a Windows runner; no 32-bit or ARM builds |
 | CI | GitHub Actions: lint, type, test on Windows and Linux; release workflow on tag builds the Windows zip with `SHA256SUMS` | Build from M0 (H§13) |
 
 ## 3. Logical architecture
@@ -162,6 +163,7 @@ class Level(StrEnum): PASS, SUSPECT, FAIL, NOT_TESTED
 class Confidence(StrEnum): HIGH, MEDIUM, LOW
 class Severity(StrEnum): BLOCKER, HIGH, MEDIUM, LOW
 class ExecPath(StrEnum): TETHERED, SEMI_AUTOMATIC, FILE_IMPORT, MANUAL
+class AutomationLevel(StrEnum): AUTOMATIC, HELPER, BUTTON, UPLOAD, MANUAL
 
 @dataclass(frozen=True)
 class Frame:
@@ -178,8 +180,9 @@ class Check(Protocol):
     group: str                 # "B"
     paths: frozenset[ExecPath]
     requirements: tuple[FrameRequirement, ...]   # settings, counts, gate profile
-    max_shots: int
-    est_minutes: float
+    max_shots: int             # design limit only; never shown to the user (D-32)
+    automation: AutomationLevel  # per mode: automatic, helper, button, upload, manual (D-34)
+    needs_sdk: frozenset[str]  # SDK capabilities; Not tested if absent (D-24)
     kb_fields: tuple[str, ...]
     def analyse(self, frames: FrameSet, ctx: CheckContext) -> CheckResult: ...
 
@@ -223,7 +226,7 @@ Kept in the session folder for re-analysis; the user deliverable is the HTML rep
 {
   "schema_version": "1.0.0",
   "app": {"version": "0.1.0", "kb_version": "2026.1", "parameter_set": "default-1"},
-  "session": {"id": "...", "started": "...", "mode": "on_site | remote | home", "profile": "quick"},
+  "session": {"id": "...", "started": "...", "mode": "connected | upload", "backend": "sdk:canon | ptp:sony | none"},
   "camera": {"brand": "...", "model": "...", "serial": {"read": "...", "entered": "...", "match": true},
              "firmware": "...", "shutter_count": {"before": 0, "after": 0, "source": "exif", "plausibility": []},
              "lens": "..."},
@@ -282,17 +285,18 @@ camera-preflight/
   docs/                     SRS, architecture, UX, roadmap, decisions, test catalogue
   knowledge-base/
     schema/                 generated JSON Schema
-    canon/ nikon/ sony/     curated YAML per model
+    canon/ nikon/ sony/     curated YAML per model; every model in scope (D-40)
     layouts/                AF point layouts
   packaging/
     pyinstaller/            onedir spec
+    exiftool/               pinned ExifTool version and checksum; fetched at build time, not committed (D-42)
     licenses/               third-party licence texts collected at build
   src/camera_preflight/
     domain/                 Frame, Result, Level, Session, Check, Message (pure)
     analysis/               common/, pixels/, dust/, uniformity/, shutter/, af/, metering/
     checks/                 one module per group: group_a.py ... group_f.py, verdict parameter sets
     gate/                   acceptance rules, provenance
-    io/                     raw.py (rawpy), exiftool.py, upload.py
+    io/                     raw.py (rawpy), metadata.py (MetadataReader interface, allowlist), exiftool.py (bundled ExifTool), upload.py
     knowledge/              schema, loader, derived builder, resolver
     helpers/                H1..H7 detectors (dark sensor, flat field, chart, steady, lens change, focus mode, card)
     acquisition/            step execution for tethered and import paths
@@ -341,7 +345,7 @@ Dependency rules (enforced by import-linter):
 
 | Level | What | How |
 | --- | --- | --- |
-| Unit | analysis functions, gate rules, verdict rules, planner, schemas | pytest + hypothesis on synthetic arrays |
+| Unit | analysis functions, gate rules, verdict rules, wizard ordering, schemas | pytest + hypothesis on synthetic arrays |
 | Synthetic defect suite | B1 to B6, C2, C3, D3 | `synth` generates CFA frames with shot and read noise, vignetting, and injected defects (hot pixels, clusters, dead pixels, dust blobs scaled by aperture, linear scratches, banding, curtain gradients, flicker stripes, blur per AF region) plus ground-truth JSON; detection rate and false positives measured (NFR-02) |
 | Integration | import, classify, decode, report on real RAW samples | Sample RAW files downloaded to a CI cache, not committed; source and licence per file recorded (V-19) |
 | Golden reports | report JSON and HTML stability | Snapshot tests on synthetic sessions |

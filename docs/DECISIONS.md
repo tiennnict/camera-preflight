@@ -24,16 +24,16 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-14 | Everything published on GitHub is in English: code, comments, docs, commit messages, issues, pull requests, review replies, release notes. Clarifies D-07 | 2026-10-16 | Session |
 | D-15 | The software is internationalised from the start; English and Vietnamese are built and kept complete in parallel. Confirms N-08 | 2026-10-16 | Session |
 | D-17 | Approvals and decisions are requested from the maintainer in the chat, in Vietnamese, with enough context to decide; the English documents record the outcome | 2026-10-16 | Session |
-| D-19 | Animations are layered vector SVG scenes driven by keyframe timelines, played in Qt Widgets through QGraphicsView; the same assets drive the HTML mockup and the printable field kit (static key frame) | 2026-10-16 | Session |
+| D-19 | Animations are layered vector SVG scenes driven by keyframe timelines, played in Qt Widgets through QGraphicsView; the same assets drive the HTML mockup and the printable field kit (static key frame). Field kit dropped by D-30 | 2026-10-16 | Session |
 | D-20 | Animations use two generic body types (DSLR and mirrorless) without brand shapes or logos; the control involved is highlighted and named by a translatable label | 2026-10-16 | Session |
 | D-21 | Camera menu settings (RAW, noise reduction off, lens corrections off) are given as text only, without animation, because menus differ per brand and generation | 2026-10-16 | Session |
-| D-22 | The UI mockup covers every wizard step of all three profiles, one framed screen per step on a single page | 2026-10-16 | Session |
+| D-22 | The UI mockup covers every wizard step of all three profiles, one framed screen per step on a single page. Profiles removed by D-28; the mockup was rebuilt for the two modes and is frozen by D-45 | 2026-10-16 | Session |
 | D-23 | Two operating modes only: camera connected (tethered) or not connected (upload images). The app detects the driver and a plugged-in camera automatically. Supersedes the four entry choices in UX S1 | 2026-10-17 | Session |
 | D-24 | Vendor SDK support is part of the design. A first-run setup step lets the user point to each SDK and explains the benefit of using it. Without an SDK, checks that need it are skipped automatically and reported as Not tested with the reason | 2026-10-17 | Session |
 | D-25 | Tethered mode automates as much as possible: set camera settings and exposure parameters, release the shutter, download the files and analyse them. When an automatic command fails, the step falls back to guided manual instructions | 2026-10-17 | Session |
 | D-26 | The wizard always contains every step. In upload mode, the capture control of each shooting step is replaced by an upload button | 2026-10-17 | Session |
 | D-27 | The report delivered to the user is an HTML file | 2026-10-17 | Session |
-| D-28 | No Quick, Standard or Full profiles. The wizard always shows every step that applies to the camera; the user may skip any step, which is then reported as Not tested (skipped by user). The planned number of shots is shown at the start | 2026-10-17 | Session |
+| D-28 | No Quick, Standard or Full profiles. The wizard always shows every step that applies to the camera; the user may skip any step, which is then reported as Not tested (skipped by user). The planned number of shots is shown at the start (this last sentence is withdrawn by D-32 and D-37) | 2026-10-17 | Session |
 | D-29 | Upload mode accepts images per step only; there is no bulk upload with automatic assignment to steps | 2026-10-17 | Session |
 | D-30 | No remote pre-check pack and no printable field kit. Each shooting step shows the required shooting parameters, whoever takes the shots. On upload, the app checks that the parameters (aperture, exposure time, ISO, file type and so on) are sufficient for the test, and rejects frames that are not, with the reason (for example exposure too short) | 2026-10-17 | Session |
 | D-31 | Vendor SDK integration is fully designed and implemented. The test environment downloads the SDKs to test against them. Release builds contain no SDK; the user is told where to download it and either places it in the default folder or points the app to another folder | 2026-10-17 | Session |
@@ -46,6 +46,13 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-38 | Reference photos come only from openly licensed sources, with author, licence and source recorded and shown in the app; target 4 photos per defect. The maintainer adds or replaces photos with their own where needed | 2026-10-17 | Session |
 | D-18 | The wizard shows 2D animations that illustrate the physical actions the user must perform (for example plugging a cable, powering on, mounting a lens, fitting a body cap, pressing or holding a button, tilting the camera to inspect a part) | 2026-10-16 | Session |
 | D-16 | The maintainer works with the assistant in Vietnamese. The assistant translates into English for GitHub and for the English UI text, and writes the Vietnamese UI text alongside | 2026-10-16 | Session |
+| D-39 | Sony USB control ships in the first release with USB control (v0.2), together with Canon. Nikon USB control follows in v0.4. Answers O-01 | 2026-10-17 | Session |
+| D-40 | No priority model list. The knowledge base targets every model of the supported brands: the derived tier works for any model, and curated entries are added for every model as sourced data is found. Hardware tests use whichever bodies are available. Answers O-02; closes V-08 | 2026-10-17 | Session |
+| D-41 | Windows builds are not code-signed. The README and release notes explain how to run an unsigned build past the SmartScreen prompt. Answers O-03; drops V-12 | 2026-10-17 | Session |
+| D-42 | ExifTool is bundled in release builds. If its terms do not allow bundling (V-16), the project writes its own metadata reader instead; the user is never asked to supply ExifTool. Answers O-04 | 2026-10-17 | Session |
+| D-43 | Minimum Windows version: Windows 10 22H2 and Windows 11, x64 only. Answers O-05 | 2026-10-17 | Session |
+| D-44 | UI text is short and complete in meaning. Screens carry no long notes, footnotes or explanations; detail is available on demand (check detail, method section of the report). Applies to English and Vietnamese ([UX.md](UX.md) section 9) | 2026-10-17 | Session |
+| D-45 | The mockup is not revised further. It is a layout and flow reference only; where it differs from the documents, the documents prevail. Its on-screen text is longer than D-44 allows and must not be copied as is | 2026-10-17 | Session |
 
 ## 2. Proposed (awaiting approval)
 
@@ -84,14 +91,22 @@ Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVI
 | P-04 | gettext + Babel as the single translation catalogue | ARCHITECTURE §2.2 | Proposed |
 | P-05 | Core libraries: rawpy, ExifTool, NumPy, SciPy, Pillow, pydantic, PyYAML, Jinja2 | ARCHITECTURE §2.2 | Proposed |
 | P-06 | Release format: PyInstaller onedir zip (portable) with SHA256SUMS; installer later | ARCHITECTURE §2.4 | Proposed |
-| P-07 | Release map v0.1 to v0.4 and milestones M0 to M5 | ROADMAP §2, §3 | Proposed |
+| P-07 | Release map v0.1 to v0.4 and milestones M0 to M5 (Sony moved into v0.2 by D-39) | ROADMAP §2, §3 | Proposed |
 
 ## 3. Open (maintainer input needed)
 
-| ID | Question | Needed by | Assistant's default if not decided |
-| --- | --- | --- | --- |
-| O-01 | Is Sony in the first release that includes USB control? | M4 | No: Sony via upload mode from v0.1; Sony USB in v0.4 |
-| O-02 | Priority model list for KB seed (M3) and KB v1 (M5) | M3 | Ask the maintainer for the bodies they can physically test |
-| O-03 | Code signing of Windows builds | v0.1 | Unsigned v0.1 with documented SmartScreen steps; revisit when downloads grow |
-| O-04 | ExifTool bundled in releases or supplied by the user | v0.1 | Bundle if V-16 confirms it is allowed; else first-run download guidance |
-| O-05 | Minimum Windows version | v0.1 | Windows 10 22H2 and Windows 11, x64 |
+No open questions. O-01 to O-05 were answered on 2026-10-17:
+
+| ID | Question | Answer |
+| --- | --- | --- |
+| O-01 | Is Sony in the first release that includes USB control? | Yes (D-39) |
+| O-02 | Priority model list for the knowledge base | No priority list; all models (D-40) |
+| O-03 | Code signing of Windows builds | Not needed (D-41) |
+| O-04 | ExifTool bundled or supplied by the user | Bundled; own reader if bundling is not allowed (D-42) |
+| O-05 | Minimum Windows version | Windows 10 22H2 and Windows 11, x64 (D-43) |
+
+## 4. Rules for agents
+
+- Only Confirmed items are binding. A work package that depends on a Proposed item is blocked until the maintainer approves it ([WORK-PACKAGES.md](WORK-PACKAGES.md) lists the dependencies).
+- Do not change a Confirmed item. If an implementation finding contradicts one, stop and report it to the maintainer.
+- New decisions get the next free D number, are asked in the chat in Vietnamese (D-17), and are recorded here in English with the date.

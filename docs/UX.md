@@ -1,6 +1,6 @@
 # UI/UX Design
 
-Status: revised 2026-10-17 after maintainer decisions D-23 to D-38 ([DECISIONS.md](DECISIONS.md)). Requirements referenced as `FR-xx`/`NFR-xx` are in [SRS.md](SRS.md). The visual mockup is a separate Design artifact; this document is the reference for behaviour.
+Status: revised 2026-10-17 after maintainer decisions D-23 to D-45 ([DECISIONS.md](DECISIONS.md)). Requirements referenced as `FR-xx`/`NFR-xx` are in [SRS.md](SRS.md). The visual mockup is a separate, private Design artifact, frozen as a layout and flow reference (D-45); section 12 maps its frames to the screens below. Where the mockup and this document differ, this document prevails.
 
 ## 1. Design goals
 
@@ -143,10 +143,25 @@ Catalogue: plug USB cable; power on; turn camera to read serial; tilt camera to 
 
 ## 9. Content guidelines
 
-- Plain, neutral sentences. State what was measured and what it may mean.
+On-screen text is short and complete in meaning (D-44, FR-GUI-09). The screen says what to do or what was found; why and how live in the check detail and the report's method section.
+
+| Element | Rule | Example (English / Vietnamese) |
+| --- | --- | --- |
+| Screen title | One line, at most about 8 words; names the action or the result | Fit the body cap / Lắp nắp thân máy |
+| Instruction | At most 2 short sentences, imperative; one action per sentence | Aim at a white wall. Keep the camera still. / Chĩa máy vào tường trắng. Giữ máy yên. |
+| Button | Verb first, at most 3 words | Start / Bắt đầu; Upload photos / Tải ảnh lên |
+| Status and result | Level plus at most one short reason | Suspect: 4 hot pixels near centre / Nghi vấn: 4 điểm nóng gần tâm |
+| Rejection reason | The value found and the value needed, nothing else | Exposure 1/60 s; needs 30 s / Phơi sáng 1/60 giây; cần 30 giây |
+| Shooting parameters | A key and value table, no prose | ISO: 1600 |
+| Notes and footnotes | None on the main screen. Background, caveats and method go to the check detail (S11) or the report | |
+| Tooltips | Only for terms the user may not know (CFA, hot pixel, EFCS); one sentence | |
+
+Other rules:
+
+- Plain, neutral wording. State what was measured, not what it means for the purchase.
 - No advice to buy, not buy, or negotiate a price.
-- Unverified thresholds are labelled in the method section and in the report.
-- Explain jargon on first use with a tooltip (CFA, hot pixel, EFCS).
+- Unverified thresholds are labelled in the method section and in the report, not on the wizard screens.
+- Vietnamese text follows the same limits; it is not a word-for-word translation of the English and may be shorter.
 
 ### 9.1 Core vocabulary (English and Vietnamese)
 
@@ -181,3 +196,26 @@ Catalogue: plug USB cable; power on; turn camera to read serial; tilt camera to 
 | Before connected mode ships | Session on a real body | 2 people | Connected mode end to end | No step where the user had to do something the app could have done over USB |
 
 Findings go to `docs/ux-findings/`.
+
+## 12. Mockup index (D-45)
+
+The mockup is a private Design artifact owned by the maintainer (Vietnamese text only, rendering not checked on every frame). Agents that cannot open it work from this document. It is a reference for layout and flow, not for copy: its on-screen text is longer than section 9 allows.
+
+| Row | Frames | Screen |
+| --- | --- | --- |
+| 1 | First-run SDK setup; Home; Detect camera (found); Detect camera (none) | S0, S1, S2 |
+| 2 | Blocker check; Blocker found | S3 |
+| 3 | Automatic run; Command failed, manual fallback | S4 |
+| 4 | Dark: waiting (H1); Dark: running; Flat: waiting (H2); Flat: running the group; Chart: waiting (H3, H4); AF: running per point; Second lens: waiting (H5) | S5, S6 |
+| 5 | AF point chosen by the user (button); AF/MF switch (button) | S7 |
+| 6 | Manual checks 1 to 9: body, controls, screens and EVF, viewfinder, mount play, flash, ports and battery and video, lens, shutter sound | S9 |
+| 7 | Upload: test photo (A1 to A5, C1, D9); dark frames with a rejected file; flat-field sets; AF chart | S8 |
+| 8 | Results (with shutter count before and after); pixel detail; AF map detail; HTML report | S10, S11, S12 |
+| 9 | Settings; Connection lost | S13, S14 |
+| 10 | Shared parts: animation library (24 scenes), top bar, bottom bar, step list, animation panel, reference photo strip | All |
+
+Known differences between the mockup and the documents:
+
+- The mockup's notes and explanations break D-44; follow section 9.
+- The report frame shows a SHA-256 code. That feature depends on N-10, which is Proposed.
+- The shutter sound frame has the app fire 6 shots at different speeds while the user listens; the connection-lost frame offers an upload for the interrupted check; the results frame has a "path" column. They are consistent with D-25, D-29 and FR-TST-02.

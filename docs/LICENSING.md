@@ -11,15 +11,16 @@ Not legal advice. This document records constraints and open questions; items ma
 
 | Vendor | Known terms | Consequence |
 | --- | --- | --- |
-| Canon | `[Sourced]` (Singapore terms) non-exclusive, non-transferable, revocable; one year from approval; use only in the applicant's country or region; distribution only as part of the developer's software; approval not guaranteed, 2 to 4 weeks. `[Sourced]` Canon Oceania does not supply the SDK to personal users (Oceania only). `[Unverified]` entity for a Vietnam-based applicant | No Canon SDK in repo or releases; adapter outside repo until V-01 |
+| Canon | `[Sourced]` (Singapore terms) non-exclusive, non-transferable, revocable; one year from approval; use only in the applicant's country or region; distribution only as part of the developer's software; approval not guaranteed, 2 to 4 weeks. `[Sourced]` Canon Oceania does not supply the SDK to personal users (Oceania only). `[Unverified]` entity for a Vietnam-based applicant | No Canon SDK files in repo or releases; adapter code in `backends/sdk/` only within what V-01 allows |
 | Nikon | `[Sourced]` (third-party source) latest public SDK autumn 2024, download site had been under maintenance | Same rule |
 | Sony | `[Sourced]` other open-source projects do not include the SDK and require user download; some functions need a licence on the camera | Same rule |
 
-Rules (R-11, CON-03):
+Rules (D-31, CON-03):
 
-1. No vendor SDK binaries, headers, sample code or SDK-derived bindings in the repo or releases until V-01 confirms what is allowed.
-2. The app loads user-supplied adapters only inside the backend host process.
-3. The UI reminds the user that SDK use is governed by the vendor's terms.
+1. No vendor SDK binaries, headers or sample code in the repo or releases, ever. SDKs are downloaded by the user (release) or by the test environment (development).
+2. Adapter code (bindings written by the project) lives in `src/camera_preflight/backends/sdk/`. Until V-01 confirms what each vendor allows, adapter work packages are blocked from merging to `main`.
+3. The app loads the native SDK only inside the backend host process, from the default folder or the folder set by the user.
+4. The UI reminds the user that SDK use is governed by the vendor's terms.
 
 ## 3. Dependencies (to be verified for exact shipped versions)
 
@@ -35,7 +36,7 @@ Rules (R-11, CON-03):
 | PyYAML | KB loading | MIT `[Unverified]` | | `[Unverified]` |
 | Jinja2, MarkupSafe | Report | BSD-3-Clause `[Unverified]` | | `[Unverified]` |
 | Babel | i18n tooling (build time) | BSD-3-Clause `[Unverified]` | Possibly not shipped | `[Unverified]` |
-| ExifTool | Metadata | "Same terms as Perl" (Artistic or GPL) `[Unverified]` | Bundling the Windows executable vs user-supplied: V-16 | `[Unverified]` |
+| ExifTool | Metadata | "Same terms as Perl" (Artistic or GPL) `[Unverified]` | Bundled (D-42), including any Perl runtime it ships with; V-16 confirms the terms. If not allowed, replaced by an in-house reader | `[Unverified]` |
 | PyInstaller | Packaging | GPL with bootloader exception `[Unverified]` | Exception intended to allow non-GPL apps `[Unverified]` | `[Unverified]` |
 | comtypes | WPD (if chosen) | MIT `[Unverified]` | | `[Unverified]` |
 | sounddevice / PortAudio | Audio (later) | MIT `[Unverified]` | | `[Unverified]` |
@@ -51,9 +52,9 @@ Rules (R-11, CON-03):
 ## 5. Personal data
 
 - The app does not read owner name, copyright, Wi-Fi or similar settings from the camera (CON-05).
-- Only files inside the session's import window, or files the user explicitly selects, are imported (FR-ACQ-02).
+- Only files the user selects for a step, or files the app itself captures in connected mode, are imported (FR-ACQ-02).
 - Stored metadata passes an allowlist; personal fields (artist, copyright, owner name, GPS, user comments, network settings) are dropped (FR-META-02).
-- Original frame files are kept unmodified for re-verification and may still contain such fields as written by the camera; session export lets the user leave original frames out (FR-SES-07).
+- Original frame files are kept unmodified in the session folder and may still contain such fields as written by the camera; the HTML report never embeds them (FR-SES-07).
 - Sessions are stored locally; nothing is transmitted (NFR-06).
 - Reports include the camera serial; the UI notes this before sharing a report.
 

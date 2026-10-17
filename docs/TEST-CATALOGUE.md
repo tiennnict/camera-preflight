@@ -1,6 +1,6 @@
 # Test Catalogue
 
-Revision of handoff section 6 ([archive/handoff.md](archive/handoff.md)) with the design review ([DESIGN-REVIEW.md](DESIGN-REVIEW.md)) and maintainer decisions D-23 to D-38 ([DECISIONS.md](DECISIONS.md)) applied. Profiles were removed (D-28): every applicable check is always in the wizard, ordered by automation level (section 9). Revised items are marked with their review ID. Evidence labels keep the handoff meaning. Nothing here has been run on a real camera. Thresholds marked `[Guess]` are parameters to be calibrated (V-07), not facts.
+Revision of handoff section 6 ([archive/handoff.md](archive/handoff.md)) with the design review ([DESIGN-REVIEW.md](DESIGN-REVIEW.md)) and maintainer decisions D-23 to D-45 ([DECISIONS.md](DECISIONS.md)) applied. Profiles were removed (D-28): every applicable check is always in the wizard, ordered by automation level (section 9). Revised items are marked with their review ID. Evidence labels keep the handoff meaning. Nothing here has been run on a real camera. Thresholds marked `[Guess]` are parameters to be calibrated (V-07), not facts.
 
 ## 0. Conventions
 
@@ -35,7 +35,7 @@ Equipment (handoff table retained; changes noted):
 | Card reader | Upload mode | To copy files to the PC |
 | Flat grey or white target, even continuous light | B, C, E | Daylight from an overcast sky or halogen light; avoid LED and fluorescent `[Inference]` |
 | Body cap | B1 | |
-| AF chart (printed from the app), tripod | D, E3 | Without them, D and E3 are skipped by the user |
+| AF chart (provided by the app as a file to print or show on a screen), tripod | D, E3 | Without them, D and E3 are skipped by the user |
 | Reference lens and a second lens | D10, E7 | `[Sourced]` separates body from lens faults |
 | Windows PC | Both modes | |
 
@@ -94,7 +94,7 @@ Two tiers (D-04): tier 1 = point does not achieve focus; tier 2 = point achieves
 
 ### D0 Protocol
 
-- App-generated chart (field kit) perpendicular to the camera, on a tripod, flicker-free light.
+- App-provided chart (`guide` package; printed or shown on a screen) perpendicular to the camera, on a tripod, flicker-free light.
 - AF-S with focus priority, single point, area expansion off `[Sourced]`.
 - Before each shot, defocus fully so the camera must refocus `[Sourced]` (manual focus ring to the near limit, or SDK drive where available).
 - DSLR: optical viewfinder path, not Live View `[Sourced]`.
@@ -104,7 +104,7 @@ Two tiers (D-04): tier 1 = point does not achieve focus; tier 2 = point achieves
 | Test | Action | Analysis and verdict | Paths | Shots |
 | --- | --- | --- | --- | --- |
 | D1 AF point map | Point count, type, layout from curated KB, else derived from metadata (Canon `[Sourced]`) | Drives chart and point list; unknown layout = generic 5-point plan only | KB, FI | 0 |
-| D2 Tier 1 (R-01) | Select each point; 3 attempts (S) or 5 (F) | Point fails to focus in at least 2 of 3 attempts = Suspect; tethered timeout Medium confidence, user-reported Low; metadata confirms selected point (gate G6) only where decoder verified | T, SA, M | Points x repeats |
+| D2 Tier 1 (R-01) | Select each point; 3 attempts (parameter `af.attempts`, `[Guess]`) | Point fails to focus in at least 2 of 3 attempts = Suspect; tethered timeout Medium confidence, user-reported Low; metadata confirms selected point (gate G6) only where decoder verified | T, SA, M | Points x repeats |
 | D3 Tier 2 | Reuse accepted D2 or D5 frames | Edge contrast around each point versus the centre point in the same session `[Sourced]`; prioritise left and right edge points `[Sourced]` | FI, T | 0 |
 | D4 Repeatability | Reuse D2/D3 data | Large spread of sharpness across repeats = unstable AF = Suspect `[Inference]` | FI, T | 0 |
 | D5 Priority sample | Centre plus four outermost points first, 3 attempts each `[Sourced]` sampling; the remaining points follow in the same run | Early D2 to D4 results on 5 points | T, SA, FI | 15 |

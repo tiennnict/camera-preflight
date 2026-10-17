@@ -1,6 +1,6 @@
 # Development Plan
 
-Status: revised 2026-10-17 after maintainer decisions D-23 to D-38. Scope references point to [SRS.md](SRS.md) and [TEST-CATALOGUE.md](TEST-CATALOGUE.md). Effort sizes are `[Guess]` for a single part-time maintainer; no calendar dates are committed.
+Status: revised 2026-10-17 after maintainer decisions D-23 to D-45. The release map is Proposed (P-07). Work packages for agents: [WORK-PACKAGES.md](WORK-PACKAGES.md). Scope references point to [SRS.md](SRS.md) and [TEST-CATALOGUE.md](TEST-CATALOGUE.md). Effort sizes are `[Guess]` for a single part-time maintainer; no calendar dates are committed.
 
 ## 1. Approach
 
@@ -17,9 +17,9 @@ Status: revised 2026-10-17 after maintainer decisions D-23 to D-38. Scope refere
 | (internal) | M0 | Foundation | Repo, CI, schemas, synthetic data |
 | 0.0.x pre-release | M1 | Analysis core and CLI | Technical users can analyse dark and flat frames |
 | **v0.1** | M2 | Full wizard in upload mode | Every check that works from files, blocker check, manual checks with reference photos, HTML report, English and Vietnamese |
-| **v0.2** | M3 | Connected mode, Canon first | Detection, SDK first-run setup, automatic phase, helpers H1, H2, H5, H7, app-driven settings and capture, Canon PTP and Canon SDK adapter |
-| **v0.3** | M4 | Connected AF and knowledge base v1 | Helpers H3, H4, H6; automatic AF runs on all points where the backend allows; curated KB for priority models |
-| **v0.4** | M5 | Nikon and Sony | PTP backends and SDK adapters for Nikon and Sony; D6 to D8 where SDKs allow |
+| **v0.2** | M3 | Connected mode, Canon and Sony | Detection, SDK first-run setup, automatic phase, helpers H1, H2, H5, H7, app-driven settings and capture; Canon and Sony PTP backends and SDK adapters (D-39) |
+| **v0.3** | M4 | Connected AF and knowledge base v1 | Helpers H3, H4, H6; automatic AF runs on all points where the backend allows; D6 to D8 for Sony; curated KB for all models with sourced data (D-40) |
+| **v0.4** | M5 | Nikon | Nikon PTP backend and SDK adapter; D6 to D8 where the Nikon SDK allows |
 | later | | macOS and Linux, audio burst (N-05) | |
 
 ## 3. Milestones
@@ -39,14 +39,14 @@ Exit: CI green on both OS; tagged pre-release produces a Windows zip that runs `
 
 Scope: FR-META-01 to 04, FR-GATE-01 to 04, 06, 07, FR-TST-01 to 05, FR-VER-01 to 02, FR-REP-02 to 06, 09, FR-KB-03 to 04. Checks A1, A3, A4, A6, B1 to B6, C1 to C4, E1, E2, E4 to E7 from files.
 
-- `io`: rawpy decoding, ExifTool wrapper, per-step upload.
+- `io`: rawpy decoding, metadata reader interface with the bundled ExifTool as first implementation (D-42), per-step upload. At the end of M1, V-16 decides whether ExifTool can ship; if not, an in-house reader replaces it before v0.1.
 - `gate`: rules G1 to G7 with plain rejection reasons (D-30), provenance.
 - `analysis`: pixels, dust, uniformity, shutter, metering.
 - `checks` with parameter set `default-1` (every threshold labelled).
 - `report`: HTML and manifest.
 - CLI: `camera-preflight analyse --check B1 <files>`.
 
-Exit: synthetic suite meets NFR-02 for B1 to B4; at least 3 real RAW samples per priority brand decode (V-14 partly closed); report snapshot test stable.
+Exit: synthetic suite meets NFR-02 for B1 to B4; at least 3 real RAW samples per brand (Canon, Nikon, Sony) decode (V-14 partly closed); report snapshot test stable.
 
 ### M2 Full wizard in upload mode, v0.1 (size: L)
 
@@ -60,30 +60,32 @@ Scope: FR-TST-06 to 09, 11, FR-ACQ-01, 02, FR-GATE-03, FR-GUI-01, 03, 05 to 08, 
 
 Exit: upload mode end to end on the demo session and on real files of at least one body; usability round 1 met or findings fixed; v0.1 zip published with licences and photo attributions (NFR-13), after V-11 is closed for shipped dependencies.
 
-### M3 Connected mode, Canon first, v0.2 (size: XL, highest technical risk)
+### M3 Connected mode, Canon and Sony, v0.2 (size: XL, highest technical risk)
 
 Precondition: spike S-USB (section 4) has selected the transport.
 
 Scope: FR-CON-01 to 08, FR-ACQ-05, 06, 09 to 12, FR-TST-10, FR-META-05, FR-REP-07, NFR-05, 18.
 
-- Backend host process and protocol (P-02); Canon PTP backend; Canon SDK adapter tested in the SDK test environment (D-31, V-23).
+- Backend host process and protocol (P-02); Canon and Sony PTP backends; Canon and Sony SDK adapters tested in the SDK test environment (D-31, D-39, V-23).
 - Camera and driver detection; first-run SDK setup screen (D-24).
 - Automatic phase: A1 to A5, settings applied by the app, C1; auto-advance.
 - Helpers H1 (dark sensor), H2 (flat field), H5 (lens changed), H7 (card) with button fallback.
 - Fallback to guided manual steps when a command fails (D-25).
 - Hardware test protocol and log per body.
 
-Exit: connected mode end to end on at least 2 Canon bodies of different generations, logged in `docs/hardware-log/`; no step asks the user for something the backend can do (NFR-18); unplug test passes (NFR-05).
+Exit: connected mode end to end on at least 2 Canon bodies of different generations and at least 1 Sony body, logged in `docs/hardware-log/`; no step asks the user for something the backend can do (NFR-18); unplug test passes (NFR-05).
 
 ### M4 Connected AF and knowledge base v1, v0.3 (size: L)
 
-Scope: FR-KB-01, 02, 05, 06, FR-VER-04; helpers H3 (chart), H4 (steady), H6 (focus mode); automatic AF runs (point selection and focus drive by the app where the backend allows, button per point otherwise); E3 connected.
+Scope: FR-KB-01, 02, 05, 06, FR-VER-04; helpers H3 (chart), H4 (steady), H6 (focus mode); automatic AF runs (point selection and focus drive by the app where the backend allows, button per point otherwise); E3 connected; D6 to D8 on Sony (D-04).
 
-Exit: AF run on at least one Canon body with two lenses; KB v1 entries all sourced.
+- KB v1 (D-40): a curated entry for every Canon, Nikon and Sony model for which sourced data is found; the derived tier covers the rest.
 
-### M5 Nikon and Sony, v0.4 (size: XL)
+Exit: AF run on at least one Canon and one Sony body with two lenses; every KB v1 entry sourced; KB validation passes in CI.
 
-Scope: Nikon and Sony PTP backends (V-04) and SDK adapters; D6 to D8 where SDKs allow.
+### M5 Nikon, v0.4 (size: L)
+
+Scope: Nikon PTP backend (V-04) and SDK adapter; D6 to D8 where the Nikon SDK allows.
 
 Exit: defined at the start of M5 from verification results.
 
@@ -97,14 +99,13 @@ Verification tasks: [VERIFICATION.md](VERIFICATION.md).
 | S-LIC: licences, NOTICE, photo attributions | V-11, V-16, V-19, V-24 | v0.1 |
 | S-AF: focus priority behaviour | V-15, V-06, V-03 | Start of M4 |
 | S-USB: transport spike on Windows | V-09, V-10, V-13, V-04, V-05 | Start of M3 (run the spike during M2) |
-| S-SDK: SDK terms, access and test environment | V-01, V-02, V-23 | Start of M3 (Canon); M5 (Nikon, Sony). Canon application has a 2 to 4 week lead time `[Sourced]` |
+| S-SDK: SDK terms, access and test environment | V-01, V-02, V-23 | Start of M3 (Canon, Sony); M5 (Nikon). Canon application has a 2 to 4 week lead time `[Sourced]` |
 | S-HLP: helper feasibility | V-22 | Start of M3 |
 | S-CAL: threshold calibration | V-07 | v0.1 for B and C; v0.3 for D and E |
-| S-SIGN: code signing | V-12, O-03 | v0.1 if decided |
 
 Spike S-USB outline:
 
-1. WPD: enumerate a Canon body, open a session, `GetDeviceInfo`, read property 0xD1AC, read live view, capture, download.
+1. WPD: enumerate a Canon body and a Sony body, open a session, `GetDeviceInfo`, read properties (Canon 0xD1AC), read live view, capture, download.
 2. Repeat with libusb plus WinUSB; note driver install and revert steps.
 3. If both fail: .NET helper around FC.SDK with the same JSON protocol.
 4. Output: a decision record with measured results in [DECISIONS.md](DECISIONS.md).
@@ -126,7 +127,7 @@ Spike S-USB outline:
 | E11 Animations and reference photos | M2 | `gui/animations`, `gui/reference` |
 | E12 Backends and SDK adapters | M3 to M5 | `backends`, `acquisition` |
 | E13 Helpers | M3, M4 | `helpers` |
-| E14 Knowledge base content | M4 | `knowledge-base/` |
+| E14 Knowledge base content | M1 to M5 | `knowledge-base/` |
 | E15 Localisation and accessibility | M0 onward | `locale`, `gui` |
 
 ## 6. Definition of Done
@@ -141,7 +142,7 @@ Spike S-USB outline:
 
 ## 7. Ways of working
 
-- Branches: `main` protected; feature branches; pull requests with CI required.
+- Branches: `main` protected; one branch per work package, named `wp/<id>-<short-name>`; pull requests with CI required.
 - Commits: Conventional Commits; CHANGELOG per release.
 - Versioning: SemVer for the app; schema versions independent.
 - Issues: verification tasks stay in [VERIFICATION.md](VERIFICATION.md) until the maintainer opens them as issues (D-11).
@@ -159,5 +160,7 @@ Spike S-USB outline:
 | Few openly licensed defect photos | Visual checks lack photos | Maintainer photos (D-38); drawings meanwhile |
 | LibRaw lacks support for recent bodies | Checks unavailable for those models | DNG fallback (FR-META-03) |
 | Thresholds wrong on real cameras | False Suspect or missed defects | Labelled parameters; calibration track; Suspect before Fail |
-| Antivirus flags builds | Users cannot run the app | onedir build; Nuitka fallback; signing (O-03) |
+| Antivirus flags builds | Users cannot run the app | onedir build; Nuitka fallback; builds are unsigned (D-41), so SmartScreen steps are documented |
+| v0.2 carries two brands (D-39) | M3 is larger and slower | Canon and Sony share the PTP layer and the backend host; the brand-specific parts are separate work packages |
+| ExifTool cannot be bundled (V-16) | An in-house metadata reader must be written (D-42) | Metadata access behind one interface from M1; decide at the end of M1 |
 | Single maintainer capacity | Milestones stretch | Each release stands alone |

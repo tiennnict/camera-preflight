@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Document | SRS |
-| Version | 0.2 (revised after maintainer decisions D-23 to D-38, 2026-10-17) |
+| Version | 0.3 (revised after maintainer decisions D-23 to D-45, 2026-10-17) |
 | Status | Draft. Items that depend on a Proposed decision are binding only once approved in [DECISIONS.md](DECISIONS.md) |
 | Baseline | [archive/handoff.md](archive/handoff.md) (`H§n`), [DESIGN-REVIEW.md](DESIGN-REVIEW.md) |
 | Related | [TEST-CATALOGUE.md](TEST-CATALOGUE.md), [ARCHITECTURE.md](ARCHITECTURE.md), [UX.md](UX.md), [ROADMAP.md](ROADMAP.md), [VERIFICATION.md](VERIFICATION.md), [LICENSING.md](LICENSING.md), [REFERENCE-IMAGES.md](REFERENCE-IMAGES.md) |
@@ -73,9 +73,9 @@ Standalone, offline desktop application. It talks to cameras over USB through in
 
 ### 2.4 Operating environment
 
-- OS: Windows 10 and 11 x64 (first target). macOS and Linux later; design must not preclude them.
+- OS: Windows 10 22H2 and Windows 11, x64 only (D-43). macOS and Linux later; design must not preclude them.
 - Hardware: PC with USB 2.0 or newer; 8 GB RAM recommended `[Guess]`; optional microphone (N-05).
-- Cameras: Canon and Nikon required; Sony optional (open decision O-01).
+- Cameras: Canon, Sony and Nikon. Upload mode supports all three from v0.1; connected mode supports Canon and Sony from v0.2 and Nikon from v0.4 (D-39). Every model of these brands is in scope; there is no priority model list (D-40).
 - No network connection required for any function.
 
 ### 2.5 Constraints
@@ -96,7 +96,7 @@ Standalone, offline desktop application. It talks to cameras over USB through in
 | ID | Assumption | Risk if false | Verification |
 | --- | --- | --- | --- |
 | AS-01 | LibRaw (via rawpy) decodes RAW files of the priority models | Checks fall back to DNG or JPEG with lower confidence | V-14 |
-| AS-02 | ExifTool decodes maker notes needed for A3, A6, D | Fields reported as unreadable | V-16 |
+| AS-02 | ExifTool decodes maker notes needed for A3, A6, D, and may be bundled | Fields reported as unreadable; if bundling is not allowed, an in-house reader is written (D-42) | V-16 |
 | AS-03 | Focus priority prevents shutter release without focus | AF tier 1 logic revised per brand | V-15 |
 | AS-04 | A PTP path from Windows without driver replacement exists (WPD) | Connected mode needs a driver step or a .NET helper | V-13 |
 | AS-05 | Live view and properties needed by helpers H1 to H7 are readable on target bodies | Helpers fall back to the button | V-22 |
@@ -115,7 +115,7 @@ Buy or price advice; absolute shutter speed measurement (C5); internal service l
 | FR-SES-01 | Each launch shall start a new session in its own folder containing frames, results and report. | M | v0.1 | H§5, D-36 |
 | FR-SES-03 | The system shall record the user-entered body serial (optional) and the serial read from the camera or metadata. | M | v0.1 | H§6 A1 |
 | FR-SES-04 | The system shall store frames as copies; it shall never modify or delete files on the camera or the source card. | M | v0.1 | H§5 |
-| FR-SES-07 | Session export shall let the user leave out original frame files and warn that they may contain personal fields written by the camera. | S | v0.1 | NFR-07 |
+| FR-SES-07 | The HTML report shall embed evidence images only, never original frame files, because those may contain personal fields written by the camera. | M | v0.1 | NFR-07, D-27 |
 | FR-SES-08 | The system shall not show a list of past sessions and shall not resume an interrupted session. | M | v0.1 | D-32, D-36 |
 
 ### 3.2 Start, SDK and detection (CON)
@@ -226,13 +226,14 @@ Detailed procedures, analysis and verdict rules: [TEST-CATALOGUE.md](TEST-CATALO
 | FR-GUI-06 | Every step that requires a physical action shall show a looping 2D animation, text-free, pausable, with a static frame under reduced motion. | M | v0.1 | D-18 to D-21 |
 | FR-GUI-07 | Visual checks (blocker and manual) shall show up to 4 reference photos per defect with author, licence and source. | M | v0.1 | D-33, D-38 |
 | FR-GUI-08 | The system shall show no time estimate, no shot estimate and no shot counter. | M | v0.1 | D-32 |
+| FR-GUI-09 | On-screen text shall be short and complete in meaning, following the copy rules in [UX.md](UX.md) section 9; long notes and explanations are shown only on demand. | M | v0.1 | D-44 |
 
 ### 3.11 Settings (SET)
 
 | ID | Requirement | Pri | Release | Source |
 | --- | --- | --- | --- | --- |
 | FR-SET-01 | The user shall be able to choose UI language (English, Vietnamese); default follows the OS, else English. | M | v0.1 | D-15 |
-| FR-SET-02 | The user shall be able to set the sessions folder, ExifTool path (if not bundled) and SDK folders (FR-CON-06). | M | v0.1 | D-24 |
+| FR-SET-02 | The user shall be able to set the sessions folder and the SDK folders (FR-CON-06). ExifTool is bundled and needs no setting (D-42). | M | v0.1 | D-24, D-42 |
 | FR-SET-03 | The user shall be able to choose light or dark theme (default: OS) and reduced motion. | C | v0.1 | UX |
 
 ### 3.12 Withdrawn requirements
@@ -266,7 +267,7 @@ Specified in [UX.md](UX.md): diagnostics-style wizard with a persistent list of 
 | Interface | Use | Notes |
 | --- | --- | --- |
 | LibRaw via rawpy | RAW decoding | Bundled; LGPL-2.1 replaceable (onedir) |
-| ExifTool | Metadata and maker notes | Subprocess; bundling subject to V-16 |
+| ExifTool | Metadata and maker notes | Bundled, run as a subprocess behind a metadata reader interface; replaced by an in-house reader if V-16 rules out bundling (D-42) |
 | Vendor SDKs | Adapters for Canon, Nikon, Sony | User-supplied at runtime; downloaded by the test environment for development (D-31) |
 | OS camera stack (WPD on Windows) | PTP transport | Subject to V-13 |
 
@@ -293,7 +294,7 @@ Specified in [UX.md](UX.md): diagnostics-style wizard with a persistent list of 
 | NFR-06 | Privacy | The app shall make no network requests by default. | M | Network-off test |
 | NFR-07 | Privacy | The app shall not read personal settings from the camera or store personal metadata fields (FR-META-02); it imports only files the user selects (FR-ACQ-02). | M | Inspection, test |
 | NFR-08 | Transparency | Every threshold, parameter set and KB entry used shall be traceable from the report. | M | Inspection |
-| NFR-09 | Portability | Windows build shall run from an unpacked folder without administrator rights. | M | Release test |
+| NFR-09 | Portability | Windows build shall run from an unpacked folder without administrator rights. Builds are not code-signed (D-41); the README explains the SmartScreen prompt. | M | Release test |
 | NFR-10 | Portability | Platform-specific code shall be confined to backends and packaging. | M | Import contract |
 | NFR-11 | Maintainability | Analysis and verdict modules shall have at least 90% line coverage `[Guess]`. | S | CI |
 | NFR-12 | Maintainability | Layer dependency rules ([ARCHITECTURE.md](ARCHITECTURE.md) section 6) enforced in CI. | M | CI |
@@ -348,4 +349,4 @@ Result and KB schemas are defined in [ARCHITECTURE.md](ARCHITECTURE.md) section 
 | VER | H§9 | All |
 | REP | H§9, D-27, D-37 | All |
 | KB | H§9, R-07 | A3, A4, D1, D9 |
-| GUI | D-18 to D-21, D-32, D-33, D-38 | Physical and visual steps |
+| GUI | D-18 to D-21, D-32, D-33, D-38, D-44 | Physical and visual steps |

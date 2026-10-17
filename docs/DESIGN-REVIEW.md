@@ -1,6 +1,6 @@
 # Design Review: Changes and Additions to the Handoff Baseline
 
-Status: **Proposed**. Every item here needs maintainer approval. Approval status is tracked in [DECISIONS.md](DECISIONS.md).
+Status: **historical record of the first review (2026-10-16)**. Many items were later superseded or rejected (for example R-02, R-10, R-11, N-01, N-04, N-07 by D-23 to D-38). The current status of every item is in [DECISIONS.md](DECISIONS.md); the current design is in [SRS.md](SRS.md), [TEST-CATALOGUE.md](TEST-CATALOGUE.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [UX.md](UX.md). Do not implement from this document.
 Baseline: [archive/handoff.md](archive/handoff.md) (referred to below as "handoff", with section numbers as `H§n`).
 
 Evidence labels follow the handoff convention: `[Sourced]`, `[Inference]`, `[Guess]`, `[Unverified]`. Nothing in this review has been run on a real camera.
