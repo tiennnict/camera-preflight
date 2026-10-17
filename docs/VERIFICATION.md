@@ -27,3 +27,6 @@ Status values: Open, In progress, Closed (with result and date), Dropped (with r
 | V-19 | Licences of sample RAW files used in CI (e.g. from public RAW sample collections) | Integration tests | Read per-file licence | M1 | Open |
 | V-20 | Which models expose sensor or camera temperature in metadata, and under which tag? | R-15, FR-META-05 | ExifTool output on samples | M3 | Open |
 | V-21 | Does Qt ship Vietnamese translations for its standard dialogs? | N-08 | Check PySide6 translations folder | M2 | Open |
+| V-22 | Which live-view and property signals are readable per backend for helpers H1 to H7 (dark sensor, flat field, chart in view, steady camera, lens ID, focus mode, card)? | FR-ACQ-10, 11 | Spike on real bodies, recorded live view | M3 | Open |
+| V-23 | Can the test environment obtain the Canon, Nikon and Sony SDKs automatically (registration, licence acceptance), or only on a local machine? | D-31, SDK adapter tests | Read download terms; try | M3 | Open |
+| V-24 | Licence and attribution of each reference photo candidate in REFERENCE-IMAGES.md (blocked: Commons not reachable from this environment) | D-38, NFR-13 | Open file pages; record attribution | M2 | Open |

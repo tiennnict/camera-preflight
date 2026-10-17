@@ -10,8 +10,9 @@ Quality attributes in priority order, derived from the SRS:
 2. **Works without a camera connection**: file import is the guaranteed path (R-02).
 3. **Testability without hardware**: analysis verifiable with synthetic data (R-08).
 4. **Replaceable connection layer**: backends can change per brand and OS without touching analysis (H§5).
-5. **Legal safety**: no vendor SDK in repo or release; LGPL libraries replaceable (H§10, R-11).
+5. **Legal safety**: no vendor SDK files in the repo or releases; SDKs are downloaded by the user or the test environment (D-31); LGPL libraries replaceable (H§10).
 6. **Distributable to non-technical users**: prebuilt Windows folder build, offline, no admin rights (NFR-09).
+7. **Automation first**: in connected mode the app performs every camera action possible over USB; helpers detect the user's physical actions (D-25, D-34).
 
 ## 2. Technology selection
 
@@ -64,7 +65,7 @@ The connection choice depends on spikes (V-10, V-13). Candidates, in evaluation 
 
 - A crash in a native SDK or USB stack does not take down the GUI or lose the session `[Inference]`.
 - The Python backends and a .NET helper use the same protocol, so the handoff fallback needs no app changes.
-- User-supplied SDK adapters (R-11) are isolated from the app process.
+- Vendor SDK adapters (D-31), which load native SDK libraries supplied by the user, are isolated from the app process.
 
 ### 2.4 Build, packaging and tooling
 
@@ -89,11 +90,10 @@ flowchart TB
     CLI["cli"]
   end
   subgraph APP["Application"]
-    WIZ["wizard: session state machine, persistence"]
-    PLN["planning: profiles, budget"]
+    WIZ["wizard: phases, check ordering, auto-advance"]
+    HLP["helpers: H1..H7 watchers on live view and properties"]
     ACQ["acquisition: capture or import per step"]
-    REP["report: JSON, HTML, manifest"]
-    KIT["kit: field kit, remote pack, AF chart"]
+    REP["report: HTML, manifest"]
   end
   subgraph DOMAIN["Checks and analysis"]
     CHK["checks: A1..F definitions, verdict rules"]
@@ -102,21 +102,21 @@ flowchart TB
     KB["knowledge: curated + derived"]
   end
   subgraph INFRA["Infrastructure"]
-    IO["io: RAW decode, ExifTool, import, classify"]
+    IO["io: RAW decode, ExifTool, upload"]
     BH["backend host (separate process)"]
   end
-  CORE["domain: Frame, Result, Level, Session, Plan"]
+  CORE["domain: Frame, Result, Level, Session, Check"]
 
   GUI --> WIZ
   CLI --> WIZ
-  WIZ --> PLN & ACQ & REP & KIT
+  WIZ --> ACQ & REP & HLP
+  HLP -. live view, properties .-> BH
   ACQ --> IO
   ACQ -. JSON over stdio .-> BH
   WIZ --> CHK
   CHK --> GATE & ANA & KB
   GATE --> IO
   REP --> CHK
-  PLN --> CHK
   ANA --> CORE
   CHK --> CORE
   IO --> CORE
@@ -215,7 +215,9 @@ Rules:
 
 ## 5. Data
 
-### 5.1 Report JSON (outline)
+### 5.1 Session result data (internal, outline)
+
+Kept in the session folder for re-analysis; the user deliverable is the HTML report (D-27).
 
 ```json
 {
@@ -286,21 +288,21 @@ camera-preflight/
     pyinstaller/            onedir spec
     licenses/               third-party licence texts collected at build
   src/camera_preflight/
-    domain/                 Frame, Result, Level, Session, Plan, Message (pure)
+    domain/                 Frame, Result, Level, Session, Check, Message (pure)
     analysis/               common/, pixels/, dust/, uniformity/, shutter/, af/, metering/
     checks/                 one module per group: group_a.py ... group_f.py, verdict parameter sets
     gate/                   acceptance rules, provenance
-    io/                     raw.py (rawpy), exiftool.py, importer.py, classify.py
+    io/                     raw.py (rawpy), exiftool.py, upload.py
     knowledge/              schema, loader, derived builder, resolver
-    planning/               profiles, budget planner
+    helpers/                H1..H7 detectors (dark sensor, flat field, chart, steady, lens change, focus mode, card)
     acquisition/            step execution for tethered and import paths
-    backends/               protocol, host process, ptp/, wpd/, plugin loading
-    report/                 model, json writer, html renderer, templates/, manifest
-    kit/                    field kit, remote pack, AF chart, solid-colour images
+    backends/               protocol, host process, ptp/, wpd/, sdk/ (canon, nikon, sony adapters; native SDK supplied at runtime)
+    report/                 html renderer, templates/, manifest
+    guide/                  AF chart, solid-colour test images, shooting parameters per step
     synth/                  synthetic frame generator with defect injection
-    wizard/                 state machine, persistence, task runner interface
+    wizard/                 phases, ordering by automation level, auto-advance, fallback to manual
     cli/                    command-line entry points
-    gui/                    app, views/, widgets/, viewmodels/, resources/
+    gui/                    app, views/, widgets/, viewmodels/, animations/ (SVG + timelines), reference/ (photos + ATTRIBUTION.md)
     locale/                 gettext catalogues (en, vi)
   tests/
     unit/  integration/  gui/
@@ -316,7 +318,8 @@ Dependency rules (enforced by import-linter):
 | `analysis` | `domain`, numpy, scipy |
 | `gate`, `knowledge`, `io` | `domain`, `analysis` (gate only) |
 | `checks` | `domain`, `analysis`, `gate`, `knowledge` |
-| `planning`, `report`, `kit`, `synth` | the above |
+| `report`, `guide`, `synth` | the above |
+| `helpers` | `domain`, `analysis`, `backends` (host client only) |
 | `acquisition` | the above, `io`, `backends` (protocol and host client only) |
 | `wizard` | everything except `gui` and `cli` |
 | `cli`, `gui` | `wizard` and below; only `gui` imports PySide6 |
@@ -327,11 +330,11 @@ Dependency rules (enforced by import-linter):
 | Concern | Approach |
 | --- | --- |
 | Concurrency | Analysis runs in worker threads (GUI) or a process pool (CLI); wizard defines a task runner interface so GUI and CLI provide their own |
-| Persistence | Atomic writes (write to temp, rename) of session JSON after every step |
+| Persistence | Atomic writes of session data after every check; no resume (D-36) |
 | Logging | stdlib `logging`; per-session log file inside the session; no personal data |
-| Errors | Typed errors from `io` and backends; wizard converts them into Not tested reasons or fallbacks (FR-CON-07) |
-| Privacy | No network code in the app; only files inside the session's import window or explicitly selected are imported (FR-ACQ-02); metadata stored through an allowlist (FR-META-02) |
-| Plugins | SDK adapters discovered from a user-configured folder and Python entry points, loaded only in the backend host |
+| Errors | Typed errors from `io` and backends; wizard converts them into fallbacks or Not tested reasons (FR-ACQ-09, FR-CON-08) |
+| Privacy | No network code in the app; only files the user selects per step are imported (FR-ACQ-02); metadata stored through an allowlist (FR-META-02) |
+| SDK adapters | Adapter code lives in `backends/sdk/`; the native SDK is found in the default folder or the folder set by the user (FR-CON-06); adapters load only in the backend host. The test environment provides SDKs for adapter tests (D-31, V-23) |
 | Versioning | SemVer for app, report schema and KB schema; KB data versioned by date (`2026.1`) |
 
 ## 8. Testing strategy
@@ -350,5 +353,5 @@ Dependency rules (enforced by import-linter):
 
 - No network access by default; no telemetry.
 - YAML safe loading; no code execution from data files.
-- SDK adapters run in a separate process and only when the user configures them.
+- SDK adapters run in a separate process and only when an SDK is present.
 - The app never reads owner name, copyright, Wi-Fi or similar camera settings.
