@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,7 +14,18 @@ def default_sessions_dir() -> Path:
     return Path(docs or Path.home()) / "camera-preflight" / "sessions"
 
 
+def bundled_sdk_dir(brand: str) -> Path | None:
+    """SDK files shipped next to the executable in the maintainer's binary release (D-47)."""
+    if not getattr(sys, "frozen", False):
+        return None
+    folder = Path(sys.executable).resolve().parent / "sdk" / brand.lower()
+    return folder if folder.is_dir() else None
+
+
 def default_sdk_dir(brand: str) -> Path:
+    bundled = bundled_sdk_dir(brand)
+    if bundled is not None:
+        return bundled
     base = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.AppLocalDataLocation)
     return Path(base or Path.home()) / "sdk" / brand.lower()
 

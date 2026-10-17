@@ -17,7 +17,7 @@ Not legal advice. This document records constraints and open questions; items ma
 
 Rules (D-31, CON-03):
 
-1. No vendor SDK binaries, headers or sample code in the repo or releases, ever. SDKs are downloaded by the user (release) or by the test environment (development).
+1. No vendor SDK binaries, headers or sample code in the repo, source archives or CI builds, ever. The maintainer's local binary release may bundle SDK runtime files (D-47) once the maintainer has read the vendor's redistribution terms `[Unverified]` (V-01). Other builds use SDKs supplied by the user or the test environment.
 2. Adapter code (bindings written by the project) lives in `src/camera_preflight/backends/sdk/`. Until V-01 confirms what each vendor allows, adapter work packages are blocked from merging to `main`.
 3. The app loads the native SDK only inside the backend host process, from the default folder or the folder set by the user.
 4. The UI reminds the user that SDK use is governed by the vendor's terms.

@@ -40,7 +40,10 @@ class BackendClient:
         self, spec: str, *, sdk_dir: Path | None = None, workdir: Path | None = None
     ) -> None:
         self.name = f"host:{spec}"
-        cmd = [sys.executable, "-m", "camera_preflight.backends.host", "--backend", spec]
+        if getattr(sys, "frozen", False):
+            cmd = [sys.executable, "--backend-host", "--backend", spec]
+        else:
+            cmd = [sys.executable, "-m", "camera_preflight.backends.host", "--backend", spec]
         if sdk_dir:
             cmd += ["--sdk-dir", str(sdk_dir)]
         if workdir:

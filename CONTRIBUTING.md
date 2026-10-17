@@ -11,4 +11,4 @@
    - `QT_QPA_PLATFORM=offscreen uv run pytest`
 5. Every user-visible string goes through gettext and gets an English source and a Vietnamese translation in the same change.
 6. Use Conventional Commits. Write everything on GitHub in English.
-7. Do not add vendor SDK files to the repository. Do not add personal metadata to fixtures.
+7. Do not add vendor SDK files to the repository or to anything CI builds. Do not add personal metadata to fixtures.

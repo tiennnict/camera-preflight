@@ -54,6 +54,7 @@ To approve or reject a proposed item, change its status and add the date. Docume
 | D-44 | UI text is short and complete in meaning. Screens carry no long notes, footnotes or explanations; detail is available on demand (check detail, method section of the report). Applies to English and Vietnamese ([UX.md](UX.md) section 9) | 2026-10-17 | Session |
 | D-45 | The mockup is not revised further. It is a layout and flow reference only; where it differs from the documents, the documents prevail. Its on-screen text is longer than D-44 allows and must not be copied as is | 2026-10-17 | Session |
 | D-46 | The maintainer approved all Proposed items (R-01, R-03, R-05 to R-08, R-12 to R-15, N-02, N-03, N-05, N-09, N-10, P-01 to P-07) and rejected N-06 (baseline and compare conflicts with D-36). The maintainer ordered autonomous implementation of all work packages with a commit per stage | 2026-10-17 | Session |
+| D-47 | Supersedes the "Release builds contain no SDK" part of D-31. The binary release that the maintainer builds locally is built against the vendor SDKs the maintainer supplies and bundles their runtime files, so it has the full SDK feature set. The repository, source archives and CI builds never contain SDK files; a build without them (a clone, CI) works fully except the SDK features, which are reported as Not tested with the reason. Vendor redistribution terms for each bundled SDK are `[Unverified]` until V-01 is closed; the maintainer is responsible for them | 2026-10-17 | Session |
 
 ## 2. Formerly proposed (resolved by D-46)
 

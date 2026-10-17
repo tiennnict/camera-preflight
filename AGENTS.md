@@ -49,7 +49,7 @@ If two sources at the same level disagree, or a document contradicts a Confirmed
 
 ## 6. Hard rules
 
-- No vendor SDK files (binaries, headers, samples) in the repository or a release, ever (D-31). SDKs are loaded at runtime from the folder the user sets.
+- No vendor SDK files (binaries, headers, samples) in the repository, source archives or CI builds, ever (D-31, D-47). The maintainer's locally built binary release may bundle SDK runtime files through `packaging/package.py --with-sdk`; agents never publish it. SDKs are loaded at runtime from the bundled folder or the folder the user sets.
 - No network access in the app, no telemetry (NFR-06).
 - No personal metadata stored, logged or reported; only files the user selects are imported (FR-META-02, FR-ACQ-02).
 - No buy or price advice, and no single score (FR-REP-05, FR-VER-02).

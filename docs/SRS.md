@@ -84,7 +84,7 @@ Standalone, offline desktop application. It talks to cameras over USB through in
 | --- | --- | --- |
 | CON-01 | Python 3.12 or newer; PySide6 GUI | D-09 |
 | CON-02 | Apache-2.0 for project code; LGPL libraries kept replaceable (onedir distribution) | H§10 |
-| CON-03 | Release builds contain no vendor SDK files; SDKs are downloaded by the user (release) or by the test environment (development) | D-31 |
+| CON-03 | The repository, source archives and CI builds contain no vendor SDK files. The maintainer's locally built binary release may bundle them; without them SDK features are Not tested with the reason | D-31, D-47 |
 | CON-04 | Everything published on GitHub in English | D-07, D-14 |
 | CON-05 | No reading, storing or transmitting of previous-owner personal data from the camera | H§10 |
 | CON-06 | No brand names in the product name | H§10 |

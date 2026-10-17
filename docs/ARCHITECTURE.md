@@ -10,7 +10,7 @@ Quality attributes in priority order, derived from the SRS:
 2. **Works without a camera connection**: upload mode is the guaranteed path and ships first (D-23, D-26).
 3. **Testability without hardware**: analysis verifiable with synthetic data (R-08).
 4. **Replaceable connection layer**: backends can change per brand and OS without touching analysis (H§5).
-5. **Legal safety**: no vendor SDK files in the repo or releases; SDKs are downloaded by the user or the test environment (D-31); LGPL libraries replaceable (H§10).
+5. **Legal safety**: no vendor SDK files in the repo, source archives or CI builds; the maintainer's local binary release may bundle them, other builds use SDKs supplied by the user or the test environment (D-31, D-47); LGPL libraries replaceable (H§10).
 6. **Distributable to non-technical users**: prebuilt Windows folder build, offline, no admin rights (NFR-09).
 7. **Automation first**: in connected mode the app performs every camera action possible over USB; helpers detect the user's physical actions (D-25, D-34).
 

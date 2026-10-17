@@ -44,7 +44,7 @@ Contributors and coding agents start with [AGENTS.md](AGENTS.md).
 - Never report Pass for a test that did not run.
 - Autofocus and metering findings are reported as Suspect with a confidence level, not as a binary verdict.
 - Upload mode always works; USB control and vendor SDKs are optional. With a camera connected, the app does every step it can over USB.
-- No vendor SDK is included in this repository or its releases.
+- No vendor SDK is included in this repository, its source archives or CI builds. The official binary release is built by the maintainer against the vendor SDKs and bundles their runtime files (D-47), so it has every SDK feature. If you build from a clone, put each SDK under `sdk/<brand>/` (see `sdk/README.md`); without it the SDK features are reported as Not tested and the rest works.
 - The app gives no buy or price advice.
 
 ## Trademarks

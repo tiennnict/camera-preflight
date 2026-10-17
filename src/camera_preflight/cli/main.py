@@ -140,6 +140,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["--backend-host"]:
+        # The packaged app has no ``python -m``; it starts its own backend host this way.
+        import importlib
+
+        host = importlib.import_module("camera_preflight.backends.host")
+        return int(host.main(argv[1:]))
     args = build_parser().parse_args(argv)
     if args.self_test:
         return cmd_self_test(args)
