@@ -206,6 +206,30 @@ class FrameRequirement:
     exposure_s: float | None = None
     aperture: float | None = None
     note_code: str = ""
+    shutter_mode: str | None = None
+    metering: str | None = None
+    exposure_comp_ev: float | None = None
+    tag: str = ""
+
+    @property
+    def key(self) -> str:
+        """Stable key that links captured frames to this requirement."""
+        parts = [self.kind.value]
+        if self.tag:
+            parts.append(self.tag)
+        if self.iso is not None:
+            parts.append(f"iso{self.iso}")
+        if self.exposure_s is not None:
+            parts.append(f"t{self.exposure_s:g}")
+        if self.aperture is not None:
+            parts.append(f"f{self.aperture:g}")
+        if self.shutter_mode:
+            parts.append(self.shutter_mode)
+        if self.metering:
+            parts.append(self.metering)
+        if self.exposure_comp_ev is not None:
+            parts.append(f"ev{self.exposure_comp_ev:+g}")
+        return "/".join(parts)
 
 
 @dataclass(frozen=True)

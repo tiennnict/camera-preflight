@@ -70,7 +70,7 @@ def _dust_attenuation(spec: SensorSpec, d: Defects, aperture: float) -> Array:
     softness = 1.5 + 14.0 * (1.0 - sharp)
     for r, c, rad in d.dust:
         dist = np.hypot(yy - r, xx - c)
-        profile = 1.0 / (1.0 + np.exp((dist - rad) / (softness * 0.35)))
+        profile = 1.0 / (1.0 + np.exp(np.clip((dist - rad) / (softness * 0.35), -50, 50)))
         att *= 1.0 - d.dust_depth * sharp * profile.astype(np.float32)
     return att
 
