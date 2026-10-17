@@ -84,13 +84,13 @@ Design revisions and new features are detailed in [DESIGN-REVIEW.md](DESIGN-REVI
 | P-04 | gettext + Babel as the single translation catalogue | ARCHITECTURE §2.2 | Proposed |
 | P-05 | Core libraries: rawpy, ExifTool, NumPy, SciPy, Pillow, pydantic, PyYAML, Jinja2 | ARCHITECTURE §2.2 | Proposed |
 | P-06 | Release format: PyInstaller onedir zip (portable) with SHA256SUMS; installer later | ARCHITECTURE §2.4 | Proposed |
-| P-07 | Release map v0.1 to v0.5 and milestones M0 to M6 | ROADMAP §2, §3 | Proposed |
+| P-07 | Release map v0.1 to v0.4 and milestones M0 to M5 | ROADMAP §2, §3 | Proposed |
 
 ## 3. Open (maintainer input needed)
 
 | ID | Question | Needed by | Assistant's default if not decided |
 | --- | --- | --- | --- |
-| O-01 | Is Sony in the first release that includes USB control? | M4 | No: Sony via file import from v0.1; Sony USB in v0.5 |
+| O-01 | Is Sony in the first release that includes USB control? | M4 | No: Sony via upload mode from v0.1; Sony USB in v0.4 |
 | O-02 | Priority model list for KB seed (M3) and KB v1 (M5) | M3 | Ask the maintainer for the bodies they can physically test |
 | O-03 | Code signing of Windows builds | v0.1 | Unsigned v0.1 with documented SmartScreen steps; revisit when downloads grow |
 | O-04 | ExifTool bundled in releases or supplied by the user | v0.1 | Bundle if V-16 confirms it is allowed; else first-run download guidance |
