@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked --group dev --extra gui
+      - run: uv run python tools/i18n.py compile
+      - name: Fetch pinned ExifTool
+        run: uv run python packaging/exiftool/fetch.py
+      - name: Build
+        run: uv run pyinstaller packaging/pyinstaller/camera-preflight.spec --noconfirm
+      - name: Self-test
+        run: dist/camera-preflight/camera-preflight.exe --self-test
+      - name: Package
+        run: uv run python packaging/package.py
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/camera-preflight-*.zip
+            dist/SHA256SUMS

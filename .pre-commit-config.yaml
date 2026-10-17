@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: i18n-check
+        name: translation catalogue
+        entry: uv run python tools/i18n.py check
+        language: system
+        pass_filenames: false

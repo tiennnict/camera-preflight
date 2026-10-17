@@ -1,0 +1,7 @@
+camera-preflight
+Copyright 2026 the camera-preflight contributors
+Licensed under the Apache License, Version 2.0.
+
+Third-party components and their licences are listed in docs/LICENSING.md.
+Release archives include the licence text of every bundled component under licenses/.
+No camera vendor SDK files are included in the repository or in any release.
