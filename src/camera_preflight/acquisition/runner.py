@@ -24,6 +24,8 @@ from ..io import MetadataReader, SessionFolder
 from ..wizard_types import IngestFn, IngestResult
 
 MAX_RESHOOTS = 2  # automatic re-shoots after a rejected frame (FR-GATE-03)
+CAPTURE_BASE_S = 20.0  # release, AF, image processing and transfer of one RAW file [Guess]
+EXPOSURE_FACTOR = 2.2  # long exposure noise reduction can double the time (Nikon Usage 10.3)
 
 
 class Sink(Protocol):
@@ -92,7 +94,7 @@ class ConnectedRunner:
         ingest: IngestFn,
         *,
         lens: int = 1,
-        timeout_s: float = 5.0,
+        timeout_s: float = CAPTURE_BASE_S,
         on_progress: Callable[[str, int, int], None] | None = None,
         workdir: Path | None = None,
     ) -> None:
@@ -106,6 +108,13 @@ class ConnectedRunner:
         self.snapshot: dict[str, object] = {}
         self._auto_exposure: dict[str, float] = {}
         self.changed = False
+
+    def capture_timeout(self, settings: CaptureSettings) -> float:
+        """Time to wait for one capture call: the fixed part plus the exposure itself, per frame.
+        A fixed 5 s used to time out every 30 s dark frame on a real body."""
+        shots = max(settings.burst, 1)
+        exposure = settings.exposure_s or 0.0
+        return self.timeout_s * shots + EXPOSURE_FACTOR * exposure * shots
 
     def start(self) -> None:
         """Remember the original settings before the first change (FR-ACQ-06)."""
@@ -201,7 +210,7 @@ class ConnectedRunner:
         try:
             self.backend.apply_settings(settings)
             self.changed = True
-            out = self.backend.capture(settings, self.timeout_s)
+            out = self.backend.capture(settings, self.capture_timeout(settings))
             if not out.ok or not out.files:
                 return None
             path = self.backend.download(out.files[0], self.workdir)
@@ -229,7 +238,7 @@ class ConnectedRunner:
         last: Exception | None = None
         for _ in range(2):
             try:
-                out = self.backend.capture(settings, self.timeout_s)
+                out = self.backend.capture(settings, self.capture_timeout(settings))
             except CommandFailed as exc:
                 last = exc
                 continue

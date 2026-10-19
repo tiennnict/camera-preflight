@@ -71,7 +71,8 @@ def handle(backend: CameraBackend, method: str, params: dict[str, Any]) -> Any:
         backend.restore_settings(params["snapshot"])
         return True
     if method == "capture":
-        out = backend.capture(CaptureSettings(**params["settings"]), float(params["timeout_s"]))
+        timeout = params.get("capture_timeout_s", params.get("timeout_s", 30.0))
+        out = backend.capture(CaptureSettings(**params["settings"]), float(timeout))
         return _encode(out)
     if method == "download":
         ref = RemoteFile(**params["ref"])
@@ -104,14 +105,40 @@ def serve(backend: CameraBackend, stdin: Any = None, stdout: Any = None) -> None
             break
 
 
+def _private_stdout() -> Any:
+    """The protocol channel, kept apart from what native code prints.
+
+    Vendor libraries write log lines to the process's standard output (the Nikon Remote SDK
+    does), which would corrupt the JSON lines. The real stdout is duplicated for the protocol
+    and file descriptor 1 is pointed at stderr, which the client discards.
+    """
+    import os
+
+    try:
+        if sys.stdout is not None:
+            sys.stdout.flush()
+        proto_fd = os.dup(1)
+        os.dup2(2, 1)
+    except OSError:
+        return sys.stdout
+    channel = os.fdopen(proto_fd, "w", encoding="utf-8", newline="\n")
+    sys.stdout = sys.stderr
+    return channel
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--backend", required=True)
     p.add_argument("--sdk-dir")
     p.add_argument("--workdir")
     args = p.parse_args(argv)
+    channel = _private_stdout()
+    if sys.stdin is None:  # windowed packaged app: the pipe is there, the Python object is not
+        import os
+
+        sys.stdin = os.fdopen(0, "r", encoding="utf-8")
     backend = make_backend(args.backend, args.sdk_dir, args.workdir)
-    serve(backend)
+    serve(backend, stdout=channel)
     return 0
 
 
