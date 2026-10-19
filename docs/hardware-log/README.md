@@ -24,5 +24,18 @@ and for each step the result and any error text.
 8. **Usability**: can a user finish connected mode with nothing the cable could have done?
    (UX section 11)
 
+## Nikon D7200 session
+
+1. Put the D7200 Type0017 module files (`Type0017.md3`, `NkdPTP.dll`, `NkRoyalmile.dll`,
+   `dnssd.dll`, from `S-SDKD7200-011BF-ALLIN/Module/Win/Binary Files/x64`) in one folder and set
+   it as the Nikon SDK folder. Close Nikon Transfer, NX Tether and Camera Control Pro.
+2. Mode dial on **M**, lens aperture ring (if any) locked at the minimum, AF-S, card inserted,
+   USB cable in, camera on. Press Start.
+3. Record: detection time, model, battery; whether ISO, shutter speed, aperture, compensation and
+   metering are set; whether files arrive with the card untouched (the module uses SDRAM); the
+   30 s dark frames; the burst of the C1 step; live view frames for H1 to H3; whether image
+   quality and long exposure NR are back to their old values after the session.
+4. Note every error text the app shows.
+
 Spike WP-40 repeats steps 1 to 4 on one Canon and one Sony body for each transport: WPD first,
 then libusb, then a .NET helper, and records the decision.

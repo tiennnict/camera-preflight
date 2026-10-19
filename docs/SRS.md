@@ -234,7 +234,7 @@ Detailed procedures, analysis and verdict rules: [TEST-CATALOGUE.md](TEST-CATALO
 | --- | --- | --- | --- | --- |
 | FR-SET-01 | The user shall be able to choose UI language (English, Vietnamese); default follows the OS, else English. | M | v0.1 | D-15 |
 | FR-SET-02 | The user shall be able to set the sessions folder and the SDK folders (FR-CON-06). ExifTool is bundled and needs no setting (D-42). | M | v0.1 | D-24, D-42 |
-| FR-SET-03 | The user shall be able to choose light or dark theme (default: OS) and reduced motion. | C | v0.1 | UX |
+| FR-SET-03 | The app shall use a light theme only (D-48); the user shall be able to choose reduced motion. | C | v0.1 | UX |
 
 ### 3.12 Withdrawn requirements
 

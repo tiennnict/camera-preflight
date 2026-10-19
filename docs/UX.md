@@ -87,7 +87,7 @@ flowchart LR
   Home --> Settings
 ```
 
-Persistent shell: top bar (app, camera, mode, language, settings), left list of phases and checks with live status, main area, bottom bar (Back, Skip, Next or auto-advance notice). No shot counter, no time estimate.
+Persistent shell: top bar (app, camera, mode, language, settings), left flat checklist of the steps with live status, no phase groups and no automation labels (D-49), main area, bottom bar (Back, Skip, Next or auto-advance notice). No shot counter, no time estimate.
 
 ## 5. Screens
 
@@ -106,7 +106,7 @@ Persistent shell: top bar (app, camera, mode, language, settings), left list of 
 | S10 | Results | Counts per level, Blockers first, Suspect list with confidence and severity, Not tested with reasons |
 | S11 | Check detail | Explanation, evidence (pixel map, dust map, AF map, charts), frames used, method and thresholds |
 | S12 | Report | Save the HTML report (D-27); restore camera settings changed by the app |
-| S13 | Settings | Language, theme, reduced motion, SDK folders (same content as S0), sessions folder |
+| S13 | Settings | Language, reduced motion, SDK folders (same content as S0), sessions folder |
 | S14 | Connection lost | What happened, nothing lost in the running session, reconnect or switch to upload mode |
 
 ## 6. Animations (D-18 to D-21)
@@ -180,6 +180,8 @@ Other rules:
 | path.manual | Manual | Thủ công |
 | mode.connected | Connected | Cắm máy |
 | mode.upload | Upload | Tải ảnh lên |
+| checklist | Checklist | Danh sách kiểm tra |
+| kb.known_issues | Known issues of this model | Lỗi đã biết của dòng máy này |
 
 ## 10. Accessibility and localisation
 
