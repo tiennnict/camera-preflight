@@ -9,6 +9,7 @@ import queue
 import subprocess
 import sys
 import threading
+import time
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -29,6 +30,8 @@ from .protocol import (
 
 DEFAULT_TIMEOUT_S = 60.0  # no host call except a capture should take this long [Guess]
 CAPTURE_MARGIN_S = 60.0  # download and processing time added to a capture's own timeout [Guess]
+CLOSE_TIMEOUT_S = 15.0  # time for the host to end its camera session [Guess]
+DOWNLOAD_TIMEOUT_S = 180.0  # time to copy one RAW file from the camera [Guess]
 
 _ERRORS = {
     "backend.not_supported": NotSupported,
@@ -99,8 +102,6 @@ class BackendClient:
     def _reply(self, method: str, msg_id: int, timeout_s: float) -> dict[str, Any]:
         """The reply to ``msg_id``. Lines that are not a reply (text a native library printed)
         are skipped."""
-        import time
-
         deadline = time.monotonic() + timeout_s
         while True:
             try:
@@ -123,7 +124,7 @@ class BackendClient:
 
     def close(self) -> None:
         try:
-            self.call("close", timeout_s=15.0)
+            self.call("close", timeout_s=CLOSE_TIMEOUT_S)
         except BackendError:
             pass
         try:
@@ -172,7 +173,11 @@ class BackendClient:
         )
 
     def download(self, ref: RemoteFile, dest_dir: Path) -> Path:
-        return Path(self.call("download", ref=asdict(ref), dest_dir=str(dest_dir), timeout_s=180.0))
+        return Path(
+            self.call(
+                "download", ref=asdict(ref), dest_dir=str(dest_dir), timeout_s=DOWNLOAD_TIMEOUT_S
+            )
+        )
 
     def live_view_frame(self) -> np.ndarray | None:
         data = self.call("live_view_frame")

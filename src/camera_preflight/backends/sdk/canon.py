@@ -105,8 +105,10 @@ _NAMES = {
 # [Sourced: canon-sdk-java README] leave about 500 ms between re-sent commands, some bodies turn
 # unstable otherwise. [Unverified] on our bodies.
 BUSY_RETRY_S = (0.5, 0.5, 0.5)
-SETTLE_S = 2.0
-DOWNLOAD_QUIET_S = 1.0
+SETTLE_S = 2.0  # time for a written property to read back as set [Guess]
+DOWNLOAD_QUIET_S = 1.0  # no new file for this long after the last one: the capture is done [Guess]
+LIVE_VIEW_WAIT_S = 1.5  # time for a live view frame to become ready [Guess]
+FIND_WAIT_S = 10.0  # time for the SDK to list a connected camera after it starts [Guess]
 
 # ---- value tables: code to nominal value [Sourced: API reference, agreeing with pyedsdk] ------------
 # Codes marked "(1/3)" in the reference are the values a body reports when its exposure step is 1/3.
@@ -576,7 +578,7 @@ class EdsLayer:
     def live_view_jpeg(self) -> bytes | None:
         if not self._evf_on and not self._start_live_view():
             return None
-        deadline = time.monotonic() + 1.5
+        deadline = time.monotonic() + LIVE_VIEW_WAIT_S
         while True:
             err = self._evf_download(self._camera, self._evf_image)
             if err == ERR_OK:
@@ -665,7 +667,7 @@ class CanonAdapter(SdkAdapter):
 
     @staticmethod
     def _find(layer: Layer) -> list[CameraEntry]:
-        deadline = time.monotonic() + 10
+        deadline = time.monotonic() + FIND_WAIT_S
         while True:
             cameras = layer.enumerate()
             if cameras:

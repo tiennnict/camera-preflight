@@ -222,6 +222,7 @@ __marimo__/
 # camera-preflight
 vendor-sdk/
 sessions/
+demo/
 reports/
 tests/data/
 *.CR2
@@ -239,3 +240,6 @@ tests/data/
 
 # compiled translation catalogues are part of the source tree
 !src/camera_preflight/locale/**/*.mo
+
+# the PyInstaller build recipe is source, not a generated file
+!packaging/pyinstaller/camera-preflight.spec

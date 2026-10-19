@@ -25,7 +25,9 @@ from ..wizard_types import IngestFn, IngestResult
 
 MAX_RESHOOTS = 2  # automatic re-shoots after a rejected frame (FR-GATE-03)
 CAPTURE_BASE_S = 20.0  # release, AF, image processing and transfer of one RAW file [Guess]
-EXPOSURE_FACTOR = 2.2  # long exposure noise reduction can double the time (Nikon Usage 10.3)
+# [Sourced: Nikon Usage 10.3] long exposure noise reduction can double the time; the 0.2 margin
+# on top is [Guess].
+EXPOSURE_FACTOR = 2.2
 
 
 class Sink(Protocol):
