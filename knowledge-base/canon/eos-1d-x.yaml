@@ -1,0 +1,17 @@
+# Canon EOS-1D X. Source: Canon Marketing Japan notice of 18 June 2013 (support ended 1 December 2022).
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS-1D X
+known_issues:
+- id: 1dx-drive-wear
+  description: Too little grease in the drive mechanism causes wear; AF may not lock and the viewfinder
+    image may shake. Free repair has ended.
+  description_vi: Cơ cấu truyền động thiếu mỡ gây mòn; AF có thể không bắt nét và hình trong ống ngắm có
+    thể rung. Chương trình sửa miễn phí đã kết thúc.
+  serial_pattern: '[01]\d{4}[1-7]\d*'
+  scope: Serial first digit 0 or 1 and sixth digit 1 to 7
+  serviced_mark: White "A" mark or a black marked area in the battery compartment
+  confirming_test: D2
+  confidence: high
+  source: https://canon.jp/support/quality-info/130618eos1dx

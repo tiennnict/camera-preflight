@@ -1,0 +1,17 @@
+# Nikon D800. No Nikon service notice names an AF fault; the issue below is from a tester's review
+# and owner reports: low confidence, check it only.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D800
+aliases:
+- NIKON D800
+known_issues:
+- id: d800-left-af
+  description: 'Left AF points focus wrongly on some D800 and D800E units, reported by testers and owners.
+    Compare the outer left and right points with the centre.'
+  description_vi: 'Điểm lấy nét bên trái lấy nét sai ở một số máy D800 và D800E, theo người thử và người
+    dùng. So các điểm ngoài cùng trái, phải với điểm giữa.'
+  confirming_test: D3
+  confidence: low
+  source: https://photographylife.com/reviews/nikon-d800/5

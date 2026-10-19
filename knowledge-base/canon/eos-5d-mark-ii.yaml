@@ -1,0 +1,28 @@
+# Canon EOS 5D Mark II. Sources: Canon Marketing Japan notice of 2 March 2010; the 2009 firmware 1.0.7
+# fixes are from a news copy of Canon's notice.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 5D Mark II
+known_issues:
+- id: 5d2-black-dots-banding
+  description: 'Firmware 1.0.6: black edges right of point lights at night, and vertical banding in sRAW1.
+    Fixed in 1.0.7: update before use.'
+  description_vi: 'Firmware 1.0.6: viền đen bên phải các điểm sáng khi chụp đêm, và sọc dọc ở sRAW1. Đã
+    sửa ở bản 1.0.7: hãy cập nhật trước khi dùng.'
+  firmware_below: 1.0.7
+  scope: Firmware 1.0.6 and earlier
+  confirming_test: B6
+  confidence: medium
+  source: https://www.dpreview.com/articles/8955892655/5d2firmware
+- id: 5d2-fw203-audio
+  description: 'Firmware 2.0.3: manual audio level saved in C1 to C3 changes after power off and sound is
+    not recorded. Fixed in 2.0.4: update before use.'
+  description_vi: 'Firmware 2.0.3: mức thu âm thủ công lưu ở C1 đến C3 bị đổi sau khi tắt máy và không thu
+    được tiếng. Đã sửa ở bản 2.0.4: hãy cập nhật trước khi dùng.'
+  firmware_from: 2.0.3
+  firmware_below: 2.0.4
+  scope: Firmware 2.0.3 only
+  confirming_test: F11
+  confidence: high
+  source: https://canon.jp/support/quality-info/100302eos5dmk2

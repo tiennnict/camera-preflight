@@ -1,0 +1,20 @@
+# Canon EOS 650D (Rebel T4i, Kiss X6i). Source: Canon Marketing Japan notice for the Kiss X6i; Canon
+# U.S.A.'s copy of the same advisory names the Rebel T4i, EOS 650D and Kiss X6i as one product.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 650D
+aliases:
+- EOS REBEL T4i
+- EOS Kiss X6i
+known_issues:
+- id: 650d-grip-whitening
+  description: The grip rubber may turn white soon after purchase (units made 31 May to 27 June 2012).
+    Canon replaces the rubber free of charge.
+  description_vi: Cao su báng cầm có thể bị bạc trắng sau thời gian ngắn (máy sản xuất 31/5 đến 27/6/2012).
+    Canon thay cao su miễn phí.
+  serial_pattern: \d[34]\d{3}1\d{6}
+  scope: 12-digit serial, second digit 3 or 4 and sixth digit 1
+  confirming_test: F5
+  confidence: high
+  source: https://canon.jp/support/quality-info/120706eoskissx6i

@@ -1,0 +1,16 @@
+# Canon EOS 6D. Source: Canon Marketing Japan notice of 9 April 2013.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 6D
+known_issues:
+- id: 6d-clock-reset
+  description: 'Firmware 1.1.2 and earlier: the date and time may reset when the battery is changed. Fixed
+    in 1.1.3: update before use.'
+  description_vi: 'Firmware 1.1.2 trở về trước: ngày giờ có thể bị đặt lại khi thay pin. Đã sửa ở bản
+    1.1.3: hãy cập nhật trước khi dùng.'
+  firmware_below: 1.1.3
+  scope: Firmware 1.1.2 and earlier
+  confirming_test: A4
+  confidence: high
+  source: https://canon.jp/support/quality-info/130409eos6d

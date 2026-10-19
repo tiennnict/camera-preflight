@@ -1,0 +1,17 @@
+# Nikon D5000. Source: Nikon Imaging Japan notice of 16 July 2009 (free repair ended 2018).
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D5000
+aliases:
+- NIKON D5000
+known_issues:
+- id: d5000-power
+  description: Some units may not power on with a charged battery or the AC adapter, due to a faulty power
+    control part. Free repair ended 31 March 2018.
+  description_vi: Một số máy có thể không lên nguồn dù pin đầy hoặc dùng bộ đổi nguồn, do linh kiện điều
+    khiển nguồn lỗi. Sửa miễn phí đã hết hạn 31/3/2018.
+  scope: Some units; Nikon gives no serial range on this page
+  confirming_test: F1
+  confidence: high
+  source: https://nij.nikon.com/news/support/2009/wnew090716.html

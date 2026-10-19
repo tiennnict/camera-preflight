@@ -1,0 +1,26 @@
+# Nikon D800E. Source: Nikon Imaging Japan notice of 16 December 2014; the AF issue is from a
+# tester's review and owner reports (low confidence).
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D800E
+aliases:
+- NIKON D800E
+known_issues:
+- id: d800e-modified-d800
+  description: Some D800 bodies were fitted with a D800E cover and sold as D800E. Nikon does not service
+    them. The camera name in playback info must read NIKON D800E.
+  description_vi: Một số máy D800 bị thay vỏ D800E và bán như D800E. Nikon không sửa các máy này. Tên
+    máy trong thông tin xem ảnh phải là NIKON D800E.
+  scope: Modified D800 bodies sold as D800E
+  confirming_test: A1
+  confidence: high
+  source: https://nij.nikon.com/news/support/2014/1216_03.html
+- id: d800-left-af
+  description: 'Left AF points focus wrongly on some D800 and D800E units, reported by testers and owners.
+    Compare the outer left and right points with the centre.'
+  description_vi: 'Điểm lấy nét bên trái lấy nét sai ở một số máy D800 và D800E, theo người thử và người
+    dùng. So các điểm ngoài cùng trái, phải với điểm giữa.'
+  confirming_test: D3
+  confidence: low
+  source: https://photographylife.com/reviews/nikon-d800/5

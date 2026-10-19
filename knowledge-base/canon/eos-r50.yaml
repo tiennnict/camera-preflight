@@ -1,0 +1,16 @@
+# Canon EOS R50. Source: Canon Singapore notice of 29 July 2025.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS R50
+known_issues:
+- id: r50-mode-dial
+  description: 'Black model only: the mode dial may become stiff, break or come off. Serials starting 19
+    to 23; free repair until 31 July 2028.'
+  description_vi: 'Chỉ bản màu đen: vòng chọn chế độ có thể bị cứng, gãy hoặc rời ra. Serial bắt đầu từ
+    19 đến 23; sửa miễn phí đến 31/7/2028.'
+  serial_pattern: (19|2[0-3])\d*
+  scope: Black units, serial first two digits 19 to 23
+  confirming_test: F6
+  confidence: high
+  source: https://asia.canon/en/support/free-repair-service-for-mirrorless-camera-eos-r50-black/notice

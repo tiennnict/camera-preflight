@@ -1,0 +1,20 @@
+# Sony ILCE-7M4. Source: Sony UK firmware 6.02 page, which lists the fix for the 6.00 problem.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Sony
+model: ILCE-7M4
+aliases:
+- Alpha 7 IV
+- a7 IV
+known_issues:
+- id: a7m4-fw600-power-save
+  description: 'Firmware 6.00: the camera enters power save when the monitor is closed, whatever the setting.
+    Fixed in 6.02: update before use.'
+  description_vi: 'Firmware 6.00: máy vào chế độ tiết kiệm pin khi gập màn hình, bất kể cài đặt. Đã sửa ở
+    bản 6.02: hãy cập nhật trước khi dùng.'
+  firmware_from: '6.00'
+  firmware_below: '6.02'
+  scope: Firmware 6.00
+  confirming_test: F7
+  confidence: high
+  source: https://www.sony.co.uk/electronics/support/e-mount-body-ilce-7-series/ilce-7m4/software/00280503

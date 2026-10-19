@@ -1,0 +1,27 @@
+# Canon EOS 7D. Sources: Canon Marketing Japan notice of 26 April 2011; the 2009 afterimage fix
+# version is from a news copy of Canon's firmware release.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 7D
+known_issues:
+- id: 7d-burst-afterimage
+  description: 'In bursts, part of the previous frame may show faintly in the next one. Fixed in firmware
+    1.1.0: update before use.'
+  description_vi: 'Khi chụp liên tiếp, một phần khung hình trước có thể hiện mờ trong khung sau. Đã sửa ở
+    firmware 1.1.0: hãy cập nhật trước khi dùng.'
+  firmware_below: 1.1.0
+  scope: Firmware before 1.1.0
+  confirming_test: C1
+  confidence: medium
+  source: https://www.dpreview.com/articles/1712535361/canon7d
+- id: 7d-cf-errors
+  description: 'With some CF cards, movies may not open or a card error may appear. Fixed in firmware
+    1.2.5: update before use.'
+  description_vi: 'Với một số thẻ CF, video có thể không mở được hoặc báo lỗi thẻ. Đã sửa ở firmware 1.2.5:
+    hãy cập nhật trước khi dùng.'
+  firmware_below: 1.2.5
+  scope: Firmware before 1.2.5
+  confirming_test: A5
+  confidence: high
+  source: https://canon.jp/support/quality-info/110426eos7dfirm

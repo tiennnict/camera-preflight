@@ -1,0 +1,21 @@
+# Canon EOS 750D (Rebel T6i, Kiss X8i). Source: Canon New Zealand service notice of 8 May 2015. The
+# serviced mark is from the Canon Marketing Japan notice for the same fault (EOS 8000D and Kiss X8i).
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 750D
+aliases:
+- EOS Rebel T6i
+- EOS Kiss X8i
+known_issues:
+- id: 750d-760d-sensor-spots
+  description: White spots on an optical layer in front of the sensor may show as dark circles in some
+    shots. Serials starting 01 or 02.
+  description_vi: Đốm trắng trên lớp quang học trước cảm biến có thể hiện thành vòng tròn tối trong một số
+    ảnh. Serial bắt đầu bằng 01 hoặc 02.
+  serial_pattern: 0[12]\d{10}
+  scope: 12-digit serial starting 01 or 02
+  serviced_mark: Dot mark on the battery cover
+  confirming_test: B4
+  confidence: high
+  source: https://www.canon.co.nz/support/support-news/service-notices/2016/06/17/02/29/eos-750d-760d-service-notice

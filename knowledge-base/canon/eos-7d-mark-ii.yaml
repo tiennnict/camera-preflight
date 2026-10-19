@@ -1,0 +1,17 @@
+# Canon EOS 7D Mark II. Source: Canon Marketing Japan notice of 19 May 2017.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 7D Mark II
+known_issues:
+- id: 7d2-fw111-remote
+  description: 'Firmware 1.1.1 installed over 1.0.5 or earlier: remote shooting with the W-E1 Wi-Fi adapter
+    fails. Fixed in 1.1.2: update before use.'
+  description_vi: 'Firmware 1.1.1 cài đè lên bản 1.0.5 trở về trước: không chụp từ xa được qua bộ Wi-Fi
+    W-E1. Đã sửa ở bản 1.1.2: hãy cập nhật trước khi dùng.'
+  firmware_from: 1.1.1
+  firmware_below: 1.1.2
+  scope: Firmware 1.1.1 updated from 1.0.5 or earlier
+  confirming_test: A4
+  confidence: high
+  source: https://canon.jp/support/quality-info/170519eos7dmk2-firm

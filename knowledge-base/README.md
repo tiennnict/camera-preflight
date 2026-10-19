@@ -18,10 +18,17 @@ refers to one with `af.layout_ref`.
 
 ## Status
 
-17 entries (checked 2026-10-19), mostly known issues from manufacturer service notices: Nikon
-D600, D750, D810, Z 6, Z 7, Z 8, Z 9, Z6III, Z5II; Canon EOS 5D, 5D Mark III, 70D, R10; Sony a9,
-a7 III, a7R III; and the D7200 with owner reports labelled `low`. Some Canon and Sony pages refuse
-automated access; where a notice was read through a copy, the confidence is `medium`.
+30 entries (checked 2026-10-19), mostly known issues from manufacturer service notices: Nikon
+D5000, D600, D750, D800E, D810, Z 6, Z 7, Z 8, Z 9, Z6III, Z5II; Canon EOS 5D, 5D Mark II,
+5D Mark III, 6D, 7D, 7D Mark II, EOS-1D X, 70D, 650D, 750D, 760D, R10, R50; Sony a9, a7 III,
+a7 IV, a7R III; and the D7200 and D800 with owner reports labelled `low`. Some Canon and Sony pages
+refuse automated access; where a notice was read through a copy, the confidence is `medium`.
+
+No maker notice was found for these bodies, so they have no entry yet: Nikon D7000, D7100, D7500,
+D850, D780, Z 5, Z 50; Canon 5D Mark IV, 6D Mark II, 80D, 90D, EOS R, RP, R5, R6; Sony a7 II,
+a7R II, a7R IV, a6000 to a6600, a7S series. Canon Marketing Japan's quality notice list
+(canon.jp/support/quality-info) and Nikon Imaging Japan's notice list
+(nij.nikon.com/support/whatsnew/information) can be read automatically and are the most complete.
 
 A known issue may name the units it concerns (D-50):
 
