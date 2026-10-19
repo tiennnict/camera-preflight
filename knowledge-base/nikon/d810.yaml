@@ -1,0 +1,17 @@
+# Nikon D810. Source: Nikon Inc. service advisory.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D810
+aliases:
+- NIKON D810
+known_issues:
+- id: d810-bright-spots
+  description: Bright spots in long exposures and in the 1.2x image area. Nikon adjusts the sensor and
+    firmware free of charge until 13 January 2027.
+  description_vi: Điểm sáng trong ảnh phơi lâu và ở vùng ảnh 1.2x. Nikon chỉnh cảm biến và firmware miễn
+    phí đến 13/1/2027.
+  serviced_mark: Black dot inside the tripod socket
+  confirming_test: B1
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/d810

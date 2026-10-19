@@ -126,6 +126,7 @@
     },
     "KnownIssue": {
       "additionalProperties": false,
+      "description": "A documented fault of a model or of some units (FR-KB-01). ``serials``, ``serial_pattern``\nand ``firmware_below`` narrow it to the units the source names; without them it concerns\nevery unit of the model. It is a warning to check, never a verdict (FR-VER-04).",
       "properties": {
         "id": {
           "title": "Id",
@@ -134,6 +135,18 @@
         "description": {
           "title": "Description",
           "type": "string"
+        },
+        "description_vi": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description Vi"
         },
         "scope": {
           "anyOf": [
@@ -146,6 +159,74 @@
           ],
           "default": null,
           "title": "Scope"
+        },
+        "serials": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/SerialRange"
+          },
+          "title": "Serials",
+          "type": "array"
+        },
+        "serial_pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Pattern"
+        },
+        "firmware_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Firmware From"
+        },
+        "firmware_below": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Firmware Below"
+        },
+        "serviced_mark": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serviced Mark"
+        },
+        "lookup_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lookup Url"
         },
         "confirming_test": {
           "title": "Confirming Test",
@@ -168,6 +249,28 @@
         "source"
       ],
       "title": "KnownIssue",
+      "type": "object"
+    },
+    "SerialRange": {
+      "additionalProperties": false,
+      "description": "Inclusive range of serial numbers as the manufacturer lists them (same length, digits).",
+      "properties": {
+        "first": {
+          "pattern": "^\\d+$",
+          "title": "First",
+          "type": "string"
+        },
+        "last": {
+          "pattern": "^\\d+$",
+          "title": "Last",
+          "type": "string"
+        }
+      },
+      "required": [
+        "first",
+        "last"
+      ],
+      "title": "SerialRange",
       "type": "object"
     },
     "ShutterInfo": {

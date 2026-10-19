@@ -1,0 +1,16 @@
+# Canon EOS 70D. Source: Canon Singapore service notice.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 70D
+known_issues:
+- id: 70d-err70-err80
+  description: Error 70 or 80 repeats, mostly when hot (long video); the camera may stop powering on.
+    Board design fault in serials starting 00 to 22. Free repair ended 31 December 2022.
+  description_vi: Lỗi Err 70 hoặc Err 80 lặp lại, nhất là khi máy nóng (quay phim lâu); máy có thể không
+    lên nguồn. Lỗi bo mạch ở serial bắt đầu từ 00 đến 22. Sửa miễn phí đã hết hạn 31/12/2022.
+  serial_pattern: (0\d|1\d|2[0-2])\d*
+  scope: Serial numbers whose first two digits are 00 to 22
+  confirming_test: F11
+  confidence: high
+  source: https://asia.canon/en/support/customer-support-for-a-phenomenon-in-which-error-70-or-error-80-occurs-repeatedly-on-the-eos-70d-digital-slr-camera/notice

@@ -18,6 +18,18 @@ refers to one with `af.layout_ref`.
 
 ## Status
 
-No entries have been written yet. Filling the base for every Canon, Nikon and Sony model needs
-sourced data from manufacturer pages and service documents, which could not be reached while the
-base was built (network allow list). See `docs/VERIFICATION.md`.
+17 entries (checked 2026-10-19), mostly known issues from manufacturer service notices: Nikon
+D600, D750, D810, Z 6, Z 7, Z 8, Z 9, Z6III, Z5II; Canon EOS 5D, 5D Mark III, 70D, R10; Sony a9,
+a7 III, a7R III; and the D7200 with owner reports labelled `low`. Some Canon and Sony pages refuse
+automated access; where a notice was read through a copy, the confidence is `medium`.
+
+A known issue may name the units it concerns (D-50):
+
+- `serials`: inclusive ranges as the manufacturer lists them (`first`, `last`, digits only);
+- `serial_pattern`: a regular expression on the serial digits, for rules such as "first digit 0
+  and sixth digit 1 or 2";
+- `firmware_from` and `firmware_below`: the firmware versions it concerns;
+- `serviced_mark` and `lookup_url`: how a repaired unit is marked, and the maker's serial checker.
+
+The app shows an issue only when it may concern the unit, as a warning to check with the named
+test, never as a verdict. Low-confidence issues are shown as owner reports.

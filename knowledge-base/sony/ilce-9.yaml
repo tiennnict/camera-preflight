@@ -1,0 +1,36 @@
+# Sony a9 (ILCE-9). Source: Sony Malaysia notice of free repair.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Sony
+model: ILCE-9
+aliases:
+- Alpha 9
+- a9
+known_issues:
+- id: a9-shoe-rattle
+  description: The Multi Interface Shoe may rattle when a large flash is attached and pressed. Listed
+    serial ranges; free repair ended 31 March 2022.
+  description_vi: Đế gắn phụ kiện (Multi Interface Shoe) có thể bị lỏng khi gắn đèn flash lớn và bị ấn
+    mạnh. Theo dải serial; sửa miễn phí đã hết hạn 31/3/2022.
+  serials:
+  - first: '3020001'
+    last: '3023644'
+  - first: '3320001'
+    last: '3320190'
+  - first: '3370001'
+    last: '3381733'
+  - first: '3770021'
+    last: '3777031'
+  - first: '4470001'
+    last: '4475048'
+  - first: '4870001'
+    last: '4871354'
+  - first: '4970001'
+    last: '4973150'
+  - first: '5070001'
+    last: '5076112'
+  - first: '5670001'
+    last: '5670457'
+  confirming_test: F5
+  confidence: high
+  source: https://www.sony.com.my/electronics/support/articles/00192022

@@ -1,0 +1,20 @@
+# Sony ILCE-7RM3. Firmware advisory of 2018 read through a news copy.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Sony
+model: ILCE-7RM3
+aliases:
+- Alpha 7R III
+- a7R III
+known_issues:
+- id: a7m3-fw2-raw-write
+  description: 'Firmware 2.00 may stop the camera while writing RAW files to a reused SD card. Fixed in
+    2.10: update before use.'
+  description_vi: 'Firmware 2.00 có thể làm máy treo khi ghi RAW lên thẻ SD đã dùng nhiều lần. Đã sửa
+    ở bản 2.10: hãy cập nhật trước khi dùng.'
+  firmware_from: '2.00'
+  firmware_below: '2.10'
+  scope: Firmware 2.00 only
+  confirming_test: A4
+  confidence: medium
+  source: https://www.the-digital-picture.com/News/Sony-Releases-Product-Advisory-for-a7R-III-and-a7-III

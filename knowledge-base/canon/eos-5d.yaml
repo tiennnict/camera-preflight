@@ -1,0 +1,15 @@
+# Canon EOS 5D (2005). Canon safety notice read through search copies.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 5D
+known_issues:
+- id: 5d-mirror-detach
+  description: The main mirror may come loose as its adhesive ages. Canon reinforced it free of charge
+    until 30 September 2015; look for brackets on both sides of the mirror.
+  description_vi: Gương chính có thể bong do keo lão hóa. Canon gia cố miễn phí đến 30/9/2015; xem có
+    kẹp gia cố ở hai bên gương không.
+  serviced_mark: Reinforcement parts on the left and right of the mirror
+  confirming_test: F4
+  confidence: medium
+  source: https://www.cla.canon.com/en/support/product-advisories/pa-slr-eos-5d

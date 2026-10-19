@@ -1,0 +1,19 @@
+# Nikon Z5II. Source: Nikon Inc. advisory of March 17, 2026.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: Z5II
+aliases:
+- NIKON Z5_2
+- Z5_2
+- Z 5II
+known_issues:
+- id: z-2026-parts
+  description: Parts below Nikon's standard in some units may make the camera stop working. Free repair
+    from 23 March 2026; check the serial with Nikon.
+  description_vi: Một số máy có linh kiện không đạt chuẩn, có thể làm máy ngừng hoạt động. Sửa miễn phí
+    từ 23/3/2026; tra serial với Nikon.
+  lookup_url: https://nikon.tfaforms.net/808
+  confirming_test: F1
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/z-tsa-3-2026

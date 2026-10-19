@@ -1,0 +1,16 @@
+# Canon EOS R10. Source: Canon Singapore notice.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS R10
+known_issues:
+- id: r10-flash-crackle
+  description: The built-in flash may make a loud crackling sound. Serials starting 01 to 10; free repair
+    offer ran until 31 March 2025.
+  description_vi: Đèn flash tích hợp có thể kêu lách tách to khi nháy. Serial bắt đầu từ 01 đến 10; chương
+    trình sửa miễn phí đến 31/3/2025.
+  serial_pattern: (0[1-9]|10)\d{10}
+  scope: 12-digit serial numbers starting 01 to 10
+  confirming_test: F10
+  confidence: high
+  source: https://asia.canon/en/support/to-users-of-the-mirrorless-camera-eos-r10/notice

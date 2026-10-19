@@ -8,13 +8,14 @@ from .derived import (
     resolve_burst_fps,
     resolve_rated_life,
 )
-from .loader import KnowledgeBase, load_entry, load_kb, normalise_name
+from .loader import KnowledgeBase, bundled_kb_root, default_kb, load_entry, load_kb, normalise_name
 from .models import (
     SCHEMA_VERSION,
     AfLayout,
     AfPointSpec,
     KnownIssue,
     ModelEntry,
+    SerialRange,
     SourcedValue,
 )
 
@@ -27,7 +28,10 @@ __all__ = [
     "KnownIssue",
     "ModelEntry",
     "Resolved",
+    "SerialRange",
     "SourcedValue",
+    "bundled_kb_root",
+    "default_kb",
     "derive_record",
     "load_entry",
     "load_kb",

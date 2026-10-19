@@ -54,4 +54,5 @@ LABELS: dict[str, str] = {
     "label.Guess": N_("Guess"),
     "label.Unverified": N_("Unverified"),
     "session_issues": N_("Photo checks"),
+    "known_issues": N_("Known issues of this model"),
 }

@@ -1,0 +1,17 @@
+# Nikon Z 9. Source: Nikon Inc. advisory of December 15, 2022.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: Z 9
+aliases:
+- NIKON Z 9
+- Z9
+known_issues:
+- id: z9-lens-release
+  description: The lens release button may not work, so a lens cannot be removed. Parts below standard
+    in some units; free repair, check the serial with Nikon.
+  description_vi: Nút tháo ống kính có thể không hoạt động, không tháo được ống kính. Một số máy dùng
+    linh kiện không đạt chuẩn; sửa miễn phí, tra serial với Nikon.
+  confirming_test: F6
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/z9-tsa-12-22

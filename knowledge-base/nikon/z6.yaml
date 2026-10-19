@@ -1,0 +1,18 @@
+# Nikon Z 6. Source: Nikon Inc. service advisory of May 16, 2019.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: Z 6
+aliases:
+- NIKON Z 6
+- Z6
+known_issues:
+- id: z6-z7-vr
+  description: Vibration reduction may not work fully on some units. Free repair; check the serial with
+    Nikon.
+  description_vi: Chống rung có thể không hoạt động đầy đủ ở một số máy. Sửa miễn phí; tra serial với
+    Nikon.
+  scope: Units in Nikon's serial checker
+  confirming_test: D3
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/technical-service-advisory-for-users-of-the-nikon-z-6-and-z-7-cameras

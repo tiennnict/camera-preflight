@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import re
+import sys
 from dataclasses import dataclass, field
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -76,3 +78,23 @@ def load_kb(root: Path) -> tuple[KnowledgeBase, list[str]]:
                 problems.append(f"{p}: release_year needs release_year_source (FR-KB-02)")
             kb.add(entry)
     return kb, problems
+
+
+def bundled_kb_root() -> Path:
+    """The ``knowledge-base`` folder: next to the executable's data in a frozen build, the
+    repository root otherwise."""
+    frozen = getattr(sys, "_MEIPASS", None)
+    if frozen:
+        return Path(frozen) / "knowledge-base"
+    return Path(__file__).resolve().parents[3] / "knowledge-base"
+
+
+@lru_cache(maxsize=1)
+def default_kb() -> KnowledgeBase:
+    """The curated base shipped with the app; empty when the folder is missing. Entries with
+    problems are left out (the validator reports them in CI)."""
+    root = bundled_kb_root()
+    if not root.is_dir():
+        return KnowledgeBase()
+    kb, _problems = load_kb(root)
+    return kb

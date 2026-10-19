@@ -27,3 +27,4 @@ class ReportData:
     sources: list[SourceFile] = field(default_factory=list)
     evidence_dir: Path | None = None
     session_issues: list[tuple[str, dict[str, str]]] = field(default_factory=list)
+    known_issues: list[tuple[str, dict[str, str]]] = field(default_factory=list)  # FR-VER-04

@@ -1,0 +1,17 @@
+# Canon EOS 5D Mark III. Canon notice read through news copies (Canon pages blocked).
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Canon
+model: EOS 5D Mark III
+known_issues:
+- id: 5d3-lcd-light-leak
+  description: In very dark scenes the top LCD light can change the displayed exposure value; Canon says
+    images are not noticeably affected. Serials with first digit 0 and sixth digit 1 or 2.
+  description_vi: Trong cảnh rất tối, đèn màn hình LCD trên có thể làm thay đổi giá trị phơi sáng hiển
+    thị; Canon cho biết ảnh hầu như không bị ảnh hưởng. Serial có chữ số đầu là 0 và chữ số thứ sáu là
+    1 hoặc 2.
+  serial_pattern: 0\d{4}[12]\d{6}
+  scope: Serial 0nnnn1nnnnnn or 0nnnn2nnnnnn
+  confirming_test: E1
+  confidence: medium
+  source: https://www.cla.canon.com/en/support/product-advisories/adv-eos-5dmrkiii

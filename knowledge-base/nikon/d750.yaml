@@ -1,0 +1,28 @@
+# Nikon D750. Source: Nikon Inc. service advisories.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D750
+aliases:
+- NIKON D750
+known_issues:
+- id: d750-shutter-shading
+  description: The shutter may not work normally and shade part of the image. Units made October 2014
+    to June 2015, possibly also July to September 2014 and July 2015 to September 2016. Nikon replaces
+    the shutter free of charge.
+  description_vi: Màn trập có thể hoạt động bất thường, làm tối một phần ảnh. Máy sản xuất 10/2014 đến
+    6/2015, có thể cả 7–9/2014 và 7/2015–9/2016. Nikon thay màn trập miễn phí.
+  scope: Production October 2014 to June 2015 (possibly July 2014 to September 2016)
+  lookup_url: https://nikon.tfaforms.net/215
+  confirming_test: C2
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/d750-july15
+- id: d750-flare
+  description: Flare of an unnatural shape when a bright light is at the top edge of the frame. Nikon
+    fixes affected units free of charge.
+  description_vi: Lóa sáng hình dạng bất thường khi nguồn sáng mạnh ở mép trên khung hình. Nikon sửa miễn
+    phí máy bị ảnh hưởng.
+  serviced_mark: Black dot inside the tripod socket
+  confirming_test: F7
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/d750

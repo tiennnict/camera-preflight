@@ -63,6 +63,10 @@ class Wizard:
 
     def __post_init__(self) -> None:
         self.reader = self.reader or default_reader()
+        if self.kb is None:
+            from ..knowledge import default_kb
+
+            self.kb = default_kb()
         self.session = SessionFolder.create(self.sessions_root, self.started)
         self.plan: list[StepDef] = build_plan(self.mode, sdk_available=self.sdk_available)
         self.states: dict[str, StepState] = {s.id: StepState(s) for s in self.plan}
@@ -476,10 +480,9 @@ class Wizard:
         return sorted(self.results.values(), key=lambda r: order.get(r.check_id, 999))
 
     # ---- output ------------------------------------------------------------------------------
-    def report_data(self) -> ReportData:
+    def report_data(self, language: str | None = None) -> ReportData:
         ctx = self.context()
         issues = [(m.code, {k: str(v) for k, v in m.params.items()}) for m in ctx.provenance.issues]
-        issues += self.known_issue_notes()
         return ReportData(
             camera=self.camera,
             results=self.ordered_results(),
@@ -490,19 +493,36 @@ class Wizard:
             sources=[SourceFile(f.id, f.source.name, f.sha256) for f in self.all_frames],
             evidence_dir=self.session.evidence_dir,
             session_issues=issues,
+            known_issues=self.known_issue_notes(language),
         )
 
-    def known_issue_notes(self) -> list[tuple[str, dict[str, str]]]:
-        """Known issues of the curated entry: a warning only, never a verdict (FR-VER-04)."""
+    def known_issue_notes(self, language: str | None = None) -> list[tuple[str, dict[str, str]]]:
+        """Known issues of the curated entry that may concern this unit: a warning only, never a
+        verdict (FR-VER-04). Issues the serial or firmware rules out are left out."""
         if self.entry is None:
             return []
-        return [
-            ("kb.known_issue", {"description": i.description, "check": i.confirming_test})
-            for i in self.entry.known_issues
-        ]
+        serial = self.camera.serial_read or self.camera.serial_entered
+        notes: list[tuple[str, dict[str, str]]] = []
+        for i in self.entry.known_issues:
+            match = i.match(serial, self.camera.firmware)
+            if match == "not_applicable":
+                continue
+            lang = language or self.language
+            text = i.description_vi if lang == "vi" and i.description_vi else i.description
+            if i.confidence.value == "low":
+                code = "kb.reported_issue"  # owner reports, not a manufacturer notice
+            elif match == "applies":
+                code = "kb.known_issue"
+            else:
+                code = "kb.known_issue_maybe"
+            params = {"description": text, "check": i.confirming_test}
+            notes.append((code, params))
+            if i.serviced_mark:
+                notes.append(("kb.serviced_mark", {"mark": i.serviced_mark}))
+        return notes
 
     def render_report(self, language: str | None = None) -> str:
-        return render_report(self.report_data(), language or self.language)
+        return render_report(self.report_data(language), language or self.language)
 
     def save_report(self, language: str | None = None, path: Path | None = None) -> Path:
         html = self.render_report(language)

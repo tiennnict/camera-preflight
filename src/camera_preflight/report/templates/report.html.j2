@@ -53,6 +53,9 @@ code { font-family:ui-monospace, Consolas, monospace; font-size:.8rem; word-brea
 {% if session_issues %}<h2>{{ L.session_issues }}</h2>
 <ul class="find">{% for t in session_issues %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
 
+{% if known_issues %}<h2>{{ L.known_issues }}</h2>
+<ul class="find">{% for t in known_issues %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+
 {% if questions %}<h2>{{ L.ask }}</h2>
 <ul>{% for q in questions %}<li>{{ q }}</li>{% endfor %}</ul>{% endif %}
 

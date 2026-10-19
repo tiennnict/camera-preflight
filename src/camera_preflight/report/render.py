@@ -125,6 +125,7 @@ def _render(data: ReportData, lang: str) -> str:
         not_tested=[views[r.check_id] for r in summary.not_tested],
         questions=[_t(q) for q in seller_questions(data.results)],
         session_issues=[_t(Message(code=c, params=p)) for c, p in data.session_issues],
+        known_issues=[_t(Message(code=c, params=p)) for c, p in data.known_issues],
         app_version=data.app_version,
         kb_version=data.kb_version,
         parameter_set=data.parameters.id,

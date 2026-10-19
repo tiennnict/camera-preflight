@@ -1,0 +1,16 @@
+# Nikon D600. Nikon's 2014 advisory is no longer on the Nikon USA list; news report used.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D600
+aliases:
+- NIKON D600
+known_issues:
+- id: d600-dust-oil
+  description: Spots on the sensor thrown by the shutter (dust or oil), mostly upper left. In 2014 Nikon
+    cleaned and replaced the shutter of any D600 free of charge. Ask whether it was done.
+  description_vi: Đốm bẩn trên cảm biến do màn trập văng ra (bụi hoặc dầu), thường ở góc trên bên trái.
+    Năm 2014 Nikon vệ sinh và thay màn trập miễn phí cho mọi D600. Hãy hỏi máy đã được thay chưa.
+  confirming_test: B4
+  confidence: medium
+  source: https://petapixel.com/2014/02/26/nikon-solving-dustoil-issues-will-d600s-regardless-warranty

@@ -1,0 +1,41 @@
+# Nikon D7200. No Nikon service advisory names the D7200 (checked on the Nikon USA list).
+# The two issues are reports on bodies of the same family: low confidence, check them only.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: D7200
+aliases:
+- NIKON D7200
+release_year: 2015
+release_year_source: https://www.dpreview.com/reviews/nikon-d7200
+shutter:
+  type: mechanical
+  rated_life:
+    value: 150000
+    source: https://amateurphotographer.com/latest/photo-news/nikon-d7200
+    confidence: medium
+af:
+  point_count: 51
+firmware_latest:
+  version: C 1.04
+  source: https://downloadcenter.nikonimglib.com/en/download/fw/287.html
+backend_hints:
+  no_sdk: nikon_ext
+  usb_mode_note: Connected mode uses the Nikon Type0017 module (S-SDKD7200).
+known_issues:
+- id: nikon-aperture-control-unit
+  description: 'Exposure jumps or an error at small apertures: a worn or jammed aperture control unit,
+    reported on D7100, D7200 and D5300 bodies. Debris on the aperture lever gives the same sign.'
+  description_vi: 'Phơi sáng thất thường hoặc báo lỗi khi khép khẩu nhỏ: cụm điều khiển khẩu mòn hoặc
+    kẹt, được báo trên D7100, D7200, D5300. Bụi ở cần khẩu cũng cho dấu hiệu tương tự.'
+  confirming_test: E7
+  confidence: low
+  source: https://www.nikonforums.com/forums/topic/12955-error-press-shutter-release-button-again/
+- id: nikon-dx-shutter-oil
+  description: 'Spots that come back after cleaning: oil or debris from the shutter, reported by D7100
+    owners. Look at a flat frame at f/16 or smaller.'
+  description_vi: 'Đốm bẩn quay lại sau khi vệ sinh: dầu hoặc mạt từ màn trập, được người dùng D7100 báo.
+    Xem ảnh nền phẳng ở f/16 hoặc khép hơn.'
+  confirming_test: B4
+  confidence: low
+  source: https://nikonites.com/forum/goto/post?id=297881

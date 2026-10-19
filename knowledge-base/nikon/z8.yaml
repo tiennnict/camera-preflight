@@ -1,0 +1,25 @@
+# Nikon Z 8. Source: Nikon Inc. combined advisories of June and August 2023.
+# Sources checked 2026-10-19.
+schema_version: 1
+brand: Nikon
+model: Z 8
+aliases:
+- NIKON Z 8
+- Z8
+known_issues:
+- id: z8-lens-mount
+  description: A lens may not turn to the locked position on some units. Free repair of a range of serial
+    numbers; check with Nikon.
+  description_vi: Ở một số máy, ống kính không xoay tới vị trí khóa. Sửa miễn phí một dải serial; tra
+    với Nikon.
+  scope: Range of serial numbers in Nikon's checker
+  confirming_test: F9
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/2023-z8-combined-1
+- id: z8-strap-eyelet
+  description: Strap eyelets may loosen or come off after a strong impact or heavy stress.
+  description_vi: Khoen đeo dây có thể lỏng hoặc bung sau va đập mạnh hoặc chịu lực lâu.
+  scope: Units of the lens mount advisory
+  confirming_test: F5
+  confidence: high
+  source: https://www.nikonusa.com/service-advisories/2023-z8-combined-1
