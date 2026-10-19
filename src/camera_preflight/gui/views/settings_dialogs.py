@@ -1,4 +1,4 @@
-"""S13 Settings and S0 first-run SDK setup (D-24, FR-CON-06, FR-SET-01 to FR-SET-03)."""
+"""S13 Settings and S0 first-run SDK setup (D-24, D-48, FR-CON-06, FR-SET-01 to FR-SET-03)."""
 
 from __future__ import annotations
 
@@ -92,16 +92,10 @@ class SettingsDialog(QDialog):
         self.lang.addItem("English", "en")
         self.lang.addItem("Tiếng Việt", "vi")
         self.lang.setCurrentIndex(max(self.lang.findData(settings.language), 0))
-        self.theme = QComboBox()
-        self.theme.addItem(tr("Follow system"), "system")
-        self.theme.addItem(tr("Light"), "light")
-        self.theme.addItem(tr("Dark"), "dark")
-        self.theme.setCurrentIndex(max(self.theme.findData(settings.theme), 0))
         self.motion = QCheckBox(tr("Reduce motion"))
         self.motion.setChecked(settings.reduced_motion)
         self.sessions = _FolderRow(settings.sessions_dir, str(settings.sessions_path()))
         form.addRow(tr("Language"), self.lang)
-        form.addRow(tr("Theme"), self.theme)
         form.addRow("", self.motion)
         form.addRow(tr("Sessions folder"), self.sessions)
         lay.addLayout(form)
@@ -124,7 +118,6 @@ class SettingsDialog(QDialog):
         s = self.settings
         return UserSettings(
             language=str(self.lang.currentData()),
-            theme=str(self.theme.currentData()),
             reduced_motion=self.motion.isChecked(),
             sessions_dir=self.sessions.value(),
             sdk_dirs={b: r.value() for b, r in self.sdk_rows.items()},

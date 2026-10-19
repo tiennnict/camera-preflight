@@ -36,8 +36,9 @@ def test_home_has_no_history_and_start_goes_to_blocker(qtbot, user_settings, set
     assert isinstance(win.view, StartView)
     assert not win.next_btn.isEnabled()
     win.start_session("")
+    qtbot.waitUntil(lambda: not win._detecting, timeout=60000)
     assert isinstance(win.view, ManualView)
-    assert ctrl.wizard is not None and win.tree.topLevelItemCount() >= 4
+    assert ctrl.wizard is not None and win.tree.count() >= 4
     win.close()
 
 
@@ -45,6 +46,7 @@ def test_blocker_answer_and_stop(qtbot, user_settings, settings_store, files, mo
     src, _ = files
     win, ctrl = _window(qtbot, user_settings, settings_store, src)
     win.start_session("")
+    qtbot.waitUntil(lambda: not win._detecting, timeout=60000)
     seen = []
     monkeypatch.setattr(win, "_blocker_found", lambda: seen.append(1))
     assert isinstance(win.view, ManualView)
@@ -61,6 +63,7 @@ def test_upload_and_results(qtbot, user_settings, settings_store, files, monkeyp
     qtbot.addWidget(win)
     win.show()
     win.start_session("")
+    qtbot.waitUntil(lambda: not win._detecting, timeout=60000)
     ctrl.wizard.reader = SidecarReader(src)
     win.show_step("dark")
     assert isinstance(win.view, UploadView)
@@ -127,10 +130,10 @@ def test_settings_dialog_round_trip(qtbot, user_settings):
 
     dlg = SettingsDialog(user_settings)
     qtbot.addWidget(dlg)
-    dlg.theme.setCurrentIndex(dlg.theme.findData("dark"))
+    assert not hasattr(dlg, "theme")  # light theme only (D-48)
     dlg.motion.setChecked(True)
     out = dlg.result_settings()
-    assert out.theme == "dark" and out.reduced_motion and out.language == "en"
+    assert out.reduced_motion and out.language == "en"
 
 
 def test_sdk_setup_can_be_skipped(qtbot, user_settings):
@@ -160,6 +163,7 @@ def test_demo_connected_flow(qtbot, user_settings, settings_store, monkeypatch):
     win.show()
     monkeypatch.setattr(win, "_auto_advance", lambda: None)
     win.start_session("", demo=True)
+    qtbot.waitUntil(lambda: not win._detecting, timeout=60000)
     w = ctrl.wizard
     assert w is not None and w.mode is Mode.CONNECTED
     assert win.camera_label.text() == "SC-1"

@@ -288,6 +288,11 @@ register(
 register(
     {
         "kb.known_issue": N_("Known issue: {description} (confirm with {check})"),
+        "kb.known_issue_maybe": N_(
+            "Known issue for some units: {description} (confirm with {check})"
+        ),
+        "kb.serviced_mark": N_("A serviced unit is marked: {mark}"),
+        "kb.reported_issue": N_("Reported by some owners: {description} (check with {check})"),
     }
 )
 

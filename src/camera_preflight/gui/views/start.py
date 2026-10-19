@@ -47,3 +47,8 @@ class StartView(StepView):
         self.root.addStretch(1)
         self.start_btn.setDefault(True)
         self.serial.returnPressed.connect(self.start_btn.click)
+
+    def set_busy(self, busy: bool) -> None:
+        """While the camera is looked for, starting again is not possible."""
+        for w in (self.start_btn, self.demo_btn, self.settings_btn, self.serial):
+            w.setEnabled(not busy)

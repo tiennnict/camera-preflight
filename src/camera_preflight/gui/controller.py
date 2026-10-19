@@ -8,6 +8,7 @@ from typing import Any
 
 from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal
 
+from ..backends.client import BackendClient
 from ..checks import ManualAnswer
 from ..domain import CheckResult, Mode
 from ..io import MetadataReader
@@ -90,17 +91,19 @@ class Controller(QObject):
         kb: KnowledgeBase | None = None,
         sdk_available: frozenset[str] = frozenset(),
         sdk_dir: Path | None = None,
+        client: BackendClient | None = None,
     ) -> Wizard:
-        """Start a connected session; the backend runs in its own process (P-02)."""
-        from ..backends.client import BackendClient
+        """Start a connected session; the backend runs in its own process (P-02). ``client`` is a
+        host that is already open (detection opens it on a worker thread)."""
         from ..synth import SidecarReader
 
         if self.wizard:
             self.wizard.close()
         sessions_dir.mkdir(parents=True, exist_ok=True)
         workdir.mkdir(parents=True, exist_ok=True)
-        client = BackendClient(spec, sdk_dir=sdk_dir, workdir=workdir)
-        client.open()
+        if client is None:
+            client = BackendClient(spec, sdk_dir=sdk_dir, workdir=workdir)
+            client.open()
         reader = SidecarReader(workdir) if spec.startswith("sim") else None
         w = Wizard(
             Mode.UPLOAD,

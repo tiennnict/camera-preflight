@@ -23,7 +23,7 @@ from PySide6.QtWidgets import (
 from ... import i18n
 from ...checks.verdict import summarise
 from ...domain import CheckResult, Level, Message
-from ...wizard import StepDef
+from ...wizard import StepDef, Wizard
 from ..controller import Controller
 from ..i18n_helpers import tr
 from ..theme import Colors
@@ -203,6 +203,7 @@ class ResultsView(StepView):
         host = QWidget()
         host.setLayout(counts)
         self.body.addWidget(host)
+        self._known_issues(w)
         self._section(tr("Blockers"), summary.blockers)
         blocker_ids = {r.check_id for r in summary.blockers}
         self._section(
@@ -214,6 +215,19 @@ class ResultsView(StepView):
         self._section(tr("Passed"), passed)
         self.body.addStretch(1)
         self._set_buttons(True)
+
+    def _known_issues(self, w: Wizard) -> None:
+        """Documented faults of this model to look at; a warning, never a verdict (FR-VER-04)."""
+        notes = w.known_issue_notes(i18n.current_language())
+        if not notes:
+            return
+        label = QLabel(tr("Known issues of this model"))
+        label.setObjectName("section")
+        self.body.addWidget(label)
+        for code, params in notes:
+            text = QLabel(i18n.render(Message(code=code, params=params)))
+            text.setWordWrap(True)
+            self.body.addWidget(text)
 
     def _section(self, title: str, results: list[CheckResult], reasons: bool = False) -> None:
         if not results:

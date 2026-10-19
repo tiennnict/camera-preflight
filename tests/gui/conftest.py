@@ -17,6 +17,10 @@ def settings_store(tmp_path):
 @pytest.fixture
 def user_settings(tmp_path):
     i18n.set_language("en")
-    return UserSettings(
-        language="en", theme="light", sessions_dir=str(tmp_path / "sessions"), sdk_dirs={}
-    )
+    return UserSettings(language="en", sessions_dir=str(tmp_path / "sessions"), sdk_dirs={})
+
+
+@pytest.fixture(autouse=True)
+def no_camera_on_usb(monkeypatch):
+    """GUI tests never look at the real USB bus or SDKs: nothing is plugged in."""
+    monkeypatch.setattr("camera_preflight.backends.discovery.present_brands", lambda: frozenset())

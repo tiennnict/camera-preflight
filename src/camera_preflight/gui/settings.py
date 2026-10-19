@@ -1,4 +1,4 @@
-"""User settings stored with QSettings (FR-SET-01 to FR-SET-03)."""
+"""User settings stored with QSettings (FR-SET-01 to FR-SET-03; light theme only, D-48)."""
 
 from __future__ import annotations
 
@@ -33,7 +33,6 @@ def default_sdk_dir(brand: str) -> Path:
 @dataclass
 class UserSettings:
     language: str = ""  # empty: follow the OS
-    theme: str = "system"
     reduced_motion: bool = False
     sessions_dir: str = ""
     sdk_dirs: dict[str, str] | None = None
@@ -55,7 +54,6 @@ def load(store: QSettings | None = None) -> UserSettings:
     s = store or QSettings("camera-preflight", "camera-preflight")
     return UserSettings(
         language=str(s.value("language", "")),
-        theme=str(s.value("theme", "system")),
         reduced_motion=str(s.value("reduced_motion", "false")).lower() == "true",
         sessions_dir=str(s.value("sessions_dir", "")),
         sdk_dirs={b: str(s.value(f"sdk/{b}", "")) for b in BRANDS},
@@ -66,7 +64,6 @@ def load(store: QSettings | None = None) -> UserSettings:
 def save(settings: UserSettings, store: QSettings | None = None) -> None:
     s = store or QSettings("camera-preflight", "camera-preflight")
     s.setValue("language", settings.language)
-    s.setValue("theme", settings.theme)
     s.setValue("reduced_motion", settings.reduced_motion)
     s.setValue("sessions_dir", settings.sessions_dir)
     for b in BRANDS:

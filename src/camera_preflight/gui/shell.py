@@ -1,20 +1,23 @@
-"""Main window: top bar, step list, step views and bottom bar (UX section 4)."""
+"""Main window: top bar, checklist, step views and bottom bar (UX section 4, D-49)."""
 
 from __future__ import annotations
 
-from PySide6.QtCore import Qt, QTimer
+import threading
+from pathlib import Path
+
+from PySide6.QtCore import QObject, Qt, QTimer, Signal
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
     QHBoxLayout,
     QLabel,
+    QListWidget,
+    QListWidgetItem,
     QMainWindow,
     QMessageBox,
     QPushButton,
     QSplitter,
     QStackedWidget,
-    QTreeWidget,
-    QTreeWidgetItem,
     QVBoxLayout,
     QWidget,
 )
@@ -37,14 +40,13 @@ from .views.start import StartView
 from .views.upload import UploadView
 from .widgets.common import level_text
 
-_PHASE_NAMES = {
-    Phase.START: "Start",
-    Phase.BLOCKER: "Blocker check",
-    Phase.AUTOMATIC: "Automatic",
-    Phase.SEMI_AUTOMATIC: "Semi-automatic",
-    Phase.MANUAL: "Manual",
-    Phase.RESULTS: "Results",
-}
+
+class _Bridge(QObject):
+    """Carries a worker thread's result to the GUI thread."""
+
+    detected = Signal(object)
+
+
 _ORDER = {Level.NOT_TESTED: 0, Level.PASS: 1, Level.SUSPECT: 2, Level.FAIL: 3}
 
 
@@ -58,9 +60,12 @@ class MainWindow(QMainWindow):
         self.controller = controller or Controller(self)
         app = QApplication.instance()
         assert isinstance(app, QApplication)
-        self.colors: Colors = apply_theme(app, settings.theme)
+        self.colors: Colors = apply_theme(app)
         self.resize(1180, 760)
         self.view: StepView | None = None
+        self._detecting = False
+        self._bridge = _Bridge(self)
+        self._bridge.detected.connect(self._on_detected)
         self._build()
         self.controller.resultReady.connect(self._on_result)
         self.controller.deviceIdentified.connect(self._on_device)
@@ -103,10 +108,10 @@ class MainWindow(QMainWindow):
         outer.addWidget(bar)
         # body
         split = QSplitter()
-        self.tree = QTreeWidget()
-        self.tree.setHeaderHidden(True)
+        # One flat checklist: no phase groups and no automation labels (D-49).
+        self.tree = QListWidget()
         self.tree.setMinimumWidth(240)
-        self.tree.setAccessibleName(tr("Steps"))
+        self.tree.setAccessibleName(tr("Checklist"))
         self.tree.itemActivated.connect(self._tree_clicked)
         self.tree.itemClicked.connect(self._tree_clicked)
         self.stack = QStackedWidget()
@@ -178,16 +183,53 @@ class MainWindow(QMainWindow):
         )
 
     def start_session(self, serial: str, demo: bool = False) -> None:
-        """Detect a camera: connected mode when found, upload mode otherwise (D-23)."""
+        """Detect a camera: connected mode when found, upload mode otherwise (D-23).
+
+        Detection and opening the camera run on a worker thread; the window stays responsive.
+        """
+        if self._detecting:
+            return
         import tempfile
-        from pathlib import Path
 
-        from ..backends.discovery import detect
-
+        self._detecting = True
+        self.busy_label.setText(tr("Looking for camera"))
+        if isinstance(self.view, StartView):
+            self.view.set_busy(True)
         work = Path(tempfile.mkdtemp(prefix="cp-cam-"))
-        found = detect(prefer="sim" if demo else None, workdir=work)
+        sdk_dirs = {b.lower(): self.settings.sdk_path(b) for b in store.BRANDS}
+
+        def job() -> None:
+            from ..backends.client import BackendClient
+            from ..backends.discovery import DetectResult, detect
+            from ..backends.protocol import BackendError
+
+            client = None
+            try:
+                found = detect(prefer="sim" if demo else None, workdir=work, sdk_dirs=sdk_dirs)
+                if found.found and found.spec:
+                    client = BackendClient(found.spec, sdk_dir=found.sdk_dir, workdir=work)
+                    try:
+                        client.open()
+                    except BackendError:
+                        client.close()
+                        client = None
+                        found = DetectResult(
+                            False, hint_code="detect.failed", seen_brand=found.brand
+                        )
+            except Exception:
+                found = DetectResult(False)
+            self._bridge.detected.emit((serial, demo, work, found, client))
+
+        threading.Thread(target=job, daemon=True).start()
+
+    def _on_detected(self, payload: object) -> None:
+        serial, demo, work, found, client = payload  # type: ignore[misc]
+        self._detecting = False
+        self.busy_label.setText("")
+        if isinstance(self.view, StartView):
+            self.view.set_busy(False)
         sdk = self._sdk_available()
-        if found.found and found.spec:
+        if client is not None:
             self.controller.begin_connected(
                 found.spec,
                 self.settings.sessions_path(),
@@ -195,9 +237,12 @@ class MainWindow(QMainWindow):
                 entered_serial=serial,
                 workdir=work,
                 sdk_available=sdk,
+                client=client,
             )
             self.camera_label.setText(found.camera)
         else:
+            if not demo and found.seen_brand and not self._ask_upload(found):
+                return
             self.controller.begin(
                 Mode.UPLOAD,
                 self.settings.sessions_path(),
@@ -209,31 +254,48 @@ class MainWindow(QMainWindow):
         self._apply_text()
         self.show_step("blocker")
 
+    def _ask_upload(self, found: object) -> bool:
+        """A camera is on USB but cannot be controlled. True: continue with photo upload."""
+        brand = str(getattr(found, "seen_brand", "")).capitalize()
+        no_sdk = getattr(found, "hint_code", "") == "detect.no_sdk"
+        box = QMessageBox(self)
+        box.setIcon(QMessageBox.Icon.Information)
+        box.setWindowTitle(tr("Camera found"))
+        if no_sdk:
+            box.setText(
+                tr("{brand} camera found. Set its SDK folder to control it.").format(brand=brand)
+            )
+            retry = box.addButton(tr("Settings"), QMessageBox.ButtonRole.ActionRole)
+        else:
+            box.setText(
+                tr(
+                    "Cannot control the {brand} camera. Close other camera apps and try again."
+                ).format(brand=brand)
+            )
+            retry = box.addButton(tr("Try again"), QMessageBox.ButtonRole.ActionRole)
+        upload = box.addButton(tr("Use photo upload"), QMessageBox.ButtonRole.AcceptRole)
+        box.setDefaultButton(retry)
+        box.exec()
+        if box.clickedButton() is upload:
+            return True
+        if no_sdk:
+            self.open_settings()
+        return False
+
     def _rebuild_tree(self) -> None:
         w = self.controller.wizard
         self.tree.clear()
         if w is None:
             return
-        self._items: dict[str, QTreeWidgetItem] = {}
-        phase_items: dict[Phase, QTreeWidgetItem] = {}
+        self._items: dict[str, QListWidgetItem] = {}
         for step in w.plan:
             if step.phase is Phase.START:
                 continue
-            parent = phase_items.get(step.phase)
-            if parent is None:
-                parent = QTreeWidgetItem([tr(_PHASE_NAMES[step.phase])])
-                parent.setFlags(Qt.ItemFlag.ItemIsEnabled)
-                f = parent.font(0)
-                f.setBold(True)
-                parent.setFont(0, f)
-                self.tree.addTopLevelItem(parent)
-                phase_items[step.phase] = parent
-            item = QTreeWidgetItem([""])
-            item.setData(0, Qt.ItemDataRole.UserRole, step.id)
-            parent.addChild(item)
+            item = QListWidgetItem("")
+            item.setData(Qt.ItemDataRole.UserRole, step.id)
+            self.tree.addItem(item)
             self._items[step.id] = item
             self._update_item(step)
-        self.tree.expandAll()
         self._mark_current()
         self._apply_text()
 
@@ -249,11 +311,11 @@ class MainWindow(QMainWindow):
             worst = max((r.level for r in results), key=lambda lv: _ORDER[lv])
             glyph = GLYPH[worst]
             color = level_color(self.colors, worst)
-            item.setToolTip(0, level_text(worst))
-        item.setText(0, f"{glyph}  {tr_code(step.title_code)}")
+            item.setToolTip(level_text(worst))
+        item.setText(f"{glyph}  {tr_code(step.title_code)}")
         from PySide6.QtGui import QBrush, QColor
 
-        item.setForeground(0, QBrush(QColor(color)))
+        item.setForeground(QBrush(QColor(color)))
 
     def _mark_current(self) -> None:
         w = self.controller.wizard
@@ -263,8 +325,8 @@ class MainWindow(QMainWindow):
         if item:
             self.tree.setCurrentItem(item)
 
-    def _tree_clicked(self, item: QTreeWidgetItem, _col: int = 0) -> None:
-        step_id = item.data(0, Qt.ItemDataRole.UserRole)
+    def _tree_clicked(self, item: QListWidgetItem) -> None:
+        step_id = item.data(Qt.ItemDataRole.UserRole)
         if step_id and self.controller.wizard:
             self.show_step(str(step_id))
 
@@ -416,7 +478,4 @@ class MainWindow(QMainWindow):
             new = dlg.result_settings()
             self.settings = new
             store.save(new, self._store)
-            app = QApplication.instance()
-            assert isinstance(app, QApplication)
-            self.colors = apply_theme(app, new.theme)
             self.apply_language(new.language or i18n.detect_language())

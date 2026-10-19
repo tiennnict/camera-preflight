@@ -1,4 +1,4 @@
-"""Application start: settings, language, theme, first-run SDK setup (S0)."""
+"""Application start: settings, language, light theme, first-run SDK setup (S0)."""
 
 from __future__ import annotations
 
