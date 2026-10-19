@@ -129,7 +129,7 @@ Approving an item unblocks the packages listed. Items with no package affect sco
 
 ## 10. Status after the first implementation pass
 
-Status of each package on branch `feat/implementation`. "Done" means built, tested without a camera and merged into that branch. Nothing here has run on a real camera.
+Status of each package on `main`. "Done" means built, tested without a camera and merged. Nothing here has run on a real camera.
 
 | Package | Status | Note |
 | --- | --- | --- |
